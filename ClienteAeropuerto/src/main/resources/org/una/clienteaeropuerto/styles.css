@@ -44,7 +44,7 @@
 
 }
 .anchorPadre{
-    -fx-background-color: #000000;
+    -fx-background-color: #181F1C;
     -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
 
 }
