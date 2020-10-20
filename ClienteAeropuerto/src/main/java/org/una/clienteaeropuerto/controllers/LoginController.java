@@ -7,11 +7,7 @@ package org.una.clienteaeropuerto.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -20,10 +16,6 @@ import javafx.scene.layout.VBox;
  */
 public class LoginController implements Initializable {
 
-    @FXML
-    private VBox root;
-    @FXML
-    private Button btnLogIn;
 
     /**
      * Initializes the controller class.
@@ -33,8 +25,5 @@ public class LoginController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void LogIn(ActionEvent event) {
-    }
     
 }
