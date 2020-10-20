@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="770.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="205.0" layoutY="52.0" prefHeight="339.0" prefWidth="376.0" stylesheets="@Styles.css">
+         <children>
+            <Label alignment="CENTER" layoutX="134.0" layoutY="14.0" prefHeight="46.0" prefWidth="108.0" text="Login" textFill="#f5f2f2">
+               <font>
+                  <Font name="Tahoma" size="36.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="123.0" layoutY="58.0" prefHeight="4.0" prefWidth="130.0" styleClass="anchorLujo" />
+            <TextField layoutX="97.0" layoutY="127.0" prefHeight="25.0" prefWidth="207.0" promptText="Username" styleClass="VBoxTarjeta2" />
+            <PasswordField layoutX="97.0" layoutY="170.0" prefHeight="25.0" prefWidth="207.0" promptText="Password" styleClass="VBoxTarjeta2">
+               <opaqueInsets>
+                  <Insets left="10.0" />
+               </opaqueInsets>
+            </PasswordField>
+            <Button layoutX="96.0" layoutY="242.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="184.0" styleClass="jfx-buttonStandard2" stylesheets="@Styles.css" text="Login">
+               <font>
+                  <Font name="Tahoma Bold" size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="28.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../../username.PNG" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="33.0" fitWidth="69.0" layoutX="17.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../../padlock.svg.png" />
+               </image>
+            </ImageView>
+         </children>
+         <styleClass>
+            <String fx:value="anchorLogin" />
+            <String fx:value="VBoxTarjeta2" />
+            <String fx:value="VBoxTarjeta" />
+         </styleClass>
+      </AnchorPane>
+   </children>
+   <styleClass>
+      <String fx:value="anchorPadre" />
+      <String fx:value="VBoxTarjeta" />
+      <String fx:value="VBoxTarjeta2" />
+   </styleClass>
+</AnchorPane>

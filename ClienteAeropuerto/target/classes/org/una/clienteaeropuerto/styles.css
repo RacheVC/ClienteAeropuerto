@@ -1,0 +1,68 @@
+.jfx-buttonStandard {
+    -fx-background-color: #0B5563;
+    -fx-background-radius: 5 5 5 5;
+    -fx-opacity: 1;
+    -fx-alignment: CENTER;
+    -fx-pref-width: 75px; 
+    -fx-pref-height: 30px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+.jfx-buttonStandard2 {
+    -fx-background-color:  #447604;
+    -fx-text-fill: WHITE;
+    -fx-background-radius: 10 10 10 10;
+    -fx-opacity: 2;
+    -fx-alignment: CENTER;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+}
+
+.VBoxTarjeta{
+    -fx-background-color: WHITE;
+    -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.3), 45, 0, 0, 0);
+}
+
+.VBoxTarjeta2{
+    -fx-background-color: WHITE;
+    -fx-background-radius: 10 10 10 10;
+    -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
+
+}
+.anchorLujo{
+    -fx-background-color: #447604;
+    -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
+
+}
+.anchorLujo2{
+    -fx-background-color: #F6AA1C;
+    -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
+
+}
+.anchorLogin{
+    -fx-background-color: #090909;
+    -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
+
+}
+.anchorPadre{
+    -fx-background-color: transparent;
+    -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
+
+}
+
+.vBoxGeneral{
+    -fx-spacing: 30;
+}
+.table-view {
+
+    -fx-table-header-border-color: transparent;
+    -fx-table-cell-border-color: -fx-box-border;
+    fx-background-color: transparent;
+}
+.color-2 {
+    -fx-background: -webkit-linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
+    -fx-background:    -moz-linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
+    -fx-background:     -ms-linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
+    -fx-background:      -o-linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
+    -fx-background:         linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
+}
+
