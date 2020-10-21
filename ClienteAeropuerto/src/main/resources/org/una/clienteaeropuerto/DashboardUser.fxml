@@ -23,85 +23,27 @@
       </ImageView>
       <HBox prefHeight="28.0" prefWidth="200.0" />
       <Accordion>
-        <panes>
-          <TitledPane animated="false" text="Mantenimiento">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorPadre">
-                     <children>
-                        <Button layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" />
-                        <Button layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="25.0" />
-                        <Button layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="60.0" />
-                        <Button layoutX="-1.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="95.0" />
-                        <Button layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="130.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
-          <TitledPane animated="false" text="Reportes">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorPadre">
-                     <children>
-                        <Button layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" />
-                        <Button layoutX="-1.0" layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="25.0" />
-                        <Button layoutX="-1.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="60.0" />
-                        <Button layoutX="-1.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="95.0" />
-                        <Button layoutX="-1.0" layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Modificar" AnchorPane.topAnchor="130.0" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </TitledPane>
-            <TitledPane animated="false" layoutX="10.0" layoutY="35.0" text="Notificaciones">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorPadre">
-                     <children>
-                        <Button layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" />
-                        <Button layoutX="-1.0" layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="25.0" />
-                        <Button layoutX="-1.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="60.0" />
-                        <Button layoutX="-1.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="95.0" />
-                        <Button layoutX="-1.0" layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Modificar" AnchorPane.topAnchor="130.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </TitledPane>
-        </panes>
-      </Accordion>
-      <Accordion layoutX="10.0" layoutY="97.0">
          <panes>
-            <TitledPane animated="false" text="Transacciones">
+            <TitledPane animated="false" text="Mantenimiento">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorPadre">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="175.0" prefWidth="200.0" styleClass="anchorPadre">
                      <children>
-                        <Button layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" />
-                        <Button layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="25.0" />
-                        <Button layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="60.0" />
-                        <Button layoutX="-1.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="95.0" />
-                        <Button layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="130.0" />
+                        <Button layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Control de Usuarios" />
+                        <Button layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Areas de Trabajo" AnchorPane.topAnchor="25.0" />
+                        <Button layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Horarios" AnchorPane.topAnchor="60.0" />
+                        <Button layoutX="-1.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Notificaciones" AnchorPane.topAnchor="95.0" />
+                        <Button layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Transacciones" AnchorPane.topAnchor="130.0" />
                      </children>
                   </AnchorPane>
                </content>
             </TitledPane>
-            <TitledPane animated="false">
+            <TitledPane animated="false" layoutX="10.0" layoutY="10.0" text="Reportes">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorPadre">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0" styleClass="anchorPadre">
                      <children>
-                        <Button layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" />
-                        <Button layoutX="-1.0" layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="25.0" />
-                        <Button layoutX="-1.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="60.0" />
-                        <Button layoutX="-1.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="95.0" />
-                        <Button layoutX="-1.0" layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Modificar" AnchorPane.topAnchor="130.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </TitledPane>
-            <TitledPane animated="false" text="Notificaciones">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="190.0" prefWidth="198.0" styleClass="anchorPadre">
-                     <children>
-                        <Button layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="-1.0" />
-                        <Button layoutX="-1.0" layoutY="33.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="35.0" />
-                        <Button layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="70.0" />
-                        <Button layoutX="-1.0" layoutY="110.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="105.0" />
-                        <Button layoutX="-1.0" layoutY="151.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Button" AnchorPane.topAnchor="140.0" />
+                        <Button layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Notificaciones" />
+                        <Button layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Horas Laboradas" AnchorPane.topAnchor="25.0" />
+                        <Button layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Divisas" AnchorPane.topAnchor="60.0" />
                      </children>
                   </AnchorPane>
                </content>
