@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="474.0" prefWidth="723.0" styleClass="anchorPadre" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.una.clienteaeropuerto.controllers.CreacionNotificacionController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+   <children>
+      <VBox layoutX="-1.0" layoutY="15.0" prefHeight="474.0" prefWidth="460.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="NOTIFICACION" textFill="#f8f3f3" />
+            <TextField>
+               <VBox.margin>
+                  <Insets left="50.0" right="20.0" top="75.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField>
+               <VBox.margin>
+                  <Insets left="50.0" right="20.0" top="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField>
+               <VBox.margin>
+                  <Insets left="50.0" right="20.0" top="50.0" />
+               </VBox.margin>
+            </TextField>
+            <TextArea prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="50.0" right="20.0" top="40.0" />
+               </VBox.margin>
+            </TextArea>
+         </children>
+      </VBox>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+   </children>
+</AnchorPane>
