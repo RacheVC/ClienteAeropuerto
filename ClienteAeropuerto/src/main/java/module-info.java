@@ -2,6 +2,7 @@ module org.una.clienteaeropuerto {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.base;
+    requires com.google.gson;
     
 
     opens org.una.clienteaeropuerto to javafx.fxml;
