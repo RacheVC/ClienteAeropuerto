@@ -28,11 +28,11 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="175.0" prefWidth="200.0" styleClass="anchorPadre">
                      <children>
-                        <Button layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Control de Usuarios" />
-                        <Button layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Areas de Trabajo" AnchorPane.topAnchor="25.0" />
-                        <Button layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Horarios" AnchorPane.topAnchor="60.0" />
-                        <Button layoutX="-1.0" layoutY="100.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Notificaciones" AnchorPane.topAnchor="95.0" />
-                        <Button layoutY="135.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Transacciones" AnchorPane.topAnchor="130.0" />
+                        <Button layoutY="-1.0" mnemonicParsing="false" onAction="#OnActionControlUsuarios" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Control de Usuarios" />
+                        <Button layoutY="29.0" mnemonicParsing="false" onAction="#OnActionAreasTrabajo" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Areas de Trabajo" AnchorPane.topAnchor="25.0" />
+                        <Button layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" onAction="#OnActionHorarios" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Horarios" AnchorPane.topAnchor="60.0" />
+                        <Button layoutX="-1.0" layoutY="100.0" mnemonicParsing="false" onAction="#OnActionNotificaciones" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Notificaciones" AnchorPane.topAnchor="95.0" />
+                        <Button layoutY="135.0" mnemonicParsing="false" onAction="#OnActionTransacciones" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Transacciones" AnchorPane.topAnchor="130.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -41,9 +41,9 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="200.0" styleClass="anchorPadre">
                      <children>
-                        <Button layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Notificaciones" />
-                        <Button layoutY="29.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Horas Laboradas" AnchorPane.topAnchor="25.0" />
-                        <Button layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Divisas" AnchorPane.topAnchor="60.0" />
+                        <Button layoutY="-1.0" mnemonicParsing="false" onAction="#OnActionNotificaciones" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Notificaciones" />
+                        <Button layoutY="29.0" mnemonicParsing="false" onAction="#OnActionHorasLaboradas" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Horas Laboradas" AnchorPane.topAnchor="25.0" />
+                        <Button layoutX="-1.0" layoutY="75.0" mnemonicParsing="false" onAction="#OnActionDivisas" prefHeight="30.0" prefWidth="200.0" styleClass="jfx-buttonStandard2" text="Divisas" AnchorPane.topAnchor="60.0" />
                      </children>
                   </AnchorPane>
                </content>

@@ -49,5 +49,9 @@ public class CreacionNotificacionController implements Initializable {
     @FXML
     private void OnActionBtnGuardar(ActionEvent event) {
     }
+
+    @FXML
+    private void OnActionBtnAgregarImagen(ActionEvent event) {
+    }
     
 }
