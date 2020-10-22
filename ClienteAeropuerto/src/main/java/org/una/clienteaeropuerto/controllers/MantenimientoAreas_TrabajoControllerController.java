@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author rache
  */
-public class FiltroNotificacionController implements Initializable {
+public class MantenimientoAreas_TrabajoControllerController implements Initializable {
 
     /**
      * Initializes the controller class.
