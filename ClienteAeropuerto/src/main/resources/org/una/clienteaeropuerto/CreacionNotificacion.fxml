@@ -8,17 +8,19 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="474.0" prefWidth="723.0" styleClass="anchorPadre" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.una.clienteaeropuerto.controllers.CreacionNotificacionController">
+<AnchorPane id="AnchorPane" prefHeight="475.0" prefWidth="725.0" styleClass="anchorPadre" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.una.clienteaeropuerto.controllers.CreacionNotificacionController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
    <children>
-      <VBox layoutX="-1.0" layoutY="15.0" prefHeight="474.0" prefWidth="460.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="-1.0" layoutY="15.0" prefHeight="390.0" prefWidth="462.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="265.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label text="NOTIFICACION" textFill="WHITE">
                <VBox.margin>
@@ -38,7 +40,7 @@
                   <Insets left="50.0" right="20.0" top="50.0" />
                </VBox.margin>
             </TextField>
-            <TextArea fx:id="txtMensaje" prefHeight="200.0" prefWidth="200.0" promptText="Mensaje" styleClass="vBoxGeneral">
+            <TextArea fx:id="txtMensaje" prefHeight="117.0" prefWidth="392.0" promptText="Mensaje" styleClass="vBoxGeneral">
                <VBox.margin>
                   <Insets bottom="15.0" left="50.0" right="20.0" top="40.0" />
                </VBox.margin>
@@ -46,7 +48,7 @@
          </children>
       </VBox>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <VBox layoutX="456.0" prefHeight="474.0" prefWidth="269.0">
+      <VBox layoutX="456.0" prefHeight="474.0" prefWidth="269.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label text="¿Desea Programar la Fecha de Envio?" textFill="WHITE">
                <font>
@@ -70,6 +72,22 @@
                <VBox.margin>
                   <Insets left="200.0" top="290.0" />
                </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox layoutX="-2.0" layoutY="373.0" prefHeight="129.0" prefWidth="445.0" AnchorPane.bottomAnchor="0.0">
+         <children>
+            <Button fx:id="btnAgregarImagen" mnemonicParsing="false" onAction="#OnActionBtnAgregarImagen" styleClass="jfx-buttonStandard" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="380.0" top="10.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="43.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@iconos/clip.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
       </VBox>

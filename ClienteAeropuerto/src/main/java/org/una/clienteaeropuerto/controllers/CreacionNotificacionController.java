@@ -35,6 +35,8 @@ public class CreacionNotificacionController implements Initializable {
     private DatePicker dpCalendario;
     @FXML
     private Button btnGuardar;
+    @FXML
+    private Button btnAgregarImagen;
 
     /**
      * Initializes the controller class.
