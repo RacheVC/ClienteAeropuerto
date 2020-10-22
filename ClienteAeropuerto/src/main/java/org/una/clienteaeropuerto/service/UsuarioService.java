@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import org.una.clienteaeropuerto.dto.AuthenticationRequest;
+import org.una.clienteaeropuerto.dto.AuthenticationResponse;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.utils.ConnectionUtils;
 
@@ -26,25 +27,25 @@ public class UsuarioService {
     private UsuarioService() {
     }
 
-    public List<UsuarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-        return ConnectionUtils.ListFromConnection(urlstring, UsuarioDTO.class);
-    }
+//    public List<UsuarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {
+//        return ConnectionUtils.ListFromConnection(urlstring, UsuarioDTO.class);
+//    }
 
     public void add(UsuarioDTO object) throws InterruptedException, ExecutionException, IOException {
         ConnectionUtils.ObjectToConnection(urlstring, object);
     }
 
-    public List<UsuarioDTO> getUserById(Long id) throws IOException {
-        return ConnectionUtils.ListFromConnection(urlstring, UsuarioDTO.class);
-    }
+//    public List<UsuarioDTO> getUserById(Long id) throws IOException {
+//        return ConnectionUtils.ListFromConnection(urlstring, UsuarioDTO.class);
+//    }
 
     public List<UsuarioDTO> finByNombre(String Nombre) throws IOException {
         return ConnectionUtils.ConnectionToObjectByField(urlstring, Nombre);
     }
 
-    public void Login(AuthenticationRequest object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnectionLogin(urlstringLogin, object);
-
+    public AuthenticationResponse Login(AuthenticationRequest object) throws InterruptedException, ExecutionException, IOException {
+        return (AuthenticationResponse) ConnectionUtils.ObjectToConnectionLogin(urlstringLogin, object);
+       
     }
 
     public static UsuarioService getInstance() {

@@ -24,7 +24,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.AuthenticationRequest;
+import org.una.clienteaeropuerto.dto.AuthenticationResponse;
+import org.una.clienteaeropuerto.service.NotificacionService;
 import org.una.clienteaeropuerto.service.UsuarioService;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 
 /**
  * FXML Controller class
@@ -39,6 +42,8 @@ public class LoginController implements Initializable {
     private PasswordField txtPassword;
     @FXML
     private Button btnLogin;
+    
+    
     
     private boolean band = true;
 
@@ -58,10 +63,11 @@ public class LoginController implements Initializable {
         
             AuthenticationRequest aure = new AuthenticationRequest(txtUserName.getText(),txtPassword.getText());
             
-        UsuarioService.getInstance().Login(aure);
+               AuthenticationResponse autenticationresponse = UsuarioService.getInstance().Login(aure);
+               System.err.println(autenticationresponse.getJwt());
         
-        
-            
+        AuthenticationSingleton.setInstance(autenticationresponse);
+        NotificacionService.getInstance().getAll();
         } catch (IOException | InterruptedException | ExecutionException e) {
             System.out.println(e);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);

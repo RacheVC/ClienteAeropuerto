@@ -3,6 +3,7 @@ org\una\clienteaeropuerto\controllers\MenuController.class
 org\una\clienteaeropuerto\controllers\ControlEmpleadosController.class
 org\una\clienteaeropuerto\dto\NotificacionDTO.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$4.class
+org\una\clienteaeropuerto\service\NotificacionService$NotificacionServiceHolder.class
 module-info.class
 org\una\clienteaeropuerto\App.class
 org\una\clienteaeropuerto\service\UsuarioService$UsuarioServiceHolder.class
@@ -19,3 +20,4 @@ org\una\clienteaeropuerto\service\NotificacionService.class
 org\una\clienteaeropuerto\service\UsuarioService.class
 org\una\clienteaeropuerto\controllers\DashboardUserController.class
 org\una\clienteaeropuerto\controllers\LoginController.class
+org\una\clienteaeropuerto\utils\AuthenticationSingleton.class

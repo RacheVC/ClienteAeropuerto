@@ -20,6 +20,9 @@ public class AuthenticationResponse {
         this.usuario = usuario;
     }
 
+    public AuthenticationResponse() {
+    }
+
     public String getJwt() {
         return jwt;
     }

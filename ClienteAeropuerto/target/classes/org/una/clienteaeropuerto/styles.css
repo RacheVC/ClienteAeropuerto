@@ -9,14 +9,17 @@
 }
 
 .jfx-buttonStandard2 {
+/*    -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 1 ), 10, 0, 5, 5 );*/
     -fx-background-color:  #447604;
     -fx-text-fill: WHITE;
     -fx-background-radius: 10 10 10 10;
+     -fx-border-color: rgb(50,169,250);
     -fx-opacity: 2;
     -fx-alignment: CENTER;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+
 }
 
+ 
 .VBoxTarjeta{
     -fx-background-color: WHITE;
     -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.3), 45, 0, 0, 0);
@@ -44,7 +47,7 @@
 
 }
 .anchorPadre{
-     -fx-background-image: url("/org.una.clienteaeropuerto.iconos/fondo1.png");
+       -fx-background-color: linear-gradient(to left, #405F34, #040803);
     -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
 
 }

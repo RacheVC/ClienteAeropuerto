@@ -20,6 +20,7 @@ import org.una.clienteaeropuerto.dto.AuthenticationResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 
 /**
@@ -48,15 +49,15 @@ public class ConnectionUtils {
         }
     }
 
-    public static <T> List<UsuarioDTO> ListFromConnection(String urlstring, Class<T> type) throws MalformedURLException, IOException {
+    public static <T> List<NotificacionDTO> ListFromConnection(String urlstring, Class<T> type) throws MalformedURLException, IOException {
         Gson gson = new Gson();
-    Type listtype = new TypeToken<ArrayList<UsuarioDTO>>() {
+    Type listtype = new TypeToken<ArrayList<NotificacionDTO>>() {
         }.getType();
         URL url = new URL(urlstring);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/json");
-//        con.setRequestProperty("Authorization", "bearer " + Token.getInstance().getJwt());
+        con.setRequestProperty("Authorization", "bearer " + AuthenticationSingleton.getInstance().getJwt());
 
         try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
             StringBuilder response = new StringBuilder();
@@ -114,7 +115,7 @@ public class ConnectionUtils {
         }
     }
 
-    public static void ObjectToConnectionLogin(String urlstring, AuthenticationRequest object) throws MalformedURLException, IOException {
+    public static Object ObjectToConnectionLogin(String urlstring, AuthenticationRequest object) throws MalformedURLException, IOException {
         Type listtype = new TypeToken<AuthenticationResponse>() {
         }.getType();
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
@@ -142,8 +143,8 @@ public class ConnectionUtils {
                 response.append(responseLine.trim());
 
             }
-
-            System.out.println(response.toString());
+            return gson.fromJson(response.toString(),listtype);
+            
         }
 
     }
