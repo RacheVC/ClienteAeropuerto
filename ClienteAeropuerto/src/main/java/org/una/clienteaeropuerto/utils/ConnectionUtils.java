@@ -20,6 +20,7 @@ import org.una.clienteaeropuerto.dto.AuthenticationResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.una.clienteaeropuerto.dto.UsuarioDTO;
 
 /**
  *
@@ -47,23 +48,24 @@ public class ConnectionUtils {
         }
     }
 
-    public static <T> List<T> ListFromConnection(String urlstring, Class<T> type) throws MalformedURLException, IOException {
+    public static <T> List<UsuarioDTO> ListFromConnection(String urlstring, Class<T> type) throws MalformedURLException, IOException {
         Gson gson = new Gson();
-        Type listtype = new TypeToken<ArrayList<T>>() {
+    Type listtype = new TypeToken<ArrayList<UsuarioDTO>>() {
         }.getType();
-
         URL url = new URL(urlstring);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/json");
+//        con.setRequestProperty("Authorization", "bearer " + Token.getInstance().getJwt());
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());
             }
             return gson.fromJson(response.toString(), listtype);
+
         }
     }
       public static <T> List<T> ConnectionToObjectByField (String urlstring, String Nombre) throws MalformedURLException, IOException {

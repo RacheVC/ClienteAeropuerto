@@ -1,5 +1,5 @@
 .jfx-buttonStandard {
-    -fx-background-color: #0B5563;
+    -fx-background-color: trasparent;
     -fx-background-radius: 5 5 5 5;
     -fx-opacity: 1;
     -fx-alignment: CENTER;
@@ -44,7 +44,12 @@
 
 }
 .anchorPadre{
-    -fx-background-color: #181F1C;
+     -fx-background-image: url("/org.una.clienteaeropuerto.iconos/fondo1.png");
+    -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
+
+}
+.vboxMenu{
+            -fx-background-color: #CDD1C4;
     -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
 
 }
@@ -58,11 +63,25 @@
     -fx-table-cell-border-color: -fx-box-border;
     fx-background-color: transparent;
 }
-.color-2 {
-    -fx-background: -webkit-linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
-    -fx-background:    -moz-linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
-    -fx-background:     -ms-linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
-    -fx-background:      -o-linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
-    -fx-background:         linear-gradient(90deg, #e74d6b 10%, #8cc8ac 90%);
+.menu-bar-btns:hover .menu-bar-btns-icon{
+    -fx-fill: #181F1C;
+}
+.menu-bar-btns:hover{
+    -fx-background-color: #0099ff;
+}
+.Button:hover{
+    -fx-background-color: #495F41;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #b8b1b1;
+    -fx-border-color: rgb(22,169,250);
+    -fx-border-width: 0px 0px 0px 3px;
+}
+.vboxizq{
+    -fx-background-color: #090909;
+   
+    -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
+}
+.anchorPadre2{
+     -fx-background-color: #fff;
 }
 

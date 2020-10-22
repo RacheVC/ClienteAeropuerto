@@ -72,12 +72,12 @@ public class LoginController implements Initializable {
                 
         }
         
-//        Parent root = FXMLLoader.load(App.class.getResource("secundary.fxml"));
-//        Scene creacionDocs = new Scene(root);
+        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
+        Scene creacionDocs = new Scene(root);
 
-//        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        window.setScene(creacionDocs);
-//        window.show();
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
                 if(band == true){
                   Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
                 alert.setTitle("Mensaje");
