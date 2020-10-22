@@ -44,7 +44,7 @@
 
 }
 .anchorPadre{
-    -fx-background-color: #181F1C;
+     -fx-background-image: url("/org.una.clienteaeropuerto.iconos/fondo1.png");
     -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
 
 }
