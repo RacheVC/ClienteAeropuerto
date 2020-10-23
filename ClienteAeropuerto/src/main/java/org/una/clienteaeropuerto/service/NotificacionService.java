@@ -18,11 +18,13 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
 public class NotificacionService {
     
         List<NotificacionDTO> listanot;
+        NotificacionDTO ntf;
     
     private final String urlstring ="http://localhost:8098/notificaciones";
      public List<NotificacionDTO> getAll() throws InterruptedException, ExecutionException, IOException {
          listanot =ConnectionUtils.ListFromConnection(urlstring, NotificacionDTO.class);
-         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+listanot);
+         System.out.println("AAAAAA"+listanot);
+        
         return ConnectionUtils.ListFromConnection(urlstring, NotificacionDTO.class);
     }
      

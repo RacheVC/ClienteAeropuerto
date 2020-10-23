@@ -7,6 +7,7 @@ package org.una.clienteaeropuerto.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.AuthenticationRequest;
 import org.una.clienteaeropuerto.dto.AuthenticationResponse;
+import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.service.NotificacionService;
 import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
@@ -67,7 +69,7 @@ public class LoginController implements Initializable {
                System.err.println(autenticationresponse.getJwt());
         
         AuthenticationSingleton.setInstance(autenticationresponse);
-        NotificacionService.getInstance().getAll();
+                NotificacionService.getInstance().getAll();
         } catch (IOException | InterruptedException | ExecutionException e) {
             System.out.println(e);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);

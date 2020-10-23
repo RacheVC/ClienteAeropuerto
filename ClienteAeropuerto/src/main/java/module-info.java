@@ -9,5 +9,7 @@ module org.una.clienteaeropuerto {
     opens org.una.clienteaeropuerto.controllers to javafx.fxml;
     exports org.una.clienteaeropuerto;
     exports org.una.clienteaeropuerto.controllers;
+    opens org.una.clienteaeropuerto.dto;
+    exports org.una.clienteaeropuerto.dto;
   
 }

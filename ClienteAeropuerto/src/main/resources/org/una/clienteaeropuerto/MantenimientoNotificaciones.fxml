@@ -61,14 +61,15 @@
       </HBox>
    </top>
    <center>
-      <TableView prefHeight="257.0" prefWidth="536.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="tvewNotificacion" prefHeight="257.0" prefWidth="536.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
+          <TableColumn fx:id="clId" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="clFechaEnvio" prefWidth="75.0" text="Fecha Envio" />
+            <TableColumn fx:id="clFechaLectura" prefWidth="99.20001220703125" text="Fecha Lectura" />
+            <TableColumn fx:id="clMensaje" prefWidth="72.79998779296875" text="Mensaje" />
+            <TableColumn fx:id="clEmisor" prefWidth="56.00006103515625" text="Emisor" />
+            <TableColumn fx:id="clEstado" prefWidth="80.00006103515625" text="Estado" />
+            <TableColumn fx:id="clReceptor" prefWidth="83.99990844726562" text="Receptor" />
         </columns>
          <styleClass>
             <String fx:value="VBoxTarjeta" />
