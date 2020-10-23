@@ -39,7 +39,7 @@ import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 public class LoginController implements Initializable {
 
     @FXML
-    private TextField txtUserName;
+    public TextField txtUserName;
     @FXML
     private PasswordField txtPassword;
     @FXML

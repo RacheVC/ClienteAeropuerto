@@ -7,8 +7,6 @@ package org.una.clienteaeropuerto.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,16 +14,22 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.service.NotificacionService;
 
@@ -54,8 +58,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     @FXML
     private TableView<NotificacionDTO> tvewNotificacion;
     @FXML
-    
-    
+
     private TableColumn<NotificacionDTO, Object> clId;
     @FXML
     private TableColumn<NotificacionDTO, String> clFechaEnvio;
@@ -69,6 +72,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     private TableColumn<NotificacionDTO, String> clEstado;
     @FXML
     private TableColumn<NotificacionDTO, String> clReceptor;
+
     /**
      * Initializes the controller class.
      */
@@ -77,11 +81,9 @@ public class MantenimientoNotificacionesController implements Initializable {
         try {
             // TODO
 
-                        
             notificacionlist = NotificacionService.getInstance().getAll();
             System.out.println(notificacionlist.get(0).getEmisor());
-            
-            
+
         } catch (InterruptedException ex) {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
@@ -89,87 +91,57 @@ public class MantenimientoNotificacionesController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       clId.setCellValueFactory(new PropertyValueFactory<>("id"));
-       clEmisor.setCellValueFactory(new PropertyValueFactory<>("emisor"));
-       clEstado.setCellValueFactory(per -> {
+
+        clId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        clEmisor.setCellValueFactory(new PropertyValueFactory<>("emisor"));
+        clEstado.setCellValueFactory(per -> {
             String estadoString;
-            if(per.getValue().isEstado())
+            if (per.getValue().isEstado()) {
                 estadoString = "Activo";
-            else
+            } else {
                 estadoString = "Inactivo";
+            }
             return new ReadOnlyStringWrapper(estadoString);
         });
-//        clFechaEnvio.setCellValueFactory(data -> {
-//            SimpleStringProperty property = new SimpleStringProperty();
-//            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//            property.setValue(dateFormat.format(data.getValue().getFecha_envio()));
-//            return property;
-//        });
-        clFechaLectura.setCellValueFactory(new PropertyValueFactory<>("fecha_lectura"));
+
+        clFechaEnvio.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_envio()));
+        clFechaLectura.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_lectura()));
         clMensaje.setCellValueFactory(new PropertyValueFactory<>("mensaje"));
         clReceptor.setCellValueFactory(new PropertyValueFactory<>("receptor"));
-        
+
         tvewNotificacion.getItems().clear();
-        
-//        ColeccionesJpaController coleccionesJpa = new ColeccionesJpaController();
-//        List<Colecciones> colecciones = new ArrayList<>();
-//        colecciones = (List<Colecciones>) coleccionesJpa.getColecciones();
-       
+
         tvewNotificacion.setItems(FXCollections.observableArrayList(notificacionlist));
-        
-            System.out.println(notificacionlist);
-            // TODO   
-                
-            }
-    
-    
-//    private void initTabla(){
-//        colId.setCellValueFactory(new PropertyValueFactory("id"));
-//        colEmisor.setCellValueFactory(new PropertyValueFactory("cedula"));
-//        colReceptor.setCellValueFactory(new PropertyValueFactory("nombreCompleto"));
-//        colEstado.setCellValueFactory(per -> {
-//            String estadoString;
-//            if(per.getValue().isEstado())
-//                estadoString = "Activo";
-//            else
-//                estadoString = "Inactivo";
-//            return new ReadOnlyStringWrapper(estadoString);
-//        });
-//        colesJefe.setCellValueFactory(per -> {
-//            String estadoString;
-//            if(per.getValue().isEsJefe())
-//                estadoString = "Sí";
-//            else
-//                estadoString = "No";
-//            return new ReadOnlyStringWrapper(estadoString);
-//        });
-//        colRegistrado.setCellValueFactory(data -> {
-//            SimpleStringProperty property = new SimpleStringProperty();
-//            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//            property.setValue(dateFormat.format(data.getValue().getFechaRegistro()));
-//            return property;
-//        });
-//        colModificacion.setCellValueFactory(data -> {
-//            SimpleStringProperty property = new SimpleStringProperty();
-//            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//            property.setValue(dateFormat.format(data.getValue().getFechaModificacion()));
-//            return property;
-//        });
-//        colIdA.setCellValueFactory(new PropertyValueFactory("id"));
-//        colCod.setCellValueFactory(data -> {
-//            return new ReadOnlyStringWrapper(data.getValue().getPermiso().getCodigo());
-//        });
-//        colDes.setCellValueFactory(data -> {
-//            return new ReadOnlyStringWrapper(data.getValue().getPermiso().getDescripcion());
-//        });
-//        colEstadoA.setCellValueFactory(per -> {
-//            String estadoString;
-//            if(per.getValue().isEstado())
-//                estadoString = "Activo";
-//            else
-//                estadoString = "Inactivo";
-//            return new ReadOnlyStringWrapper(estadoString);
-//        });
-//    }
+
+        System.out.println(notificacionlist);
+        // TODO   
+
+    }
+
+    @FXML
+    private void accionBuscarNotificacion(ActionEvent event) {
+    }
+
+    @FXML
+    private void accionCrearNotificacion(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(App.class.getResource("CreacionNotificacion.fxml"));
+        Scene creacionDocs = new Scene(root);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
+    }
+
+    @FXML
+    private void accionModificarNotificacion(ActionEvent event) {
+    }
+
+    @FXML
+    private void accionInactivarNotificacion(ActionEvent event) {
+    }
+
+    @FXML
+    private void accionSalirrNotificacion(ActionEvent event) {
+    }
 }

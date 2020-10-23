@@ -21,11 +21,17 @@ public class NotificacionService {
         NotificacionDTO ntf;
     
     private final String urlstring ="http://localhost:8098/notificaciones";
+    
      public List<NotificacionDTO> getAll() throws InterruptedException, ExecutionException, IOException {
          listanot =ConnectionUtils.ListFromConnection(urlstring, NotificacionDTO.class);
-         System.out.println("AAAAAA"+listanot);
+       
         
         return ConnectionUtils.ListFromConnection(urlstring, NotificacionDTO.class);
+    }
+     
+     
+        public void add(NotificacionDTO object) throws InterruptedException, ExecutionException, IOException {
+        ConnectionUtils.ObjectToConnection(urlstring, object);
     }
      
      public static NotificacionService getInstance() {
