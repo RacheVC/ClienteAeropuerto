@@ -48,7 +48,7 @@ public class CreacionNotificacionController implements Initializable {
     private Button btnGuardar;
     @FXML
     private Button btnAgregarImagen;
-    LoginController logincontroller = new LoginController();
+    LoginController user = new LoginController();
     
     NotificacionDTO notificaciondto = new NotificacionDTO();
     NotificacionService notificacionservice = new NotificacionService();
@@ -65,7 +65,7 @@ public class CreacionNotificacionController implements Initializable {
     private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
         int i=100;  
        
-        notificaciondto.setEmisor("dwdwdw");
+        notificaciondto.setEmisor(user.CapturarUsuario());
         notificaciondto.setEstado(true);
         notificaciondto.setMensaje(txtMensaje.getText());
         notificaciondto.setReceptor(txtReceptor.getText());

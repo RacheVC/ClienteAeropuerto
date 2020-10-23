@@ -88,4 +88,8 @@ public class LoginController implements Initializable {
 
     }
 
+    public String CapturarUsuario() {
+        return String.valueOf(this.txtUserName.getText());
+        
+    }
 }
