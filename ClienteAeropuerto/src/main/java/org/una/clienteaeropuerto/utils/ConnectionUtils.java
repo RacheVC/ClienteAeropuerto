@@ -20,6 +20,7 @@ import org.una.clienteaeropuerto.dto.AuthenticationResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 
@@ -28,8 +29,8 @@ import org.una.clienteaeropuerto.dto.UsuarioDTO;
  * @author rache
  */
 public class ConnectionUtils {
-    
-        public static <T> List<T> ConnectionToObjectByCedula (String urlstring, String Cedula) throws MalformedURLException, IOException {
+
+    public static <T> List<T> ConnectionToObjectByCedula(String urlstring, String Cedula) throws MalformedURLException, IOException {
         Gson gson = new Gson();
         Type listtype = new TypeToken<ArrayList<T>>() {
         }.getType();
@@ -39,7 +40,7 @@ public class ConnectionUtils {
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/json");
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
             while ((responseLine = br.readLine()) != null) {
@@ -51,7 +52,7 @@ public class ConnectionUtils {
 
     public static <T> List<NotificacionDTO> ListFromConnection(String urlstring, Class<T> type) throws MalformedURLException, IOException {
         Gson gson = new Gson();
-    Type listtype = new TypeToken<ArrayList<NotificacionDTO>>() {
+        Type listtype = new TypeToken<ArrayList<NotificacionDTO>>() {
         }.getType();
         URL url = new URL(urlstring);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -69,7 +70,29 @@ public class ConnectionUtils {
 
         }
     }
-      public static <T> List<T> ConnectionToObjectByField (String urlstring, String Nombre) throws MalformedURLException, IOException {
+
+    public static <T> List<Areas_trabajoDTO> ListFromConnectionAT(String urlstring, Class<T> type) throws MalformedURLException, IOException {
+        Gson gson = new Gson();
+        Type listtype = new TypeToken<ArrayList<Areas_trabajoDTO>>() {
+        }.getType();
+        URL url = new URL(urlstring);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Authorization", "bearer " + AuthenticationSingleton.getInstance().getJwt());
+
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            return gson.fromJson(response.toString(), listtype);
+
+        }
+    }
+
+    public static <T> List<T> ConnectionToObjectByField(String urlstring, String Nombre) throws MalformedURLException, IOException {
         Gson gson = new Gson();
         Type listtype = new TypeToken<ArrayList<T>>() {
         }.getType();
@@ -78,8 +101,8 @@ public class ConnectionUtils {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("Accept", "application/json");
-        
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
             while ((responseLine = br.readLine()) != null) {
@@ -102,12 +125,12 @@ public class ConnectionUtils {
 
         String data = gson.toJson(object);
 
-        try (OutputStream os = con.getOutputStream()) {
+        try ( OutputStream os = con.getOutputStream()) {
             byte[] input = data.getBytes("utf-8");
             os.write(input, 0, input.length);
         }
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
             while ((responseLine = br.readLine()) != null) {
@@ -130,27 +153,23 @@ public class ConnectionUtils {
 
         String data = gson.toJson(object);
 
-        try (OutputStream os = con.getOutputStream()) {
+        try ( OutputStream os = con.getOutputStream()) {
             byte[] input = data.getBytes("utf-8");
             os.write(input, 0, input.length);
         }
         System.out.println(con.getResponseCode());
-        
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());
 
             }
-            return gson.fromJson(response.toString(),listtype);
-            
+            return gson.fromJson(response.toString(), listtype);
+
         }
 
     }
-   
-   
 
 }
-

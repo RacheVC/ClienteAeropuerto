@@ -7,7 +7,6 @@ package org.una.clienteaeropuerto.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import javafx.event.ActionEvent;
@@ -26,7 +25,7 @@ import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.AuthenticationRequest;
 import org.una.clienteaeropuerto.dto.AuthenticationResponse;
-import org.una.clienteaeropuerto.dto.NotificacionDTO;
+import org.una.clienteaeropuerto.service.AreasTrabajoService;
 import org.una.clienteaeropuerto.service.NotificacionService;
 import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
@@ -44,11 +43,8 @@ public class LoginController implements Initializable {
     private PasswordField txtPassword;
     @FXML
     private Button btnLogin;
-    
-    
-    
-    private boolean band = true;
 
+    private boolean band = true;
 
     /**
      * Initializes the controller class.
@@ -56,45 +52,42 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void IniciarSesion(ActionEvent event) throws IOException {
-        
-           try {
-        
-            AuthenticationRequest aure = new AuthenticationRequest(txtUserName.getText(),txtPassword.getText());
-            
-               AuthenticationResponse autenticationresponse = UsuarioService.getInstance().Login(aure);
-               System.err.println(autenticationresponse.getJwt());
-        
-        AuthenticationSingleton.setInstance(autenticationresponse);
-                NotificacionService.getInstance().getAll();
+
+        try {
+
+            AuthenticationRequest aure = new AuthenticationRequest(txtUserName.getText(), txtPassword.getText());
+
+            AuthenticationResponse autenticationresponse = UsuarioService.getInstance().Login(aure);
+            System.err.println(autenticationresponse.getJwt());
+
+            AuthenticationSingleton.setInstance(autenticationresponse);
         } catch (IOException | InterruptedException | ExecutionException e) {
             System.out.println(e);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("Usuario no autenticado.");
-                alert.show();
-                band = false;
-                
+            alert.setTitle("Mensaje");
+            alert.setHeaderText("Usuario no autenticado.");
+            alert.show();
+            band = false;
+
         }
-        
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
+
+        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoAreas_Trabajo.fxml"));
         Scene creacionDocs = new Scene(root);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
-                if(band == true){
-                  Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("Usuario autenticado.");
-                alert.show();  
-                }
-                
-    
+        if (band == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+            alert.setTitle("Mensaje");
+            alert.setHeaderText("Usuario autenticado.");
+            alert.show();
+        }
+
     }
 
-    
 }
