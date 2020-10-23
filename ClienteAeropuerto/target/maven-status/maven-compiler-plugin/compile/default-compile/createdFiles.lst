@@ -1,3 +1,4 @@
+org\una\clienteaeropuerto\controllers\MantenimientoUsuariosController.class
 org\una\clienteaeropuerto\service\RolesService.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$2.class
 org\una\clienteaeropuerto\controllers\MantenimientoRolesController.class
@@ -14,6 +15,7 @@ org\una\clienteaeropuerto\dto\AuthenticationRequest.class
 org\una\clienteaeropuerto\controllers\MantenimientoNotificacionesController.class
 org\una\clienteaeropuerto\service\UsuarioService.class
 org\una\clienteaeropuerto\utils\AuthenticationSingleton.class
+org\una\clienteaeropuerto\utils\ConnectionUtils$7.class
 org\una\clienteaeropuerto\controllers\MenuController.class
 org\una\clienteaeropuerto\service\AreasTrabajoService$AreasTrabajoServiceHolder.class
 org\una\clienteaeropuerto\controllers\ControlEmpleadosController.class

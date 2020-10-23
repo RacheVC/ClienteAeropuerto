@@ -54,7 +54,6 @@ public class MantenimientoNotificacionesController implements Initializable {
     private Button btnSalir;
 
     private List<NotificacionDTO> notificacionlist = new ArrayList<NotificacionDTO>();
-    NotificacionService notificacionservice;
     @FXML
     private TableView<NotificacionDTO> tvewNotificacion;
     @FXML

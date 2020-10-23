@@ -5,9 +5,18 @@
  */
 package org.una.clienteaeropuerto.controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +24,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
+import org.una.clienteaeropuerto.service.UsuarioService;
 
 /**
  * FXML Controller class
@@ -35,30 +46,62 @@ public class MantenimientoUsuariosController implements Initializable {
     @FXML
     private Button btnInactivar;
     @FXML
-    private TableView<?> tvewNotificacion;
+    private TableView<UsuarioDTO> tvUsuarios;
     @FXML
     private TableColumn<UsuarioDTO, Object> clId;
     @FXML
-    private TableColumn<UsuarioDTO, Date> clFechaEnvio;
+    private TableColumn<UsuarioDTO, String> tcNombre;
     @FXML
-    private TableColumn<?, ?> clFechaLectura;
+    private TableColumn<UsuarioDTO, String> tcCedula;
     @FXML
-    private TableColumn<?, ?> clMensaje;
+    private TableColumn<UsuarioDTO, String> tcCorreo;
     @FXML
-    private TableColumn<?, ?> clEmisor;
+    private TableColumn<UsuarioDTO, String> tcEstado;
     @FXML
-    private TableColumn<?, ?> clEstado;
+    private TableColumn<UsuarioDTO, String> tcFechaRegistro;
     @FXML
-    private TableColumn<?, ?> clReceptor;
+    private TableColumn<UsuarioDTO, String> tcEmpleadoId;
+    @FXML
+    private TableColumn<UsuarioDTO, String> tcRolId;
     @FXML
     private Button btnSalir;
-
+    
+    private List<UsuarioDTO> usuariosList = new ArrayList<UsuarioDTO>();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            usuariosList = UsuarioService.getInstance().getAll();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        clId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcEstado.setCellValueFactory(per -> {
+            String estadoString;
+            if (per.getValue().isEstado()) {
+                estadoString = "Activo";
+            } else {
+                estadoString = "Inactivo";
+            }
+            return new ReadOnlyStringWrapper(estadoString);
+        });
+        tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
+        tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+        tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
+        tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFechaRegistro()));
+        tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
+        tcRolId.setCellValueFactory(new PropertyValueFactory<>("rolesId"));
+        
+        tvUsuarios.getItems().clear();
+
+        tvUsuarios.setItems(FXCollections.observableArrayList(usuariosList));
     }    
 
     @FXML
@@ -80,5 +123,6 @@ public class MantenimientoUsuariosController implements Initializable {
     @FXML
     private void accionSalirrNotificacion(ActionEvent event) {
     }
+
     
 }
