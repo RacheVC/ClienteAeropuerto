@@ -18,29 +18,21 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  * @author Andres
  */
 public class UsuarioService {
-     private final String urlstring = "http://localhost:8098/usuarios/";
+     private final String urlCreate = "http://localhost:8098/usuarios/";
+     private final String urlFindAll = "http://localhost:8098/usuarios";
     private final String urlstringLogin = "http://localhost:8098/authentication/login";
-    private final String urlstringNombre = "http://localhost:8098/usuarios/Usuario%20admin";
     private final String urlstringCedula = "http://localhost:8098/usuarios/cedula/A";
     UsuarioDTO datos = new UsuarioDTO();
 
     private UsuarioService() {
     }
 
-//    public List<UsuarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-//        return ConnectionUtils.ListFromConnection(urlstring, UsuarioDTO.class);
-//    }
-
-    public void add(UsuarioDTO object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnection(urlstring, object);
+    public List<UsuarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {
+        return ConnectionUtils.ListFromConnectionUsuario(urlFindAll, UsuarioDTO.class);
     }
 
-//    public List<UsuarioDTO> getUserById(Long id) throws IOException {
-//        return ConnectionUtils.ListFromConnection(urlstring, UsuarioDTO.class);
-//    }
-
-    public List<UsuarioDTO> finByNombre(String Nombre) throws IOException {
-        return ConnectionUtils.ConnectionToObjectByField(urlstring, Nombre);
+    public void add(UsuarioDTO object) throws InterruptedException, ExecutionException, IOException {
+        ConnectionUtils.ObjectToConnection(urlCreate, object);
     }
 
     public AuthenticationResponse Login(AuthenticationRequest object) throws InterruptedException, ExecutionException, IOException {
