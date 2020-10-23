@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="657.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.MantenimientoAreas_TrabajoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="657.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.MantenimientoRolesController">
     <top>
         <HBox prefHeight="143.0" prefWidth="824.0" styleClass="anchorPadre" stylesheets="@styles.css" BorderPane.alignment="CENTER">
             <children>
                 <VBox prefHeight="143.0" prefWidth="373.0">
                     <children>
-                        <Label text="Areas de Trabajo" textFill="#fcf8f8">
+                        <Label text="Roles" textFill="#fcf8f8">
                             <font>
                                 <Font name="Tahoma Bold" size="18.0" />
                             </font>
@@ -61,7 +61,7 @@
         </HBox>
     </top>
     <center>
-        <TableView fx:id="tvAreasTrabajo" prefHeight="257.0" prefWidth="411.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+        <TableView fx:id="tvRoles" prefHeight="257.0" prefWidth="411.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="tcId" prefWidth="194.0" text="Id" />
             <TableColumn fx:id="tcNombre" prefWidth="209.0" text="Nombre" />

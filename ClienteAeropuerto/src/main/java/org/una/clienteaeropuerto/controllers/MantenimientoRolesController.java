@@ -28,15 +28,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
-import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
-import org.una.clienteaeropuerto.service.AreasTrabajoService;
+import org.una.clienteaeropuerto.dto.RolesDTO;
+import org.una.clienteaeropuerto.service.RolesService;
 
 /**
  * FXML Controller class
  *
- * @author rache
+ * @author Luis
  */
-public class MantenimientoAreas_TrabajoController implements Initializable {
+public class MantenimientoRolesController implements Initializable {
 
     @FXML
     private TextField txtBusqueda;
@@ -49,51 +49,50 @@ public class MantenimientoAreas_TrabajoController implements Initializable {
     @FXML
     private Button btnInactivar;
     @FXML
-    private TableView<Areas_trabajoDTO> tvAreasTrabajo;
+    private TableView<RolesDTO> tvRoles;
     @FXML
-    private TableColumn<Areas_trabajoDTO, String> tcNombre;
+    private TableColumn<RolesDTO, Object> tcId;
+    @FXML
+    private TableColumn<RolesDTO, String> tcNombre;
     @FXML
     private Button btnSalir;
 
-    private List<Areas_trabajoDTO> areaTrabajoList = new ArrayList<Areas_trabajoDTO>();
-    @FXML
-    private TableColumn<Areas_trabajoDTO, Object> tcId;
+    private List<RolesDTO> rolesList = new ArrayList<RolesDTO>();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         try {
-            areaTrabajoList = AreasTrabajoService.getInstance().getAll();
-            System.out.println("AAAAAAAAAAAAAAAAAAAAA" + areaTrabajoList);
+            rolesList = RolesService.getInstance().getAll();
         } catch (InterruptedException ex) {
-            Logger.getLogger(MantenimientoAreas_TrabajoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MantenimientoRolesController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
-            Logger.getLogger(MantenimientoAreas_TrabajoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MantenimientoRolesController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(MantenimientoAreas_TrabajoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MantenimientoRolesController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
 
-        tvAreasTrabajo.getItems().clear();
+        tvRoles.getItems().clear();
 
-        tvAreasTrabajo.setItems(FXCollections.observableArrayList(areaTrabajoList));
+        tvRoles.setItems(FXCollections.observableArrayList(rolesList));
 
     }
 
     @FXML
     private void onActionBtnBuscar(ActionEvent event) {
-
     }
 
     @FXML
     private void onActionBtnCrear(ActionEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(App.class.getResource("CreacionArea_Trabajo.fxml"));
+        
+         Parent root = FXMLLoader.load(App.class.getResource("CreacionRoles.fxml"));
         Scene creacionDocs = new Scene(root);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -16,25 +16,24 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  * @author Andres
  */
 public class NotificacionService {
-    
-        List<NotificacionDTO> listanot;
-        NotificacionDTO ntf;
-    
-    private final String urlstring ="http://localhost:8098/notificaciones";
-    
-     public List<NotificacionDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-         listanot =ConnectionUtils.ListFromConnection(urlstring, NotificacionDTO.class);
-       
-        
+
+    List<NotificacionDTO> listanot;
+    NotificacionDTO ntf;
+
+    private final String urlstring = "http://localhost:8098/notificaciones";
+    private final String urlCreate = "http://localhost:8098/notificaciones/";
+
+    public List<NotificacionDTO> getAll() throws InterruptedException, ExecutionException, IOException {
+        listanot = ConnectionUtils.ListFromConnection(urlstring, NotificacionDTO.class);
+
         return ConnectionUtils.ListFromConnection(urlstring, NotificacionDTO.class);
     }
-     
-     
-        public void add(NotificacionDTO object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnection(urlstring, object);
+
+    public void add(NotificacionDTO object) throws InterruptedException, ExecutionException, IOException {
+        ConnectionUtils.ObjectToConnection(urlCreate, object);
     }
-     
-     public static NotificacionService getInstance() {
+
+    public static NotificacionService getInstance() {
         return NotificacionServiceHolder.INSTANCE;
     }
 

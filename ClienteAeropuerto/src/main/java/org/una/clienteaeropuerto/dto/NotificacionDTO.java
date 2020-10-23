@@ -6,7 +6,6 @@
 package org.una.clienteaeropuerto.dto;
 
 import java.util.Date;
-import org.una.clienteaeropuerto.dto.UsuarioDTO;
 
 /**
  *

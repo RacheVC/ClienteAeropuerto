@@ -63,7 +63,8 @@
     <center>
         <TableView fx:id="tvAreasTrabajo" prefHeight="257.0" prefWidth="411.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="tcNombre" prefWidth="357.0" text="Nombre" />
+                <TableColumn fx:id="tcId" prefWidth="194.0" text="Id" />
+            <TableColumn fx:id="tcNombre" prefWidth="209.0" text="Nombre" />
             </columns>
             <styleClass>
                 <String fx:value="VBoxTarjeta" />

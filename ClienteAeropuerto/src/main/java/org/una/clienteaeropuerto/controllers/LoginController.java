@@ -25,8 +25,6 @@ import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.AuthenticationRequest;
 import org.una.clienteaeropuerto.dto.AuthenticationResponse;
-import org.una.clienteaeropuerto.service.AreasTrabajoService;
-import org.una.clienteaeropuerto.service.NotificacionService;
 import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 
@@ -75,7 +73,7 @@ public class LoginController implements Initializable {
 
         }
 
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoAreas_Trabajo.fxml"));
+        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoRoles.fxml"));
         Scene creacionDocs = new Scene(root);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
