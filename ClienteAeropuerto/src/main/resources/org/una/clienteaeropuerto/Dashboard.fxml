@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.DashboardController">
    <left>
       <VBox prefHeight="573.0" prefWidth="306.0" styleClass="anchorPadre" BorderPane.alignment="CENTER">
@@ -72,7 +71,7 @@
                            <children>
                               <VBox prefHeight="186.0" prefWidth="307.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#OnActionVtnDivisas" styleClass="jfx-buttonStandard2" text="Divisas">
+                                    <Button mnemonicParsing="false" onAction="#OnActionBtnDivisas" styleClass="jfx-buttonStandard2" text="Divisas">
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="120.0" />
                                        </VBox.margin>
@@ -97,7 +96,7 @@
             </Accordion>
             <Button mnemonicParsing="false" onAction="#OnActionBtnCerrarSesion" prefHeight="41.0" prefWidth="115.0" styleClass="jfx-buttonStandard2" text="Cerrar Sesión">
                <VBox.margin>
-                  <Insets left="100.0" top="290.0" />
+                  <Insets left="100.0" top="300.0" />
                </VBox.margin>
             </Button>
          </children>
