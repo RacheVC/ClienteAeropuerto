@@ -14,7 +14,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.DashboardController">
    <left>
-      <VBox prefHeight="573.0" prefWidth="306.0" styleClass="anchorPadre" BorderPane.alignment="CENTER">
+      <VBox prefHeight="573.0" prefWidth="306.0" styleClass="anchorPadre" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="txtUser" prefHeight="53.0" prefWidth="306.0">
                <graphic>
@@ -27,7 +27,7 @@
             </Label>
             <Accordion>
               <panes>
-                <TitledPane animated="false" styleClass="anchorPadre2" text="Mantenimientos">
+                <TitledPane animated="false" style="-fx-background-color: green;" styleClass="anchorPadre2" text="Mantenimientos">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="146.0" prefWidth="304.0" styleClass="anchorPadre">
                            <children>
@@ -38,9 +38,9 @@
                                           <Insets bottom="5.0" left="80.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnActionBtnMantNotificaciones" styleClass="jfx-buttonStandard2" text="Notificaciones">
+                                    <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnActionBtnMantNotificaciones" styleClass="jfx-buttonStandard2" text="Control de notificaciones">
                                        <VBox.margin>
-                                          <Insets bottom="5.0" left="100.0" />
+                                          <Insets bottom="5.0" left="70.0" />
                                        </VBox.margin>
                                     </Button>
                                     <Button layoutX="90.0" layoutY="40.0" mnemonicParsing="false" onAction="#OnActionBtnMantTransacciones" styleClass="jfx-buttonStandard2" text="Transacciones">
@@ -48,24 +48,18 @@
                                           <Insets bottom="5.0" left="100.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button layoutX="90.0" layoutY="70.0" mnemonicParsing="false" styleClass="jfx-buttonStandard2" text="Control de Usuarios">
+                                    <Button layoutX="90.0" layoutY="100.0" mnemonicParsing="false" onAction="#OnActionControlRoles" styleClass="jfx-buttonStandard2" text="Control de Roles">
                                        <VBox.margin>
-                                          <Insets bottom="5.0" left="80.0" />
+                                          <Insets bottom="5.0" left="92.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button layoutX="90.0" layoutY="100.0" mnemonicParsing="false" styleClass="jfx-buttonStandard2" text="Control de Usuarios">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" left="80.0" />
-                                       </VBox.margin>
-                                    </Button>
-                                    <Button layoutX="90.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnActionBtnControlUsuarios" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Control de Usuarios" />
                                  </children>
                               </VBox>
                            </children>
                         </AnchorPane>
                   </content>
                 </TitledPane>
-                  <TitledPane animated="false" layoutX="10.0" layoutY="10.0" text="Reportes">
+                  <TitledPane animated="false" layoutX="10.0" layoutY="10.0" style="-fx-background-color: green;" text="Reportes">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="148.0" prefWidth="278.0" styleClass="anchorPadre">
                            <children>
@@ -103,6 +97,17 @@
       </VBox>
    </left>
    <center>
-      <HBox prefHeight="400.0" prefWidth="429.0" styleClass="anchorPadre" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="400.0" prefWidth="429.0" styleClass="anchorPadre" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="243.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@iconos/Avion.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="100.0" top="70.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </children></HBox>
    </center>
 </BorderPane>
