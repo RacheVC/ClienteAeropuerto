@@ -7,7 +7,10 @@ package org.una.clienteaeropuerto.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -16,6 +19,9 @@ import javafx.fxml.Initializable;
  */
 public class DashboardController implements Initializable {
 
+    @FXML
+    private Label txtUser;
+
     /**
      * Initializes the controller class.
      */
@@ -23,5 +29,33 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void OnActionBtnControlUsuarios(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnMantNotificaciones(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnMantTransacciones(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionVtnDivisas(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnNotificaciones(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnTransacciones(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnCerrarSesion(ActionEvent event) {
+    }
     
 }
