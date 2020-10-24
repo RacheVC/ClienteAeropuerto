@@ -58,7 +58,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void OnActionBtnMantTransacciones(ActionEvent event) {
+    private void OnActionBtnMantTransacciones(ActionEvent event) throws IOException {
                Parent root = FXMLLoader.load(App.class.getResource("MantenimientoTransacciones.fxml"));
         Scene creacionDocs = new Scene(root);
 
@@ -78,7 +78,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void OnActionBtnCerrarSesion(ActionEvent event) {
+    private void OnActionBtnCerrarSesion(ActionEvent event) throws IOException {
                Parent root = FXMLLoader.load(App.class.getResource("Login.fxml"));
         Scene creacionDocs = new Scene(root);
 
