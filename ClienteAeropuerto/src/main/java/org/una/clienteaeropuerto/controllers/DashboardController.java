@@ -35,11 +35,11 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
     private void OnActionBtnControlUsuarios(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoUsuarios.fxml"));
+               Parent root = FXMLLoader.load(App.class.getResource("ControlEmpleados.fxml"));
         Scene creacionDocs = new Scene(root);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -49,7 +49,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void OnActionBtnMantNotificaciones(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
+               Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
         Scene creacionDocs = new Scene(root);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -58,8 +58,8 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void OnActionBtnNotificaciones(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
+    private void OnActionBtnMantTransacciones(ActionEvent event) {
+               Parent root = FXMLLoader.load(App.class.getResource("MantenimientoTransacciones.fxml"));
         Scene creacionDocs = new Scene(root);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -67,19 +67,19 @@ public class DashboardController implements Initializable {
         window.show();
     }
 
-    @FXML
-    private void OnActionBtnTransacciones(ActionEvent event) throws IOException {
-              Parent root = FXMLLoader.load(App.class.getResource("MantenimientoTransacciones.fxml"));
-        Scene creacionDocs = new Scene(root);
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+    @FXML
+    private void OnActionBtnNotificaciones(ActionEvent event) {
+    
     }
 
     @FXML
-    private void OnActionBtnCerrarSesion(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(App.class.getResource("Login.fxml"));
+    private void OnActionBtnTransacciones(ActionEvent event) {
+    }
+
+    @FXML
+    private void OnActionBtnCerrarSesion(ActionEvent event) {
+               Parent root = FXMLLoader.load(App.class.getResource("Login.fxml"));
         Scene creacionDocs = new Scene(root);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -90,15 +90,5 @@ public class DashboardController implements Initializable {
     @FXML
     private void OnActionBtnDivisas(ActionEvent event) {
     }
-
-    @FXML
-    private void OnActionControlRoles(ActionEvent event) throws IOException {
-         Parent root = FXMLLoader.load(App.class.getResource("MantenimientoRoles.fxml"));
-        Scene creacionDocs = new Scene(root);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
-    }
-
+    
 }
