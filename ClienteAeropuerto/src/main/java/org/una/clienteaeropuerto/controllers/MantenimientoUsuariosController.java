@@ -19,12 +19,18 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.UsuarioService;
 
@@ -109,7 +115,14 @@ public class MantenimientoUsuariosController implements Initializable {
     }
 
     @FXML
-    private void accionCrearNotificacion(ActionEvent event) {
+    private void accionCrearNotificacion(ActionEvent event) throws IOException {
+        
+        Parent root = FXMLLoader.load(App.class.getResource("CreacionUsuarios.fxml"));
+        Scene creacionDocs = new Scene(root);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
     }
 
     @FXML

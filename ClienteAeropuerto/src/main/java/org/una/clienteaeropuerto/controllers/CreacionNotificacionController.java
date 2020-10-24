@@ -65,7 +65,7 @@ public class CreacionNotificacionController implements Initializable {
     private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
         int i=100;  
        
-        notificaciondto.setEmisor(user.CapturarUsuario());
+//        notificaciondto.setEmisor(user.CapturarUsuario());
         notificaciondto.setEstado(true);
         notificaciondto.setMensaje(txtMensaje.getText());
         notificaciondto.setReceptor(txtReceptor.getText());

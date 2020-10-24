@@ -24,7 +24,7 @@ public class UsuarioService {
     private final String urlstringCedula = "http://localhost:8098/usuarios/cedula/A";
     UsuarioDTO datos = new UsuarioDTO();
 
-    private UsuarioService() {
+    public UsuarioService() {
     }
 
     public List<UsuarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {

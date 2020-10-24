@@ -16,13 +16,14 @@ public class UsuarioDTO {
     private String nombreCompleto;   
     private String cedula;
     private String correo;
+    private String contrasenaEncriptada;
     private boolean estado; 
     private Date fechaRegistro; 
     private Long empleadoId; 
     private Long rolesId;
     
    
-    public UsuarioDTO(Long id, String nombreCompleto, String cedula, String correo, boolean estado, Date fechaRegistro, Long empleadoId, Long rolesId) {
+    public UsuarioDTO(Long id, String nombreCompleto, String cedula, String correo, boolean estado, Date fechaRegistro, Long empleadoId, Long rolesId, String contrasenaEncriptada) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.cedula = cedula;
@@ -31,6 +32,15 @@ public class UsuarioDTO {
         this.fechaRegistro = fechaRegistro;
         this.empleadoId = empleadoId;
         this.rolesId = rolesId;
+        this.contrasenaEncriptada = contrasenaEncriptada;
+    }
+
+    public String getContrasenaEncriptada() {
+        return contrasenaEncriptada;
+    }
+
+    public void setContrasenaEncriptada(String contrasenaEncriptada) {
+        this.contrasenaEncriptada = contrasenaEncriptada;
     }
 
     public UsuarioDTO() {

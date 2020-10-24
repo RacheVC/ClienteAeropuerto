@@ -69,8 +69,8 @@
             <TableColumn fx:id="tcCorreo" prefWidth="82.0" text="Correo" />
             <TableColumn fx:id="tcEstado" prefWidth="71.0" text="Estado" />
             <TableColumn fx:id="tcFechaRegistro" prefWidth="91.0" text="Fecha registro" />
-            <TableColumn fx:id="tcEmpleadoId" prefWidth="75.0" text="Empleado id" />
-            <TableColumn fx:id="tcRolId" prefWidth="46.0" text="Jefe id" />
+            <TableColumn fx:id="tcEmpleadoId" prefWidth="75.0" text="Jefe id" />
+            <TableColumn fx:id="tcRolId" prefWidth="46.0" text="Rol" />
         </columns>
          <styleClass>
             <String fx:value="VBoxTarjeta" />
