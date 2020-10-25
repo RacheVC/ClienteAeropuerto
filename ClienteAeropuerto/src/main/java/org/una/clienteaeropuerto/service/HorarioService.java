@@ -16,14 +16,14 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  * @author Andres
  */
 public class HorarioService {
-    
+      List<HorarioDTO> listanot;
     private final String urlstring = "http://localhost:8098/horarios";
     private final String urlCreate = "http://localhost:8098/horarios/";
     
       public List<HorarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {
        
-
         return ConnectionUtils.ListFromConnectionHorario(urlstring, HorarioDTO.class);
+        
     }
 
     public void add(HorarioDTO object) throws InterruptedException, ExecutionException, IOException {

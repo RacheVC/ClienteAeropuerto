@@ -11,14 +11,14 @@ package org.una.clienteaeropuerto.dto;
  */
 public class HorarioDTO {
      private Long id;
-    private int Dia_Entrada;
-    private int Dia_Salida;
+    private String Dia_Entrada;
+    private String Dia_Salida;
     private UsuarioAreaDTO Usuarios_Areas;
 
     public HorarioDTO() {
     }
 
-    public HorarioDTO(Long id, int Dia_Entrada, int Dia_Salida, UsuarioAreaDTO Usuarios_Areas) {
+    public HorarioDTO(Long id, String Dia_Entrada, String Dia_Salida, UsuarioAreaDTO Usuarios_Areas) {
         this.id = id;
         this.Dia_Entrada = Dia_Entrada;
         this.Dia_Salida = Dia_Salida;
@@ -33,19 +33,19 @@ public class HorarioDTO {
         this.id = id;
     }
 
-    public int getDia_Entrada() {
+    public String getDia_Entrada() {
         return Dia_Entrada;
     }
 
-    public void setDia_Entrada(int Dia_Entrada) {
+    public void setDia_Entrada(String Dia_Entrada) {
         this.Dia_Entrada = Dia_Entrada;
     }
 
-    public int getDia_Salida() {
+    public String getDia_Salida() {
         return Dia_Salida;
     }
 
-    public void setDia_Salida(int Dia_Salida) {
+    public void setDia_Salida(String Dia_Salida) {
         this.Dia_Salida = Dia_Salida;
     }
 
