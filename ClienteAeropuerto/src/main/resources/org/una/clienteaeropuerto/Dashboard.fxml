@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="727.0" styleClass="anchorPadre" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="736.0" styleClass="anchorPadre" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.DashboardController">
    <left>
       <VBox prefHeight="570.0" prefWidth="252.0" BorderPane.alignment="CENTER">
          <children>
@@ -199,7 +199,7 @@
          <children>
             <Pane prefHeight="58.0" prefWidth="364.0">
                <children>
-                  <Label layoutX="48.0" layoutY="3.0" text="!Bienvenido¡" textFill="#f2eeee">
+                  <Label layoutX="48.0" layoutY="3.0" text="¡Bienvenido!" textFill="#f2eeee">
                      <font>
                         <Font name="Forte" size="47.0" />
                      </font>
