@@ -9,15 +9,15 @@ package org.una.clienteaeropuerto.dto;
  *
  * @author Andres
  */
-public class UsuarioAreaDTO {
-    private Long id;
+public class Usuarios_AreasDTO {
+      private Long id;
     private Areas_trabajoDTO areas_trabajo;
     private UsuarioDTO usuarios;
 
-    public UsuarioAreaDTO() {
+    public Usuarios_AreasDTO() {
     }
 
-    public UsuarioAreaDTO(Long id, Areas_trabajoDTO areas_trabajo, UsuarioDTO usuarios) {
+    public Usuarios_AreasDTO(Long id, Areas_trabajoDTO areas_trabajo, UsuarioDTO usuarios) {
         this.id = id;
         this.areas_trabajo = areas_trabajo;
         this.usuarios = usuarios;

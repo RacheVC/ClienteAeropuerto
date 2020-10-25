@@ -83,15 +83,20 @@ public class ConnectionUtils {
         con.setRequestProperty("Accept", "application/json");
         con.setRequestProperty("Authorization", "bearer " + AuthenticationSingleton.getInstance().getJwt());
 
+         
         try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
+            
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());
+                
             }
+            System.out.println(response);
             return gson.fromJson(response.toString(), listtype);
-
+            
         }
+        
     }
 
     public static <T> List<Areas_trabajoDTO> ListFromConnectionAT(String urlstring, Class<T> type) throws MalformedURLException, IOException {

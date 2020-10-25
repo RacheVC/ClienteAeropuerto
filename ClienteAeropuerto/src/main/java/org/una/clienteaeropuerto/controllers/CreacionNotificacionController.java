@@ -86,7 +86,12 @@ public class CreacionNotificacionController implements Initializable {
     @FXML
     private void OnActionBtnAgregarImagen(ActionEvent event) {
 //        FileChooser fileChooser = new FileChooser();
-//        int seleccion = fileChooser.showOpenDialog(areaTexto);
+//        int seleccion;
+//        seleccion = fileChooser.showOpenDialog();
+//        
+//        if(seleccion == fileChooser.APROVE_OPTION){
+//            
+//        }
     }
     
 }

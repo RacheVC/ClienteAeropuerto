@@ -2,6 +2,7 @@ C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\Cl
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\App.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\UsuarioService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\ControlEmpleadosController.java
+C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Usuarios_AreasDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\MantenimientoNotificacionesController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\MantenimientoUsuariosController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\RolesDTO.java
@@ -26,5 +27,4 @@ C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\Cl
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Areas_trabajoDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\MantenimientoRolesController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\AuthenticationRequest.java
-C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\UsuarioAreaDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\module-info.java

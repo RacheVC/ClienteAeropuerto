@@ -71,6 +71,7 @@ public class HorarioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             horariolist = HorarioService.getInstance().getAll();
+            System.out.println(horariolist.toString());
 
             // TODO
         } catch (InterruptedException | ExecutionException | IOException ex) {
@@ -79,9 +80,9 @@ public class HorarioController implements Initializable {
 
         clId.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("Dia_Entrada"));
-        clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("Dia_Salida"));
-        clUsuarioAreaId.setCellValueFactory(new PropertyValueFactory<>("Usuarios_Areas"));
+        clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("dia_Entrada"));
+        clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("dia_Salida"));
+        clUsuarioAreaId.setCellValueFactory(new PropertyValueFactory<>("usuarios_Areas"));
 
         tvewHorarios.getItems().clear();
 

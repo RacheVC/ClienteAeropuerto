@@ -9,13 +9,13 @@ org\una\clienteaeropuerto\service\UsuarioService$UsuarioServiceHolder.class
 org\una\clienteaeropuerto\service\RolesService$RolesServiceHolder.class
 org\una\clienteaeropuerto\controllers\CrearHorarioController.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$1.class
-org\una\clienteaeropuerto\dto\UsuarioAreaDTO.class
 org\una\clienteaeropuerto\controllers\CreacionNotificacionController.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$6.class
 org\una\clienteaeropuerto\controllers\CreacionRolesController.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$3.class
 org\una\clienteaeropuerto\dto\AuthenticationRequest.class
 org\una\clienteaeropuerto\controllers\MantenimientoNotificacionesController.class
+org\una\clienteaeropuerto\dto\Usuarios_AreasDTO.class
 org\una\clienteaeropuerto\service\UsuarioService.class
 org\una\clienteaeropuerto\utils\AuthenticationSingleton.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$7.class
