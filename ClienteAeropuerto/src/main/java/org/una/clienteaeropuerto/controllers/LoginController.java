@@ -73,17 +73,19 @@ public class LoginController implements Initializable {
 
         }
 
+       
+        if (band == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+            alert.setTitle("Mensaje");
+            alert.setHeaderText("Usuario autenticado.");
+            alert.show();
+            
         Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
         Scene creacionDocs = new Scene(root);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
-        if (band == true) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
-            alert.setTitle("Mensaje");
-            alert.setHeaderText("Usuario autenticado.");
-            alert.show();
         }
 
     }
