@@ -11,9 +11,15 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
+import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.HorarioDTO;
 import org.una.clienteaeropuerto.service.HorarioService;
 
@@ -34,37 +40,37 @@ public class CrearHorarioController implements Initializable {
     private ComboBox<String> cbDiaSalida;
     @FXML
     private ComboBox<String> cbAreaTrabajo;
+    
     HorarioService horarioService = new HorarioService();
     HorarioDTO horariodto = new HorarioDTO();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        IniciarCombobox();
-         
-        // TODO
-    }    
-
-    
-    
-    public void IniciarCombobox(){
         
-      cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves","Viernes","Sábado","Domingo");   
-      cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves","Viernes","Sábado","Domingo"); 
-              
-               
+        IniciarCombobox();
     }
-    
-    
+
+    public void IniciarCombobox() {
+
+        cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+        cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+
+    }
+
     @FXML
     private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
-      
-      
-        horariodto.setDia_Entrada(cbDiaEntrada.getValue().toString());
-        horariodto.setDia_Salida(cbDiaSalida.getValue().toString());
-//        horariodto.setUsuarios_Areas();
 
-    horarioService.add(horariodto);
+        horariodto.setDia_Entrada(cbDiaEntrada.getValue());
+        horariodto.setDia_Salida(cbDiaSalida.getValue());
+        horarioService.add(horariodto);
+
+        Parent root = FXMLLoader.load(App.class.getResource("Horario.fxml"));
+        Scene creacionDocs = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
     }
 }

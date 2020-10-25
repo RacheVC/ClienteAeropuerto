@@ -66,7 +66,6 @@ public class MantenimientoAreas_TrabajoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             areaTrabajoList = AreasTrabajoService.getInstance().getAll();
-            System.out.println("AAAAAAAAAAAAAAAAAAAAA" + areaTrabajoList);
         } catch (InterruptedException ex) {
             Logger.getLogger(MantenimientoAreas_TrabajoController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
@@ -95,7 +94,6 @@ public class MantenimientoAreas_TrabajoController implements Initializable {
 
         Parent root = FXMLLoader.load(App.class.getResource("CreacionArea_Trabajo.fxml"));
         Scene creacionDocs = new Scene(root);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();

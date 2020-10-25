@@ -10,7 +10,8 @@ package org.una.clienteaeropuerto.dto;
  * @author Andres
  */
 public class HorarioDTO {
-     private Long id;
+
+    private Long id;
     private String Dia_Entrada;
     private String Dia_Salida;
     private UsuarioAreaDTO Usuarios_Areas;
@@ -56,6 +57,5 @@ public class HorarioDTO {
     public void setUsuarios_Areas(UsuarioAreaDTO Usuarios_Areas) {
         this.Usuarios_Areas = Usuarios_Areas;
     }
-    
-    
+
 }

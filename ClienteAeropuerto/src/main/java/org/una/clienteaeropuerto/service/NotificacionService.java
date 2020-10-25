@@ -18,7 +18,6 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
 public class NotificacionService {
 
     List<NotificacionDTO> listanot;
-    NotificacionDTO ntf;
 
     private final String urlstring = "http://localhost:8098/notificaciones";
     private final String urlCreate = "http://localhost:8098/notificaciones/";

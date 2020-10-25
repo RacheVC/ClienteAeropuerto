@@ -24,6 +24,7 @@ org\una\clienteaeropuerto\controllers\ControlEmpleadosController.class
 org\una\clienteaeropuerto\controllers\HorarioController.class
 org\una\clienteaeropuerto\controllers\CreacionArea_TrabajoController.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$4.class
+org\una\clienteaeropuerto\controllers\DashboardController.class
 module-info.class
 org\una\clienteaeropuerto\App.class
 org\una\clienteaeropuerto\dto\Areas_trabajoDTO.class

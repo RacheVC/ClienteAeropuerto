@@ -50,15 +50,15 @@ public class HorarioController implements Initializable {
     @FXML
     private Button btnInactivar;
     @FXML
-    private TableView<HorarioDTO> tvewNotificacion;
+    private TableView<HorarioDTO> tvewHorarios;
     @FXML
     private TableColumn<HorarioDTO, Object> clId;
     @FXML
-    private TableColumn<HorarioDTO, String> clFechaEnvio;
+    private TableColumn<HorarioDTO, String> clDiaEntrada;
     @FXML
-    private TableColumn<HorarioDTO, String> clFechaLectura;
+    private TableColumn<HorarioDTO, String> clDiaSalida;
     @FXML
-    private TableColumn<HorarioDTO, String> clMensaje;
+    private TableColumn<HorarioDTO, String> clUsuarioAreaId;
     @FXML
     private Button btnSalir;
 
@@ -79,48 +79,49 @@ public class HorarioController implements Initializable {
 
         clId.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        clFechaEnvio.setCellValueFactory(new PropertyValueFactory<>("Dia_Entrada"));
-        clFechaLectura.setCellValueFactory(new PropertyValueFactory<>("Dia_Salida"));
-        clMensaje.setCellValueFactory(new PropertyValueFactory<>("Usuarios_Areas"));
+        clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("Dia_Entrada"));
+        clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("Dia_Salida"));
+        clUsuarioAreaId.setCellValueFactory(new PropertyValueFactory<>("Usuarios_Areas"));
 
-        tvewNotificacion.getItems().clear();
+        tvewHorarios.getItems().clear();
 
-        tvewNotificacion.setItems(FXCollections.observableArrayList(horariolist));
+        tvewHorarios.setItems(FXCollections.observableArrayList(horariolist));
+      
         System.out.println(horariolist.get(0).getId());
         System.out.println(horariolist.get(0).getDia_Entrada());
         System.out.println(horariolist.get(0).getDia_Salida());
-
         System.out.println(horariolist.get(0).getUsuarios_Areas());
 
     }
 
     @FXML
-    private void accionBuscarNotificacion(ActionEvent event) {
+    private void accionBuscarHorario(ActionEvent event) {
     }
 
     @FXML
-    private void accionCrearNotificacion(ActionEvent event) throws IOException {
+    private void accionCrearHorario(ActionEvent event) throws IOException {
+
         Parent root = FXMLLoader.load(App.class.getResource("CrearHorario.fxml"));
         Scene creacionDocs = new Scene(root);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
+
     }
 
     @FXML
-    private void accionModificarNotificacion(ActionEvent event) {
+    private void accionModificarHorario(ActionEvent event) {
     }
 
     @FXML
-    private void accionInactivarNotificacion(ActionEvent event) {
+    private void accionInactivarHorario(ActionEvent event) {
     }
 
     @FXML
-    private void accionSalirrNotificacion(ActionEvent event) throws IOException {
-           Parent root = FXMLLoader.load(App.class.getResource("Horario.fxml"));
+    private void accionSalirHorario(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
         Scene creacionDocs = new Scene(root);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
