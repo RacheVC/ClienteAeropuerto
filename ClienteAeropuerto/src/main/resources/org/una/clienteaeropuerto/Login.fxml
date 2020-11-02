@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -49,6 +50,21 @@
             <String fx:value="VBoxTarjeta" />
          </styleClass>
       </AnchorPane>
+      <Button layoutX="623.0" layoutY="3.0" mnemonicParsing="false" onAction="#ActionBtnTipoCambio" text="Tipo de cambio">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@iconos/bagofmoney_dollar_4399.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Century Gothic Bold" size="13.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Button>
    </children>
    <styleClass>
       <String fx:value="anchorPadre" />

@@ -94,4 +94,8 @@ public class LoginController implements Initializable {
         return String.valueOf(this.txtUserName.getText());
         
     }
+
+    @FXML
+    private void ActionBtnTipoCambio(ActionEvent event) {
+    }
 }

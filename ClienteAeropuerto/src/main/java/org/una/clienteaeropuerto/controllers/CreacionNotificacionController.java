@@ -45,7 +45,7 @@ public class CreacionNotificacionController implements Initializable {
     @FXML
     private Button btnAgregarImagen;
     LoginController user = new LoginController();
-    
+
     private Window stage;
 
     NotificacionDTO notificaciondto = new NotificacionDTO();
