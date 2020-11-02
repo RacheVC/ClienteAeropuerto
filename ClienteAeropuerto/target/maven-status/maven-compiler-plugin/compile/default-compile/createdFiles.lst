@@ -12,6 +12,7 @@ org\una\clienteaeropuerto\controllers\CreacionNotificacionController.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$6.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$3.class
 org\una\clienteaeropuerto\dto\AuthenticationRequest.class
+org\una\clienteaeropuerto\controllers\DivisaController.class
 org\una\clienteaeropuerto\controllers\MantenimientoNotificacionesController.class
 org\una\clienteaeropuerto\dto\Usuarios_AreasDTO.class
 org\una\clienteaeropuerto\service\UsuarioService.class
