@@ -47,9 +47,9 @@ public class CreacionUsuariosController implements Initializable {
     @FXML
     private PasswordField txtContrasena;
     @FXML
-    private PasswordField txtJefeId;
-    @FXML
     private ComboBox<RolesDTO> cbxRoles;
+    @FXML
+    private TextField txtJefe_id;
 
     /**
      * Initializes the controller class.

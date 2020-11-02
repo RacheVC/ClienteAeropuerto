@@ -78,11 +78,8 @@ public class MantenimientoNotificacionesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            // TODO
-
             notificacionlist = NotificacionService.getInstance().getAll();
             System.out.println(notificacionlist.get(0).getEmisor());
-
         } catch (InterruptedException ex) {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {

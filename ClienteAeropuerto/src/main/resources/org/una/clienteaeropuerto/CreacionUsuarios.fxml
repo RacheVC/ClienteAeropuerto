@@ -32,7 +32,7 @@
                   <Insets left="50.0" right="20.0" top="50.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
             <TextField fx:id="txtCedula" promptText="Cédula" styleClass="VBoxTarjeta2">
@@ -40,24 +40,33 @@
                   <Insets left="50.0" right="20.0" top="50.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
             <TextField fx:id="txtCorreo" promptText="Correo" styleClass="VBoxTarjeta2">
                <VBox.margin>
                   <Insets left="50.0" right="20.0" top="50.0" />
                </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
             </TextField>
             <PasswordField fx:id="txtContrasena" promptText="Contraseña" styleClass="VBoxTarjeta2">
                <VBox.margin>
                   <Insets left="50.0" right="20.0" top="50.0" />
                </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
             </PasswordField>
-            <PasswordField fx:id="txtJefeId" promptText="Contraseña" styleClass="VBoxTarjeta2">
+            <TextField fx:id="txtJefe_id" promptText="Jefe id" styleClass="VBoxTarjeta2">
                <VBox.margin>
                   <Insets left="50.0" right="20.0" top="50.0" />
                </VBox.margin>
-            </PasswordField>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
             <ComboBox fx:id="cbxRoles" prefWidth="150.0" promptText="Roles">
                <VBox.margin>
                   <Insets left="50.0" right="20.0" top="50.0" />

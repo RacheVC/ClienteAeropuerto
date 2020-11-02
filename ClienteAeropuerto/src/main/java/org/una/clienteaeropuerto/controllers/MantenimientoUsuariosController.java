@@ -8,7 +8,6 @@ package org.una.clienteaeropuerto.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -71,8 +70,9 @@ public class MantenimientoUsuariosController implements Initializable {
     private TableColumn<UsuarioDTO, String> tcRolId;
     @FXML
     private Button btnSalir;
-    
+
     private List<UsuarioDTO> usuariosList = new ArrayList<UsuarioDTO>();
+
     /**
      * Initializes the controller class.
      */
@@ -80,6 +80,7 @@ public class MantenimientoUsuariosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             usuariosList = UsuarioService.getInstance().getAll();
+            System.out.println(usuariosList.toString());
         } catch (InterruptedException ex) {
             Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
@@ -87,7 +88,7 @@ public class MantenimientoUsuariosController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         clId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcEstado.setCellValueFactory(per -> {
             String estadoString;
@@ -101,14 +102,15 @@ public class MantenimientoUsuariosController implements Initializable {
         tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
         tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
-        tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFechaRegistro()));
+        tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
+
         tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
         tcRolId.setCellValueFactory(new PropertyValueFactory<>("rolesId"));
-        
+
         tvUsuarios.getItems().clear();
 
         tvUsuarios.setItems(FXCollections.observableArrayList(usuariosList));
-    }    
+    }
 
     @FXML
     private void accionBuscarNotificacion(ActionEvent event) {
@@ -116,7 +118,7 @@ public class MantenimientoUsuariosController implements Initializable {
 
     @FXML
     private void accionCrearNotificacion(ActionEvent event) throws IOException {
-        
+
         Parent root = FXMLLoader.load(App.class.getResource("CreacionUsuarios.fxml"));
         Scene creacionDocs = new Scene(root);
 
@@ -137,5 +139,4 @@ public class MantenimientoUsuariosController implements Initializable {
     private void accionSalirrNotificacion(ActionEvent event) {
     }
 
-    
 }

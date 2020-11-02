@@ -18,18 +18,18 @@ public class UsuarioDTO {
     private String correo;
     private String contrasenaEncriptada;
     private boolean estado; 
-    private Date fechaRegistro; 
+    private Date fecha_registro; 
     private Long empleadoId; 
     private Long rolesId;
     
    
-    public UsuarioDTO(Long id, String nombreCompleto, String cedula, String correo, boolean estado, Date fechaRegistro, Long empleadoId, Long rolesId, String contrasenaEncriptada) {
+    public UsuarioDTO(Long id, String nombreCompleto, String cedula, String correo, boolean estado, Date fecha_registro, Long empleadoId, Long rolesId, String contrasenaEncriptada) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.cedula = cedula;
         this.correo = correo;
         this.estado = estado;
-        this.fechaRegistro = fechaRegistro;
+        this.fecha_registro = fecha_registro;
         this.empleadoId = empleadoId;
         this.rolesId = rolesId;
         this.contrasenaEncriptada = contrasenaEncriptada;
@@ -88,12 +88,12 @@ public class UsuarioDTO {
         this.estado = estado;
     }
 
-    public Date getFechaRegistro() {
-        return fechaRegistro;
+    public Date getFecha_registro() {
+        return fecha_registro;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
+    public void setFecha_registro(Date fecha_registro) {
+        this.fecha_registro = fecha_registro;
     }
 
     public Long getEmpleadoId() {
@@ -110,6 +110,11 @@ public class UsuarioDTO {
 
     public void setRolesId(Long rolesId) {
         this.rolesId = rolesId;
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioDTO{" + "fecha_registro=" + fecha_registro + '}';
     }
     
 }
