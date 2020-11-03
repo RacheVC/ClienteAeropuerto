@@ -109,9 +109,7 @@ public class MantenimientoNotificacionesController implements Initializable {
 
         tvewNotificacion.setItems(FXCollections.observableArrayList(notificacionlist));
 
-        System.out.println(notificacionlist);
-        // TODO   
-
+        System.out.println(notificacionlist);  
     }
 
     @FXML
@@ -120,10 +118,8 @@ public class MantenimientoNotificacionesController implements Initializable {
 
     @FXML
     private void accionCrearNotificacion(ActionEvent event) throws IOException {
-
         Parent root = FXMLLoader.load(App.class.getResource("CreacionNotificacion.fxml"));
         Scene creacionDocs = new Scene(root);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
@@ -138,6 +134,11 @@ public class MantenimientoNotificacionesController implements Initializable {
     }
 
     @FXML
-    private void accionSalirrNotificacion(ActionEvent event) {
+    private void accionSalirrNotificacion(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
+        Scene creacionDocs = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
     }
 }
