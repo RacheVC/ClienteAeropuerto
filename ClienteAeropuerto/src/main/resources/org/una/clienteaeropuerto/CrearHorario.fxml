@@ -33,7 +33,7 @@
                         <Insets left="150.0" right="20.0" top="50.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <ComboBox fx:id="cbAreaTrabajo" prefWidth="150.0" promptText="Area Trabajo" styleClass="VBoxTarjeta2">
+                  <ComboBox fx:id="cbAreaTrabajo" onMouseClicked="#MouseAreaTrabajo" prefWidth="150.0" promptText="Area  de trabajo" styleClass="VBoxTarjeta2">
                      <VBox.margin>
                         <Insets left="150.0" right="20.0" top="50.0" />
                      </VBox.margin>
@@ -43,8 +43,8 @@
                         <Insets left="150.0" right="20.0" top="50.0" />
                      </VBox.margin>
                      <children>
-                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" />
-                        <Button fx:id="btnGuardar1" mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Cancelar">
+                        <Button mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" />
+                        <Button mnemonicParsing="false" onAction="#OnActionBtnAtras" styleClass="jfx-buttonStandard2" text="Atrás">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>

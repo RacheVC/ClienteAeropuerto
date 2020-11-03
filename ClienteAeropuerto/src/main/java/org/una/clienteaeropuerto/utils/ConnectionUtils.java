@@ -293,6 +293,7 @@ public class ConnectionUtils {
         con.setRequestMethod("PUT");
         con.setRequestProperty("Content-Type", "application/json; utf-8");
         con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Authorization", "bearer " + AuthenticationSingleton.getInstance().getJwt());
         con.setDoOutput(true);
 
         String data = gson.toJson(object);

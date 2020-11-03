@@ -33,6 +33,7 @@ import org.una.clienteaeropuerto.dto.RolesDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.RolesService;
 import org.una.clienteaeropuerto.service.UsuarioService;
+import org.una.clienteaeropuerto.utils.AppContext;
 
 /**
  * FXML Controller class
@@ -61,14 +62,14 @@ public class CreacionUsuariosController implements Initializable {
     @FXML
     private TextField txtJefe_id;
 
+    RolesService rolesService = new RolesService();
+    List<RolesDTO> rolesList = new ArrayList<>();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        RolesService rolesService = new RolesService();
-        List<RolesDTO> rolesList = new ArrayList<>();
 
         try {
             rolesList = (List<RolesDTO>) rolesService.getAll();
@@ -81,27 +82,62 @@ public class CreacionUsuariosController implements Initializable {
         }
 
         cbxRoles.setItems(FXCollections.observableArrayList(rolesList));
+
+        if (AppContext.getInstance().get("ed").equals("edit")) {
+            UsuarioDTO usuarioDTO = new UsuarioDTO();
+            usuarioDTO = (UsuarioDTO) AppContext.getInstance().get("usuarioDTO");
+            txtCedula.setText(usuarioDTO.getCedula());
+            txtContrasena.setText(usuarioDTO.getContrasenaEncriptada());
+            txtCorreo.setText(usuarioDTO.getCorreo());
+            txtNombre.setText(usuarioDTO.getNombreCompleto());
+            cbxRoles.setValue(usuarioDTO.getRoles());
+        }
     }
 
     @FXML
     private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
-        try {
-            usuarioDTO.setNombreCompleto(txtNombre.getText());
-            usuarioDTO.setCedula(txtCedula.getText());
-            usuarioDTO.setCorreo(txtCorreo.getText());
-            usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
-            usuarioDTO.setRoles(rolesDTO);
-            usuarioService.add(usuarioDTO);
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-            alert.setTitle("Mensaje");
-            alert.setHeaderText("El usuario fue creado con éxito.");
-            alert.show();
-        } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-            alert.setTitle("Error");
-            alert.setHeaderText("El usuario no se ha podido crear.");
-            alert.show();
+        if (!AppContext.getInstance().get("ed").equals("edit")) {
+            try {
+                usuarioDTO.setNombreCompleto(txtNombre.getText());
+                usuarioDTO.setCedula(txtCedula.getText());
+                usuarioDTO.setCorreo(txtCorreo.getText());
+                usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
+                usuarioDTO.setRoles(rolesDTO);
+                usuarioService.add(usuarioDTO);
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+                alert.setTitle("Mensaje");
+                alert.setHeaderText("El usuario fue creado con éxito.");
+                alert.show();
+            } catch (Exception e) {
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+                alert.setTitle("Error");
+                alert.setHeaderText("El usuario no se ha podido crear.");
+                alert.show();
+            }
+        } else {
+            try {
+                usuarioDTO = (UsuarioDTO) AppContext.getInstance().get("usuarioDTO");
+                usuarioDTO.setNombreCompleto(txtNombre.getText());
+                usuarioDTO.setCedula(txtCedula.getText());
+                usuarioDTO.setCorreo(txtCorreo.getText());
+                usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
+                usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+                alert.setTitle("Mensaje");
+                alert.setHeaderText("El usuario fue modificado con éxito.");
+                alert.show();
+            } catch (Exception e) {
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+                alert.setTitle("Mensaje");
+                alert.setHeaderText("El usuario no se ha podido modificar.");
+                alert.show();
+            }
+
         }
 
     }

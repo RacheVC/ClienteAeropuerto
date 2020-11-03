@@ -14,21 +14,22 @@ public class HorarioDTO {
     private Long id;
     private String dia_Entrada;
     private String dia_Salida;
-    private Usuarios_AreasDTO Usuarios_Areas;
+    private boolean estado;
+    private Areas_trabajoDTO areas_trabajo;
 
     public HorarioDTO() {
     }
 
     @Override
     public String toString() {
-        return "HorarioDTO{" + "id=" + id + ", Dia_Entrada=" + dia_Entrada + ", Dia_Salida=" + dia_Salida + ", Usuarios_Areas=" + Usuarios_Areas + '}';
+        return "HorarioDTO{" + "id=" + id + ", dia_Entrada=" + dia_Entrada + ", dia_Salida=" + dia_Salida + ", areas_trabajo=" + areas_trabajo + '}';
     }
 
-    public HorarioDTO(Long id, String Dia_Entrada, String Dia_Salida, Usuarios_AreasDTO Usuarios_Areas) {
+    public HorarioDTO(Long id, String dia_Entrada, String dia_Salida, Areas_trabajoDTO areas_trabajo) {
         this.id = id;
-        this.dia_Entrada = Dia_Entrada;
-        this.dia_Salida = Dia_Salida;
-        this.Usuarios_Areas = Usuarios_Areas;
+        this.dia_Entrada = dia_Entrada;
+        this.dia_Salida = dia_Salida;
+        this.areas_trabajo = areas_trabajo;
     }
 
     public Long getId() {
@@ -55,12 +56,19 @@ public class HorarioDTO {
         this.dia_Salida = Dia_Salida;
     }
 
-    public Usuarios_AreasDTO getUsuarios_Areas() {
-        return Usuarios_Areas;
+    public Areas_trabajoDTO getAreas_trabajo() {
+        return areas_trabajo;
     }
 
-    public void setUsuarios_Areas(Usuarios_AreasDTO Usuarios_Areas) {
-        this.Usuarios_Areas = Usuarios_Areas;
+    public void setAreas_trabajo(Areas_trabajoDTO areas_trabajo) {
+        this.areas_trabajo = areas_trabajo;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 }

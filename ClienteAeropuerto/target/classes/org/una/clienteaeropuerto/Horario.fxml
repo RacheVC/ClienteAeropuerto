@@ -66,7 +66,7 @@
             <TableColumn fx:id="clId" prefWidth="75.0" text="Id" />
             <TableColumn fx:id="clDiaEntrada" prefWidth="113.5999526977539" text="Día Entrada" />
             <TableColumn fx:id="clDiaSalida" prefWidth="120.0" text="Día Salida" />
-            <TableColumn fx:id="clUsuarioAreaId" prefWidth="236.79995727539062" text="Usuario Area" />
+            <TableColumn fx:id="clAreaTrabajo" prefWidth="236.79995727539062" text="Área de trabajo" />
          </columns>
          <styleClass>
             <String fx:value="VBoxTarjeta" />
@@ -77,7 +77,7 @@
    <right>
       <VBox prefHeight="257.0" prefWidth="113.0" styleClass="anchorPadre">
          <children>
-            <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#accionSalirHorario" prefHeight="25.0" prefWidth="62.0" styleClass="jfx-buttonStandard2" text="Salir" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#accionSalirHorario" prefHeight="25.0" prefWidth="62.0" styleClass="jfx-buttonStandard2" text="Salir" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="30.0" right="10.0" top="225.0" />
                </VBox.margin>

@@ -28,10 +28,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.UsuarioService;
+import org.una.clienteaeropuerto.utils.AppContext;
 
 /**
  * FXML Controller class
@@ -73,6 +75,8 @@ public class MantenimientoUsuariosController implements Initializable {
 
     private List<UsuarioDTO> usuariosList = new ArrayList<UsuarioDTO>();
 
+    UsuarioDTO usuarioDTO = new UsuarioDTO();
+
     /**
      * Initializes the controller class.
      */
@@ -105,7 +109,6 @@ public class MantenimientoUsuariosController implements Initializable {
         tcRolId.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getRoles()));
         tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
         tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
-     //   tcRolId.setCellValueFactory(new PropertyValueFactory<>("roles"));
 
         tvUsuarios.getItems().clear();
 
@@ -118,17 +121,26 @@ public class MantenimientoUsuariosController implements Initializable {
 
     @FXML
     private void accionCrearNotificacion(ActionEvent event) throws IOException {
+        AppContext.getInstance().set("usuarioDTO", usuarioDTO);
+        AppContext.getInstance().set("ed", "insertar");
 
         Parent root = FXMLLoader.load(App.class.getResource("CreacionUsuarios.fxml"));
         Scene creacionDocs = new Scene(root);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
     }
 
     @FXML
-    private void accionModificarNotificacion(ActionEvent event) {
+    private void accionModificarNotificacion(ActionEvent event) throws IOException {
+        AppContext.getInstance().set("usuarioDTO", usuarioDTO);
+        AppContext.getInstance().set("ed", "edit");
+
+        Parent root = FXMLLoader.load(App.class.getResource("CreacionUsuarios.fxml"));
+        Scene creacionDocs = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
     }
 
     @FXML
@@ -136,7 +148,19 @@ public class MantenimientoUsuariosController implements Initializable {
     }
 
     @FXML
-    private void accionSalirrNotificacion(ActionEvent event) {
+    private void accionSalirrNotificacion(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
+        Scene creacionDocs = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
+    }
+
+    @FXML
+    private void MouseTvUsuarios(MouseEvent event) throws IOException {
+         if (tvUsuarios.getSelectionModel().getSelectedItem() != null) {
+            usuarioDTO = (UsuarioDTO) tvUsuarios.getSelectionModel().getSelectedItem();
+        }
     }
 
 }

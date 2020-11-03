@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.HorarioDTO;
 import org.una.clienteaeropuerto.service.HorarioService;
+import org.una.clienteaeropuerto.utils.AppContext;
 
 /**
  * FXML Controller class
@@ -58,22 +59,20 @@ public class HorarioController implements Initializable {
     @FXML
     private TableColumn<HorarioDTO, String> clDiaSalida;
     @FXML
-    private TableColumn<HorarioDTO, String> clUsuarioAreaId;
-    @FXML
-    private Button btnSalir;
+    private TableColumn<HorarioDTO, String> clAreaTrabajo;
 
     private List<HorarioDTO> horariolist = new ArrayList<HorarioDTO>();
+
+    HorarioDTO horarioDTO = new HorarioDTO();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         try {
             horariolist = HorarioService.getInstance().getAll();
-            System.out.println(horariolist.toString());
-
-            // TODO
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,36 +81,40 @@ public class HorarioController implements Initializable {
 
         clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("dia_Entrada"));
         clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("dia_Salida"));
-        clUsuarioAreaId.setCellValueFactory(new PropertyValueFactory<>("usuarios_Areas"));
+        clAreaTrabajo.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getAreas_trabajo()));
 
         tvewHorarios.getItems().clear();
 
         tvewHorarios.setItems(FXCollections.observableArrayList(horariolist));
-      
-        System.out.println(horariolist.get(0).getId());
-        System.out.println(horariolist.get(0).getDia_Entrada());
-        System.out.println(horariolist.get(0).getDia_Salida());
-        System.out.println(horariolist.get(0).getUsuarios_Areas());
-
     }
 
     @FXML
     private void accionBuscarHorario(ActionEvent event) {
+
     }
 
     @FXML
     private void accionCrearHorario(ActionEvent event) throws IOException {
+        AppContext.getInstance().set("horarioDTO", horarioDTO);
+        AppContext.getInstance().set("ed", "insertar");
 
         Parent root = FXMLLoader.load(App.class.getResource("CrearHorario.fxml"));
         Scene creacionDocs = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
-
     }
 
     @FXML
-    private void accionModificarHorario(ActionEvent event) {
+    private void accionModificarHorario(ActionEvent event) throws IOException {
+        AppContext.getInstance().set("horarioDTO", horarioDTO);
+        AppContext.getInstance().set("ed", "edit");
+
+        Parent root = FXMLLoader.load(App.class.getResource("CrearHorario.fxml"));
+        Scene creacionDocs = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
     }
 
     @FXML
