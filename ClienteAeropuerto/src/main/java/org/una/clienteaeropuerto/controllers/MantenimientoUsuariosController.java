@@ -102,10 +102,10 @@ public class MantenimientoUsuariosController implements Initializable {
         tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
         tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
+        tcRolId.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getRoles()));
         tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
-
         tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
-        tcRolId.setCellValueFactory(new PropertyValueFactory<>("rolesId"));
+     //   tcRolId.setCellValueFactory(new PropertyValueFactory<>("roles"));
 
         tvUsuarios.getItems().clear();
 

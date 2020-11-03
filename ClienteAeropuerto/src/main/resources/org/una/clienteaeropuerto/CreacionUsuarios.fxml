@@ -67,7 +67,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </TextField>
-            <ComboBox fx:id="cbxRoles" prefWidth="150.0" promptText="Roles">
+            <ComboBox fx:id="cbxRoles" onAction="#ActionCbxRoles" prefWidth="150.0" promptText="Roles">
                <VBox.margin>
                   <Insets left="50.0" right="20.0" top="50.0" />
                </VBox.margin>
@@ -80,6 +80,11 @@
             <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="10.0" top="500.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#OnActionBtnAtras" styleClass="jfx-buttonStandard2" text="Atrás">
+               <VBox.margin>
+                  <Insets left="150.0" top="-25.0" />
                </VBox.margin>
             </Button>
          </children>

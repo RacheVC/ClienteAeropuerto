@@ -263,5 +263,41 @@ public class ConnectionUtils {
         }
 
     }
+    
+      public static void ObjectToConnectionModify(String urlstring, Object object) throws MalformedURLException, IOException {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+
+        URL url = new URL(urlstring);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("PUT");
+        con.setRequestProperty("Content-Type", "application/json; utf-8");
+        con.setRequestProperty("Accept", "application/json");
+        con.setDoOutput(true);
+
+        String data = gson.toJson(object);
+
+        try ( OutputStream os = con.getOutputStream()) {
+            byte[] input = data.getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+        }
+    }
+
+    public static void ObjectToConnectionDelete(String urlstring, Object object) throws MalformedURLException, IOException {
+        URL url = new URL(urlstring);
+        System.out.println(urlstring);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("DELETE");
+        con.setRequestProperty("Accept", "application/json");
+        con.connect();
+        System.out.println(con.getResponseCode());
+    }
 
 }

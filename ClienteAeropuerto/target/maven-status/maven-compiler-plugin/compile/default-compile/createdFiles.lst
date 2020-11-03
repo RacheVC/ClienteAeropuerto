@@ -29,6 +29,7 @@ org\una\clienteaeropuerto\controllers\DashboardController.class
 module-info.class
 org\una\clienteaeropuerto\App.class
 org\una\clienteaeropuerto\dto\Areas_trabajoDTO.class
+org\una\clienteaeropuerto\utils\AppContext.class
 org\una\clienteaeropuerto\utils\ConnectionUtils.class
 org\una\clienteaeropuerto\dto\HorarioDTO.class
 org\una\clienteaeropuerto\service\AreasTrabajoService.class

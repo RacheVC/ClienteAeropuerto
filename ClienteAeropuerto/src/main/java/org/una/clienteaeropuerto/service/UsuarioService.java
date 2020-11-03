@@ -18,10 +18,14 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  * @author Andres
  */
 public class UsuarioService {
-     private final String urlCreate = "http://localhost:8098/usuarios/";
-     private final String urlFindAll = "http://localhost:8098/usuarios";
+
+    private final String urlCreate = "http://localhost:8098/usuarios/";
+    private final String urlFindAll = "http://localhost:8098/usuarios";
     private final String urlstringLogin = "http://localhost:8098/authentication/login";
-    private final String urlstringCedula = "http://localhost:8098/usuarios/cedula/A";
+    private final String urlstringCedula = "http://localhost:8098/usuarios/cedula/";
+    private final String urlModify = "http://localhost:8098/usuarios/";
+    private final String urlDelete = "http://localhost:8098/usuarios/";
+
     UsuarioDTO datos = new UsuarioDTO();
 
     public UsuarioService() {
@@ -37,11 +41,19 @@ public class UsuarioService {
 
     public AuthenticationResponse Login(AuthenticationRequest object) throws InterruptedException, ExecutionException, IOException {
         return (AuthenticationResponse) ConnectionUtils.ObjectToConnectionLogin(urlstringLogin, object);
-       
+
     }
 
     public static UsuarioService getInstance() {
         return UsuarioServiceHolder.INSTANCE;
+    }
+
+    public void modify(Long id, UsuarioDTO object) throws InterruptedException, ExecutionException, IOException {
+        ConnectionUtils.ObjectToConnectionModify(urlModify + id, object);
+    }
+
+    public void delete(Long id) throws InterruptedException, ExecutionException, IOException {
+        ConnectionUtils.ObjectToConnectionDelete(urlDelete + id, null);
     }
 
     private static class UsuarioServiceHolder {
@@ -51,7 +63,7 @@ public class UsuarioService {
 
     public List<UsuarioDTO> finByCedula(String Cedula) throws IOException {
         Cedula = String.valueOf(datos.getCedula());
-        return ConnectionUtils.ConnectionToObjectByCedula(urlstringCedula,Cedula);
+        return ConnectionUtils.ConnectionToObjectByCedula(urlstringCedula, Cedula);
     }
 
 }

@@ -20,10 +20,10 @@ public class UsuarioDTO {
     private boolean estado; 
     private Date fecha_registro; 
     private Long empleadoId; 
-    private Long rolesId;
+    private RolesDTO roles;
     
    
-    public UsuarioDTO(Long id, String nombreCompleto, String cedula, String correo, boolean estado, Date fecha_registro, Long empleadoId, Long rolesId, String contrasenaEncriptada) {
+    public UsuarioDTO(Long id, String nombreCompleto, String cedula, String correo, boolean estado, Date fecha_registro, Long empleadoId, RolesDTO roles, String contrasenaEncriptada) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.cedula = cedula;
@@ -31,7 +31,7 @@ public class UsuarioDTO {
         this.estado = estado;
         this.fecha_registro = fecha_registro;
         this.empleadoId = empleadoId;
-        this.rolesId = rolesId;
+        this.roles = roles;
         this.contrasenaEncriptada = contrasenaEncriptada;
     }
 
@@ -104,12 +104,12 @@ public class UsuarioDTO {
         this.empleadoId = empleadoId;
     }
 
-    public Long getRolesId() {
-        return rolesId;
+    public RolesDTO getRoles() {
+        return roles;
     }
 
-    public void setRolesId(Long rolesId) {
-        this.rolesId = rolesId;
+    public void setRoles(RolesDTO roles) {
+        this.roles = roles;
     }
 
     @Override
