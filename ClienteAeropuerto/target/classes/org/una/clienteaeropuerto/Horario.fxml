@@ -61,7 +61,7 @@
       </HBox>
    </top>
    <center>
-      <TableView fx:id="tvewHorarios" prefHeight="257.0" prefWidth="536.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="tvewHorarios" onMouseClicked="#MouseTabla" prefHeight="257.0" prefWidth="536.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn fx:id="clId" prefWidth="75.0" text="Id" />
             <TableColumn fx:id="clDiaEntrada" prefWidth="113.5999526977539" text="Día Entrada" />

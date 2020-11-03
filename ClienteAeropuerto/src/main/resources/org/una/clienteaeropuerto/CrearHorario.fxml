@@ -33,7 +33,7 @@
                         <Insets left="150.0" right="20.0" top="50.0" />
                      </VBox.margin>
                   </ComboBox>
-                  <ComboBox fx:id="cbAreaTrabajo" onMouseClicked="#MouseAreaTrabajo" prefWidth="150.0" promptText="Area  de trabajo" styleClass="VBoxTarjeta2">
+                  <ComboBox fx:id="cbAreaTrabajo" onAction="#actionCbxAreaTrabajo" prefWidth="150.0" promptText="Area  de trabajo" styleClass="VBoxTarjeta2">
                      <VBox.margin>
                         <Insets left="150.0" right="20.0" top="50.0" />
                      </VBox.margin>

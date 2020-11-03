@@ -27,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.HorarioDTO;
@@ -129,6 +130,13 @@ public class HorarioController implements Initializable {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
+    }
+
+    @FXML
+    private void MouseTabla(MouseEvent event) {
+         if (tvewHorarios.getSelectionModel().getSelectedItem() != null) {
+            horarioDTO = (HorarioDTO) tvewHorarios.getSelectionModel().getSelectedItem();
+        }
     }
 
 }

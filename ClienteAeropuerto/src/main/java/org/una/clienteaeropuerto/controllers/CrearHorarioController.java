@@ -24,7 +24,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
@@ -72,21 +71,21 @@ public class CrearHorarioController implements Initializable {
 
         cbAreaTrabajo.setItems(FXCollections.observableArrayList(areasTrabajoList));
 
-        IniciarCombobox();
-
         if (AppContext.getInstance().get("ed").equals("edit")) {
-            HorarioDTO horariosDTO = new HorarioDTO();
-            horariosDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
-            cbDiaEntrada.setValue(horariosDTO.getDia_Entrada());
-            cbDiaSalida.setValue(horariosDTO.getDia_Salida());
-            cbAreaTrabajo.setValue(horariosDTO.getAreas_trabajo());
+            HorarioDTO horarioDTO = new HorarioDTO();
+            horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
+            cbDiaEntrada.setValue(horarioDTO.getDia_Entrada());
+            cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+            cbDiaSalida.setValue(horarioDTO.getDia_Salida());
+            cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+            horarioDTO.setEstado(true);
+            cbAreaTrabajo.setValue(horarioDTO.getAreas_trabajo());
+        } else {
+            if (AppContext.getInstance().get("ed").equals("insertar")) {
+                cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+                cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+            }
         }
-    }
-
-    public void IniciarCombobox() {
-
-        cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
-        cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
     }
 
     @FXML
@@ -144,9 +143,10 @@ public class CrearHorarioController implements Initializable {
     }
 
     @FXML
-    private void MouseAreaTrabajo(MouseEvent event) {
+    private void actionCbxAreaTrabajo(ActionEvent event) {
         if (cbAreaTrabajo.getSelectionModel().getSelectedItem() != null) {
             areas_trabajoDTO = (Areas_trabajoDTO) cbAreaTrabajo.getSelectionModel().getSelectedItem();
         }
     }
+
 }
