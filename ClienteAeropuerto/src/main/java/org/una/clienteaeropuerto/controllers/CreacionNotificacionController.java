@@ -22,7 +22,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -56,6 +55,7 @@ public class CreacionNotificacionController implements Initializable {
     NotificacionDTO notificaciondto = new NotificacionDTO();
     NotificacionService notificacionservice = new NotificacionService();
     ImagenService imagenservice = new ImagenService();
+    static int residuo = 0;
     @FXML
     private ImageView imgNotificacion;
 
@@ -69,7 +69,6 @@ public class CreacionNotificacionController implements Initializable {
 
     @FXML
     private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
-        int i = 100;
 
         notificaciondto.setEstado(true);
         notificaciondto.setMensaje(txtMensaje.getText());
@@ -87,7 +86,6 @@ public class CreacionNotificacionController implements Initializable {
 
     @FXML
     private void OnActionBtnAgregarImagen(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
-        this.MetodoGuardarBase64();
 
     }
 
@@ -116,88 +114,37 @@ public class CreacionNotificacionController implements Initializable {
 
     }
 
-    public void MetodoGuardarBase64() throws InterruptedException, ExecutionException, IOException {
-        int cantidadRecorrido = 0;
-        int diferencia = 0;
-        int limite = 10000;
-        int limite2 = 10000;
+    public void MetodoGuardarBase64() {
         String sobrante;
-        int residuo = 0;
+
         File result = this.GetFile();
         String str = this.encodeFileToBase64(result);
         int totalcadena = str.length();
-        if (totalcadena <= 10000) {
-            System.out.println("mmmmmmmmmmmmmmmmmmmmm");
-            ImagenesDTO imagen = new ImagenesDTO();
-            imagen.setImagen_Adjunta(str.substring(0, 10000));
-            imagenservice.add(imagen);
-            System.out.println(imagen + "ttttttttttttttttttttttttt");
-        }
+        System.out.println(totalcadena);
+        if (residuo <= 1000) {
+            if (totalcadena <= 10000) {
+                ImagenesDTO imagen = new ImagenesDTO();
+                imagen.setImagen_Adjunta(str.substring(0, totalcadena));
+                System.out.println(imagen);
+            }
 
-//        diferencia = totalcadena % 10000;
-//
-//        if (diferencia == 0) {
-//            cantidadRecorrido = totalcadena / 100000;
-//        } else {
-//            cantidadRecorrido = (totalcadena / 10000) + 1;
-//        }
-//
-//        for (int i = 0; i < cantidadRecorrido; i++) {
-//            if (totalcadena <= 10000) {
-//                ImagenesDTO imagen = new ImagenesDTO();
-//                imagen.setImagen_Adjunta(str.substring(0, totalcadena));
-//                this.imagenservice.add(imagen);
-//                System.out.println(imagen);
-//            }
-//
-//            if (totalcadena > 10000) {
-//                limite2 = limite2 + 10000;
-//                ImagenesDTO imagen = new ImagenesDTO();
-//                imagen.setImagen_Adjunta(str.substring(limite, totalcadena));
-//                limite = limite + 10000;
-//                System.out.println(imagen);
-//                totalcadena = totalcadena - 10000;
-//                this.imagenservice.add(imagen);
-//            }
-//        }
+        }
+        if (residuo > 1000) {
+            if (totalcadena > 10000) {
+                for (int i = 0; i < totalcadena; i++) {
+                    if (totalcadena > 10000) {
+                        totalcadena = totalcadena - 10000;
+                        ImagenesDTO imagen = new ImagenesDTO();
+                        imagen.setImagen_Adjunta(str.substring(0, 10000));
+                        System.out.println(imagen);
+                        residuo = totalcadena % 10000;
+
+                    }
+                }
+
+            }
+
         }
     }
-//        String sobrante;
-//        int residuo = 0;
-//        File result = this.GetFile();
-//        String str = this.encodeFileToBase64(result);
-//        int totalcadena = str.length();
-//        System.out.println(totalcadena);
-//        if (totalcadena <= 10000) {
-//            ImagenesDTO imagen = new ImagenesDTO();
-//            imagen.setImagen_Adjunta(str.substring(0, totalcadena));
-//            System.out.println(imagen);
-//        }
-//        if (totalcadena > 10000) {
-//            for (int i = 0; i < totalcadena; i++) {
-//                if (totalcadena > 10000) {
-//                    totalcadena = 
-//                    ImagenesDTO imagen = new ImagenesDTO();
-//                    imagen.setImagen_Adjunta(str.substring(0, totalcadena));
-//                    System.out.println(imagen);
-//
-////                    residuo = sobrante.length();
-//                }
-//            }
-//
-//        }
 
-//        File file = new File();
-//        int result;
-//        FileChooser fc = new FileChooser();
-//        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", "*.*"),
-//                new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"));
-//        File imgFile = fc.showOpenDialog(stage);
-//        if (imgFile != null) {
-//            Image image = new Image("file:" + imgFile.getAbsolutePath());
-//            imgNotificacion.setImage(image);
-//            file.getAbsoluteFile();
-//            System.out.println(file);
-//      
-//        }
-
+}
