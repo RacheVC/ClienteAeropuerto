@@ -59,33 +59,8 @@ public class CrearHorarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        try {
-            areasTrabajoList = (List<Areas_trabajoDTO>) areasTrabajoService.getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        cbAreaTrabajo.setItems(FXCollections.observableArrayList(areasTrabajoList));
-
-        if (AppContext.getInstance().get("ed").equals("edit")) {
-            HorarioDTO horarioDTO = new HorarioDTO();
-            horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
-            cbDiaEntrada.setValue(horarioDTO.getDia_Entrada());
-            cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
-            cbDiaSalida.setValue(horarioDTO.getDia_Salida());
-            cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
-            horarioDTO.setEstado(true);
-            cbAreaTrabajo.setValue(horarioDTO.getAreas_trabajo());
-        } else {
-            if (AppContext.getInstance().get("ed").equals("insertar")) {
-                cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
-                cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
-            }
-        }
+        llenarCbAreaTrabajo();
+        funcionAppContext();
     }
 
     @FXML
@@ -146,6 +121,38 @@ public class CrearHorarioController implements Initializable {
     private void actionCbxAreaTrabajo(ActionEvent event) {
         if (cbAreaTrabajo.getSelectionModel().getSelectedItem() != null) {
             areas_trabajoDTO = (Areas_trabajoDTO) cbAreaTrabajo.getSelectionModel().getSelectedItem();
+        }
+    }
+    
+    private void llenarCbAreaTrabajo(){
+        try {
+            areasTrabajoList = (List<Areas_trabajoDTO>) areasTrabajoService.getAll();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        cbAreaTrabajo.setItems(FXCollections.observableArrayList(areasTrabajoList));
+    }
+    
+    private void funcionAppContext(){
+        if (AppContext.getInstance().get("ed").equals("edit")) {
+            HorarioDTO horarioDTO = new HorarioDTO();
+            horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
+            cbDiaEntrada.setValue(horarioDTO.getDia_Entrada());
+            cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+            cbDiaSalida.setValue(horarioDTO.getDia_Salida());
+            cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+            horarioDTO.setEstado(true);
+            cbAreaTrabajo.setValue(horarioDTO.getAreas_trabajo());
+        } else {
+            if (AppContext.getInstance().get("ed").equals("insertar")) {
+                cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+                cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+            }
         }
     }
 

@@ -71,27 +71,8 @@ public class CreacionUsuariosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        try {
-            rolesList = (List<RolesDTO>) rolesService.getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        cbxRoles.setItems(FXCollections.observableArrayList(rolesList));
-
-        if (AppContext.getInstance().get("ed").equals("edit")) {
-            UsuarioDTO usuarioDTO = new UsuarioDTO();
-            usuarioDTO = (UsuarioDTO) AppContext.getInstance().get("usuarioDTO");
-            txtCedula.setText(usuarioDTO.getCedula());
-            txtContrasena.setText(usuarioDTO.getContrasenaEncriptada());
-            txtCorreo.setText(usuarioDTO.getCorreo());
-            txtNombre.setText(usuarioDTO.getNombreCompleto());
-            cbxRoles.setValue(usuarioDTO.getRoles());
-        }
+        llenarCbRoles();
+        funcionAppContext();
     }
 
     @FXML
@@ -156,6 +137,32 @@ public class CreacionUsuariosController implements Initializable {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
+    }
+
+    private void llenarCbRoles() {
+        try {
+            rolesList = (List<RolesDTO>) rolesService.getAll();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        cbxRoles.setItems(FXCollections.observableArrayList(rolesList));
+    }
+
+    private void funcionAppContext() {
+        if (AppContext.getInstance().get("ed").equals("edit")) {
+            UsuarioDTO usuarioDTO = new UsuarioDTO();
+            usuarioDTO = (UsuarioDTO) AppContext.getInstance().get("usuarioDTO");
+            txtCedula.setText(usuarioDTO.getCedula());
+            txtContrasena.setText(usuarioDTO.getContrasenaEncriptada());
+            txtCorreo.setText(usuarioDTO.getCorreo());
+            txtNombre.setText(usuarioDTO.getNombreCompleto());
+            cbxRoles.setValue(usuarioDTO.getRoles());
+        }
     }
 
 }
