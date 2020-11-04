@@ -10,30 +10,32 @@ package org.una.clienteaeropuerto.dto;
  * @author Andres
  */
 public class Euros {
-     private double rate;
+     private String rate;
 
-    private double timestamp;
+    private String timestamp;
 
-    public Euros(double rate, double timestamp) {
+    public Euros(String rate, String timestamp) {
         this.rate = rate;
         this.timestamp = timestamp;
     }
 
-    public double getRate() {
+    public String getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(String rate) {
         this.rate = rate;
     }
 
-    public double getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(double timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
+
+   
     
     
 }

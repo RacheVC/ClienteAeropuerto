@@ -142,9 +142,9 @@ public class ConnectionUtils {
         }
     }
 
-    public static <T> List<DivisaDTO> ListFromConnectionDivisa(String urlstring, Class<T> type) throws MalformedURLException, IOException {
+    public static <T> Object ListFromConnectionDivisa(String urlstring, Object object) throws MalformedURLException, IOException {
         Gson gson = new Gson();
-        Type listtype = new TypeToken<ArrayList<DivisaDTO>>() {
+        Type listtype = new TypeToken<DivisaDTO>() {
         }.getType();
         URL url = new URL(urlstring);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -157,6 +157,7 @@ public class ConnectionUtils {
             String responseLine;
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());
+                System.out.println(response);
             }
             return gson.fromJson(response.toString(), listtype);
 

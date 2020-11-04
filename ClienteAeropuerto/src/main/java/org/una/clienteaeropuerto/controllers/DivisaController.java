@@ -27,7 +27,7 @@ import org.una.clienteaeropuerto.service.DivisaService;
 public class DivisaController implements Initializable {
 
     
- private List<DivisaDTO> divisalist = new ArrayList<DivisaDTO>();
+ private DivisaDTO divisalist ;
     @FXML
     private ComboBox<String> cmbTipoDivisa;
 
@@ -50,8 +50,8 @@ public class DivisaController implements Initializable {
     private void CargarDivisas(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
         if(cmbTipoDivisa.getValue() == "Eurodolar"){
             
-            divisalist = DivisaService.getInstance().getAll();
-            System.out.println(divisalist);
+            divisalist = (DivisaDTO) DivisaService.getInstance().getAll();
+            System.out.println(divisalist.toString());
         }
     }
     

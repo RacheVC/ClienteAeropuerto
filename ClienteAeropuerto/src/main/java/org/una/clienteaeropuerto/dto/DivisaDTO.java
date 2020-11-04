@@ -11,30 +11,43 @@ package org.una.clienteaeropuerto.dto;
  */
 public class DivisaDTO {
     
-    private  Euros EURUSD;
-    
-    private int code;
+    private  Monedas rates;
+    private String code;
 
-    public DivisaDTO(Euros EURUSD, int code) {
-        this.EURUSD = EURUSD;
+    public DivisaDTO(Monedas rates, String code) {
+        this.rates = rates;
         this.code = code;
     }
 
-    public Euros getEURUSD() {
-        return EURUSD;
+    public Monedas getRates() {
+        return rates;
     }
 
-    public void setEURUSD(Euros EURUSD) {
-        this.EURUSD = EURUSD;
+    public void setRates(Monedas rates) {
+        this.rates = rates;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
+
+    @Override
+    public String toString() {
+        return "DivisaDTO{" + "rates=" + rates + ", code=" + code + '}';
+    }
+
+    
+
+    
+    
+
+    
+
    
+    
     
 }

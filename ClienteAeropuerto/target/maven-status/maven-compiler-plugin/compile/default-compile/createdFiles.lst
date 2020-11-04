@@ -1,6 +1,7 @@
 org\una\clienteaeropuerto\controllers\MantenimientoUsuariosController.class
 org\una\clienteaeropuerto\service\RolesService.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$2.class
+org\una\clienteaeropuerto\dto\Monedas.class
 org\una\clienteaeropuerto\service\ImagenService.class
 org\una\clienteaeropuerto\dto\NotificacionDTO.class
 org\una\clienteaeropuerto\controllers\CreacionNotificacionController.class
