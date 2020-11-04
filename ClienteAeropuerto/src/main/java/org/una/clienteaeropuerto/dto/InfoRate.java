@@ -9,12 +9,12 @@ package org.una.clienteaeropuerto.dto;
  *
  * @author Andres
  */
-public class Euros {
+public class InfoRate {
      private String rate;
 
     private String timestamp;
 
-    public Euros(String rate, String timestamp) {
+    public InfoRate(String rate, String timestamp) {
         this.rate = rate;
         this.timestamp = timestamp;
     }

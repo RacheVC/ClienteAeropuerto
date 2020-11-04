@@ -11,6 +11,7 @@ C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\Cl
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\DivisaService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\DashboardController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\UsuarioDTO.java
+C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\InfoRate.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Monedas.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\CreacionNotificacionController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\ImagenesDTO.java
@@ -29,5 +30,4 @@ C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\Cl
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Areas_trabajoDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\AuthenticationRequest.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\DivisaDTO.java
-C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Euros.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\module-info.java

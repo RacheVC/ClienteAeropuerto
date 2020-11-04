@@ -16,7 +16,7 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  * @author Andres
  */
 public class DivisaService {
-    private final String urlFindAll = "https://www.freeforexapi.com/api/live?pairs=EURUSD";
+    private final String urlFindAll = "https://www.freeforexapi.com/api/live?pairs=USDEUR,USDGBP,USDAUD,USDNZD,USDCAD,USDCHF,USDJPY,USDCRC";
    
       public Object getAll() throws InterruptedException, ExecutionException, IOException {
         return ConnectionUtils.ListFromConnectionDivisa(urlFindAll, DivisaDTO.class);

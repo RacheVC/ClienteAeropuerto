@@ -20,7 +20,6 @@ org\una\clienteaeropuerto\utils\ConnectionUtils$5.class
 org\una\clienteaeropuerto\service\ImagenService$NotificacionServiceHolder.class
 org\una\clienteaeropuerto\dto\RolesDTO.class
 org\una\clienteaeropuerto\service\DivisaService$DivisaServiceHolder.class
-org\una\clienteaeropuerto\dto\Euros.class
 org\una\clienteaeropuerto\service\HorarioService$HorarioServiceHolder.class
 org\una\clienteaeropuerto\service\NotificacionService$NotificacionServiceHolder.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$9.class
@@ -46,5 +45,6 @@ org\una\clienteaeropuerto\dto\HorarioDTO.class
 org\una\clienteaeropuerto\dto\ImagenesDTO.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$8.class
 org\una\clienteaeropuerto\controllers\CreacionUsuariosController.class
+org\una\clienteaeropuerto\dto\InfoRate.class
 org\una\clienteaeropuerto\service\NotificacionService.class
 org\una\clienteaeropuerto\controllers\LoginController.class
