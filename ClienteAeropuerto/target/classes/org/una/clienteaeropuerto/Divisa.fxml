@@ -19,8 +19,13 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="34.0" prefWidth="600.0">
+                  <HBox onInputMethodTextChanged="#holdfdsf" prefHeight="34.0" prefWidth="600.0">
                      <children>
+                        <TextField fx:id="txtMonto" onKeyTyped="#BusquedaPorEscritura" promptText="Monto" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                           <HBox.margin>
+                              <Insets left="48.0" top="50.0" />
+                           </HBox.margin>
+                        </TextField>
                         <Label text="Seleccione un tipo de moneda:" textFill="WHITE">
                            <HBox.margin>
                               <Insets left="35.0" top="50.0" />
@@ -34,11 +39,6 @@
                               <Insets left="10.0" top="50.0" />
                            </HBox.margin>
                         </ComboBox>
-                        <TextField fx:id="txtMonto" promptText="Monto" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
-                           <HBox.margin>
-                              <Insets left="48.0" top="50.0" />
-                           </HBox.margin>
-                        </TextField>
                      </children>
                   </HBox>
                   <HBox prefHeight="54.0" prefWidth="600.0">
@@ -51,7 +51,7 @@
                               <Insets left="35.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="txtDolarAmericano" prefHeight="26.0" prefWidth="118.0" promptText="Dólar Americano" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                        <TextField fx:id="txtDolarAmericano" editable="false" prefHeight="26.0" prefWidth="118.0" promptText="Dólar Americano" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
@@ -64,7 +64,7 @@
                               <Insets left="15.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="txtLibraEsterlina" prefHeight="26.0" prefWidth="118.0" promptText="Libra Esterlina" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                        <TextField fx:id="txtLibraEsterlina" editable="false" prefHeight="26.0" prefWidth="118.0" promptText="Libra Esterlina" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
@@ -77,7 +77,7 @@
                               <Insets left="15.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="txtYenJapones" prefHeight="26.0" prefWidth="118.0" promptText="Yen Japonés" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                        <TextField fx:id="txtYenJapones" editable="false" prefHeight="26.0" prefWidth="118.0" promptText="Yen Japonés" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
@@ -97,7 +97,7 @@
                               <Insets left="35.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="txtEurodolar" prefHeight="26.0" prefWidth="118.0" promptText="Eurodolar" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                        <TextField fx:id="txtEurodolar" editable="false" prefHeight="26.0" prefWidth="118.0" promptText="Eurodolar" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
@@ -110,7 +110,7 @@
                               <Insets left="15.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="txtDolarCanadiense" prefHeight="26.0" prefWidth="118.0" promptText="Dólar Canadiense" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                        <TextField fx:id="txtDolarCanadiense" editable="false" prefHeight="26.0" prefWidth="118.0" promptText="Dólar Canadiense" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
@@ -123,7 +123,7 @@
                               <Insets left="15.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="txtDolarNeozelandes" prefHeight="26.0" prefWidth="118.0" promptText="Dólar Neozelandes" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                        <TextField fx:id="txtDolarNeozelandes" editable="false" prefHeight="26.0" prefWidth="118.0" promptText="Dólar Neozelandes" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
@@ -140,7 +140,7 @@
                               <Insets left="35.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="txtFrancoSuizo" prefHeight="26.0" prefWidth="118.0" promptText="Franco Suizo" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                        <TextField fx:id="txtFrancoSuizo" editable="false" prefHeight="26.0" prefWidth="118.0" promptText="Franco Suizo" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
@@ -153,7 +153,7 @@
                               <Insets left="15.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="txtDolarAustraliano" prefHeight="26.0" prefWidth="118.0" promptText="Dólar Australiano" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                        <TextField fx:id="txtDolarAustraliano" editable="false" prefHeight="26.0" prefWidth="118.0" promptText="Dólar Australiano" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
@@ -166,7 +166,7 @@
                               <Insets left="15.0" top="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField fx:id="txtColonCostarricense" prefHeight="26.0" prefWidth="118.0" promptText="Colón Costarricense" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
+                        <TextField fx:id="txtColonCostarricense" editable="false" prefHeight="26.0" prefWidth="118.0" promptText="Colón Costarricense" styleClass="VBoxTarjeta2" stylesheets="@styles.css">
                            <HBox.margin>
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>

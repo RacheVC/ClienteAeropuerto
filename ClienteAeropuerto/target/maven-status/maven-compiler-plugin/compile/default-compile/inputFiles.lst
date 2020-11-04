@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\CrearHorarioController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\App.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\UsuarioService.java
@@ -32,38 +31,3 @@ C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\Cl
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\AuthenticationRequest.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\DivisaDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\module-info.java
-=======
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\DivisaController.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\HorarioController.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\App.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\MantenimientoNotificacionesController.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\MantenimientoUsuariosController.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Usuarios_AreasDTO.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\LoginController.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\AuthenticationResponse.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\UsuarioDTO.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Euros.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\UsuarioService.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\HorarioDTO.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\CreacionUsuariosController.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\CrearHorarioController.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Monedas.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\DashboardController.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Areas_trabajoDTO.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\HorarioService.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\DivisaDTO.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\NotificacionService.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\RolesService.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\AuthenticationRequest.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\CreacionNotificacionController.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\module-info.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\AppContext.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\AuthenticationSingleton.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\DivisaService.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\NotificacionDTO.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\AreasTrabajoService.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\ConnectionUtils.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\ImagenesDTO.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\ImagenService.java
-C:\Users\rache\OneDrive\Escritorio\UNA\2020\II CICLO\Programacion III\Cliente\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\RolesDTO.java
->>>>>>> Stashed changes
