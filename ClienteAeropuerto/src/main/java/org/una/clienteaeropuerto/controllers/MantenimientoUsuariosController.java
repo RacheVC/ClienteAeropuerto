@@ -8,6 +8,7 @@ package org.una.clienteaeropuerto.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -74,17 +75,19 @@ public class MantenimientoUsuariosController implements Initializable {
     private Button btnSalir;
 
     private List<UsuarioDTO> usuariosList = new ArrayList<UsuarioDTO>();
+    private List<UsuarioDTO> usuariosList2 = new ArrayList<UsuarioDTO>();
 
     UsuarioDTO usuarioDTO = new UsuarioDTO();
+    UsuarioService usuarioService = new UsuarioService();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         try {
             usuariosList = UsuarioService.getInstance().getAll();
-            System.out.println(usuariosList.toString());
         } catch (InterruptedException ex) {
             Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ExecutionException ex) {
@@ -93,30 +96,12 @@ public class MantenimientoUsuariosController implements Initializable {
             Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        clId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcEstado.setCellValueFactory(per -> {
-            String estadoString;
-            if (per.getValue().isEstado()) {
-                estadoString = "Activo";
-            } else {
-                estadoString = "Inactivo";
-            }
-            return new ReadOnlyStringWrapper(estadoString);
-        });
-        tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
-        tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
-        tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
-        tcRolId.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getRoles()));
-        tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
-        tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
-
-        tvUsuarios.getItems().clear();
-
-        tvUsuarios.setItems(FXCollections.observableArrayList(usuariosList));
+        actualizarTableView();
     }
 
     @FXML
     private void accionBuscarNotificacion(ActionEvent event) {
+
     }
 
     @FXML
@@ -144,7 +129,28 @@ public class MantenimientoUsuariosController implements Initializable {
     }
 
     @FXML
-    private void accionInactivarNotificacion(ActionEvent event) {
+    private void accionInactivarNotificacion(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
+        if (usuarioDTO.isEstado() == true) {
+            usuarioDTO.setEstado(false);
+            encontrarFechaRegistro(usuarioDTO.getId());
+            usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
+
+            Parent root = FXMLLoader.load(App.class.getResource("MantenimientoUsuarios.fxml"));
+            Scene creacionDocs = new Scene(root);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(creacionDocs);
+            window.show();
+        }
+    }
+
+    private void encontrarFechaRegistro(Long id) {
+        Date fechaEncontrada;
+        for (int i = 0; i < usuariosList.size(); i++) {
+            if (id == usuariosList.get(i).getId()) {
+                fechaEncontrada = usuariosList.get(i).getFecha_registro();
+                usuarioDTO.setFecha_registro(fechaEncontrada);
+            }
+        }
     }
 
     @FXML
@@ -158,8 +164,37 @@ public class MantenimientoUsuariosController implements Initializable {
 
     @FXML
     private void MouseTvUsuarios(MouseEvent event) throws IOException {
-         if (tvUsuarios.getSelectionModel().getSelectedItem() != null) {
+        if (tvUsuarios.getSelectionModel().getSelectedItem() != null) {
             usuarioDTO = (UsuarioDTO) tvUsuarios.getSelectionModel().getSelectedItem();
+        }
+    }
+
+    private void actualizarTableView() {
+
+        for (int i = 0; i < usuariosList.size(); i++) {
+            if (usuariosList.get(i).isEstado() == true) {
+                usuariosList2.add(usuariosList.get(i));
+                clId.setCellValueFactory(new PropertyValueFactory<>("id"));
+                tcEstado.setCellValueFactory(per -> {
+                    String estadoString;
+                    if (per.getValue().isEstado()) {
+                        estadoString = "Activo";
+                    } else {
+                        estadoString = "Inactivo";
+                    }
+                    return new ReadOnlyStringWrapper(estadoString);
+                });
+                tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
+                tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+                tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
+                tcRolId.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getRoles()));
+                tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
+                tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
+
+                tvUsuarios.getItems().clear();
+
+                tvUsuarios.setItems(FXCollections.observableArrayList(usuariosList2));
+            }
         }
     }
 

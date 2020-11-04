@@ -63,10 +63,11 @@
    <center>
       <TableView fx:id="tvewHorarios" onMouseClicked="#MouseTabla" prefHeight="257.0" prefWidth="536.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn fx:id="clId" prefWidth="75.0" text="Id" />
-            <TableColumn fx:id="clDiaEntrada" prefWidth="113.5999526977539" text="Día Entrada" />
-            <TableColumn fx:id="clDiaSalida" prefWidth="120.0" text="Día Salida" />
-            <TableColumn fx:id="clAreaTrabajo" prefWidth="236.79995727539062" text="Área de trabajo" />
+            <TableColumn fx:id="clId" prefWidth="52.0" text="Id" />
+            <TableColumn fx:id="clDiaEntrada" prefWidth="119.0" text="Día Entrada" />
+            <TableColumn fx:id="clDiaSalida" prefWidth="123.0" text="Día Salida" />
+            <TableColumn fx:id="clAreaTrabajo" prefWidth="133.0" text="Área de trabajo" />
+            <TableColumn fx:id="clEstado" prefWidth="118.0" text="Estado" />
          </columns>
          <styleClass>
             <String fx:value="VBoxTarjeta" />

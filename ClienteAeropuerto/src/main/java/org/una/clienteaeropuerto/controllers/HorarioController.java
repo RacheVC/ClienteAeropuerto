@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -61,10 +62,16 @@ public class HorarioController implements Initializable {
     private TableColumn<HorarioDTO, String> clDiaSalida;
     @FXML
     private TableColumn<HorarioDTO, String> clAreaTrabajo;
+    @FXML
+    private TableColumn<HorarioDTO, String> clEstado;
 
     private List<HorarioDTO> horariolist = new ArrayList<HorarioDTO>();
 
+    private List<HorarioDTO> horariolist2 = new ArrayList<HorarioDTO>();
+
     HorarioDTO horarioDTO = new HorarioDTO();
+
+    HorarioService horarioService = new HorarioService();
 
     /**
      * Initializes the controller class.
@@ -78,15 +85,8 @@ public class HorarioController implements Initializable {
             Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        clId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        actualizarTableView();
 
-        clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("dia_Entrada"));
-        clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("dia_Salida"));
-        clAreaTrabajo.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getAreas_trabajo()));
-
-        tvewHorarios.getItems().clear();
-
-        tvewHorarios.setItems(FXCollections.observableArrayList(horariolist));
     }
 
     @FXML
@@ -111,20 +111,24 @@ public class HorarioController implements Initializable {
         AppContext.getInstance().set("horarioDTO", horarioDTO);
         AppContext.getInstance().set("ed", "edit");
 
-        Parent root = FXMLLoader.load(App.class.getResource("CrearHorario.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
     }
 
     @FXML
-    private void accionInactivarHorario(ActionEvent event) {
+    private void accionInactivarHorario(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
+        if (horarioDTO.isEstado() == true) {
+            horarioDTO.setEstado(false);
+            horarioService.modify(horarioDTO.getId(), horarioDTO);
+            
+            Parent root = FXMLLoader.load(App.class.getResource("HorarioController.fxml"));
+            Scene creacionDocs = new Scene(root);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(creacionDocs);
+            window.show();
+        }
     }
 
     @FXML
     private void accionSalirHorario(ActionEvent event) throws IOException {
-
         Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
         Scene creacionDocs = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -134,8 +138,31 @@ public class HorarioController implements Initializable {
 
     @FXML
     private void MouseTabla(MouseEvent event) {
-         if (tvewHorarios.getSelectionModel().getSelectedItem() != null) {
+        if (tvewHorarios.getSelectionModel().getSelectedItem() != null) {
             horarioDTO = (HorarioDTO) tvewHorarios.getSelectionModel().getSelectedItem();
+        }
+    }
+
+    private void actualizarTableView() {
+        for (int i = 0; i < horariolist.size(); i++) {
+            if (horariolist.get(i).isEstado() == true) {
+                horariolist2.add(horariolist.get(i));
+                clId.setCellValueFactory(new PropertyValueFactory<>("id"));
+                clEstado.setCellValueFactory(per -> {
+                    String estadoString;
+                    if (per.getValue().isEstado()) {
+                        estadoString = "Activo";
+                    } else {
+                        estadoString = "Inactivo";
+                    }
+                    return new ReadOnlyStringWrapper(estadoString);
+                });
+                clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("dia_Entrada"));
+                clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("dia_Salida"));
+                clAreaTrabajo.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getAreas_trabajo()));
+                tvewHorarios.getItems().clear();
+                tvewHorarios.setItems(FXCollections.observableArrayList(horariolist2));
+            }
         }
     }
 
