@@ -72,6 +72,10 @@ public class HorarioController implements Initializable {
     HorarioDTO horarioDTO = new HorarioDTO();
 
     HorarioService horarioService = new HorarioService();
+    @FXML
+    private TableColumn<HorarioDTO, String> clHoraEntrada;
+    @FXML
+    private TableColumn<HorarioDTO, String> clHoraSalida;
 
     /**
      * Initializes the controller class.
