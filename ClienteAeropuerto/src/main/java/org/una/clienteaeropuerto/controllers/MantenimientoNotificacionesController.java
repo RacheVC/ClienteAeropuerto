@@ -30,7 +30,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
+import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
+import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
 
 /**
@@ -54,6 +56,9 @@ public class MantenimientoNotificacionesController implements Initializable {
     private Button btnSalir;
 
     private List<NotificacionDTO> notificacionlist = new ArrayList<NotificacionDTO>();
+    
+    private List<ImagenesDTO> imageneslist = new ArrayList<ImagenesDTO>();
+    
     @FXML
     private TableView<NotificacionDTO> tvewNotificacion;
     @FXML
@@ -109,7 +114,10 @@ public class MantenimientoNotificacionesController implements Initializable {
 
         tvewNotificacion.setItems(FXCollections.observableArrayList(notificacionlist));
 
-        System.out.println(notificacionlist);  
+        System.out.println(notificacionlist);
+        
+        CargarListaImagenes();
+        UnirPartesImagen(1);
     }
 
     @FXML
@@ -132,7 +140,9 @@ public class MantenimientoNotificacionesController implements Initializable {
     @FXML
     private void accionInactivarNotificacion(ActionEvent event) {
     }
-
+    
+   
+    
     @FXML
     private void accionSalirrNotificacion(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
@@ -141,4 +151,36 @@ public class MantenimientoNotificacionesController implements Initializable {
         window.setScene(creacionDocs);
         window.show();
     }
+    
+    public void CargarListaImagenes(){
+        
+        try {
+            imageneslist = ImagenService.getInstance().getAll();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public String UnirPartesImagen(int id){
+        String partesUnidas= "";
+        String parte;
+        
+        for (int i = 0; i < imageneslist.size(); i++) {
+            if(id == imageneslist.get(i).getNotificaciones().getId()){
+                parte = imageneslist.get(i).getImagen_Adjunta();                
+                partesUnidas = parte+partesUnidas;
+                
+            }
+           
+            
+        }
+       return partesUnidas; 
+    }
+    
+    
 }

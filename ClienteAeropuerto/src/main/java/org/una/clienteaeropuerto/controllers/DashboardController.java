@@ -74,7 +74,7 @@ public class DashboardController implements Initializable {
     @FXML
     private void actionControlNotificaciones(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(App.class.getResource("CreacionNotificacion.fxml"));
+        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
         Scene creacionDocs = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
