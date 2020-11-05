@@ -8,6 +8,7 @@ package org.una.clienteaeropuerto.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -34,6 +35,7 @@ import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
+import org.una.clienteaeropuerto.utils.AppContext;
 
 /**
  * FXML Controller class
@@ -56,9 +58,9 @@ public class MantenimientoNotificacionesController implements Initializable {
     private Button btnSalir;
 
     private List<NotificacionDTO> notificacionlist = new ArrayList<NotificacionDTO>();
-    
+
     private List<ImagenesDTO> imageneslist = new ArrayList<ImagenesDTO>();
-    
+
     @FXML
     private TableView<NotificacionDTO> tvewNotificacion;
     @FXML
@@ -76,6 +78,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     private TableColumn<NotificacionDTO, String> clEstado;
     @FXML
     private TableColumn<NotificacionDTO, String> clReceptor;
+    String str;
 
     /**
      * Initializes the controller class.
@@ -85,11 +88,7 @@ public class MantenimientoNotificacionesController implements Initializable {
         try {
             notificacionlist = NotificacionService.getInstance().getAll();
             System.out.println(notificacionlist.get(0).getEmisor());
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -113,11 +112,13 @@ public class MantenimientoNotificacionesController implements Initializable {
         tvewNotificacion.getItems().clear();
 
         tvewNotificacion.setItems(FXCollections.observableArrayList(notificacionlist));
+        str = (String) AppContext.getInstance().get("str");
 
         System.out.println(notificacionlist);
-        
+
         CargarListaImagenes();
         UnirPartesImagen(1);
+        this.encodeFileToBase64();
     }
 
     @FXML
@@ -140,9 +141,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     @FXML
     private void accionInactivarNotificacion(ActionEvent event) {
     }
-    
-   
-    
+
     @FXML
     private void accionSalirrNotificacion(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
@@ -151,36 +150,38 @@ public class MantenimientoNotificacionesController implements Initializable {
         window.setScene(creacionDocs);
         window.show();
     }
-    
-    public void CargarListaImagenes(){
-        
+
+    public void CargarListaImagenes() {
+
         try {
             imageneslist = ImagenService.getInstance().getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    public String UnirPartesImagen(int id){
-        String partesUnidas= "";
+
+    public String UnirPartesImagen(int id) {
+        String partesUnidas = "";
         String parte;
-        
+
         for (int i = 0; i < imageneslist.size(); i++) {
-            if(id == imageneslist.get(i).getNotificaciones().getId()){
-                parte = imageneslist.get(i).getImagen_Adjunta();                
-                partesUnidas = parte+partesUnidas;
-                
+            if (id == imageneslist.get(i).getNotificaciones().getId()) {
+                parte = imageneslist.get(i).getImagen_Adjunta();
+                partesUnidas = parte + partesUnidas;
+
             }
-           
-            
+
         }
-       return partesUnidas; 
+        return partesUnidas;
     }
-    
-    
+
+    public String encodeFileToBase64() {
+        String cadenaunida = this.UnirPartesImagen(1);
+        byte image[] = Base64.getDecoder().decode(cadenaunida);
+        String encode = new String (image);
+        System.out.println(encode);
+        return encode;
+    }
+
 }

@@ -37,6 +37,7 @@ import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
+import org.una.clienteaeropuerto.utils.AppContext;
 
 /**
  * FXML Controller class
@@ -62,6 +63,7 @@ public class CreacionNotificacionController implements Initializable {
     ImagenService imagenservice = new ImagenService();
     List<ImagenesDTO> listimagenes;
     static int residuo = 0;
+    String str;
     @FXML
     private ImageView imgNotificacion;
 
@@ -121,29 +123,12 @@ public class CreacionNotificacionController implements Initializable {
         }
     }
 
-    public void GetImage() throws InterruptedException, ExecutionException, IOException {
-        this.listimagenes = this.imagenservice.getAll();
-        for (int i = 0; i < this.listimagenes.size(); i++) {
-            imagenservice.getAll().get(i).getNotificaciones().getId();
 
-        }
-    }
-
-    public static void decoder(String base64Image, String pathFile) {
-        try ( FileOutputStream imageOutFile = new FileOutputStream(pathFile)) {
-            // Converting a Base64 String into Image byte array
-            byte[] imageByteArray = Base64.getDecoder().decode(base64Image);
-            imageOutFile.write(imageByteArray);
-        } catch (FileNotFoundException e) {
-            System.out.println("Image not found" + e);
-        } catch (IOException ioe) {
-            System.out.println("Exception while reading the Image " + ioe);
-        }
-    }
 
     public void PostImage64() throws InterruptedException, ExecutionException, IOException {
         File file = this.GetFile();
-        String str = this.encodeFileToBase64(file);
+        str = this.encodeFileToBase64(file);
+        AppContext.getInstance().set("str", str);
         int diferencia = 0;
         int totalcadena = str.length();
         int cantidadRecorrido = 0;
