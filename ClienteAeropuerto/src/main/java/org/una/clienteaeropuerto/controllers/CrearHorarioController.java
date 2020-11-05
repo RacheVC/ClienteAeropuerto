@@ -7,7 +7,6 @@ package org.una.clienteaeropuerto.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
@@ -46,10 +46,11 @@ public class CrearHorarioController implements Initializable {
     private ComboBox<String> cbDiaSalida;
     @FXML
     private ComboBox<Areas_trabajoDTO> cbAreaTrabajo;
-
+    DatePicker datepicker;
     HorarioService horarioService = new HorarioService();
     HorarioDTO horarioDTO = new HorarioDTO();
-
+    java.util.Date date = new java.util.Date();
+    java.util.Date date2 = new java.util.Date();
     Areas_trabajoDTO areas_trabajoDTO = new Areas_trabajoDTO();
     AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
     List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
@@ -77,11 +78,16 @@ public class CrearHorarioController implements Initializable {
 
         if (!AppContext.getInstance().get("ed").equals("edit")) {
             try {
+                date.setHours(Integer.valueOf(cbHoraEntrada.getValue()));
+                date.setMinutes(Integer.valueOf(cbMinutoEntrada.getValue()));
+                date2.setHours(Integer.valueOf(cbHoraSalida.getValue()));
+                date2.setMinutes(Integer.valueOf(cbMinutoSalida.getValue()));
                 horarioDTO.setDia_Entrada(cbDiaEntrada.getValue());
                 horarioDTO.setDia_Salida(cbDiaSalida.getValue());
                 horarioDTO.setEstado(true);
                 horarioDTO.setAreas_trabajo(areas_trabajoDTO);
-                
+                horarioDTO.setHora_entrada(date);
+                horarioDTO.setHora_salida(date2);
                 horarioService.add(horarioDTO);
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
@@ -93,6 +99,7 @@ public class CrearHorarioController implements Initializable {
                 alert.setTitle("Error");
                 alert.setHeaderText("El horario no se pudo crear.");
                 alert.show();
+                System.out.println(e);
             }
 
         } else {

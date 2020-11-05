@@ -161,8 +161,8 @@ public class HorarioController implements Initializable {
                     }
                     return new ReadOnlyStringWrapper(estadoString);
                 });
-                clHoraEntrada.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getHora_entrada().getHours() + ":" + (param.getValue().getHora_entrada().getMinutes()) + ":" + (param.getValue().getHora_entrada().getSeconds())));
-                clHoraSalida.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getHora_salida().getTime()));
+                clHoraEntrada.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getHora_entrada().getHours() + ":" + (param.getValue().getHora_entrada().getMinutes())));
+                clHoraSalida.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getHora_salida().getHours() + ":" + (param.getValue().getHora_salida().getMinutes())));
                 clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("dia_Entrada"));
                 clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("dia_Salida"));
                 clAreaTrabajo.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getAreas_trabajo()));
