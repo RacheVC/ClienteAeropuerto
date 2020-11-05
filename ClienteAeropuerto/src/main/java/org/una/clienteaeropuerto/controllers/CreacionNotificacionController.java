@@ -5,19 +5,17 @@
  */
 package org.una.clienteaeropuerto.controllers;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import static java.lang.Math.log;
-import static java.lang.StrictMath.log;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -61,6 +60,7 @@ public class CreacionNotificacionController implements Initializable {
     NotificacionDTO notificaciondto = new NotificacionDTO();
     NotificacionService notificacionservice = new NotificacionService();
     ImagenService imagenservice = new ImagenService();
+    List<ImagenesDTO> listimagenes;
     static int residuo = 0;
     @FXML
     private ImageView imgNotificacion;
@@ -70,6 +70,7 @@ public class CreacionNotificacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.listimagenes = new ArrayList<>();
 
     }
 
@@ -103,6 +104,8 @@ public class CreacionNotificacionController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(stage);
         if (selectedFile != null) {
             selectedFile.toPath();
+            Image image = new Image("file:" + selectedFile.getAbsolutePath());
+            imgNotificacion.setImage(image);
         }
         System.out.println(fileChooser);
         return selectedFile;
@@ -115,6 +118,26 @@ public class CreacionNotificacionController implements Initializable {
             return enconde;
         } catch (IOException e) {
             throw new IllegalStateException("could not read file " + file, e);
+        }
+    }
+
+    public void GetImage() throws InterruptedException, ExecutionException, IOException {
+        this.listimagenes = this.imagenservice.getAll();
+        for (int i = 0; i < this.listimagenes.size(); i++) {
+            imagenservice.getAll().get(i).getNotificaciones().getId();
+
+        }
+    }
+
+    public static void decoder(String base64Image, String pathFile) {
+        try ( FileOutputStream imageOutFile = new FileOutputStream(pathFile)) {
+            // Converting a Base64 String into Image byte array
+            byte[] imageByteArray = Base64.getDecoder().decode(base64Image);
+            imageOutFile.write(imageByteArray);
+        } catch (FileNotFoundException e) {
+            System.out.println("Image not found" + e);
+        } catch (IOException ioe) {
+            System.out.println("Exception while reading the Image " + ioe);
         }
     }
 
@@ -159,5 +182,3 @@ public class CreacionNotificacionController implements Initializable {
         }
     }
 }
-
-
