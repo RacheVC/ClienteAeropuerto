@@ -97,7 +97,7 @@ public class ConnectionUtils {
     }
 
     public static <T> List<HorarioDTO> ListFromConnectionHorario(String urlstring, Class<T> type) throws MalformedURLException, IOException {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("HH:mm:ss").create();
         Type listtype = new TypeToken<ArrayList<HorarioDTO>>() {
         }.getType();
         URL url = new URL(urlstring);

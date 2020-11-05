@@ -33,6 +33,11 @@ public class HorarioDTO {
         this.areas_trabajo = areas_trabajo;
     }
 
+    @Override
+    public String toString() {
+        return "HorarioDTO{" + "id=" + id + ", dia_Entrada=" + dia_Entrada + ", dia_Salida=" + dia_Salida + ", estado=" + estado + ", hora_entrada=" + hora_entrada + ", hora_salida=" + hora_salida + ", areas_trabajo=" + areas_trabajo + '}';
+    }
+
     public Long getId() {
         return id;
     }
@@ -88,10 +93,7 @@ public class HorarioDTO {
     public void setHora_salida(Date hora_salida) {
         this.hora_salida = hora_salida;
     }
-
-    @Override
-    public String toString() {
-        return "HorarioDTO{" + "id=" + id + ", dia_Entrada=" + dia_Entrada + ", dia_Salida=" + dia_Salida + ", estado=" + estado + ", hora_entrada=" + hora_entrada + ", hora_salida=" + hora_salida + ", areas_trabajo=" + areas_trabajo + '}';
-    }
+    
+    
 
 }

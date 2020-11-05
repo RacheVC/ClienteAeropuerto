@@ -122,7 +122,7 @@ public class HorarioController implements Initializable {
         if (horarioDTO.isEstado() == true) {
             horarioDTO.setEstado(false);
             horarioService.modify(horarioDTO.getId(), horarioDTO);
-            
+
             Parent root = FXMLLoader.load(App.class.getResource("HorarioController.fxml"));
             Scene creacionDocs = new Scene(root);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -161,6 +161,8 @@ public class HorarioController implements Initializable {
                     }
                     return new ReadOnlyStringWrapper(estadoString);
                 });
+                clHoraEntrada.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getHora_entrada().getHours() + ":" + (param.getValue().getHora_entrada().getMinutes()) + ":" + (param.getValue().getHora_entrada().getSeconds())));
+                clHoraSalida.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getHora_salida().getTime()));
                 clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("dia_Entrada"));
                 clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("dia_Salida"));
                 clAreaTrabajo.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getAreas_trabajo()));
