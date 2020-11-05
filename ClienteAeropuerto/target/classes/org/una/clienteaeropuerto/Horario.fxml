@@ -63,11 +63,13 @@
    <center>
       <TableView fx:id="tvewHorarios" onMouseClicked="#MouseTabla" prefHeight="257.0" prefWidth="536.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <columns>
-            <TableColumn fx:id="clId" prefWidth="52.0" text="Id" />
-            <TableColumn fx:id="clDiaEntrada" prefWidth="119.0" text="Día Entrada" />
-            <TableColumn fx:id="clDiaSalida" prefWidth="123.0" text="Día Salida" />
-            <TableColumn fx:id="clAreaTrabajo" prefWidth="133.0" text="Área de trabajo" />
-            <TableColumn fx:id="clEstado" prefWidth="118.0" text="Estado" />
+            <TableColumn fx:id="clId" prefWidth="40.79998856782913" text="Id" />
+            <TableColumn fx:id="clDiaEntrada" prefWidth="83.99999618530273" text="Día Entrada" />
+            <TableColumn fx:id="clDiaSalida" prefWidth="67.20001983642578" text="Día Salida" />
+            <TableColumn fx:id="clHoraEntrada" prefWidth="81.5999755859375" text="Hora Entrada" />
+            <TableColumn fx:id="clHoraSalida" prefWidth="91.20001220703125" text="Hora Salida" />
+            <TableColumn fx:id="clAreaTrabajo" prefWidth="104.79998779296875" text="Área de trabajo" />
+            <TableColumn fx:id="clEstado" prefWidth="97.59999389648442" text="Estado" />
          </columns>
          <styleClass>
             <String fx:value="VBoxTarjeta" />
@@ -76,7 +78,7 @@
       </TableView>
    </center>
    <right>
-      <VBox prefHeight="257.0" prefWidth="113.0" styleClass="anchorPadre">
+      <VBox prefHeight="257.0" prefWidth="90.0" styleClass="anchorPadre">
          <children>
             <Button mnemonicParsing="false" onAction="#accionSalirHorario" prefHeight="25.0" prefWidth="62.0" styleClass="jfx-buttonStandard2" text="Salir" VBox.vgrow="ALWAYS">
                <VBox.margin>

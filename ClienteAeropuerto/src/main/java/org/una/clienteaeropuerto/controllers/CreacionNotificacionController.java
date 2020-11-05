@@ -5,13 +5,19 @@
  */
 package org.una.clienteaeropuerto.controllers;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import static java.lang.Math.log;
+import static java.lang.StrictMath.log;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Base64;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,7 +70,7 @@ public class CreacionNotificacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
     }
 
     @FXML
@@ -85,8 +91,8 @@ public class CreacionNotificacionController implements Initializable {
     }
 
     @FXML
-    private void OnActionBtnAgregarImagen(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
-
+    private void OnActionBtnAgregarImagen(ActionEvent event) throws InterruptedException, ExecutionException, IOException, Exception {
+        this.PostImage64();
     }
 
     public File GetFile() {
@@ -98,53 +104,60 @@ public class CreacionNotificacionController implements Initializable {
         if (selectedFile != null) {
             selectedFile.toPath();
         }
-        System.out.println(fileChooser + "aaaaaaaaaaaaaaaaaaaa");
+        System.out.println(fileChooser);
         return selectedFile;
     }
 
-    private static String encodeFileToBase64(File file) {
+    public String encodeFileToBase64(File file) {
         try {
-
             byte[] fileContent = Files.readAllBytes(file.toPath());
-            return Base64.getEncoder().encodeToString(fileContent);
-
+            String enconde = new String(Base64.getEncoder().encodeToString(fileContent));
+            return enconde;
         } catch (IOException e) {
             throw new IllegalStateException("could not read file " + file, e);
         }
-
     }
 
-    public void MetodoGuardarBase64() {
-        String sobrante;
-
-        File result = this.GetFile();
-        String str = this.encodeFileToBase64(result);
+    public void PostImage64() throws InterruptedException, ExecutionException, IOException {
+        File file = this.GetFile();
+        String str = this.encodeFileToBase64(file);
+        int diferencia = 0;
         int totalcadena = str.length();
-        System.out.println(totalcadena);
-        if (residuo <= 1000) {
+        int cantidadRecorrido = 0;
+        int limite2 = 10000;
+        int limite = 0;
+        diferencia = totalcadena % 10000;
+
+        if (diferencia == 0) {
+            cantidadRecorrido = totalcadena / 100000;
+            limite = (cantidadRecorrido * 10000) - 10000;
+            limite2 = cantidadRecorrido * 10000;
+        } else {
+            cantidadRecorrido = (totalcadena / 10000) + 1;
+            limite = (cantidadRecorrido * 10000) - 10000;
+            limite2 = totalcadena;
+        }
+
+        for (int i = 0; i < cantidadRecorrido; i++) {
             if (totalcadena <= 10000) {
                 ImagenesDTO imagen = new ImagenesDTO();
                 imagen.setImagen_Adjunta(str.substring(0, totalcadena));
-                System.out.println(imagen);
+                imagen.setParte(cantidadRecorrido - i);
+                imagen.setTotalPartes(cantidadRecorrido);
+                this.imagenservice.add(imagen);
             }
-
-        }
-        if (residuo > 1000) {
             if (totalcadena > 10000) {
-                for (int i = 0; i < totalcadena; i++) {
-                    if (totalcadena > 10000) {
-                        totalcadena = totalcadena - 10000;
-                        ImagenesDTO imagen = new ImagenesDTO();
-                        imagen.setImagen_Adjunta(str.substring(0, 10000));
-                        System.out.println(imagen);
-                        residuo = totalcadena % 10000;
 
-                    }
-                }
-
+                ImagenesDTO imagen = new ImagenesDTO();
+                imagen.setImagen_Adjunta(str.substring(limite, limite2));
+                imagen.setTotalPartes(cantidadRecorrido);
+                imagen.setParte(cantidadRecorrido - i);
+                this.imagenservice.add(imagen);
+                limite2 = limite - 1;
+                limite = limite - 10000;
             }
-
         }
     }
-
 }
+
+

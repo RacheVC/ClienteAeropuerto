@@ -12,14 +12,14 @@ package org.una.clienteaeropuerto.dto;
 public class ImagenesDTO {
 
     private Long id;
-    private String Imagen_Adjunta;
+    private String imagen_Adjunta;
     private int parte;
     private int totalPartes;
     private NotificacionDTO notificaciones;
 
-    public ImagenesDTO(Long id, String Imagen_Adjunta, int parte, int totalPartes, NotificacionDTO notificaciones) {
+    public ImagenesDTO(Long id, String imagen_Adjunta, int parte, int totalPartes, NotificacionDTO notificaciones) {
         this.id = id;
-        this.Imagen_Adjunta = Imagen_Adjunta;
+        this.imagen_Adjunta = imagen_Adjunta;
         this.parte = parte;
         this.totalPartes = totalPartes;
         this.notificaciones = notificaciones;
@@ -37,11 +37,11 @@ public class ImagenesDTO {
     }
 
     public String getImagen_Adjunta() {
-        return Imagen_Adjunta;
+        return imagen_Adjunta;
     }
 
-    public void setImagen_Adjunta(String Imagen_Adjunta) {
-        this.Imagen_Adjunta = Imagen_Adjunta;
+    public void setImagen_Adjunta(String imagen_Adjunta) {
+        this.imagen_Adjunta = imagen_Adjunta;
     }
 
     public int getParte() {
@@ -67,6 +67,6 @@ public class ImagenesDTO {
     public void setNotificaciones(NotificacionDTO notificaciones) {
         this.notificaciones = notificaciones;
     }
-    
 
+    
 }

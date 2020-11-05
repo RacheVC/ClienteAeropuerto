@@ -31,12 +31,12 @@ public class ImagenService {
         ConnectionUtils.ObjectToConnection(urlCreate, object);
     }
 
-    public static NotificacionService getInstance() {
-        return NotificacionServiceHolder.INSTANCE;
+    public static ImagenService getInstance() {
+        return ImagenesServiceHolder.INSTANCE;
     }
 
-    private static class NotificacionServiceHolder {
+    private static class ImagenesServiceHolder {
 
-        private static final NotificacionService INSTANCE = new NotificacionService();
+        private static final ImagenService INSTANCE = new ImagenService();
     }
 }
