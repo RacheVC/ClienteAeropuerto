@@ -7,6 +7,7 @@ package org.una.clienteaeropuerto.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -52,6 +53,14 @@ public class CrearHorarioController implements Initializable {
     Areas_trabajoDTO areas_trabajoDTO = new Areas_trabajoDTO();
     AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
     List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
+    @FXML
+    private ComboBox<String> cbHoraEntrada;
+    @FXML
+    private ComboBox<String> cbMinutoEntrada;
+    @FXML
+    private ComboBox<String> cbHoraSalida;
+    @FXML
+    private ComboBox<String> cbMinutoSalida;
 
     /**
      * Initializes the controller class.
@@ -72,6 +81,7 @@ public class CrearHorarioController implements Initializable {
                 horarioDTO.setDia_Salida(cbDiaSalida.getValue());
                 horarioDTO.setEstado(true);
                 horarioDTO.setAreas_trabajo(areas_trabajoDTO);
+                
                 horarioService.add(horarioDTO);
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
@@ -123,8 +133,8 @@ public class CrearHorarioController implements Initializable {
             areas_trabajoDTO = (Areas_trabajoDTO) cbAreaTrabajo.getSelectionModel().getSelectedItem();
         }
     }
-    
-    private void llenarCbAreaTrabajo(){
+
+    private void llenarCbAreaTrabajo() {
         try {
             areasTrabajoList = (List<Areas_trabajoDTO>) areasTrabajoService.getAll();
         } catch (InterruptedException ex) {
@@ -137,8 +147,8 @@ public class CrearHorarioController implements Initializable {
 
         cbAreaTrabajo.setItems(FXCollections.observableArrayList(areasTrabajoList));
     }
-    
-    private void funcionAppContext(){
+
+    private void funcionAppContext() {
         if (AppContext.getInstance().get("ed").equals("edit")) {
             HorarioDTO horarioDTO = new HorarioDTO();
             horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
@@ -146,14 +156,60 @@ public class CrearHorarioController implements Initializable {
             cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
             cbDiaSalida.setValue(horarioDTO.getDia_Salida());
             cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+            cbHoraEntrada.setValue(String.valueOf(horarioDTO.getHora_entrada().getHours()));
+            cbHoraSalida.setValue(String.valueOf(horarioDTO.getHora_salida().getHours()));
+            cbMinutoEntrada.setValue(String.valueOf(horarioDTO.getHora_entrada().getMinutes()));
+            cbMinutoSalida.setValue(String.valueOf(horarioDTO.getHora_salida().getMinutes()));
+            LLenarComboboxHoras();
             horarioDTO.setEstado(true);
             cbAreaTrabajo.setValue(horarioDTO.getAreas_trabajo());
         } else {
             if (AppContext.getInstance().get("ed").equals("insertar")) {
+                LLenarComboboxHoras();
                 cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
                 cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
             }
         }
+    }
+
+    public void LLenarComboboxHoras() {
+        for (int i = 1; i < 25; i++) {
+            if (i < 10) {
+                cbHoraEntrada.getItems().addAll("0" + String.valueOf(i));
+                cbHoraSalida.getItems().addAll("0" + String.valueOf(i));
+            } else {
+                cbHoraEntrada.getItems().addAll(String.valueOf(i));
+                cbHoraSalida.getItems().addAll(String.valueOf(i));
+            }
+
+        }
+
+        for (int i = 0; i < 60; i++) {
+            if (i < 10) {
+                cbMinutoEntrada.getItems().addAll("0" + String.valueOf(i));
+                cbMinutoSalida.getItems().addAll("0" + String.valueOf(i));
+            } else {
+                cbMinutoEntrada.getItems().addAll(String.valueOf(i));
+                cbMinutoSalida.getItems().addAll(String.valueOf(i));
+            }
+
+        }
+    }
+
+    @FXML
+    private void actioncbHoraEntrada(ActionEvent event) {
+    }
+
+    @FXML
+    private void actioncbMinutoEntrada(ActionEvent event) {
+    }
+
+    @FXML
+    private void actioncbHoraSalida(ActionEvent event) {
+    }
+
+    @FXML
+    private void actioncbMinutoSalida(ActionEvent event) {
     }
 
 }

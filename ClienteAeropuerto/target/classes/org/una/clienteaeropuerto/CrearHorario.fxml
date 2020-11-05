@@ -40,7 +40,73 @@
                   </ComboBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <VBox.margin>
-                        <Insets left="150.0" right="20.0" top="50.0" />
+                        <Insets top="35.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Hora de entrada:" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="25.0" top="9.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ComboBox fx:id="cbHoraEntrada" onAction="#actioncbHoraEntrada" prefHeight="26.0" prefWidth="71.0" promptText="Hora" styleClass="VBoxTarjeta2">
+                           <HBox.margin>
+                              <Insets left="6.0" top="9.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <Label text=":" textFill="WHITE">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="4.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ComboBox fx:id="cbMinutoEntrada" onAction="#actioncbMinutoEntrada" prefHeight="26.0" prefWidth="86.0" promptText="Minutos" styleClass="VBoxTarjeta2">
+                           <HBox.margin>
+                              <Insets left="4.0" top="9.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Hora de salida:" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="25.0" top="9.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ComboBox fx:id="cbHoraSalida" onAction="#actioncbHoraSalida" prefHeight="26.0" prefWidth="71.0" promptText="Hora" styleClass="VBoxTarjeta2">
+                           <HBox.margin>
+                              <Insets left="20.0" top="9.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <Label text=":" textFill="WHITE">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="4.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ComboBox fx:id="cbMinutoSalida" onAction="#actioncbMinutoSalida" prefHeight="26.0" prefWidth="86.0" promptText="Minutos" styleClass="VBoxTarjeta2">
+                           <HBox.margin>
+                              <Insets left="4.0" top="9.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets left="150.0" right="20.0" top="24.0" />
                      </VBox.margin>
                      <children>
                         <Button mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" />
