@@ -55,6 +55,7 @@ public class CreacionUsuariosController implements Initializable {
     UsuarioDTO usuarioDTO = new UsuarioDTO();
     UsuarioService usuarioService = new UsuarioService();
 
+    java.util.Date date2 = new java.util.Date();
     @FXML
     private PasswordField txtContrasena;
     @FXML
@@ -162,6 +163,7 @@ public class CreacionUsuariosController implements Initializable {
             txtCorreo.setText(usuarioDTO.getCorreo());
             txtNombre.setText(usuarioDTO.getNombreCompleto());
             cbxRoles.setValue(usuarioDTO.getRoles());
+            usuarioDTO.getFecha_registro();
         }
     }
 

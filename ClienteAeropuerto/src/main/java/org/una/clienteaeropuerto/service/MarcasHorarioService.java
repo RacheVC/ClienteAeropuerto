@@ -23,7 +23,7 @@ public class MarcasHorarioService {
     private final String urlModify = "http://localhost:8098/marcas_horario/";
 
     public List<MarcaHorarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-
+   
         listMarca = ConnectionUtils.ListFromConnectionMarcas(urlFindAll, MarcaHorarioDTO.class);
         return ConnectionUtils.ListFromConnectionMarcas(urlFindAll, MarcaHorarioDTO.class);
     }

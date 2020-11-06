@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="391.0" prefWidth="416.0" styleClass="anchorPadre" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.CreacionMarcaHorarioController">
+   <children>
+      <Label layoutX="106.0" layoutY="14.0" text="Marcas de horario" textFill="#f2f0f0" underline="true">
+         <font>
+            <Font name="Century Gothic Bold" size="23.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbMarcaEntrada" layoutX="142.0" layoutY="223.0" mnemonicParsing="false" text="Marca de entrada" textFill="#fcfafa">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="cbMarcaSalida" layoutX="142.0" layoutY="261.0" mnemonicParsing="false" text="Marca de salida" textFill="#fcfafa">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </CheckBox>
+      <Button layoutX="137.0" layoutY="332.0" mnemonicParsing="false" onAction="#actionBtnGuardar" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Guardar">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Circle fill="#030303" layoutX="209.0" layoutY="138.0" radius="85.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect></Circle>
+      <Label fx:id="lbHora" layoutX="157.0" layoutY="101.0" prefHeight="75.0" prefWidth="110.0" text="00:00" textFill="#fcfcfc">
+         <font>
+            <Font size="46.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <ComboBox fx:id="cbxAreaTrabajo" layoutX="137.0" layoutY="296.0" onAction="#actionCbxAreaTrabajo" prefWidth="150.0" promptText="Area de trabajo" />
+      <Button layoutX="228.0" layoutY="332.0" mnemonicParsing="false" onAction="#actionBtnAtras" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Atrás">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
