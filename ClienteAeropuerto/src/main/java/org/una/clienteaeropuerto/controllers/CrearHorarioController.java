@@ -84,8 +84,8 @@ public class CrearHorarioController implements Initializable {
                 date.setMinutes(Integer.valueOf(cbMinutoEntrada.getValue()));
                 date2.setHours(Integer.valueOf(cbHoraSalida.getValue()));
                 date2.setMinutes(Integer.valueOf(cbMinutoSalida.getValue()));
-                horarioDTO.setDia_Entrada(cbDiaEntrada.getValue());
-                horarioDTO.setDia_Salida(cbDiaSalida.getValue());
+                horarioDTO.setDiaEntrada(cbDiaEntrada.getValue());
+                horarioDTO.setDiaSalida(cbDiaSalida.getValue());
                 horarioDTO.setEstado(true);
                 horarioDTO.setAreas_trabajo(areas_trabajoDTO);
                 horarioDTO.setHora_entrada(date);
@@ -107,8 +107,8 @@ public class CrearHorarioController implements Initializable {
         } else {
             try {
                 horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
-                horarioDTO.setDia_Entrada(cbDiaEntrada.getValue());
-                horarioDTO.setDia_Salida(cbDiaSalida.getValue());
+                horarioDTO.setDiaEntrada(cbDiaEntrada.getValue());
+                horarioDTO.setDiaSalida(cbDiaSalida.getValue());
                 horarioDTO.setEstado(true);
                 horarioService.modify(horarioDTO.getId(), horarioDTO);
 
@@ -161,9 +161,9 @@ public class CrearHorarioController implements Initializable {
         if (AppContext.getInstance().get("ed").equals("edit")) {
             HorarioDTO horarioDTO = new HorarioDTO();
             horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
-            cbDiaEntrada.setValue(horarioDTO.getDia_Entrada());
+            cbDiaEntrada.setValue(horarioDTO.getDiaEntrada());
             cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
-            cbDiaSalida.setValue(horarioDTO.getDia_Salida());
+            cbDiaSalida.setValue(horarioDTO.getDiaSalida());
             cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
             cbHoraEntrada.setValue(String.valueOf(horarioDTO.getHora_entrada().getHours()));
             cbHoraSalida.setValue(String.valueOf(horarioDTO.getHora_salida().getHours()));

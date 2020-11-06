@@ -22,6 +22,8 @@ public class HorarioService {
     private final String urlCreate = "http://localhost:8098/horarios/";
     private final String urlModify = "http://localhost:8098/horarios/";
     private final String urlDelete = "http://localhost:8098/horarios/";
+    private final String urlFindDiaEntrada = "http://localhost:8098/horarios/";
+    private final String urlFindDiaSalida = "http://localhost:8098/horarios/";
 
     public List<HorarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {
 
@@ -49,4 +51,15 @@ public class HorarioService {
 
         private static final HorarioService INSTANCE = new HorarioService();
     }
+
+    public List<HorarioDTO> finByDiaEntrada(String diaEntrada) throws IOException {
+
+        return ConnectionUtils.ConnectionToObjectByDias(urlFindDiaEntrada, diaEntrada);
+    }
+
+    public List<HorarioDTO> finByDiaSalida(String diaSalida) throws IOException {
+
+        return ConnectionUtils.ConnectionToObjectByDias(urlFindDiaSalida, diaSalida);
+    }
+
 }

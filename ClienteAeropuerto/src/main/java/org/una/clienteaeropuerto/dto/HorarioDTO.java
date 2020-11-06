@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package org.una.clienteaeropuerto.dto;
+
 import java.util.Date;
 
 /**
@@ -13,8 +14,8 @@ import java.util.Date;
 public class HorarioDTO {
 
     private Long id;
-    private String dia_Entrada;
-    private String dia_Salida;
+    private String diaEntrada;
+    private String diaSalida;
     private boolean estado;
     private Date hora_entrada;
     private Date hora_salida;
@@ -23,10 +24,10 @@ public class HorarioDTO {
     public HorarioDTO() {
     }
 
-    public HorarioDTO(Long id, String dia_Entrada, String dia_Salida, boolean estado, Date hora_entrada, Date hora_salida, Areas_trabajoDTO areas_trabajo) {
+    public HorarioDTO(Long id, String diaEntrada, String diaSalida, boolean estado, Date hora_entrada, Date hora_salida, Areas_trabajoDTO areas_trabajo) {
         this.id = id;
-        this.dia_Entrada = dia_Entrada;
-        this.dia_Salida = dia_Salida;
+        this.diaEntrada = diaEntrada;
+        this.diaSalida = diaSalida;
         this.estado = estado;
         this.hora_entrada = hora_entrada;
         this.hora_salida = hora_salida;
@@ -35,7 +36,7 @@ public class HorarioDTO {
 
     @Override
     public String toString() {
-        return "HorarioDTO{" + "id=" + id + ", dia_Entrada=" + dia_Entrada + ", dia_Salida=" + dia_Salida + ", estado=" + estado + ", hora_entrada=" + hora_entrada + ", hora_salida=" + hora_salida + ", areas_trabajo=" + areas_trabajo + '}';
+        return "HorarioDTO{" + "id=" + id + ", diaEntrada=" + diaEntrada + ", diaSalida=" + diaSalida + ", estado=" + estado + ", hora_entrada=" + hora_entrada + ", hora_salida=" + hora_salida + ", areas_trabajo=" + areas_trabajo + '}';
     }
 
     public Long getId() {
@@ -46,20 +47,20 @@ public class HorarioDTO {
         this.id = id;
     }
 
-    public String getDia_Entrada() {
-        return dia_Entrada;
+    public String getDiaEntrada() {
+        return diaEntrada;
     }
 
-    public void setDia_Entrada(String Dia_Entrada) {
-        this.dia_Entrada = Dia_Entrada;
+    public void setDiaEntrada(String diaEntrada) {
+        this.diaEntrada = diaEntrada;
     }
 
-    public String getDia_Salida() {
-        return dia_Salida;
+    public String getDiaSalida() {
+        return diaSalida;
     }
 
-    public void setDia_Salida(String Dia_Salida) {
-        this.dia_Salida = Dia_Salida;
+    public void setDiaSalida(String diaSalida) {
+        this.diaSalida = diaSalida;
     }
 
     public Areas_trabajoDTO getAreas_trabajo() {
@@ -93,7 +94,5 @@ public class HorarioDTO {
     public void setHora_salida(Date hora_salida) {
         this.hora_salida = hora_salida;
     }
-    
-    
 
 }

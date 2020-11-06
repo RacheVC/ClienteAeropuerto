@@ -169,8 +169,8 @@ public class HorarioController implements Initializable {
                 });
                 clHoraEntrada.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getHora_entrada().getHours() + ":" + (param.getValue().getHora_entrada().getMinutes())));
                 clHoraSalida.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getHora_salida().getHours() + ":" + (param.getValue().getHora_salida().getMinutes())));
-                clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("dia_Entrada"));
-                clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("dia_Salida"));
+                clDiaEntrada.setCellValueFactory(new PropertyValueFactory<>("diaEntrada"));
+                clDiaSalida.setCellValueFactory(new PropertyValueFactory<>("diaSalida"));
                 clAreaTrabajo.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getAreas_trabajo()));
                 tvewHorarios.getItems().clear();
                 tvewHorarios.setItems(FXCollections.observableArrayList(horariolist2));
