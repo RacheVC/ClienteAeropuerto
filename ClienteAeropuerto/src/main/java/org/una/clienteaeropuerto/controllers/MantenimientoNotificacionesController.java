@@ -6,6 +6,7 @@
 package org.una.clienteaeropuerto.controllers;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -79,12 +80,24 @@ public class MantenimientoNotificacionesController implements Initializable {
     @FXML
     private TableColumn<NotificacionDTO, String> clReceptor;
     String str;
+    @FXML
+    private Button btnSalir1;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        CargarInformacionNotificaciones();
+        System.out.println(notificacionlist);
+
+        CargarListaImagenes();
+        UnirPartesImagen(1);
+       this.encodeFileToBase64();
+    }
+    
+    public void CargarInformacionNotificaciones(){
         try {
             notificacionlist = NotificacionService.getInstance().getAll();
             System.out.println(notificacionlist.get(0).getEmisor());
@@ -114,11 +127,6 @@ public class MantenimientoNotificacionesController implements Initializable {
         tvewNotificacion.setItems(FXCollections.observableArrayList(notificacionlist));
         str = (String) AppContext.getInstance().get("str");
 
-        System.out.println(notificacionlist);
-
-        CargarListaImagenes();
-        UnirPartesImagen(1);
-        this.encodeFileToBase64();
     }
 
     @FXML
@@ -164,24 +172,34 @@ public class MantenimientoNotificacionesController implements Initializable {
     public String UnirPartesImagen(int id) {
         String partesUnidas = "";
         String parte;
-
+        int cant = 0;
         for (int i = 0; i < imageneslist.size(); i++) {
             if (id == imageneslist.get(i).getNotificaciones().getId()) {
                 parte = imageneslist.get(i).getImagen_Adjunta();
                 partesUnidas = parte + partesUnidas;
-
+                 
             }
 
         }
+        cant = partesUnidas.length();
+//        System.out.println(partesUnidas.charAt(10053));
+//       System.out.println(partesUnidas.charAt(10054));
+     
         return partesUnidas;
     }
 
-    public String encodeFileToBase64() {
-        String cadenaunida = this.UnirPartesImagen(1);
-        byte image[] = Base64.getDecoder().decode(cadenaunida);
-        String encode = new String (image);
-        System.out.println(encode);
-        return encode;
+    public void encodeFileToBase64() {
+        System.err.println(UnirPartesImagen(1));
+        String cadenahp =String.valueOf(UnirPartesImagen(1));
+//        String cadenaunida = this.UnirPartesImagen(1);
+        
+            byte[] bytes = Base64.getDecoder().decode("VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIDEzIGxhenkgZG9ncy4=");
+//        byte image[] = Base64.getDecoder().decode(cadenaunida);
+//        String encode = new String (image);
+        System.out.println(bytes.toString());
+//        return encode;
     }
+    
+   
 
 }

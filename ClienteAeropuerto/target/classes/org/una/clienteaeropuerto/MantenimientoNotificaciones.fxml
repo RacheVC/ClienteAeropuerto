@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="657.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.MantenimientoNotificacionesController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="669.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.MantenimientoNotificacionesController">
    <top>
       <HBox prefHeight="143.0" prefWidth="824.0" styleClass="anchorPadre" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -78,11 +78,16 @@
       </TableView>
    </center>
    <right>
-      <VBox prefHeight="257.0" prefWidth="113.0" styleClass="anchorPadre">
+      <VBox prefHeight="257.0" prefWidth="132.0" styleClass="anchorPadre">
          <children>
+            <Button fx:id="btnSalir1" mnemonicParsing="false" onAction="#accionSalirrNotificacion" prefHeight="26.0" prefWidth="108.0" styleClass="jfx-buttonStandard2" text="Generar Reporte">
+               <VBox.margin>
+                  <Insets left="14.0" top="15.0" />
+               </VBox.margin>
+            </Button>
             <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#accionSalirrNotificacion" prefHeight="25.0" prefWidth="62.0" styleClass="jfx-buttonStandard2" text="Salir" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets left="30.0" right="10.0" top="225.0" />
+                  <Insets left="30.0" right="10.0" top="179.0" />
                </VBox.margin>
             </Button>
          </children>
