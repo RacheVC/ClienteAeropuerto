@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -45,8 +46,6 @@ public class MantenimientoUsuariosController implements Initializable {
 
     @FXML
     private TextField txtBusqueda;
-    @FXML
-    private Button btnBuscar;
     @FXML
     private Button btnCrear;
     @FXML
@@ -76,9 +75,12 @@ public class MantenimientoUsuariosController implements Initializable {
 
     private List<UsuarioDTO> usuariosList = new ArrayList<UsuarioDTO>();
     private List<UsuarioDTO> usuariosList2 = new ArrayList<UsuarioDTO>();
+    private List<UsuarioDTO> usuariosListCedula = new ArrayList<UsuarioDTO>();
 
     UsuarioDTO usuarioDTO = new UsuarioDTO();
     UsuarioService usuarioService = new UsuarioService();
+    @FXML
+    private Button btnBuscar;
 
     /**
      * Initializes the controller class.
@@ -97,11 +99,6 @@ public class MantenimientoUsuariosController implements Initializable {
         }
 
         actualizarTableView();
-    }
-
-    @FXML
-    private void accionBuscarNotificacion(ActionEvent event) {
-
     }
 
     @FXML
@@ -198,4 +195,21 @@ public class MantenimientoUsuariosController implements Initializable {
         }
     }
 
+    @FXML
+    private void actionBtnBuscar(ActionEvent event) throws IOException {
+
+        try {
+            UsuarioService usuarioService = new UsuarioService();
+            List<UsuarioDTO> UsuarioList = new ArrayList<>();
+            UsuarioList = (List<UsuarioDTO>) usuarioService.finByCedula(txtBusqueda.getText());
+            tvUsuarios.getItems().clear();
+            tvUsuarios.setItems(FXCollections.observableArrayList(UsuarioList));
+        } catch (Exception e) {
+            System.out.println(e);
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("Error");
+            info.setContentText("Los datos no se han podido filtrar");
+            info.showAndWait();
+        }
+    }
 }

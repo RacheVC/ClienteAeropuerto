@@ -25,6 +25,7 @@ public class UsuarioService {
     private final String urlstringCedula = "http://localhost:8098/usuarios/cedula/";
     private final String urlModify = "http://localhost:8098/usuarios/";
     private final String urlDelete = "http://localhost:8098/usuarios/";
+    private final String urlFindNombre = "http://localhost:8098/usuarios/nombreCompleto/";
 
     UsuarioDTO datos = new UsuarioDTO();
 
@@ -62,8 +63,13 @@ public class UsuarioService {
     }
 
     public List<UsuarioDTO> finByCedula(String Cedula) throws IOException {
-        Cedula = String.valueOf(datos.getCedula());
+
         return ConnectionUtils.ConnectionToObjectByCedula(urlstringCedula, Cedula);
+    }
+    
+    public List<UsuarioDTO> finByNombre(String nombre) throws IOException {
+
+        return ConnectionUtils.ConnectionToObjectByNombre(urlFindNombre, nombre);
     }
 
 }

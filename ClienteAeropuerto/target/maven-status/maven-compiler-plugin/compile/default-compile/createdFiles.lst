@@ -5,6 +5,7 @@ org\una\clienteaeropuerto\dto\Monedas.class
 org\una\clienteaeropuerto\service\ImagenService.class
 org\una\clienteaeropuerto\dto\NotificacionDTO.class
 org\una\clienteaeropuerto\dto\MarcaHorarioDTO.class
+org\una\clienteaeropuerto\utils\ConnectionUtils$12.class
 org\una\clienteaeropuerto\controllers\CreacionNotificacionController.class
 org\una\clienteaeropuerto\service\DivisaService.class
 org\una\clienteaeropuerto\service\UsuarioService.class
