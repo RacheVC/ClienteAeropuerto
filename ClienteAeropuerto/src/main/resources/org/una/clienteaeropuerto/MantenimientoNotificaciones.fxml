@@ -80,7 +80,7 @@
    <right>
       <VBox prefHeight="257.0" prefWidth="132.0" styleClass="anchorPadre">
          <children>
-            <Button fx:id="btnSalir1" mnemonicParsing="false" onAction="#accionSalirrNotificacion" prefHeight="26.0" prefWidth="108.0" styleClass="jfx-buttonStandard2" text="Generar Reporte">
+            <Button fx:id="btnGenerarReporte" mnemonicParsing="false" onAction="#accionGenerarReporte" prefHeight="26.0" prefWidth="108.0" styleClass="jfx-buttonStandard2" text="Generar Reporte">
                <VBox.margin>
                   <Insets left="14.0" top="15.0" />
                </VBox.margin>

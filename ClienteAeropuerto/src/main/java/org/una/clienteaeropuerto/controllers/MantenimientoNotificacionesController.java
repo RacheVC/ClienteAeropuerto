@@ -81,7 +81,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     private TableColumn<NotificacionDTO, String> clReceptor;
     String str;
     @FXML
-    private Button btnSalir1;
+    private Button btnGenerarReporte;
 
     /**
      * Initializes the controller class.
@@ -198,6 +198,10 @@ public class MantenimientoNotificacionesController implements Initializable {
 //        String encode = new String (image);
         System.out.println(bytes.toString());
 //        return encode;
+    }
+
+    @FXML
+    private void accionGenerarReporte(ActionEvent event) {
     }
     
    
