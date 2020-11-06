@@ -82,7 +82,13 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void actionControlMarcas(ActionEvent event) {
+    private void actionControlMarcas(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(App.class.getResource("ControlMarcasHorario.fxml"));
+        Scene creacionDocs = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
     }
 
     @FXML
@@ -99,7 +105,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void actionCerrarSesion(ActionEvent event) throws IOException {
-        
+
         Parent root = FXMLLoader.load(App.class.getResource("Login.fxml"));
         Scene creacionDocs = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

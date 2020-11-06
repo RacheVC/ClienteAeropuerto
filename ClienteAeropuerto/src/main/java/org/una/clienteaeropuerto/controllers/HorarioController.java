@@ -114,6 +114,12 @@ public class HorarioController implements Initializable {
     private void accionModificarHorario(ActionEvent event) throws IOException {
         AppContext.getInstance().set("horarioDTO", horarioDTO);
         AppContext.getInstance().set("ed", "edit");
+        
+        Parent root = FXMLLoader.load(App.class.getResource("CrearHorario.fxml"));
+        Scene creacionDocs = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
 
     }
 
