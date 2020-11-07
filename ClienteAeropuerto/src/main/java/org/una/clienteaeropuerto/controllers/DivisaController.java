@@ -7,14 +7,11 @@ package org.una.clienteaeropuerto.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +22,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.DivisaDTO;
@@ -72,7 +68,8 @@ public class DivisaController implements Initializable {
 
         txtMonto.addEventHandler(KeyEvent.KEY_TYPED, event -> SoloNumerosEnteros(event));
         CargarDatos();
-// TODO
+        
+        txtMonto.setFocusTraversable(false);
 
     }
 
@@ -140,8 +137,6 @@ public class DivisaController implements Initializable {
         float monto;
         monto = Float.valueOf(txtMonto.getText());
         LlenartxtField(monto);
-        System.out.println(divisalist.getRates().getUSDCAD().getRate());
-        System.out.println(divisalist.getRates().getUSDCAD().getRate());
     }
 
     public void CalcularTipoCambio(float floatdivisa) {
