@@ -159,9 +159,7 @@ public class ConnectionUtils {
 
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());
-
             }
-            System.out.println(response);
             return gson.fromJson(response.toString(), listtype);
 
         }
@@ -229,7 +227,6 @@ public class ConnectionUtils {
             String responseLine;
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());
-                System.out.println(response);
             }
             return gson.fromJson(response.toString(), listtype);
 
@@ -393,7 +390,6 @@ public class ConnectionUtils {
         con.setRequestMethod("DELETE");
         con.setRequestProperty("Accept", "application/json");
         con.connect();
-        System.out.println(con.getResponseCode());
     }
 
 }
