@@ -24,9 +24,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -42,10 +42,6 @@ import org.una.clienteaeropuerto.utils.AppContext;
  */
 public class HorarioController implements Initializable {
 
-    @FXML
-    private TextField txtBusqueda;
-    @FXML
-    private Button btnBuscar;
     @FXML
     private Button btnCrear;
     @FXML
@@ -76,6 +72,10 @@ public class HorarioController implements Initializable {
     private TableColumn<HorarioDTO, String> clHoraEntrada;
     @FXML
     private TableColumn<HorarioDTO, String> clHoraSalida;
+    @FXML
+    private ComboBox<HorarioDTO> cbxFiltroDiaEntrada;
+    @FXML
+    private ComboBox cbxFiltroDiaSalida;
 
     /**
      * Initializes the controller class.
@@ -91,11 +91,25 @@ public class HorarioController implements Initializable {
 
         actualizarTableView();
 
-    }
+        try {
+            llenarCbxDiaEntrada();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    @FXML
-    private void accionBuscarHorario(ActionEvent event) {
-
+        try {
+            llenarCbxDiaSalida();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -114,7 +128,7 @@ public class HorarioController implements Initializable {
     private void accionModificarHorario(ActionEvent event) throws IOException {
         AppContext.getInstance().set("horarioDTO", horarioDTO);
         AppContext.getInstance().set("ed", "edit");
-        
+
         Parent root = FXMLLoader.load(App.class.getResource("CrearHorario.fxml"));
         Scene creacionDocs = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -176,6 +190,54 @@ public class HorarioController implements Initializable {
                 tvewHorarios.setItems(FXCollections.observableArrayList(horariolist2));
             }
         }
+    }
+
+    @FXML
+    private void actioncbxFiltroDiaEntrada(ActionEvent event) throws IOException {
+
+        if (cbxFiltroDiaEntrada.getSelectionModel().getSelectedItem() != null) {
+            HorarioDTO horarioDTO = new HorarioDTO();
+            horarioDTO = (HorarioDTO) cbxFiltroDiaEntrada.getSelectionModel().getSelectedItem();
+            HorarioService horarioService = new HorarioService();
+            List<HorarioDTO> horarioList = new ArrayList<>();
+            horarioList = (List<HorarioDTO>) horarioService.finByDiaEntrada(horarioDTO.getDiaEntrada());
+            horarioList.get(0).getDiaEntrada();
+            tvewHorarios.getItems().clear();
+            tvewHorarios.setItems(FXCollections.observableArrayList(horarioList));
+        }
+    }
+
+    @FXML
+    private void actionCbxFiltroDiaSalida(ActionEvent event) throws IOException {
+
+        if (cbxFiltroDiaSalida.getSelectionModel().getSelectedItem() != null) {
+            HorarioDTO horarioDTO = new HorarioDTO();
+            horarioDTO = (HorarioDTO) cbxFiltroDiaSalida.getSelectionModel().getSelectedItem();
+            HorarioService horarioService = new HorarioService();
+            List<HorarioDTO> horarioList = new ArrayList<>();
+            horarioList = (List<HorarioDTO>) horarioService.finByDiaSalida(horarioDTO.getDiaSalida());
+            horarioList.get(0).getDiaSalida();
+            tvewHorarios.getItems().clear();
+            tvewHorarios.setItems(FXCollections.observableArrayList(horarioList));
+        }
+    }
+
+    private void llenarCbxDiaEntrada() throws InterruptedException, ExecutionException, IOException {
+
+        HorarioService horarioService = new HorarioService();
+        List<HorarioDTO> ListHorarioDTO = new ArrayList<>();
+        ListHorarioDTO = (List<HorarioDTO>) horarioService.getAll();
+
+        cbxFiltroDiaEntrada.setItems(FXCollections.observableArrayList(ListHorarioDTO));
+    }
+
+    private void llenarCbxDiaSalida() throws InterruptedException, ExecutionException, IOException {
+
+        HorarioService horarioService = new HorarioService();
+        List<HorarioDTO> ListHorarioDTO = new ArrayList<>();
+        ListHorarioDTO = (List<HorarioDTO>) horarioService.getAll();
+
+        cbxFiltroDiaSalida.setItems(FXCollections.observableArrayList(ListHorarioDTO));
     }
 
 }

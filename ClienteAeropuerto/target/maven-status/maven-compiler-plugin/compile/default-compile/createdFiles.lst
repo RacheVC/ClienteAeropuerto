@@ -19,6 +19,7 @@ org\una\clienteaeropuerto\utils\ConnectionUtils.class
 org\una\clienteaeropuerto\service\AreasTrabajoService.class
 org\una\clienteaeropuerto\service\HorarioService.class
 org\una\clienteaeropuerto\dto\UsuarioDTO.class
+org\una\clienteaeropuerto\utils\ConnectionUtils$13.class
 org\una\clienteaeropuerto\dto\AuthenticationResponse.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$5.class
 org\una\clienteaeropuerto\dto\RolesDTO.class

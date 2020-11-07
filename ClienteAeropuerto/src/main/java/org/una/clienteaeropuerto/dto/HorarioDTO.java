@@ -36,7 +36,7 @@ public class HorarioDTO {
 
     @Override
     public String toString() {
-        return "HorarioDTO{" + "id=" + id + ", diaEntrada=" + diaEntrada + ", diaSalida=" + diaSalida + ", estado=" + estado + ", hora_entrada=" + hora_entrada + ", hora_salida=" + hora_salida + ", areas_trabajo=" + areas_trabajo + '}';
+        return diaEntrada ;
     }
 
     public Long getId() {
