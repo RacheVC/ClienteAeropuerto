@@ -21,6 +21,21 @@
 
 }
 
+.FondoDivisas{
+    -fx-background-image: url("/org/una/clienteaeropuerto/iconos/FondoDivisas.jpg");
+}
+
+.BotonTipoCambio{
+     -fx-background-color:  #1A4A73;
+    -fx-text-fill: WHITE;
+    -fx-background-radius: 10 10 10 10;
+    -fx-opacity: 2;
+    -fx-alignment: CENTER;
+    -fx-border-style: solid;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
+}
 
 .VBoxTarjeta{
     -fx-background-color: WHITE;
@@ -44,7 +59,7 @@
 
 }
 .anchorLogin{
-    -fx-background-color: #090909;
+    -fx-background-color: rgba(3,0,0,0.3);
     -fx-effect:  dropshadow(three-pass-box, rgba(3,0,0,0.3), 35, 0, 0, 0);
 
 }

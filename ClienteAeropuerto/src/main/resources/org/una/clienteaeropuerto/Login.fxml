@@ -10,47 +10,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="770.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.LoginController">
    <children>
-      <AnchorPane layoutX="205.0" layoutY="52.0" prefHeight="339.0" prefWidth="376.0" stylesheets="@Styles.css">
-         <children>
-            <Label alignment="CENTER" layoutX="134.0" layoutY="14.0" prefHeight="46.0" prefWidth="108.0" text="Login" textFill="#f5f2f2">
-               <font>
-                  <Font name="Tahoma" size="36.0" />
-               </font>
-            </Label>
-            <AnchorPane layoutX="123.0" layoutY="58.0" prefHeight="4.0" prefWidth="130.0" styleClass="anchorLujo" />
-            <TextField fx:id="txtUserName" layoutX="97.0" layoutY="127.0" prefHeight="25.0" prefWidth="207.0" promptText="Username" styleClass="VBoxTarjeta2" />
-            <PasswordField fx:id="txtPassword" layoutX="97.0" layoutY="170.0" prefHeight="25.0" prefWidth="207.0" promptText="Password" styleClass="VBoxTarjeta2">
-               <opaqueInsets>
-                  <Insets left="10.0" />
-               </opaqueInsets>
-            </PasswordField>
-            <Button fx:id="btnLogin" layoutX="96.0" layoutY="242.0" mnemonicParsing="false" onAction="#IniciarSesion" prefHeight="46.0" prefWidth="184.0" styleClass="jfx-buttonStandard2" stylesheets="@Styles.css" text="Login">
-               <font>
-                  <Font name="Tahoma Bold" size="14.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="46.0" fitWidth="47.0" layoutX="28.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@iconos/username.PNG" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="69.0" layoutX="17.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@iconos/password.PNG" />
-               </image>
-            </ImageView>
-         </children>
-         <styleClass>
-            <String fx:value="anchorLogin" />
-            <String fx:value="VBoxTarjeta2" />
-            <String fx:value="VBoxTarjeta" />
-         </styleClass>
-      </AnchorPane>
-      <Button layoutX="623.0" layoutY="3.0" mnemonicParsing="false" onAction="#ActionBtnTipoCambio" text="Tipo de cambio">
+      <Button layoutX="623.0" layoutY="3.0" mnemonicParsing="false" onAction="#ActionBtnTipoCambio" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Tipo de cambio" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -65,6 +30,49 @@
             <InnerShadow />
          </effect>
       </Button>
+      <VBox alignment="CENTER" layoutX="610.0" layoutY="62.0" prefHeight="388.0" prefWidth="732.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="62.0">
+         <children>
+            <AnchorPane maxWidth="375.0" prefHeight="324.0" prefWidth="375.0" stylesheets="@Styles.css">
+               <children>
+                  <Label alignment="CENTER" layoutX="134.0" layoutY="14.0" prefHeight="46.0" prefWidth="108.0" text="Login" textFill="#f5f2f2">
+                     <font>
+                        <Font name="Tahoma" size="36.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="123.0" layoutY="58.0" prefHeight="4.0" prefWidth="130.0" style="-fx-background-color: #1A4A73;" />
+                  <TextField fx:id="txtUserName" layoutX="97.0" layoutY="127.0" prefHeight="25.0" prefWidth="207.0" promptText="Username" styleClass="VBoxTarjeta2" />
+                  <PasswordField fx:id="txtPassword" layoutX="97.0" layoutY="170.0" prefHeight="25.0" prefWidth="207.0" promptText="Password" styleClass="VBoxTarjeta2">
+                     <opaqueInsets>
+                        <Insets left="10.0" />
+                     </opaqueInsets>
+                  </PasswordField>
+                  <Button fx:id="btnLogin" layoutX="96.0" layoutY="242.0" mnemonicParsing="false" onAction="#IniciarSesion" prefHeight="46.0" prefWidth="184.0" styleClass="BotonTipoCambio" stylesheets="@Styles.css" text="Login">
+                     <font>
+                        <Font name="Tahoma Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="30.0" fitWidth="38.0" layoutX="28.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="58.0" AnchorPane.topAnchor="124.0">
+                     <image>
+                        <Image url="@iconos/username.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="29.0" fitWidth="64.0" layoutX="17.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="58.0" AnchorPane.topAnchor="169.0">
+                     <image>
+                        <Image url="@iconos/password.PNG" />
+                     </image>
+                  </ImageView>
+               </children>
+               <styleClass>
+                  <String fx:value="anchorLogin" />
+                  <String fx:value="VBoxTarjeta2" />
+                  <String fx:value="VBoxTarjeta" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="15.0" />
+               </VBox.margin>
+            </AnchorPane>
+         </children>
+      </VBox>
    </children>
    <styleClass>
       <String fx:value="anchorPadre" />
