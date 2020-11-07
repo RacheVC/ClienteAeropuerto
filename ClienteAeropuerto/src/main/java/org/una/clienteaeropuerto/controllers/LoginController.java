@@ -58,41 +58,45 @@ public class LoginController implements Initializable {
         try {
 
             AuthenticationRequest aure = new AuthenticationRequest(txtUserName.getText(), txtPassword.getText());
-
             AuthenticationResponse autenticationresponse = UsuarioService.getInstance().Login(aure);
             System.err.println(autenticationresponse.getJwt());
 
             AuthenticationSingleton.setInstance(autenticationresponse);
         } catch (IOException | InterruptedException | ExecutionException e) {
-            System.out.println(e);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
-            alert.setTitle("Mensaje");
-            alert.setHeaderText("Usuario no autenticado.");
-            alert.show();
+            this.MensajeAutorizado();
             band = false;
 
         }
-
-       
         if (band == true) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
-            alert.setTitle("Mensaje");
-            alert.setHeaderText("Usuario autenticado.");
-            alert.show();
-            
-        Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
-        Scene creacionDocs = new Scene(root);
+            this.MensajeNoautorizado();
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+            Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
+            Scene creacionDocs = new Scene(root);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(creacionDocs);
+            window.show();
         }
 
     }
 
+    private void MensajeNoautorizado() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Usuario no autenticado.");
+        alert.show();
+    }
+
+    private void MensajeAutorizado() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Usuario autenticado.");
+        alert.show();
+    }
+
     public String CapturarUsuario() {
         return String.valueOf(this.txtUserName.getText());
-        
+
     }
 
     @FXML

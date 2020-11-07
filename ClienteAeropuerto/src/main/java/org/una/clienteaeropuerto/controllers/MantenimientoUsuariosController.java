@@ -90,11 +90,7 @@ public class MantenimientoUsuariosController implements Initializable {
 
         try {
             usuariosList = UsuarioService.getInstance().getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -181,18 +177,20 @@ public class MantenimientoUsuariosController implements Initializable {
                     }
                     return new ReadOnlyStringWrapper(estadoString);
                 });
-                tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
-                tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
-                tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
-                tcRolId.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getRoles()));
-                tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
-                tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
-
-                tvUsuarios.getItems().clear();
-
-                tvUsuarios.setItems(FXCollections.observableArrayList(usuariosList2));
+                RellenaTableView();
             }
         }
+    }
+
+    private void RellenaTableView() {
+        tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
+        tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+        tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
+        tcRolId.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getRoles()));
+        tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
+        tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
+        tvUsuarios.getItems().clear();
+        tvUsuarios.setItems(FXCollections.observableArrayList(usuariosList2));
     }
 
     @FXML

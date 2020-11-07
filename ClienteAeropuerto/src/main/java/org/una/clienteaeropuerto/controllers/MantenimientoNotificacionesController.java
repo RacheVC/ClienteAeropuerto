@@ -88,23 +88,22 @@ public class MantenimientoNotificacionesController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         CargarInformacionNotificaciones();
         System.out.println(notificacionlist);
 
         CargarListaImagenes();
         UnirPartesImagen(1);
-       this.encodeFileToBase64();
+//        this.encodeFileToBase64();
     }
-    
-    public void CargarInformacionNotificaciones(){
+
+    public void CargarInformacionNotificaciones() {
         try {
             notificacionlist = NotificacionService.getInstance().getAll();
             System.out.println(notificacionlist.get(0).getEmisor());
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         clId.setCellValueFactory(new PropertyValueFactory<>("id"));
         clEmisor.setCellValueFactory(new PropertyValueFactory<>("emisor"));
         clEstado.setCellValueFactory(per -> {
@@ -116,17 +115,18 @@ public class MantenimientoNotificacionesController implements Initializable {
             }
             return new ReadOnlyStringWrapper(estadoString);
         });
+        RellenarTableView();
+        str = (String) AppContext.getInstance().get("str");
 
+    }
+
+    private void RellenarTableView() {
         clFechaEnvio.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_envio()));
         clFechaLectura.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_lectura()));
         clMensaje.setCellValueFactory(new PropertyValueFactory<>("mensaje"));
         clReceptor.setCellValueFactory(new PropertyValueFactory<>("receptor"));
-
         tvewNotificacion.getItems().clear();
-
         tvewNotificacion.setItems(FXCollections.observableArrayList(notificacionlist));
-        str = (String) AppContext.getInstance().get("str");
-
     }
 
     @FXML
@@ -177,33 +177,28 @@ public class MantenimientoNotificacionesController implements Initializable {
             if (id == imageneslist.get(i).getNotificaciones().getId()) {
                 parte = imageneslist.get(i).getImagen_Adjunta();
                 partesUnidas = parte + partesUnidas;
-                 
+
             }
 
         }
         cant = partesUnidas.length();
-//        System.out.println(partesUnidas.charAt(10053));
-//       System.out.println(partesUnidas.charAt(10054));
-     
         return partesUnidas;
     }
-
-    public void encodeFileToBase64() {
-        System.err.println(UnirPartesImagen(1));
-        String cadenahp =String.valueOf(UnirPartesImagen(1));
-//        String cadenaunida = this.UnirPartesImagen(1);
-        
-            byte[] bytes = Base64.getDecoder().decode("VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIDEzIGxhenkgZG9ncy4=");
-//        byte image[] = Base64.getDecoder().decode(cadenaunida);
-//        String encode = new String (image);
-        System.out.println(bytes.toString());
-//        return encode;
-    }
+//
+//    public void encodeFileToBase64() {
+//        System.err.println(UnirPartesImagen(1));
+//        String cadenahp = String.valueOf(UnirPartesImagen(1));
+////        String cadenaunida = this.UnirPartesImagen(1);
+//
+//        byte[] bytes = Base64.getDecoder().decode("VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIDEzIGxhenkgZG9ncy4=");
+////        byte image[] = Base64.getDecoder().decode(cadenaunida);
+////        String encode = new String (image);
+//        System.out.println(bytes.toString());
+////        return encode;
+//    }
 
     @FXML
     private void accionGenerarReporte(ActionEvent event) {
     }
-    
-   
 
 }
