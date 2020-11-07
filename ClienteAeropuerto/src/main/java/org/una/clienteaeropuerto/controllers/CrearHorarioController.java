@@ -49,10 +49,10 @@ public class CrearHorarioController implements Initializable {
     DatePicker datepicker;
     HorarioService horarioService = new HorarioService();
     HorarioDTO horarioDTO = new HorarioDTO();
-   
+
     java.util.Date date = new java.util.Date();
     java.util.Date date2 = new java.util.Date();
-    
+
     Areas_trabajoDTO areas_trabajoDTO = new Areas_trabajoDTO();
     AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
     List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
@@ -91,17 +91,9 @@ public class CrearHorarioController implements Initializable {
                 horarioDTO.setHora_entrada(date);
                 horarioDTO.setHora_salida(date2);
                 horarioService.add(horarioDTO);
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("El horario fue creado con éxito.");
-                alert.show();
+                this.CreateMessage();
             } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Error");
-                alert.setHeaderText("El horario no se pudo crear.");
-                alert.show();
-                System.out.println(e);
+                this.FailCreateMessage();
             }
 
         } else {
@@ -111,19 +103,43 @@ public class CrearHorarioController implements Initializable {
                 horarioDTO.setDiaSalida(cbDiaSalida.getValue());
                 horarioDTO.setEstado(true);
                 horarioService.modify(horarioDTO.getId(), horarioDTO);
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("El horario fue modificado con éxito.");
-                alert.show();
+                this.EditMessage();
             } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Error");
-                alert.setHeaderText("El horario no se pudo modificar.");
-                alert.show();
+                this.FailEditMessage();
             }
 
         }
+
+    }
+
+    private void CreateMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El horario fue creado con éxito.");
+        alert.show();
+
+    }
+
+    private void FailCreateMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText("El horario no se ha podido crear.");
+        alert.show();
+    }
+
+    private void EditMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El horario fue modificado con éxito.");
+        alert.show();
+
+    }
+
+    private void FailEditMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El horario no se ha podido modificar.");
+        alert.show();
 
     }
 
@@ -146,11 +162,7 @@ public class CrearHorarioController implements Initializable {
     private void llenarCbAreaTrabajo() {
         try {
             areasTrabajoList = (List<Areas_trabajoDTO>) areasTrabajoService.getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -161,14 +173,7 @@ public class CrearHorarioController implements Initializable {
         if (AppContext.getInstance().get("ed").equals("edit")) {
             HorarioDTO horarioDTO = new HorarioDTO();
             horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
-            cbDiaEntrada.setValue(horarioDTO.getDiaEntrada());
-            cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
-            cbDiaSalida.setValue(horarioDTO.getDiaSalida());
-            cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
-            cbHoraEntrada.setValue(String.valueOf(horarioDTO.getHora_entrada().getHours()));
-            cbHoraSalida.setValue(String.valueOf(horarioDTO.getHora_salida().getHours()));
-            cbMinutoEntrada.setValue(String.valueOf(horarioDTO.getHora_entrada().getMinutes()));
-            cbMinutoSalida.setValue(String.valueOf(horarioDTO.getHora_salida().getMinutes()));
+            RellenarCamposTable(horarioDTO);
             LLenarComboboxHoras();
             horarioDTO.setEstado(true);
             cbAreaTrabajo.setValue(horarioDTO.getAreas_trabajo());
@@ -179,6 +184,17 @@ public class CrearHorarioController implements Initializable {
                 cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
             }
         }
+    }
+
+    private void RellenarCamposTable(HorarioDTO horarioDTO1) {
+        cbDiaEntrada.setValue(horarioDTO1.getDiaEntrada());
+        cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+        cbDiaSalida.setValue(horarioDTO1.getDiaSalida());
+        cbDiaSalida.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
+        cbHoraEntrada.setValue(String.valueOf(horarioDTO1.getHora_entrada().getHours()));
+        cbHoraSalida.setValue(String.valueOf(horarioDTO1.getHora_salida().getHours()));
+        cbMinutoEntrada.setValue(String.valueOf(horarioDTO1.getHora_entrada().getMinutes()));
+        cbMinutoSalida.setValue(String.valueOf(horarioDTO1.getHora_salida().getMinutes()));
     }
 
     public void LLenarComboboxHoras() {

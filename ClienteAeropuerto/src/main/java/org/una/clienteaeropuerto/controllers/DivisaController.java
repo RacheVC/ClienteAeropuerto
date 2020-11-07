@@ -84,42 +84,31 @@ public class DivisaController implements Initializable {
     }
 
     public void CargarDivisasAutomaticamente() throws InterruptedException, ExecutionException, IOException {
-
-        if (cmbTipoDivisa.getValue() == "Dólar Americano") {
-
+        if ("Dólar Americano".equals(cmbTipoDivisa.getValue())) {
             DolarAmericano();
         }
-
-        if (cmbTipoDivisa.getValue() == "Libra Esterlina") {
+        if ("Libra Esterlina".equals(cmbTipoDivisa.getValue())) {
             CalcularTipoCambio(Float.valueOf(divisalist.getRates().getUSDGBP().getRate()));
         }
-
-        if (cmbTipoDivisa.getValue() == "Yen Japones") {
+        if ("Yen Japones".equals(cmbTipoDivisa.getValue())) {
             CalcularTipoCambio(Float.valueOf(divisalist.getRates().getUSDJPY().getRate()));
         }
-
-        if (cmbTipoDivisa.getValue() == "Eurodolar") {
+        if ("Eurodolar".equals(cmbTipoDivisa.getValue())) {
             CalcularTipoCambio(Float.valueOf(divisalist.getRates().getUSDEUR().getRate()));
         }
-
-        if (cmbTipoDivisa.getValue() == "Dólar Canadiense") {
+        if ("Dólar Canadiense".equals(cmbTipoDivisa.getValue())) {
             CalcularTipoCambio(Float.valueOf(divisalist.getRates().getUSDCAD().getRate()));
         }
-
-        if (cmbTipoDivisa.getValue() == "Franco Suizo") {
+        if ("Franco Suizo".equals(cmbTipoDivisa.getValue())) {
             CalcularTipoCambio(Float.valueOf(divisalist.getRates().getUSDCHF().getRate()));
         }
-
-        if (cmbTipoDivisa.getValue() == "Dólar neozelandes") {
+        if ("Dólar neozelandes".equals(cmbTipoDivisa.getValue())) {
             CalcularTipoCambio(Float.valueOf(divisalist.getRates().getUSDNZD().getRate()));
         }
-
-        if (cmbTipoDivisa.getValue() == "Dólar Australiano") {
+        if ("Dólar Australiano".equals(cmbTipoDivisa.getValue())) {
             CalcularTipoCambio(Float.valueOf(divisalist.getRates().getUSDAUD().getRate()));
         }
-
-        if (cmbTipoDivisa.getValue() == "Colón Costarricense") {
-
+        if ("Colón Costarricense".equals(cmbTipoDivisa.getValue())) {
             CalcularTipoCambio(Float.valueOf(divisalist.getRates().getUSDCRC().getRate()));
         }
     }
@@ -127,11 +116,7 @@ public class DivisaController implements Initializable {
     public void CargarDatos() {
         try {
             divisalist = (DivisaDTO) DivisaService.getInstance().getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(DivisaController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(DivisaController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(DivisaController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -169,7 +154,6 @@ public class DivisaController implements Initializable {
         txtColonCostarricense.setText(String.valueOf((Float.valueOf(divisalist.getRates().getUSDCRC().getRate()) * monto)));
     }
 
-
     @FXML
     private void holdfdsf(InputMethodEvent event) {
 
@@ -182,18 +166,22 @@ public class DivisaController implements Initializable {
             CargarDivisasAutomaticamente();
 
         } else {
-            txtColonCostarricense.clear();
-            txtDolarAmericano.clear();
-            txtDolarAustraliano.clear();
-            txtDolarCanadiense.clear();
-            txtDolarNeozelandes.clear();
-            txtEurodolar.clear();
-            txtFrancoSuizo.clear();
-            txtLibraEsterlina.clear();
-            txtMonto.clear();
-            txtYenJapones.clear();
+          this.Clear();
         }
 
+    }
+
+    private void Clear() {
+        txtColonCostarricense.clear();
+        txtDolarAmericano.clear();
+        txtDolarAustraliano.clear();
+        txtDolarCanadiense.clear();
+        txtDolarNeozelandes.clear();
+        txtEurodolar.clear();
+        txtFrancoSuizo.clear();
+        txtLibraEsterlina.clear();
+        txtMonto.clear();
+        txtYenJapones.clear();
     }
 
     public void SoloNumerosEnteros(KeyEvent keyEvent) {
@@ -209,7 +197,7 @@ public class DivisaController implements Initializable {
 
     @FXML
     private void ActionBtnLogin(ActionEvent event) throws IOException {
-        
+
         Parent root = FXMLLoader.load(App.class.getResource("Login.fxml"));
         Scene creacionDocs = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

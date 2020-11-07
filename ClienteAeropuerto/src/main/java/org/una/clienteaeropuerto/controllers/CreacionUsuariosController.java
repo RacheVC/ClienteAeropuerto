@@ -87,17 +87,9 @@ public class CreacionUsuariosController implements Initializable {
                 usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
                 usuarioDTO.setRoles(rolesDTO);
                 usuarioService.add(usuarioDTO);
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("El usuario fue creado con éxito.");
-                alert.show();
+                this.CreateMessage();
             } catch (Exception e) {
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Error");
-                alert.setHeaderText("El usuario no se ha podido crear.");
-                alert.show();
+                this.FailCreateMessage();
             }
         } else {
             try {
@@ -107,20 +99,43 @@ public class CreacionUsuariosController implements Initializable {
                 usuarioDTO.setCorreo(txtCorreo.getText());
                 usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
                 usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("El usuario fue modificado con éxito.");
-                alert.show();
+                this.EditMessage();
             } catch (Exception e) {
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("El usuario no se ha podido modificar.");
-                alert.show();
+                this.FailEditMessage();
             }
 
         }
+
+    }
+
+    private void CreateMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El usuario fue creado con éxito.");
+        alert.show();
+
+    }
+
+    private void FailCreateMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText("El usuario no se ha podido crear.");
+        alert.show();
+    }
+
+    private void EditMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El usuario fue modificado con éxito.");
+        alert.show();
+
+    }
+
+    private void FailEditMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El usuario no se ha podido modificar.");
+        alert.show();
 
     }
 
@@ -143,11 +158,7 @@ public class CreacionUsuariosController implements Initializable {
     private void llenarCbRoles() {
         try {
             rolesList = (List<RolesDTO>) rolesService.getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
 

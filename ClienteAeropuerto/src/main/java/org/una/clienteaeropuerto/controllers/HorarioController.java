@@ -79,37 +79,21 @@ public class HorarioController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         try {
             horariolist = HorarioService.getInstance().getAll();
+            llenarCbxDiaEntrada();
+            llenarCbxDiaSalida();
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         actualizarTableView();
 
-        try {
-            llenarCbxDiaEntrada();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
-            llenarCbxDiaSalida();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @FXML

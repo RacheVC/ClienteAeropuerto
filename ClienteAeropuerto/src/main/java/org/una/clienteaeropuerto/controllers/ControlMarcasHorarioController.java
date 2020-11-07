@@ -160,7 +160,6 @@ public class ControlMarcasHorarioController implements Initializable {
                 tcMarcaEntrada.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getMarca_entrada().getHours() + ":" + (param.getValue().getMarca_entrada().getMinutes())));
                 tcMarcaSalida.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getMarca_salida().getHours() + ":" + (param.getValue().getMarca_salida().getMinutes())));
                 tcAreaTrabajo.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getAreas_trabajo()));
-
                 tvMarcasHorario.getItems().clear();
                 tvMarcasHorario.setItems(FXCollections.observableArrayList(marcasList2));
             }
@@ -179,5 +178,7 @@ public class ControlMarcasHorarioController implements Initializable {
         window.setScene(creacionDocs);
         window.show();
     }
+    
+   
 
 }

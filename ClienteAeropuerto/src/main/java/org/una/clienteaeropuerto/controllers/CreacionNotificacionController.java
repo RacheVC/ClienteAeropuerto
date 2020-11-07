@@ -122,10 +122,7 @@ public class CreacionNotificacionController implements Initializable {
             throw new IllegalStateException("could not read file " + file, e);
         }
     }
-
-
-
-    public void PostImage64() throws InterruptedException, ExecutionException, IOException {
+    private void PostImage64() throws InterruptedException, ExecutionException, IOException {
         File file = this.GetFile();
         str = this.encodeFileToBase64(file);
         AppContext.getInstance().set("str", str);

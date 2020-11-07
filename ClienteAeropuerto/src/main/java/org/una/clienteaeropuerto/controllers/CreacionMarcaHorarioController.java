@@ -92,17 +92,9 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
                 date2.setMinutes(Integer.valueOf(00));
                 marcaHorarioDTO.setMarca_salida(date2);
                 marcasHorarioService.add(marcaHorarioDTO);
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("La marca se ha creado con éxito.");
-                alert.show();
+                this.CreateMessage();
             } catch (Exception e) {
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Error");
-                alert.setHeaderText("La marca no se ha podido crear.");
-                alert.show();
+                this.FailCreateMessage();
             }
         } else {
             try {
@@ -111,19 +103,42 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
                 marcaHorarioDTO.setEstado(true);
                 marcaHorarioDTO.setMarca_salida(date);
                 marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("La marca fue modificado con éxito.");
-                alert.show();
+                this.EditMessage();
             } catch (Exception e) {
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-                alert.setTitle("Mensaje");
-                alert.setHeaderText("El marca no se ha podido modificar.");
-                alert.show();
+                this.FailEditMessage();
             }
         }
+    }
+
+    private void CreateMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("La marca se ha creado con éxito.");
+        alert.show();
+
+    }
+
+    private void FailCreateMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Error");
+        alert.setHeaderText("La marca no se ha podido crear.");
+        alert.show();
+    }
+
+    private void EditMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("La marca fue modificado con éxito.");
+        alert.show();
+
+    }
+
+    private void FailEditMessage() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El marca no se ha podido modificar.");
+        alert.show();
+
     }
 
     private void calcularHora() {
@@ -150,11 +165,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     private void llenarCbAreaTrabajo() {
         try {
             areasTrabajoList = (List<Areas_trabajoDTO>) areasTrabajoService.getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
