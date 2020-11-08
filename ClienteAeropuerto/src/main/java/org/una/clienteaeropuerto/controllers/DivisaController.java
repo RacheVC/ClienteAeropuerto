@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
@@ -26,6 +27,17 @@ import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.DivisaDTO;
 import org.una.clienteaeropuerto.service.DivisaService;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * FXML Controller class
@@ -57,6 +69,8 @@ public class DivisaController implements Initializable {
     private TextField txtDolarAustraliano;
     @FXML
     private TextField txtColonCostarricense;
+    @FXML
+    private Button btnGenerarReporte;
 
     /**
      * Initializes the controller class.
@@ -68,7 +82,7 @@ public class DivisaController implements Initializable {
 
         txtMonto.addEventHandler(KeyEvent.KEY_TYPED, event -> SoloNumerosEnteros(event));
         CargarDatos();
-        
+
         txtMonto.setFocusTraversable(false);
 
     }
@@ -161,7 +175,7 @@ public class DivisaController implements Initializable {
             CargarDivisasAutomaticamente();
 
         } else {
-          this.Clear();
+            this.Clear();
         }
 
     }
@@ -199,5 +213,53 @@ public class DivisaController implements Initializable {
         window.setScene(creacionDocs);
         window.show();
     }
+
+    @FXML
+    private void GenerarReporteDivisas(ActionEvent event) throws IOException {
+
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Reporte Divisas");
+
+        Object[][] bookData = {
+            {"Moneda", cmbTipoDivisa.getValue(), "Monto"},
+            {"Dólar Americano", txtMonto.getText(), txtDolarAmericano.getText()},
+            {"Yen Japones", txtMonto.getText(), txtYenJapones.getText()},
+            {"Eurodolar", txtMonto.getText(), txtYenJapones.getText()},
+            {"Dólar Canadiense", txtMonto.getText(), txtDolarCanadiense.getText()},
+            {"Franco Suizo", txtMonto.getText(), txtFrancoSuizo.getText()},
+            {"Dólar neozelandes", txtMonto.getText(), txtDolarNeozelandes.getText()},
+            {"Dólar Australiano", txtMonto.getText(), txtDolarAustraliano.getText()},
+            {"Colón Costarricense", txtMonto.getText(), txtColonCostarricense.getText()},};
+
+        int rowCount = 0;
+
+        for (Object[] aBook : bookData) {
+            Row row = sheet.createRow(++rowCount);
+
+            int columnCount = 0;
+
+            for (Object field : aBook) {
+                Cell cell = row.createCell(++columnCount);
+                if (field instanceof String) {
+                    cell.setCellValue((String) field);
+                } else if (field instanceof Integer) {
+                    cell.setCellValue((Integer) field);
+                }
+            }
+
+        }
+
+        try ( FileOutputStream outputStream = new FileOutputStream("ReporteDivisas.xlsx")) {
+           MensajeConfirmacionReporte();
+        }
+
+    }
+    
+    public void MensajeConfirmacionReporte(){
+     Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+            alert.setTitle("Mensaje");
+            alert.setHeaderText("El reporte se ha realizado de manera correcta.");
+            alert.show();
+}
 
 }

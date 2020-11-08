@@ -66,12 +66,12 @@ public class LoginController implements Initializable {
 
             AuthenticationSingleton.setInstance(autenticationresponse);
         } catch (IOException | InterruptedException | ExecutionException e) {
-            this.MensajeAutorizado();
+            this.MensajeNoautorizado();
             band = false;
 
         }
         if (band == true) {
-            this.MensajeNoautorizado();
+            this.MensajeAutorizado();
 
             Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
             Scene creacionDocs = new Scene(root);

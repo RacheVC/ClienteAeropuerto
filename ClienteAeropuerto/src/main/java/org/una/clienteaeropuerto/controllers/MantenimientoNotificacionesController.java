@@ -94,7 +94,7 @@ public class MantenimientoNotificacionesController implements Initializable {
 
         CargarListaImagenes();
         UnirPartesImagen(1);
-//        this.encodeFileToBase64();
+      // this.encodeFileToBase64();
     }
 
     public void CargarInformacionNotificaciones() {
@@ -185,17 +185,22 @@ public class MantenimientoNotificacionesController implements Initializable {
         return partesUnidas;
     }
 //
-//    public void encodeFileToBase64() {
-//        System.err.println(UnirPartesImagen(1));
-//        String cadenahp = String.valueOf(UnirPartesImagen(1));
-////        String cadenaunida = this.UnirPartesImagen(1);
-//
-//        byte[] bytes = Base64.getDecoder().decode("VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIDEzIGxhenkgZG9ncy4=");
-////        byte image[] = Base64.getDecoder().decode(cadenaunida);
-////        String encode = new String (image);
-//        System.out.println(bytes.toString());
-////        return encode;
-//    }
+    public void encodeFileToBase64() {
+        System.err.println(UnirPartesImagen(1));
+        String cadenahp = String.valueOf(UnirPartesImagen(1));
+//        String cadenaunida = this.UnirPartesImagen(1);
+for (int i = 0; i < cadenahp.length(); i++) {
+    
+            System.err.println(cadenahp.charAt(i));
+        }
+
+
+        byte[] bytes = Base64.getDecoder().decode(cadenahp);
+//        byte image[] = Base64.getDecoder().decode(cadenaunida);
+//        String encode = new String (image);
+        System.out.println(bytes.toString());
+//        return encode;
+    }
 
     @FXML
     private void accionGenerarReporte(ActionEvent event) {

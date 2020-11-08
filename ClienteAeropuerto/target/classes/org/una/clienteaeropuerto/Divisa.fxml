@@ -142,7 +142,7 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox prefHeight="54.0" prefWidth="600.0">
+                  <HBox prefHeight="58.0" prefWidth="647.0">
                      <children>
                         <ImageView fitHeight="36.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -183,6 +183,18 @@
                               <Insets left="10.0" top="15.0" />
                            </HBox.margin>
                         </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="58.0" prefWidth="647.0">
+                     <children>
+                        <Button fx:id="btnGenerarReporte" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#GenerarReporteDivisas" prefHeight="26.0" prefWidth="119.0" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Generar Reporte">
+                           <padding>
+                              <Insets bottom="4.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets left="29.0" top="17.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
                </children>
