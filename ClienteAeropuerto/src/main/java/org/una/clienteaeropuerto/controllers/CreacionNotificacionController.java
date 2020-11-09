@@ -117,6 +117,7 @@ public class CreacionNotificacionController implements Initializable {
         try {
             byte[] fileContent = Files.readAllBytes(file.toPath());
             String enconde = new String(Base64.getEncoder().encodeToString(fileContent));
+            System.err.println("++++++++++++++++++++++"+enconde);
             return enconde;
         } catch (IOException e) {
             throw new IllegalStateException("could not read file " + file, e);
@@ -129,7 +130,7 @@ public class CreacionNotificacionController implements Initializable {
         int diferencia = 0;
         int totalcadena = str.length();
         int cantidadRecorrido = 0;
-        int limite2 = 10000;
+        int limite2 = 10000 ;
         int limite = 0;
         diferencia = totalcadena % 10000;
 
@@ -158,7 +159,7 @@ public class CreacionNotificacionController implements Initializable {
                 imagen.setTotalPartes(cantidadRecorrido);
                 imagen.setParte(cantidadRecorrido - i);
                 this.imagenservice.add(imagen);
-                limite2 = limite - 1;
+                limite2 = limite;
                 limite = limite - 10000;
             }
         }

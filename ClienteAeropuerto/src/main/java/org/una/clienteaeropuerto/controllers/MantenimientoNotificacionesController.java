@@ -94,7 +94,7 @@ public class MantenimientoNotificacionesController implements Initializable {
 
         CargarListaImagenes();
         UnirPartesImagen(1);
-      // this.encodeFileToBase64();
+       this.encodeFileToBase64();
     }
 
     public void CargarInformacionNotificaciones() {
@@ -187,18 +187,14 @@ public class MantenimientoNotificacionesController implements Initializable {
 //
     public void encodeFileToBase64() {
         System.err.println(UnirPartesImagen(1));
-        String cadenahp = String.valueOf(UnirPartesImagen(1));
+        String cadena = String.valueOf(UnirPartesImagen(1));
 //        String cadenaunida = this.UnirPartesImagen(1);
-for (int i = 0; i < cadenahp.length(); i++) {
-    
-            System.err.println(cadenahp.charAt(i));
-        }
 
 
-        byte[] bytes = Base64.getDecoder().decode(cadenahp);
+        byte[] bytes = Base64.getDecoder().decode(cadena);
 //        byte image[] = Base64.getDecoder().decode(cadenaunida);
 //        String encode = new String (image);
-        System.out.println(bytes.toString());
+        System.out.println(bytes);
 //        return encode;
     }
 
