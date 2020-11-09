@@ -250,16 +250,17 @@ public class DivisaController implements Initializable {
         }
 
         try ( FileOutputStream outputStream = new FileOutputStream("ReporteDivisas.xlsx")) {
-           MensajeConfirmacionReporte();
+            workbook.write(outputStream);
+            MensajeConfirmacionReporte();
         }
 
     }
-    
-    public void MensajeConfirmacionReporte(){
-     Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
-            alert.setTitle("Mensaje");
-            alert.setHeaderText("El reporte se ha realizado de manera correcta.");
-            alert.show();
-}
+
+    public void MensajeConfirmacionReporte() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El reporte se ha realizado de manera correcta.");
+        alert.show();
+    }
 
 }
