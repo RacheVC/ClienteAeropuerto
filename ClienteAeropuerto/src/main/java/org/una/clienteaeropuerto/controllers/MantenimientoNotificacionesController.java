@@ -5,6 +5,8 @@
  */
 package org.una.clienteaeropuerto.controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -18,6 +20,7 @@ import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +33,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
@@ -82,6 +88,8 @@ public class MantenimientoNotificacionesController implements Initializable {
     String str;
     @FXML
     private Button btnGenerarReporte;
+    @FXML
+    private ImageView imagensirva;
 
     /**
      * Initializes the controller class.
@@ -94,7 +102,11 @@ public class MantenimientoNotificacionesController implements Initializable {
 
         CargarListaImagenes();
         UnirPartesImagen(1);
-       this.encodeFileToBase64();
+        try {
+            this.encodeFileToBase64();
+        } catch (IOException ex) {
+            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void CargarInformacionNotificaciones() {
@@ -185,18 +197,50 @@ public class MantenimientoNotificacionesController implements Initializable {
         return partesUnidas;
     }
 //
-    public void encodeFileToBase64() {
+public void encodeFileToBase64() throws IOException {
         System.err.println(UnirPartesImagen(1));
         String cadena = String.valueOf(UnirPartesImagen(1));
 //        String cadenaunida = this.UnirPartesImagen(1);
 
-
         byte[] bytes = Base64.getDecoder().decode(cadena);
-//        byte image[] = Base64.getDecoder().decode(cadenaunida);
-//        String encode = new String (image);
-        System.out.println(bytes);
+////        byte image[] = Base64.getDecoder().decode(cadenaunida);
+////        String encode = new String (image);
+//          Image imagen;
+//          
+//        System.out.println(bytes);
 //        return encode;
+
+        ByteArrayInputStream bos = new ByteArrayInputStream(bytes);
+        BufferedImage bi = ImageIO.read(bos);
+       Image im = SwingFXUtils.toFXImage(bi, null);
+        imagensirva.setImage(im);
+
     }
+
+//    private BufferedImage createImageFromBytes(byte[] imageData) {
+//       ByteArrayInputStream bais = new ByteArrayInputStream(imageData);
+//       try {
+//           return ImageIO.read();
+//       } catch (IOException e) {
+//           throw new RuntimeException(e);
+//       }
+//}
+//    
+//        public void decoder(String base64Image, String pathFile) {
+//        try (FileOutputStream imageOutFile = new FileOutputStream(pathFile)) {
+//            // Converting a Base64 String into Image byte array
+//            byte[] imageByteArray = Base64.getDecoder().decode(base64Image);
+//            imageOutFile.write(imageByteArray);
+//            BufferedImage image = null;
+//            InputStream in = new ByteArrayInputStream(imageByteArray);
+//            image = ImageIO.read(stream);
+//            convertToFxImage(image);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Image not found" + e);
+//        } catch (IOException ioe) {
+//            System.out.println("Exception while reading the Image " + ioe);
+//        }
+//    }
 
     @FXML
     private void accionGenerarReporte(ActionEvent event) {

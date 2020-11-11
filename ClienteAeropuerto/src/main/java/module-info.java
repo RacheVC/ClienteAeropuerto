@@ -6,6 +6,8 @@ module org.una.clienteaeropuerto {
     requires filechooser;
    requires poi.ooxml;
    requires poi;
+   requires java.desktop;
+   requires javafx.swing;
     
     opens org.una.clienteaeropuerto to javafx.fxml;
     opens org.una.clienteaeropuerto.controllers to javafx.fxml;
