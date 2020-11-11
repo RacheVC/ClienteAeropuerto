@@ -7,13 +7,12 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="669.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.MantenimientoNotificacionesController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="789.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.MantenimientoNotificacionesController">
    <top>
       <HBox prefHeight="143.0" prefWidth="824.0" styleClass="anchorPadre" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -62,7 +61,7 @@
       </HBox>
    </top>
    <center>
-      <TableView fx:id="tvewNotificacion" prefHeight="257.0" prefWidth="536.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+      <TableView fx:id="tvewNotificacion" prefHeight="257.0" prefWidth="617.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="clId" prefWidth="75.0" text="Id" />
           <TableColumn fx:id="clFechaEnvio" prefWidth="75.0" text="Fecha Envio" />
@@ -71,6 +70,7 @@
             <TableColumn fx:id="clEmisor" prefWidth="56.00006103515625" text="Emisor" />
             <TableColumn fx:id="clEstado" prefWidth="80.00006103515625" text="Estado" />
             <TableColumn fx:id="clReceptor" prefWidth="83.99990844726562" text="Receptor" />
+            <TableColumn fx:id="clImagen" prefWidth="97.60002441406255" text="Imagen" />
         </columns>
          <styleClass>
             <String fx:value="VBoxTarjeta" />
@@ -79,14 +79,13 @@
       </TableView>
    </center>
    <right>
-      <VBox prefHeight="257.0" prefWidth="132.0" styleClass="anchorPadre">
+      <VBox prefHeight="204.0" prefWidth="146.0" styleClass="anchorPadre">
          <children>
             <Button fx:id="btnGenerarReporte" mnemonicParsing="false" onAction="#accionGenerarReporte" prefHeight="26.0" prefWidth="108.0" styleClass="jfx-buttonStandard2" text="Generar Reporte">
                <VBox.margin>
                   <Insets left="14.0" top="15.0" />
                </VBox.margin>
             </Button>
-            <ImageView fx:id="imagensirva" fitHeight="73.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#accionSalirrNotificacion" prefHeight="25.0" prefWidth="62.0" styleClass="jfx-buttonStandard2" text="Salir" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="30.0" right="10.0" top="179.0" />

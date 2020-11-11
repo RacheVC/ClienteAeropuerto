@@ -88,8 +88,9 @@ public class MantenimientoNotificacionesController implements Initializable {
     String str;
     @FXML
     private Button btnGenerarReporte;
-    @FXML
     private ImageView imagensirva;
+    @FXML
+    private TableColumn<?, ?> clImagen;
 
     /**
      * Initializes the controller class.
@@ -200,15 +201,8 @@ public class MantenimientoNotificacionesController implements Initializable {
 public void encodeFileToBase64() throws IOException {
         System.err.println(UnirPartesImagen(1));
         String cadena = String.valueOf(UnirPartesImagen(1));
-//        String cadenaunida = this.UnirPartesImagen(1);
 
         byte[] bytes = Base64.getDecoder().decode(cadena);
-////        byte image[] = Base64.getDecoder().decode(cadenaunida);
-////        String encode = new String (image);
-//          Image imagen;
-//          
-//        System.out.println(bytes);
-//        return encode;
 
         ByteArrayInputStream bos = new ByteArrayInputStream(bytes);
         BufferedImage bi = ImageIO.read(bos);
@@ -216,31 +210,6 @@ public void encodeFileToBase64() throws IOException {
         imagensirva.setImage(im);
 
     }
-
-//    private BufferedImage createImageFromBytes(byte[] imageData) {
-//       ByteArrayInputStream bais = new ByteArrayInputStream(imageData);
-//       try {
-//           return ImageIO.read();
-//       } catch (IOException e) {
-//           throw new RuntimeException(e);
-//       }
-//}
-//    
-//        public void decoder(String base64Image, String pathFile) {
-//        try (FileOutputStream imageOutFile = new FileOutputStream(pathFile)) {
-//            // Converting a Base64 String into Image byte array
-//            byte[] imageByteArray = Base64.getDecoder().decode(base64Image);
-//            imageOutFile.write(imageByteArray);
-//            BufferedImage image = null;
-//            InputStream in = new ByteArrayInputStream(imageByteArray);
-//            image = ImageIO.read(stream);
-//            convertToFxImage(image);
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Image not found" + e);
-//        } catch (IOException ioe) {
-//            System.out.println("Exception while reading the Image " + ioe);
-//        }
-//    }
 
     @FXML
     private void accionGenerarReporte(ActionEvent event) {
