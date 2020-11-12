@@ -8,7 +8,6 @@ package org.una.clienteaeropuerto.controllers;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -20,7 +19,6 @@ import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,8 +31,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import org.una.clienteaeropuerto.App;
@@ -52,26 +49,8 @@ import org.una.clienteaeropuerto.utils.AppContext;
 public class MantenimientoNotificacionesController implements Initializable {
 
     @FXML
-    private TextField txtBusqueda;
-    @FXML
-    private Button btnBuscar;
-    @FXML
-    private Button btnCrear;
-    @FXML
-    private Button btnModificar;
-    @FXML
-    private Button btnInactivar;
-    @FXML
-    private Button btnSalir;
-
-    private List<NotificacionDTO> notificacionlist = new ArrayList<NotificacionDTO>();
-
-    private List<ImagenesDTO> imageneslist = new ArrayList<ImagenesDTO>();
-
-    @FXML
     private TableView<NotificacionDTO> tvewNotificacion;
     @FXML
-
     private TableColumn<NotificacionDTO, Object> clId;
     @FXML
     private TableColumn<NotificacionDTO, String> clFechaEnvio;
@@ -85,13 +64,20 @@ public class MantenimientoNotificacionesController implements Initializable {
     private TableColumn<NotificacionDTO, String> clEstado;
     @FXML
     private TableColumn<NotificacionDTO, String> clReceptor;
-    String str;
     @FXML
     private Button btnGenerarReporte;
-    private ImageView imagensirva;
-    @FXML
-    private TableColumn<?, ?> clImagen;
 
+    private List<NotificacionDTO> notificacionlist = new ArrayList<NotificacionDTO>();
+
+    private List<NotificacionDTO> notificacionlist2 = new ArrayList<NotificacionDTO>();
+
+    private List<ImagenesDTO> imageneslist = new ArrayList<ImagenesDTO>();
+
+    NotificacionDTO notificacionDTO = new NotificacionDTO();
+
+    NotificacionService notificacionService = new NotificacionService();
+
+    String str;
     /**
      * Initializes the controller class.
      */
@@ -99,47 +85,45 @@ public class MantenimientoNotificacionesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         CargarInformacionNotificaciones();
-        System.out.println(notificacionlist);
-
         CargarListaImagenes();
         UnirPartesImagen(1);
-        try {
-            this.encodeFileToBase64();
-        } catch (IOException ex) {
-            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public void CargarInformacionNotificaciones() {
+
         try {
             notificacionlist = NotificacionService.getInstance().getAll();
-            System.out.println(notificacionlist.get(0).getEmisor());
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        clId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        clEmisor.setCellValueFactory(new PropertyValueFactory<>("emisor"));
-        clEstado.setCellValueFactory(per -> {
-            String estadoString;
-            if (per.getValue().isEstado()) {
-                estadoString = "Activo";
-            } else {
-                estadoString = "Inactivo";
-            }
-            return new ReadOnlyStringWrapper(estadoString);
-        });
-        RellenarTableView();
-        str = (String) AppContext.getInstance().get("str");
 
+        actualizarTableView();
     }
 
-    private void RellenarTableView() {
-        clFechaEnvio.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_envio()));
-        clFechaLectura.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_lectura()));
-        clMensaje.setCellValueFactory(new PropertyValueFactory<>("mensaje"));
-        clReceptor.setCellValueFactory(new PropertyValueFactory<>("receptor"));
-        tvewNotificacion.getItems().clear();
-        tvewNotificacion.setItems(FXCollections.observableArrayList(notificacionlist));
+    private void actualizarTableView() {
+
+        for (int i = 0; i < notificacionlist.size(); i++) {
+            if (notificacionlist.get(i).isEstado() == true) {
+                notificacionlist2.add(notificacionlist.get(i));
+                clId.setCellValueFactory(new PropertyValueFactory<>("id"));
+                clEmisor.setCellValueFactory(new PropertyValueFactory<>("emisor"));
+                clEstado.setCellValueFactory(per -> {
+                    String estadoString;
+                    if (per.getValue().isEstado()) {
+                        estadoString = "Activo";
+                    } else {
+                        estadoString = "Inactivo";
+                    }
+                    return new ReadOnlyStringWrapper(estadoString);
+                });
+                clFechaEnvio.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_envio()));
+                clFechaLectura.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_entrega()));
+                clMensaje.setCellValueFactory(new PropertyValueFactory<>("mensaje"));
+                clReceptor.setCellValueFactory(new PropertyValueFactory<>("receptor"));
+                tvewNotificacion.getItems().clear();
+                tvewNotificacion.setItems(FXCollections.observableArrayList(notificacionlist2));
+            }
+        }
     }
 
     @FXML
@@ -148,6 +132,10 @@ public class MantenimientoNotificacionesController implements Initializable {
 
     @FXML
     private void accionCrearNotificacion(ActionEvent event) throws IOException {
+
+        AppContext.getInstance().set("notificacionDTO", notificacionDTO);
+        AppContext.getInstance().set("ed", "insertar");
+
         Parent root = FXMLLoader.load(App.class.getResource("CreacionNotificacion.fxml"));
         Scene creacionDocs = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -156,11 +144,31 @@ public class MantenimientoNotificacionesController implements Initializable {
     }
 
     @FXML
-    private void accionModificarNotificacion(ActionEvent event) {
+    private void accionModificarNotificacion(ActionEvent event) throws IOException {
+
+        AppContext.getInstance().set("notificacionDTO", notificacionDTO);
+        AppContext.getInstance().set("ed", "edit");
+
+        Parent root = FXMLLoader.load(App.class.getResource("CreacionNotificacion.fxml"));
+        Scene creacionDocs = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
     }
 
     @FXML
-    private void accionInactivarNotificacion(ActionEvent event) {
+    private void accionInactivarNotificacion(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
+
+        if (notificacionDTO.isEstado() == true) {
+            notificacionDTO.setEstado(false);
+            notificacionService.modify(notificacionDTO.getId(), notificacionDTO);
+
+            Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
+            Scene creacionDocs = new Scene(root);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(creacionDocs);
+            window.show();
+        }
     }
 
     @FXML
@@ -197,22 +205,30 @@ public class MantenimientoNotificacionesController implements Initializable {
         cant = partesUnidas.length();
         return partesUnidas;
     }
-//
-public void encodeFileToBase64() throws IOException {
-        System.err.println(UnirPartesImagen(1));
+
+    public void encodeFileToBase64() throws IOException {
+        System.out.println(UnirPartesImagen(1));
         String cadena = String.valueOf(UnirPartesImagen(1));
 
         byte[] bytes = Base64.getDecoder().decode(cadena);
 
         ByteArrayInputStream bos = new ByteArrayInputStream(bytes);
         BufferedImage bi = ImageIO.read(bos);
-       Image im = SwingFXUtils.toFXImage(bi, null);
-        imagensirva.setImage(im);
-
+        // Image im = SwingFXUtils.toFXImage(bi, null);
+        //       imagensirva.setImage(im);
     }
 
     @FXML
     private void accionGenerarReporte(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void MouseClickedTvewNotificacion(MouseEvent event) {
+
+        if (tvewNotificacion.getSelectionModel().getSelectedItem() != null) {
+            notificacionDTO = (NotificacionDTO) tvewNotificacion.getSelectionModel().getSelectedItem();
+        }
     }
 
 }

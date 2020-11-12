@@ -22,7 +22,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
@@ -49,21 +48,22 @@ public class CreacionUsuariosController implements Initializable {
     @FXML
     private TextField txtCorreo;
     @FXML
-    private Button btnGuardar;
-
-    RolesDTO rolesDTO = new RolesDTO();
-    UsuarioDTO usuarioDTO = new UsuarioDTO();
-    UsuarioService usuarioService = new UsuarioService();
-
-    java.util.Date date2 = new java.util.Date();
-    @FXML
     private PasswordField txtContrasena;
     @FXML
     private ComboBox<RolesDTO> cbxRoles;
     @FXML
     private TextField txtJefe_id;
+    
+    RolesDTO rolesDTO = new RolesDTO();
+    
+    UsuarioDTO usuarioDTO = new UsuarioDTO();
+    
+    UsuarioService usuarioService = new UsuarioService();
 
+    java.util.Date date2 = new java.util.Date();
+ 
     RolesService rolesService = new RolesService();
+
     List<RolesDTO> rolesList = new ArrayList<>();
 
     /**
@@ -87,9 +87,9 @@ public class CreacionUsuariosController implements Initializable {
                 usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
                 usuarioDTO.setRoles(rolesDTO);
                 usuarioService.add(usuarioDTO);
-                this.CreateMessage();
+                this.MensajeCrear();
             } catch (Exception e) {
-                this.FailCreateMessage();
+                this.CrearFalloMensaje();
             }
         } else {
             try {
@@ -99,16 +99,16 @@ public class CreacionUsuariosController implements Initializable {
                 usuarioDTO.setCorreo(txtCorreo.getText());
                 usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
                 usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
-                this.EditMessage();
+                this.MensajeEditar();
             } catch (Exception e) {
-                this.FailEditMessage();
+                this.EditarFalloMensaje();
             }
 
         }
 
     }
 
-    private void CreateMessage() {
+    private void MensajeCrear() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El usuario fue creado con éxito.");
@@ -116,14 +116,14 @@ public class CreacionUsuariosController implements Initializable {
 
     }
 
-    private void FailCreateMessage() {
+    private void CrearFalloMensaje() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Error");
         alert.setHeaderText("El usuario no se ha podido crear.");
         alert.show();
     }
 
-    private void EditMessage() {
+    private void MensajeEditar() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El usuario fue modificado con éxito.");
@@ -131,7 +131,7 @@ public class CreacionUsuariosController implements Initializable {
 
     }
 
-    private void FailEditMessage() {
+    private void EditarFalloMensaje() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El usuario no se ha podido modificar.");

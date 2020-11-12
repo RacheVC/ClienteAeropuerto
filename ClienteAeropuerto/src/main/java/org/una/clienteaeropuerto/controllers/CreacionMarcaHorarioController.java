@@ -85,58 +85,58 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     private void actionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
 
         if (!AppContext.getInstance().get("ed").equals("edit")) {
-            try {
+            if (cbMarcaEntrada.isSelected()) {
                 marcaHorarioDTO.setAreas_trabajo(areas_trabajoDTO);
                 marcaHorarioDTO.setEstado(true);
                 date2.setHours(00);
                 date2.setMinutes(Integer.valueOf(00));
                 marcaHorarioDTO.setMarca_salida(date2);
                 marcasHorarioService.add(marcaHorarioDTO);
-                this.CreateMessage();
-            } catch (Exception e) {
-                this.FailCreateMessage();
+                this.CrearMensaje();
+            } else {
+                this.FalloCrearMensaje();
             }
         } else {
-            try {
+            if(cbMarcaSalida.isSelected()) {
                 marcaHorarioDTO = (MarcaHorarioDTO) AppContext.getInstance().get("marcaHorarioDTO");
                 marcaHorarioDTO.setAreas_trabajo(areas_trabajoDTO);
                 marcaHorarioDTO.setEstado(true);
                 marcaHorarioDTO.setMarca_salida(date);
                 marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
-                this.EditMessage();
-            } catch (Exception e) {
-                this.FailEditMessage();
+                this.EditarMensaje();
+            }else{
+                this.FalloEditarMensaje();
             }
         }
     }
 
-    private void CreateMessage() {
+    private void CrearMensaje() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
-        alert.setHeaderText("La marca se ha creado con éxito.");
+        alert.setHeaderText("La marca de entrada se ha creado con éxito.");
         alert.show();
 
     }
 
-    private void FailCreateMessage() {
+    private void FalloCrearMensaje() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Error");
-        alert.setHeaderText("La marca no se ha podido crear.");
+        alert.setHeaderText("No ha realizado la marca de entrada.");
         alert.show();
     }
 
-    private void EditMessage() {
+    private void EditarMensaje() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
-        alert.setHeaderText("La marca fue modificado con éxito.");
+        alert.setHeaderText("La marca de salida se ha creado con éxito.");
         alert.show();
 
     }
 
-    private void FailEditMessage() {
+    private void FalloEditarMensaje() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
-        alert.setHeaderText("El marca no se ha podido modificar.");
+        alert.setHeaderText("No ha realizado la marca de salida.");
         alert.show();
 
     }

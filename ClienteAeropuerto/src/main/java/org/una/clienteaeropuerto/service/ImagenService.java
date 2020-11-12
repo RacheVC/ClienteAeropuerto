@@ -16,15 +16,12 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  * @author rache
  */
 public class ImagenService {
-       List<ImagenesDTO> listaimagenes;
 
-    private final String urlstring = "http://localhost:8098/imagenes";
+    private final String urlFindAll = "http://localhost:8098/imagenes";
     private final String urlCreate = "http://localhost:8098/imagenes/";
 
     public List<ImagenesDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-        listaimagenes = ConnectionUtils.ListFromConnectionImagen(urlstring, ImagenesDTO.class);
-
-        return ConnectionUtils.ListFromConnectionImagen(urlstring, ImagenesDTO.class);
+        return ConnectionUtils.ListFromConnectionImagen(urlFindAll, ImagenesDTO.class);
     }
 
     public void add(ImagenesDTO object) throws InterruptedException, ExecutionException, IOException {

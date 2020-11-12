@@ -32,7 +32,7 @@
                         <Insets left="30.0" right="100.0" top="30.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#accionBuscar" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Buscar">
+                  <Button mnemonicParsing="false" onAction="#accionBuscar" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Buscar">
                      <VBox.margin>
                         <Insets left="250.0" top="10.0" />
                      </VBox.margin>
@@ -41,9 +41,9 @@
             </VBox>
             <Pane prefHeight="160.0" prefWidth="289.0">
                <children>
-                  <Button fx:id="btnInactivar" layoutX="92.0" layoutY="14.0" mnemonicParsing="false" onAction="#accionInactivar" prefHeight="25.0" prefWidth="82.0" styleClass="jfx-buttonStandard2" text="Inactivar" />
-                  <Button fx:id="btnInsertarHoraEntrada" layoutX="57.0" layoutY="59.0" mnemonicParsing="false" onAction="#actionBtnInsertarHoraEntrada" prefHeight="25.0" prefWidth="151.0" styleClass="jfx-buttonStandard2" text="Insertar hora de entrada" />
-                  <Button fx:id="btnInsertarHoraSalida" layoutX="57.0" layoutY="91.0" mnemonicParsing="false" onAction="#actionBtnInsertarHoraSalida" prefHeight="25.0" prefWidth="151.0" styleClass="jfx-buttonStandard2" text="Insertar hora de salida" />
+                  <Button layoutX="92.0" layoutY="14.0" mnemonicParsing="false" onAction="#accionInactivar" prefHeight="25.0" prefWidth="82.0" styleClass="jfx-buttonStandard2" text="Inactivar" />
+                  <Button layoutX="57.0" layoutY="59.0" mnemonicParsing="false" onAction="#actionBtnInsertarHoraEntrada" prefHeight="25.0" prefWidth="151.0" styleClass="jfx-buttonStandard2" text="Insertar hora de entrada" />
+                  <Button layoutX="57.0" layoutY="91.0" mnemonicParsing="false" onAction="#actionBtnInsertarHoraSalida" prefHeight="25.0" prefWidth="151.0" styleClass="jfx-buttonStandard2" text="Insertar hora de salida" />
                </children>
             </Pane>
          </children>
@@ -67,7 +67,7 @@
    <right>
       <VBox prefHeight="257.0" prefWidth="121.0" styleClass="anchorPadre">
          <children>
-            <Button fx:id="btnSalir" mnemonicParsing="false" onAction="#accionSalir" prefHeight="25.0" prefWidth="62.0" styleClass="jfx-buttonStandard2" text="Salir" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#accionSalir" prefHeight="25.0" prefWidth="62.0" styleClass="jfx-buttonStandard2" text="Salir" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="40.0" right="10.0" top="225.0" />
                </VBox.margin>

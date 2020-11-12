@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="348.0" prefWidth="600.0" styleClass="FondoDivisas" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.DivisaController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="625.0" styleClass="FondoDivisas" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.DivisaController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="647.0">
+      <BorderPane prefHeight="400.0" prefWidth="622.0">
          <center>
             <VBox prefHeight="345.0" prefWidth="647.0" BorderPane.alignment="CENTER">
                <children>
@@ -42,7 +42,7 @@
                         </ComboBox>
                         <Button mnemonicParsing="false" onAction="#ActionBtnLogin" prefHeight="34.0" prefWidth="88.0" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Login">
                            <HBox.margin>
-                              <Insets left="28.0" right="12.0" top="-25.0" />
+                              <Insets left="28.0" right="3.0" top="-30.0" />
                            </HBox.margin>
                            <effect>
                               <InnerShadow />
@@ -187,7 +187,7 @@
                   </HBox>
                   <HBox prefHeight="58.0" prefWidth="647.0">
                      <children>
-                        <Button fx:id="btnGenerarReporte" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#GenerarReporteDivisas" prefHeight="26.0" prefWidth="119.0" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Generar Reporte">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#GenerarReporteDivisas" prefHeight="26.0" prefWidth="119.0" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Generar Reporte">
                            <padding>
                               <Insets bottom="4.0" />
                            </padding>

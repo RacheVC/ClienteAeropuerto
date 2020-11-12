@@ -19,13 +19,11 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  */
 public class UsuarioService {
 
-    private final String urlCreate = "http://localhost:8098/usuarios/";
+    private final String urlCreateModify = "http://localhost:8098/usuarios/";
     private final String urlFindAll = "http://localhost:8098/usuarios";
     private final String urlstringLogin = "http://localhost:8098/authentication/login";
-    private final String urlstringCedula = "http://localhost:8098/usuarios/cedula/";
-    private final String urlModify = "http://localhost:8098/usuarios/";
-    private final String urlDelete = "http://localhost:8098/usuarios/";
-    private final String urlFindNombre = "http://localhost:8098/usuarios/nombreCompleto/";
+    private final String urlFindByCedula = "http://localhost:8098/usuarios/cedula/";
+    private final String urlFindByNombre = "http://localhost:8098/usuarios/nombreCompleto/";
 
     UsuarioDTO datos = new UsuarioDTO();
 
@@ -37,7 +35,7 @@ public class UsuarioService {
     }
 
     public void add(UsuarioDTO object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnection(urlCreate, object);
+        ConnectionUtils.ObjectToConnection(urlCreateModify, object);
     }
 
     public AuthenticationResponse Login(AuthenticationRequest object) throws InterruptedException, ExecutionException, IOException {
@@ -50,11 +48,7 @@ public class UsuarioService {
     }
 
     public void modify(Long id, UsuarioDTO object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnectionModify(urlModify + id, object);
-    }
-
-    public void delete(Long id) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnectionDelete(urlDelete + id, null);
+        ConnectionUtils.ObjectToConnectionModify(urlCreateModify + id, object);
     }
 
     private static class UsuarioServiceHolder {
@@ -64,12 +58,12 @@ public class UsuarioService {
 
     public List<UsuarioDTO> finByCedula(String Cedula) throws IOException {
 
-        return ConnectionUtils.ConnectionToObjectByCedula(urlstringCedula, Cedula);
+        return ConnectionUtils.ConnectionToObjectByCedula(urlFindByCedula, Cedula);
     }
     
     public List<UsuarioDTO> finByNombre(String nombre) throws IOException {
 
-        return ConnectionUtils.ConnectionToObjectByNombre(urlFindNombre, nombre);
+        return ConnectionUtils.ConnectionToObjectByNombre(urlFindByNombre, nombre);
     }
 
 }

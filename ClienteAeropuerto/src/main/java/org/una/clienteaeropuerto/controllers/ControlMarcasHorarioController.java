@@ -43,14 +43,6 @@ import org.una.clienteaeropuerto.utils.AppContext;
 public class ControlMarcasHorarioController implements Initializable {
 
     @FXML
-    private TextField txtBusqueda;
-    @FXML
-    private Button btnBuscar;
-    @FXML
-    private Button btnInactivar;
-    @FXML
-    private Button btnSalir;
-    @FXML
     private TableView<MarcaHorarioDTO> tvMarcasHorario;
     @FXML
     private TableColumn<MarcaHorarioDTO, String> tcId;

@@ -17,14 +17,10 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  */
 public class RolesService {
 
-    List<RolesDTO> rolesDTO;
-
     private final String urlFindAll = "http://localhost:8098/roles";
     private final String urlCreate = "http://localhost:8098/roles/";
 
     public List<RolesDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-        rolesDTO = ConnectionUtils.ListFromConnectionRol(urlFindAll, RolesDTO.class);
-
         return ConnectionUtils.ListFromConnectionRol(urlFindAll, RolesDTO.class);
     }
 

@@ -6,8 +6,6 @@
 package org.una.clienteaeropuerto.controllers;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -23,7 +21,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -50,40 +49,49 @@ public class CreacionNotificacionController implements Initializable {
     private TextField txtReceptor;
     @FXML
     private TextArea txtMensaje;
+     @FXML
+    private ImageView imgNotificacion;
     @FXML
-    private Button btnGuardar;
+    private DatePicker dpFechaEntrega;
     @FXML
-    private Button btnAgregarImagen;
+    private CheckBox cbProgramarFechaEntrega;
+    
     LoginController user = new LoginController();
 
     private Window stage;
 
-    NotificacionDTO notificaciondto = new NotificacionDTO();
+    NotificacionDTO notificacionDTO = new NotificacionDTO();
+    
     NotificacionService notificacionservice = new NotificacionService();
+    
     ImagenService imagenservice = new ImagenService();
+    
     List<ImagenesDTO> listimagenes;
+    
     static int residuo = 0;
     String str;
-    @FXML
-    private ImageView imgNotificacion;
+    
+    private List<ImagenesDTO> imageneslist = new ArrayList<ImagenesDTO>();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         this.listimagenes = new ArrayList<>();
+        funcionAppContext();
 
     }
 
     @FXML
     private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
 
-        notificaciondto.setEstado(true);
-        notificaciondto.setMensaje(txtMensaje.getText());
-        notificaciondto.setReceptor(txtReceptor.getText());
+        notificacionDTO.setEstado(true);
+        notificacionDTO.setMensaje(txtMensaje.getText());
+        notificacionDTO.setReceptor(txtReceptor.getText());
 
-        notificacionservice.add(notificaciondto);
+        notificacionservice.add(notificacionDTO);
 
         Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
         Scene creacionDocs = new Scene(root);
@@ -117,12 +125,13 @@ public class CreacionNotificacionController implements Initializable {
         try {
             byte[] fileContent = Files.readAllBytes(file.toPath());
             String enconde = new String(Base64.getEncoder().encodeToString(fileContent));
-            System.err.println("++++++++++++++++++++++"+enconde);
+            System.err.println("++++++++++++++++++++++" + enconde);
             return enconde;
         } catch (IOException e) {
             throw new IllegalStateException("could not read file " + file, e);
         }
     }
+
     private void PostImage64() throws InterruptedException, ExecutionException, IOException {
         File file = this.GetFile();
         str = this.encodeFileToBase64(file);
@@ -130,7 +139,7 @@ public class CreacionNotificacionController implements Initializable {
         int diferencia = 0;
         int totalcadena = str.length();
         int cantidadRecorrido = 0;
-        int limite2 = 10000 ;
+        int limite2 = 10000;
         int limite = 0;
         diferencia = totalcadena % 10000;
 
@@ -163,5 +172,74 @@ public class CreacionNotificacionController implements Initializable {
                 limite = limite - 10000;
             }
         }
+    }
+
+    private void funcionAppContext() {
+
+        if (AppContext.getInstance().get("ed").equals("edit")) {
+            NotificacionDTO notificacionDTO = new NotificacionDTO();
+            notificacionDTO = (NotificacionDTO) AppContext.getInstance().get("notificacionDTO");
+            txtMensaje.setText(notificacionDTO.getMensaje());
+            txtReceptor.setText(notificacionDTO.getReceptor());
+            notificacionDTO.setEstado(true);
+            notificacionDTO.getId();
+
+//            try {
+//                imgNotificacion.setImage(encodeFileToBase64());
+//            } catch (IOException ex) {
+//                Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        }
+    }
+
+//    public void CargarListaImagenes() {
+//        
+//        try {
+//            imageneslist = ImagenService.getInstance().getAll();
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ExecutionException ex) {
+//            Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//       
+//    }
+//
+//    public String UnirPartesImagen(Long id) {
+//        String partesUnidas = "";
+//        String parte;
+//        int cant = 0;
+//        for (int i = 0; i < imageneslist.size(); i++) {
+//            if (id == imageneslist.get(i).getNotificaciones().getId()) {
+//                parte = imageneslist.get(i).getImagen_Adjunta();
+//                partesUnidas = parte + partesUnidas;
+//            }
+//        }
+//        cant = partesUnidas.length();
+//        return partesUnidas;
+//    }
+//
+//    public Image encodeFileToBase64() throws IOException {
+//
+//        String cadena = String.valueOf(UnirPartesImagen(notificacionDTO.getId()));
+//        System.out.println("ididididiidididi" + UnirPartesImagen(notificacionDTO.getId()));
+//        byte[] bytes = Base64.getDecoder().decode(cadena);
+//
+//        ByteArrayInputStream bos = new ByteArrayInputStream(bytes);
+//        BufferedImage bi = ImageIO.read(bos);
+//        Image im = SwingFXUtils.toFXImage(bi, null);
+//     //   imagensirva.setImage(im);
+//        return im;
+//    }
+    @FXML
+    private void OnActionCbProgramarFechaEntrega(ActionEvent event) {
+
+        if (cbProgramarFechaEntrega.isSelected()) {
+            dpFechaEntrega.setDisable(false);
+        } else {
+            dpFechaEntrega.setDisable(true);
+        }
+
     }
 }

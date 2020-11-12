@@ -27,7 +27,6 @@ public class DivisaService {
     }
 
     private static class DivisaServiceHolder {
-
         private static final DivisaService INSTANCE = new DivisaService();
     }
 }

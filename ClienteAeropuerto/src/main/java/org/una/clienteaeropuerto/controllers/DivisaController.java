@@ -5,7 +5,6 @@
  */
 package org.una.clienteaeropuerto.controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -27,9 +26,6 @@ import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.DivisaDTO;
 import org.una.clienteaeropuerto.service.DivisaService;
-import javafx.stage.FileChooser;
-
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import javafx.scene.control.Alert;
@@ -69,8 +65,6 @@ public class DivisaController implements Initializable {
     private TextField txtDolarAustraliano;
     @FXML
     private TextField txtColonCostarricense;
-    @FXML
-    private Button btnGenerarReporte;
 
     /**
      * Initializes the controller class.

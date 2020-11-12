@@ -16,25 +16,19 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  * @author Luis
  */
 public class AreasTrabajoService {
-   
-    List<Areas_trabajoDTO> areasTrabajoDTO;
-    
-    private final String urlFindAll ="http://localhost:8098/areas_trabajo";
-    private final String urlCreate ="http://localhost:8098/areas_trabajo/";
-    
+
+    private final String urlFindAll = "http://localhost:8098/areas_trabajo";
+    private final String urlCreate = "http://localhost:8098/areas_trabajo/";
+
     public List<Areas_trabajoDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-         areasTrabajoDTO =ConnectionUtils.ListFromConnectionAT(urlFindAll, Areas_trabajoDTO.class);
-       
-        
         return ConnectionUtils.ListFromConnectionAT(urlFindAll, Areas_trabajoDTO.class);
     }
-     
-     
-        public void add(Areas_trabajoDTO object) throws InterruptedException, ExecutionException, IOException {
+
+    public void add(Areas_trabajoDTO object) throws InterruptedException, ExecutionException, IOException {
         ConnectionUtils.ObjectToConnection(urlCreate, object);
     }
-     
-     public static AreasTrabajoService getInstance() {
+
+    public static AreasTrabajoService getInstance() {
         return AreasTrabajoServiceHolder.INSTANCE;
     }
 

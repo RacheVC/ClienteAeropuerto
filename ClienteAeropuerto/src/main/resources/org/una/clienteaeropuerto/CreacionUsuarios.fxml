@@ -77,7 +77,7 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <VBox layoutX="456.0" prefHeight="474.0" prefWidth="269.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="10.0" top="500.0" />
                </VBox.margin>

@@ -46,16 +46,6 @@ public class CrearHorarioController implements Initializable {
     private ComboBox<String> cbDiaSalida;
     @FXML
     private ComboBox<Areas_trabajoDTO> cbAreaTrabajo;
-    DatePicker datepicker;
-    HorarioService horarioService = new HorarioService();
-    HorarioDTO horarioDTO = new HorarioDTO();
-
-    java.util.Date date = new java.util.Date();
-    java.util.Date date2 = new java.util.Date();
-
-    Areas_trabajoDTO areas_trabajoDTO = new Areas_trabajoDTO();
-    AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
-    List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
     @FXML
     private ComboBox<String> cbHoraEntrada;
     @FXML
@@ -64,7 +54,23 @@ public class CrearHorarioController implements Initializable {
     private ComboBox<String> cbHoraSalida;
     @FXML
     private ComboBox<String> cbMinutoSalida;
+    
+    DatePicker datepicker;
+    
+    HorarioService horarioService = new HorarioService();
+    
+    HorarioDTO horarioDTO = new HorarioDTO();
 
+    java.util.Date date = new java.util.Date();
+    
+    java.util.Date date2 = new java.util.Date();
+
+    Areas_trabajoDTO areas_trabajoDTO = new Areas_trabajoDTO();
+    
+    AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
+    
+    List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
+    
     /**
      * Initializes the controller class.
      */

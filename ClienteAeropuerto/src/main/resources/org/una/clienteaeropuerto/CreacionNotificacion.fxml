@@ -3,6 +3,8 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -33,24 +35,37 @@
                   <Insets left="50.0" right="20.0" top="50.0" />
                </VBox.margin>
             </TextField>
-            <TextArea fx:id="txtMensaje" prefHeight="117.0" prefWidth="392.0" promptText="Mensaje" styleClass="vBoxGeneral">
+            <TextArea fx:id="txtMensaje" prefHeight="64.0" prefWidth="502.0" promptText="Mensaje" styleClass="vBoxGeneral">
                <VBox.margin>
-                  <Insets bottom="15.0" left="50.0" right="20.0" top="40.0" />
+                  <Insets bottom="10.0" left="50.0" right="20.0" top="15.0" />
                </VBox.margin>
             </TextArea>
+            <CheckBox fx:id="cbProgramarFechaEntrega" mnemonicParsing="false" onAction="#OnActionCbProgramarFechaEntrega" text="¿Desea programar una fecha de entrega" textFill="#f2f0f0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="50.0" />
+               </VBox.margin>
+            </CheckBox>
+            <DatePicker fx:id="dpFechaEntrega" promptText="Fecha de entrega">
+               <VBox.margin>
+                  <Insets left="50.0" top="10.0" />
+               </VBox.margin>
+            </DatePicker>
          </children>
       </VBox>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <VBox layoutX="456.0" prefHeight="474.0" prefWidth="269.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets left="125.0" top="445.0" />
+                  <Insets left="125.0" top="440.0" />
                </VBox.margin>
             </Button>
          </children>
       </VBox>
-      <VBox layoutX="-2.0" layoutY="373.0" prefHeight="196.0" prefWidth="656.0" AnchorPane.bottomAnchor="0.0">
+      <VBox layoutX="-2.0" layoutY="373.0" prefHeight="196.0" prefWidth="545.0" AnchorPane.bottomAnchor="0.0">
          <children>
             <ImageView fx:id="imgNotificacion" fitHeight="159.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -60,7 +75,7 @@
                   <Insets bottom="-150.0" left="300.0" />
                </VBox.margin>
             </ImageView>
-            <Button fx:id="btnAgregarImagen" mnemonicParsing="false" onAction="#OnActionBtnAgregarImagen" prefHeight="31.0" prefWidth="0.0" styleClass="jfx-buttonStandard" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#OnActionBtnAgregarImagen" prefHeight="31.0" prefWidth="0.0" styleClass="jfx-buttonStandard" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="450.0" top="120.0" />
                </VBox.margin>

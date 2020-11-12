@@ -8,6 +8,7 @@ package org.una.clienteaeropuerto.service;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import org.una.clienteaeropuerto.dto.HorarioDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.utils.ConnectionUtils;
 
@@ -17,19 +18,19 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  */
 public class NotificacionService {
 
-    List<NotificacionDTO> listanot;
-
-    private final String urlstring = "http://localhost:8098/notificaciones";
-    private final String urlCreate = "http://localhost:8098/notificaciones/";
+    private final String urlFindAll = "http://localhost:8098/notificaciones";
+    private final String urlCreateModify = "http://localhost:8098/notificaciones/";
 
     public List<NotificacionDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-        listanot = ConnectionUtils.ListFromConnection(urlstring, NotificacionDTO.class);
-
-        return ConnectionUtils.ListFromConnection(urlstring, NotificacionDTO.class);
+        return ConnectionUtils.ListFromConnection(urlFindAll, NotificacionDTO.class);
     }
 
     public void add(NotificacionDTO object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnection(urlCreate, object);
+        ConnectionUtils.ObjectToConnection(urlCreateModify, object);
+    }
+    
+     public void modify(Long id, NotificacionDTO object) throws InterruptedException, ExecutionException, IOException {
+        ConnectionUtils.ObjectToConnectionModify(urlCreateModify + id, object);
     }
 
     public static NotificacionService getInstance() {

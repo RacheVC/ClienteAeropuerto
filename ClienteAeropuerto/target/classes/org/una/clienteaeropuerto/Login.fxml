@@ -46,7 +46,7 @@
                         <Insets left="10.0" />
                      </opaqueInsets>
                   </PasswordField>
-                  <Button fx:id="btnLogin" layoutX="96.0" layoutY="242.0" mnemonicParsing="false" onAction="#IniciarSesion" prefHeight="46.0" prefWidth="184.0" styleClass="BotonTipoCambio" stylesheets="@Styles.css" text="Login">
+                  <Button layoutX="96.0" layoutY="242.0" mnemonicParsing="false" onAction="#IniciarSesion" prefHeight="46.0" prefWidth="184.0" styleClass="BotonTipoCambio" stylesheets="@Styles.css" text="Login">
                      <font>
                         <Font name="Tahoma Bold" size="14.0" />
                      </font>

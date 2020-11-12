@@ -39,8 +39,6 @@ public class LoginController implements Initializable {
     public TextField txtUserName;
     @FXML
     private PasswordField txtPassword;
-    @FXML
-    private Button btnLogin;
 
     private boolean band = true;
 

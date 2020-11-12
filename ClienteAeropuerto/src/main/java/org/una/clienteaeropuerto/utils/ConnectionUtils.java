@@ -39,7 +39,7 @@ public class ConnectionUtils {
         Gson gson = new Gson();
         Type listtype = new TypeToken<ArrayList<UsuarioDTO>>() {
         }.getType();
-        
+
         urlstring = urlstring + Cedula;
         URL url = new URL(urlstring);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -61,7 +61,7 @@ public class ConnectionUtils {
         Gson gson = new Gson();
         Type listtype = new TypeToken<ArrayList<UsuarioDTO>>() {
         }.getType();
-        
+
         urlstring = urlstring + nombre;
         URL url = new URL(urlstring);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -78,12 +78,12 @@ public class ConnectionUtils {
             return gson.fromJson(response.toString(), listtype);
         }
     }
-    
+
     public static <T> List<T> ConnectionToObjectByDias(String urlstring, String dia) throws MalformedURLException, IOException {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("HH:mm:ss").create();
         Type listtype = new TypeToken<ArrayList<HorarioDTO>>() {
         }.getType();
-        
+
         urlstring = urlstring + dia;
         URL url = new URL(urlstring);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -382,14 +382,4 @@ public class ConnectionUtils {
             }
         }
     }
-
-    public static void ObjectToConnectionDelete(String urlstring, Object object) throws MalformedURLException, IOException {
-        URL url = new URL(urlstring);
-        System.out.println(urlstring);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("DELETE");
-        con.setRequestProperty("Accept", "application/json");
-        con.connect();
-    }
-
 }

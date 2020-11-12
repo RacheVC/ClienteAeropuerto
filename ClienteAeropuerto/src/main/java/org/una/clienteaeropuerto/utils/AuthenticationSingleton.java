@@ -15,7 +15,6 @@ public class AuthenticationSingleton {
     
       private static  AuthenticationResponse SINGLETON = new AuthenticationResponse();
    
-   
     public static AuthenticationResponse getInstance(){
         return SINGLETON;
     }

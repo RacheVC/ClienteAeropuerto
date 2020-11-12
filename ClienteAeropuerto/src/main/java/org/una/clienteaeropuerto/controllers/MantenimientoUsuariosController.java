@@ -25,7 +25,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -47,12 +46,6 @@ public class MantenimientoUsuariosController implements Initializable {
     @FXML
     private TextField txtBusqueda;
     @FXML
-    private Button btnCrear;
-    @FXML
-    private Button btnModificar;
-    @FXML
-    private Button btnInactivar;
-    @FXML
     private TableView<UsuarioDTO> tvUsuarios;
     @FXML
     private TableColumn<UsuarioDTO, Object> clId;
@@ -70,17 +63,15 @@ public class MantenimientoUsuariosController implements Initializable {
     private TableColumn<UsuarioDTO, String> tcEmpleadoId;
     @FXML
     private TableColumn<UsuarioDTO, String> tcRolId;
-    @FXML
-    private Button btnSalir;
 
     private List<UsuarioDTO> usuariosList = new ArrayList<UsuarioDTO>();
+    
     private List<UsuarioDTO> usuariosList2 = new ArrayList<UsuarioDTO>();
-    private List<UsuarioDTO> usuariosListCedula = new ArrayList<UsuarioDTO>();
-
+    
     UsuarioDTO usuarioDTO = new UsuarioDTO();
+    
     UsuarioService usuarioService = new UsuarioService();
-    @FXML
-    private Button btnBuscar;
+
 
     /**
      * Initializes the controller class.

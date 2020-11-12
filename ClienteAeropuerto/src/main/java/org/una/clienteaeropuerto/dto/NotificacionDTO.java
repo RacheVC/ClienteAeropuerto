@@ -12,9 +12,10 @@ import java.util.Date;
  * @author Andres
  */
 public class NotificacionDTO {
+
     private Long id;
     private Date fecha_envio;
-    private Date fecha_lectura;
+    private Date fecha_entrega;
     private String mensaje;
     private String emisor;
     private String receptor;
@@ -24,10 +25,10 @@ public class NotificacionDTO {
     public NotificacionDTO() {
     }
 
-    public NotificacionDTO(Long id, Date fecha_envio, Date fecha_lectura, String mensaje, String emisor, String receptor, boolean estado, UsuarioDTO usuarios) {
+    public NotificacionDTO(Long id, Date fecha_envio, Date fecha_entrega, String mensaje, String emisor, String receptor, boolean estado, UsuarioDTO usuarios) {
         this.id = id;
         this.fecha_envio = fecha_envio;
-        this.fecha_lectura = fecha_lectura;
+        this.fecha_entrega = fecha_entrega;
         this.mensaje = mensaje;
         this.emisor = emisor;
         this.receptor = receptor;
@@ -42,8 +43,6 @@ public class NotificacionDTO {
     public void setReceptor(String receptor) {
         this.receptor = receptor;
     }
-
-   
 
     public Long getId() {
         return id;
@@ -61,12 +60,12 @@ public class NotificacionDTO {
         this.fecha_envio = fecha_envio;
     }
 
-    public Date getFecha_lectura() {
-        return fecha_lectura;
+    public Date getFecha_entrega() {
+        return fecha_entrega;
     }
 
-    public void setFecha_lectura(Date fecha_lectura) {
-        this.fecha_lectura = fecha_lectura;
+    public void setFecha_entrega(Date fecha_entrega) {
+        this.fecha_entrega = fecha_entrega;
     }
 
     public String getMensaje() {
@@ -101,6 +100,4 @@ public class NotificacionDTO {
         this.usuarios = usuarios;
     }
 
-    
 }
-

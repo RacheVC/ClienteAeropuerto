@@ -17,23 +17,19 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  */
 public class MarcasHorarioService {
 
-    List<MarcaHorarioDTO> listMarca;
     private final String urlFindAll = "http://localhost:8098/marcas_horario";
-    private final String urlCreate = "http://localhost:8098/marcas_horario/";
-    private final String urlModify = "http://localhost:8098/marcas_horario/";
+    private final String urlCreateModify = "http://localhost:8098/marcas_horario/";
 
     public List<MarcaHorarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-   
-        listMarca = ConnectionUtils.ListFromConnectionMarcas(urlFindAll, MarcaHorarioDTO.class);
-        return ConnectionUtils.ListFromConnectionMarcas(urlFindAll, MarcaHorarioDTO.class);
+           return ConnectionUtils.ListFromConnectionMarcas(urlFindAll, MarcaHorarioDTO.class);
     }
 
     public void add(MarcaHorarioDTO object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnection(urlCreate, object);
+        ConnectionUtils.ObjectToConnection(urlCreateModify, object);
     }
 
     public void modify(Long id, MarcaHorarioDTO object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnectionModify(urlModify + id, object);
+        ConnectionUtils.ObjectToConnectionModify(urlCreateModify + id, object);
     }
 
     public static MarcasHorarioService getInstance() {

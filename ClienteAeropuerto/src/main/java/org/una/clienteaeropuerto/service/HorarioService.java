@@ -17,30 +17,21 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  */
 public class HorarioService {
 
-    List<HorarioDTO> listanot;
-    private final String urlstring = "http://localhost:8098/horarios";
-    private final String urlCreate = "http://localhost:8098/horarios/";
-    private final String urlModify = "http://localhost:8098/horarios/";
-    private final String urlDelete = "http://localhost:8098/horarios/";
-    private final String urlFindDiaEntrada = "http://localhost:8098/horarios/";
-    private final String urlFindDiaSalida = "http://localhost:8098/horarios/";
+    private final String urlFindAll = "http://localhost:8098/horarios";
+    private final String urlCreateModify = "http://localhost:8098/horarios/";
+    private final String urlFindDiaEntrada = "http://localhost:8098/horarios/diaEntrada/";
+    private final String urlFindDiaSalida = "http://localhost:8098/horarios/diaSalida/";
 
     public List<HorarioDTO> getAll() throws InterruptedException, ExecutionException, IOException {
-
-        listanot = ConnectionUtils.ListFromConnectionHorario(urlstring, HorarioDTO.class);
-        return ConnectionUtils.ListFromConnectionHorario(urlstring, HorarioDTO.class);
+        return ConnectionUtils.ListFromConnectionHorario(urlFindAll, HorarioDTO.class);
     }
 
     public void add(HorarioDTO object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnection(urlCreate, object);
+        ConnectionUtils.ObjectToConnection(urlCreateModify, object);
     }
 
     public void modify(Long id, HorarioDTO object) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnectionModify(urlModify + id, object);
-    }
-
-    public void delete(Long id) throws InterruptedException, ExecutionException, IOException {
-        ConnectionUtils.ObjectToConnectionDelete(urlDelete + id, null);
+        ConnectionUtils.ObjectToConnectionModify(urlCreateModify + id, object);
     }
 
     public static HorarioService getInstance() {
