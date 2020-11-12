@@ -18,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
+import org.una.clienteaeropuerto.dto.UsuarioDTO;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 
 /**
  * FXML Controller class
@@ -43,12 +45,15 @@ public class DashboardController implements Initializable {
     @FXML
     private Button btnCerrarSesion;
 
+    UsuarioDTO usuarioDTO = new UsuarioDTO();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
+        ValidacionPermisos();
     }
 
     @FXML
@@ -113,4 +118,16 @@ public class DashboardController implements Initializable {
         window.show();
     }
 
+    private void ValidacionPermisos() {
+
+        if ("Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+            btnControlNotificaciones.setDisable(true);
+        } else if ("Gestor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+            btnControlParametros.setDisable(true);
+            btnControlNotificaciones.setDisable(true);
+        } else if ("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+            btnControlParametros.setDisable(true);
+            btnControlNotificaciones.setDisable(true);
+        }
+    }
 }

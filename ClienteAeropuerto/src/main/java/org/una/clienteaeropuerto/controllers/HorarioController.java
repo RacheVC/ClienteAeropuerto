@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -33,6 +34,7 @@ import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.HorarioDTO;
 import org.una.clienteaeropuerto.service.HorarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 
 /**
  * FXML Controller class
@@ -67,6 +69,12 @@ public class HorarioController implements Initializable {
     private TableColumn<HorarioDTO, String> clHoraSalida;
     @FXML
     private ComboBox<HorarioDTO> cbxFiltroDiaEntrada;
+    @FXML
+    private Button btnCrear;
+    @FXML
+    private Button btnModificar;
+    @FXML
+    private Button btnInactivar;
 
     /**
      * Initializes the controller class.
@@ -77,6 +85,7 @@ public class HorarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        ValidacionPermisos();
         CargarInformacionHorario();
 
     }
@@ -195,6 +204,22 @@ public class HorarioController implements Initializable {
         ListHorarioDTO = (List<HorarioDTO>) horarioService.getAll();
 
         cbxFiltroDiaEntrada.setItems(FXCollections.observableArrayList(ListHorarioDTO));
+    }
+
+    private void ValidacionPermisos() {
+
+         if ("Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))
+                || "Gerente".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+
+            btnCrear.setDisable(true);
+            btnModificar.setDisable(true);
+            
+        }else if("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))){
+             
+            btnCrear.setDisable(true);
+            btnModificar.setDisable(true);
+            btnInactivar.setDisable(true);
+        }
     }
 
 }

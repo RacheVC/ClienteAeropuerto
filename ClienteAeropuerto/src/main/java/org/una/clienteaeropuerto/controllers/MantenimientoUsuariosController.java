@@ -25,6 +25,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,6 +36,7 @@ import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 
 /**
  * FXML Controller class
@@ -71,6 +73,12 @@ public class MantenimientoUsuariosController implements Initializable {
     UsuarioDTO usuarioDTO = new UsuarioDTO();
 
     UsuarioService usuarioService = new UsuarioService();
+    @FXML
+    private Button btnCrear;
+    @FXML
+    private Button btnModificar;
+    @FXML
+    private Button btnInactivar;
 
     /**
      * Initializes the controller class.
@@ -78,6 +86,7 @@ public class MantenimientoUsuariosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        ValidacionPermisos();
         cargarInformacionUsuarios();
     }
 
@@ -121,7 +130,7 @@ public class MantenimientoUsuariosController implements Initializable {
     }
 
     private void encontrarFechaRegistro(Long id) {
-        
+
         Date fechaEncontrada;
         for (int i = 0; i < usuariosList.size(); i++) {
             if (id == usuariosList.get(i).getId()) {
@@ -200,6 +209,22 @@ public class MantenimientoUsuariosController implements Initializable {
             info.setTitle("Error");
             info.setContentText("Los datos no se han podido filtrar");
             info.showAndWait();
+        }
+    }
+
+    private void ValidacionPermisos() {
+
+        if ("Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))
+                || "Gerente".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+
+            btnCrear.setDisable(true);
+            btnModificar.setDisable(true);
+            
+        }else if("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))){
+             
+            btnCrear.setDisable(true);
+            btnModificar.setDisable(true);
+            btnInactivar.setDisable(true);
         }
     }
 }

@@ -13,7 +13,6 @@ public class AuthenticationResponse {
 
     private String jwt;
     private UsuarioDTO usuario;
-// private List<PermisoOtorgadoDTO> permisos;
 
     public AuthenticationResponse(String jwt, UsuarioDTO usuario) {
         this.jwt = jwt;
@@ -38,4 +37,5 @@ public class AuthenticationResponse {
     public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
+
 }

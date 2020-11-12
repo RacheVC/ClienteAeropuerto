@@ -17,7 +17,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -50,28 +49,22 @@ public class LoginController implements Initializable {
 
     }
 
-    
     @FXML
     private void IniciarSesion(ActionEvent event) throws IOException {
 
         try {
-
             AuthenticationRequest aure = new AuthenticationRequest(txtUserName.getText(), txtPassword.getText());
             AuthenticationResponse autenticationresponse = UsuarioService.getInstance().Login(aure);
-            System.err.println(autenticationresponse.getJwt());
-
             AuthenticationSingleton.setInstance(autenticationresponse);
         } catch (IOException | InterruptedException | ExecutionException e) {
-            this.MensajeNoautorizado();
+            this.MensajeNoAutorizado();
             band = false;
-
         }
         if (band == true) {
             this.MensajeAutorizado();
 
             Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
             Scene creacionDocs = new Scene(root);
-
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(creacionDocs);
             window.show();
@@ -79,9 +72,9 @@ public class LoginController implements Initializable {
 
     }
 
-    private void MensajeNoautorizado() {
+    private void MensajeNoAutorizado() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
-        alert.setTitle("Mensaje");
+        alert.setTitle("Error");
         alert.setHeaderText("Usuario no autenticado.");
         alert.show();
     }
@@ -93,16 +86,11 @@ public class LoginController implements Initializable {
         alert.show();
     }
 
-    public String CapturarUsuario() {
-        return String.valueOf(this.txtUserName.getText());
-
-    }
-
     @FXML
     private void ActionBtnTipoCambio(ActionEvent event) throws IOException {
+        
         Parent root = FXMLLoader.load(App.class.getResource("Divisa.fxml"));
         Scene creacionDocs = new Scene(root);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();

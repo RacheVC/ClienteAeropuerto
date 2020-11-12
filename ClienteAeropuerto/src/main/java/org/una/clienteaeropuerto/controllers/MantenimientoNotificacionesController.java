@@ -40,6 +40,7 @@ import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 
 /**
  * FXML Controller class
@@ -64,8 +65,6 @@ public class MantenimientoNotificacionesController implements Initializable {
     private TableColumn<NotificacionDTO, String> clEstado;
     @FXML
     private TableColumn<NotificacionDTO, String> clReceptor;
-    @FXML
-    private Button btnGenerarReporte;
 
     private List<NotificacionDTO> notificacionlist = new ArrayList<NotificacionDTO>();
 
@@ -78,12 +77,21 @@ public class MantenimientoNotificacionesController implements Initializable {
     NotificacionService notificacionService = new NotificacionService();
 
     String str;
+    @FXML
+    private TextField txtBusqueda;
+    @FXML
+    private Button btnCrear;
+    @FXML
+    private Button btnModificar;
+    @FXML
+    private Button btnInactivar;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        ValidacionPermisos();
         CargarInformacionNotificaciones();
         CargarListaImagenes();
         UnirPartesImagen(1);
@@ -228,6 +236,22 @@ public class MantenimientoNotificacionesController implements Initializable {
 
         if (tvewNotificacion.getSelectionModel().getSelectedItem() != null) {
             notificacionDTO = (NotificacionDTO) tvewNotificacion.getSelectionModel().getSelectedItem();
+        }
+    }
+    
+    private void ValidacionPermisos() {
+
+        if ("Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))
+                || "Gerente".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+
+            btnCrear.setDisable(true);
+            btnModificar.setDisable(true);
+            
+        }else if("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))){
+             
+            btnCrear.setDisable(true);
+            btnModificar.setDisable(true);
+            btnInactivar.setDisable(true);
         }
     }
 
