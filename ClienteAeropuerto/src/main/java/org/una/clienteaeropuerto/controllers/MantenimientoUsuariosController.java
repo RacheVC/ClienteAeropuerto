@@ -65,13 +65,12 @@ public class MantenimientoUsuariosController implements Initializable {
     private TableColumn<UsuarioDTO, String> tcRolId;
 
     private List<UsuarioDTO> usuariosList = new ArrayList<UsuarioDTO>();
-    
-    private List<UsuarioDTO> usuariosList2 = new ArrayList<UsuarioDTO>();
-    
-    UsuarioDTO usuarioDTO = new UsuarioDTO();
-    
-    UsuarioService usuarioService = new UsuarioService();
 
+    private List<UsuarioDTO> usuariosList2 = new ArrayList<UsuarioDTO>();
+
+    UsuarioDTO usuarioDTO = new UsuarioDTO();
+
+    UsuarioService usuarioService = new UsuarioService();
 
     /**
      * Initializes the controller class.
@@ -79,17 +78,11 @@ public class MantenimientoUsuariosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        try {
-            usuariosList = UsuarioService.getInstance().getAll();
-        } catch (InterruptedException | ExecutionException | IOException ex) {
-            Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        actualizarTableView();
+        cargarInformacionUsuarios();
     }
 
     @FXML
-    private void accionCrearNotificacion(ActionEvent event) throws IOException {
+    private void actionBtnCrear(ActionEvent event) throws IOException {
         AppContext.getInstance().set("usuarioDTO", usuarioDTO);
         AppContext.getInstance().set("ed", "insertar");
 
@@ -101,7 +94,7 @@ public class MantenimientoUsuariosController implements Initializable {
     }
 
     @FXML
-    private void accionModificarNotificacion(ActionEvent event) throws IOException {
+    private void actionBtnModificar(ActionEvent event) throws IOException {
         AppContext.getInstance().set("usuarioDTO", usuarioDTO);
         AppContext.getInstance().set("ed", "edit");
 
@@ -113,7 +106,7 @@ public class MantenimientoUsuariosController implements Initializable {
     }
 
     @FXML
-    private void accionInactivarNotificacion(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
+    private void actionBtnInactivar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
         if (usuarioDTO.isEstado() == true) {
             usuarioDTO.setEstado(false);
             encontrarFechaRegistro(usuarioDTO.getId());
@@ -128,6 +121,7 @@ public class MantenimientoUsuariosController implements Initializable {
     }
 
     private void encontrarFechaRegistro(Long id) {
+        
         Date fechaEncontrada;
         for (int i = 0; i < usuariosList.size(); i++) {
             if (id == usuariosList.get(i).getId()) {
@@ -138,7 +132,7 @@ public class MantenimientoUsuariosController implements Initializable {
     }
 
     @FXML
-    private void accionSalirrNotificacion(ActionEvent event) throws IOException {
+    private void actionBtnSalir(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
         Scene creacionDocs = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -151,6 +145,17 @@ public class MantenimientoUsuariosController implements Initializable {
         if (tvUsuarios.getSelectionModel().getSelectedItem() != null) {
             usuarioDTO = (UsuarioDTO) tvUsuarios.getSelectionModel().getSelectedItem();
         }
+    }
+
+    private void cargarInformacionUsuarios() {
+
+        try {
+            usuariosList = UsuarioService.getInstance().getAll();
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(MantenimientoUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        actualizarTableView();
     }
 
     private void actualizarTableView() {
@@ -168,20 +173,16 @@ public class MantenimientoUsuariosController implements Initializable {
                     }
                     return new ReadOnlyStringWrapper(estadoString);
                 });
-                RellenaTableView();
+                tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
+                tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
+                tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
+                tcRolId.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getRoles()));
+                tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
+                tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
+                tvUsuarios.getItems().clear();
+                tvUsuarios.setItems(FXCollections.observableArrayList(usuariosList2));
             }
         }
-    }
-
-    private void RellenaTableView() {
-        tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
-        tcCedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
-        tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
-        tcRolId.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getRoles()));
-        tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
-        tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
-        tvUsuarios.getItems().clear();
-        tvUsuarios.setItems(FXCollections.observableArrayList(usuariosList2));
     }
 
     @FXML

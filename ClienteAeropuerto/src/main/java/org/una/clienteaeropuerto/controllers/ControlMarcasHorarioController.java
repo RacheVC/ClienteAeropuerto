@@ -26,7 +26,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -71,18 +70,7 @@ public class ControlMarcasHorarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        try {
-            marcasList = MarcasHorarioService.getInstance().getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ControlMarcasHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(ControlMarcasHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ControlMarcasHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        actualizarTableView();
-
+        cargarInformacionMarcasHorario();
     }
 
     @FXML
@@ -135,6 +123,21 @@ public class ControlMarcasHorarioController implements Initializable {
         }
     }
 
+    private void cargarInformacionMarcasHorario() {
+        
+        try {
+            marcasList = MarcasHorarioService.getInstance().getAll();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ControlMarcasHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(ControlMarcasHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ControlMarcasHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        actualizarTableView();
+    }
+
     private void actualizarTableView() {
         for (int i = 0; i < marcasList.size(); i++) {
             if (marcasList.get(i).isEstado() == true) {
@@ -163,14 +166,12 @@ public class ControlMarcasHorarioController implements Initializable {
 
         AppContext.getInstance().set("marcaHorarioDTO", marcaHorarioDTO);
         AppContext.getInstance().set("ed", "edit");
-        
+
         Parent root = FXMLLoader.load(App.class.getResource("CreacionMarcaHorario.fxml"));
         Scene creacionDocs = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(creacionDocs);
         window.show();
     }
-    
-   
 
 }

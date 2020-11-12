@@ -40,17 +40,17 @@
             </VBox>
             <HBox prefHeight="143.0" prefWidth="304.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#accionCrearNotificacion" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-buttonStandard2" text="Crear">
+                  <Button mnemonicParsing="false" onAction="#actionBtnCrear" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-buttonStandard2" text="Crear">
                      <HBox.margin>
                         <Insets left="10.0" right="20.0" top="50.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#accionModificarNotificacion" prefHeight="25.0" prefWidth="94.0" styleClass="jfx-buttonStandard2" text="Modificar">
+                  <Button mnemonicParsing="false" onAction="#actionBtnModificar" prefHeight="25.0" prefWidth="94.0" styleClass="jfx-buttonStandard2" text="Modificar">
                      <HBox.margin>
                         <Insets left="10.0" right="20.0" top="50.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#accionInactivarNotificacion" prefHeight="25.0" prefWidth="82.0" styleClass="jfx-buttonStandard2" text="Inactivar">
+                  <Button mnemonicParsing="false" onAction="#actionBtnInactivar" prefHeight="25.0" prefWidth="82.0" styleClass="jfx-buttonStandard2" text="Inactivar">
                      <HBox.margin>
                         <Insets left="10.0" right="20.0" top="50.0" />
                      </HBox.margin>
@@ -81,7 +81,7 @@
    <right>
       <VBox prefHeight="257.0" prefWidth="74.0" styleClass="anchorPadre">
          <children>
-            <Button mnemonicParsing="false" onAction="#accionSalirrNotificacion" prefHeight="25.0" prefWidth="62.0" styleClass="jfx-buttonStandard2" text="Salir" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" onAction="#actionBtnSalir" prefHeight="25.0" prefWidth="62.0" styleClass="jfx-buttonStandard2" text="Salir" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="30.0" right="10.0" top="225.0" />
                </VBox.margin>

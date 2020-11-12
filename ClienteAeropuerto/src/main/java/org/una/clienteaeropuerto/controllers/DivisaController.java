@@ -71,14 +71,20 @@ public class DivisaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cmbTipoDivisa.setValue("Eurodolar");
-        cmbTipoDivisa.getItems().addAll("Dólar Americano", "Libra Esterlina", "Yen Japones", "Eurodolar", "Dólar Canadiense", "Franco Suizo", "Dólar neozelandes", "Dólar Australiano", "Colón Costarricense");
 
+        llenarComboBoxTipoDivisa();
+                
         txtMonto.addEventHandler(KeyEvent.KEY_TYPED, event -> SoloNumerosEnteros(event));
+        
         CargarDatos();
 
         txtMonto.setFocusTraversable(false);
 
+    }
+    
+    private void llenarComboBoxTipoDivisa(){
+        cmbTipoDivisa.setValue("Eurodolar");
+        cmbTipoDivisa.getItems().addAll("Dólar Americano", "Libra Esterlina", "Yen Japones", "Eurodolar", "Dólar Canadiense", "Franco Suizo", "Dólar neozelandes", "Dólar Australiano", "Colón Costarricense");
     }
 
     @FXML
