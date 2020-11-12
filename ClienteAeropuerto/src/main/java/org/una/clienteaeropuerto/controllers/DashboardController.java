@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
@@ -46,6 +47,8 @@ public class DashboardController implements Initializable {
     private Button btnCerrarSesion;
 
     UsuarioDTO usuarioDTO = new UsuarioDTO();
+    @FXML
+    private Label lbNombreUsuario;
 
     /**
      * Initializes the controller class.
@@ -53,6 +56,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        capturarNombreUsuario();
         ValidacionPermisos();
     }
 
@@ -129,5 +133,11 @@ public class DashboardController implements Initializable {
             btnControlParametros.setDisable(true);
             btnControlNotificaciones.setDisable(true);
         }
+    }
+    
+    private void capturarNombreUsuario(){
+        
+        AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto();
+        lbNombreUsuario.setText(AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto());
     }
 }

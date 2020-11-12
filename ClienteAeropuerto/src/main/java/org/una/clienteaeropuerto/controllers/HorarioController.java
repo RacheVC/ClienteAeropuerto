@@ -55,14 +55,6 @@ public class HorarioController implements Initializable {
     private TableColumn<HorarioDTO, String> clAreaTrabajo;
     @FXML
     private TableColumn<HorarioDTO, String> clEstado;
-
-    private List<HorarioDTO> horariolist = new ArrayList<HorarioDTO>();
-
-    private List<HorarioDTO> horariolist2 = new ArrayList<HorarioDTO>();
-
-    HorarioDTO horarioDTO = new HorarioDTO();
-
-    HorarioService horarioService = new HorarioService();
     @FXML
     private TableColumn<HorarioDTO, String> clHoraEntrada;
     @FXML
@@ -75,6 +67,15 @@ public class HorarioController implements Initializable {
     private Button btnModificar;
     @FXML
     private Button btnInactivar;
+
+    private List<HorarioDTO> horariolist = new ArrayList<HorarioDTO>();
+
+    private List<HorarioDTO> horariolist2 = new ArrayList<HorarioDTO>();
+
+    HorarioDTO horarioDTO = new HorarioDTO();
+
+    HorarioService horarioService = new HorarioService();
+    
 
     /**
      * Initializes the controller class.

@@ -65,6 +65,14 @@ public class MantenimientoNotificacionesController implements Initializable {
     private TableColumn<NotificacionDTO, String> clEstado;
     @FXML
     private TableColumn<NotificacionDTO, String> clReceptor;
+    @FXML
+    private TextField txtBusqueda;
+    @FXML
+    private Button btnCrear;
+    @FXML
+    private Button btnModificar;
+    @FXML
+    private Button btnInactivar;
 
     private List<NotificacionDTO> notificacionlist = new ArrayList<NotificacionDTO>();
 
@@ -77,14 +85,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     NotificacionService notificacionService = new NotificacionService();
 
     String str;
-    @FXML
-    private TextField txtBusqueda;
-    @FXML
-    private Button btnCrear;
-    @FXML
-    private Button btnModificar;
-    @FXML
-    private Button btnInactivar;
+    
     /**
      * Initializes the controller class.
      */

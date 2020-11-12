@@ -65,6 +65,12 @@ public class MantenimientoUsuariosController implements Initializable {
     private TableColumn<UsuarioDTO, String> tcEmpleadoId;
     @FXML
     private TableColumn<UsuarioDTO, String> tcRolId;
+    @FXML
+    private Button btnCrear;
+    @FXML
+    private Button btnModificar;
+    @FXML
+    private Button btnInactivar;
 
     private List<UsuarioDTO> usuariosList = new ArrayList<UsuarioDTO>();
 
@@ -73,12 +79,7 @@ public class MantenimientoUsuariosController implements Initializable {
     UsuarioDTO usuarioDTO = new UsuarioDTO();
 
     UsuarioService usuarioService = new UsuarioService();
-    @FXML
-    private Button btnCrear;
-    @FXML
-    private Button btnModificar;
-    @FXML
-    private Button btnInactivar;
+    
 
     /**
      * Initializes the controller class.

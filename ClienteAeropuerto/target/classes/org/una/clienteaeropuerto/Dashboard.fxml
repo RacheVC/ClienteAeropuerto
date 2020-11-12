@@ -169,6 +169,14 @@
                   <Insets left="30.0" />
                </VBox.margin>
             </ImageView>
+            <Label fx:id="lbNombreUsuario" prefHeight="19.0" prefWidth="113.0" text="Label" textFill="#f8f6f6">
+               <font>
+                  <Font name="Century Gothic Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
             <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#actionCerrarSesion" style="-fx-background-color: white;" stylesheets="@styles.css" text="Cerrar sesión" textFill="#222121">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
@@ -183,6 +191,9 @@
                <font>
                   <Font name="Century Gothic Bold" size="12.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="3.0" />
+               </VBox.margin>
             </Button>
          </children>
       </VBox>
