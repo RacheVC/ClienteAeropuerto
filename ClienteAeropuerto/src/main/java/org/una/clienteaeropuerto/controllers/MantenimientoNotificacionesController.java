@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,14 +27,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javax.imageio.ImageIO;
+import org.apache.poi.ss.usermodel.Color;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
@@ -85,17 +92,18 @@ public class MantenimientoNotificacionesController implements Initializable {
     NotificacionService notificacionService = new NotificacionService();
 
     String str;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        ValidacionPermisos();
+//        ValidacionPermisos();
         CargarInformacionNotificaciones();
         CargarListaImagenes();
         UnirPartesImagen(1);
+        addButtonToTable();
     }
 
     public void CargarInformacionNotificaciones() {
@@ -215,16 +223,71 @@ public class MantenimientoNotificacionesController implements Initializable {
         return partesUnidas;
     }
 
-    public void encodeFileToBase64() throws IOException {
-        System.out.println(UnirPartesImagen(1));
+    public Image encodeFileToBase64() throws IOException {
+     
         String cadena = String.valueOf(UnirPartesImagen(1));
 
         byte[] bytes = Base64.getDecoder().decode(cadena);
 
         ByteArrayInputStream bos = new ByteArrayInputStream(bytes);
         BufferedImage bi = ImageIO.read(bos);
-        // Image im = SwingFXUtils.toFXImage(bi, null);
+        Image im = SwingFXUtils.toFXImage(bi, null);
         //       imagensirva.setImage(im);
+        return im;
+    }
+
+    private void addButtonToTable() {
+        TableColumn<NotificacionDTO, Void> colBtn = new TableColumn("Imagenes");
+
+        Callback<TableColumn<NotificacionDTO, Void>, TableCell<NotificacionDTO, Void>> cellFactory = new Callback<TableColumn<NotificacionDTO, Void>, TableCell<NotificacionDTO, Void>>() {
+            @Override
+            public TableCell<NotificacionDTO, Void> call(final TableColumn<NotificacionDTO, Void> param) {
+                final TableCell<NotificacionDTO, Void> cell = new TableCell<NotificacionDTO, Void>() {
+
+                    private final Button btn = new Button();
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            NotificacionDTO data = getTableView().getItems().get(getIndex());
+                            System.out.println("selectedData: " + data);
+                        });
+//                        btn.backgroundProperty(Color.blue);
+                        btn.setPrefWidth(30);
+                        btn.setPrefHeight(30);
+                        ImageView imv = null;
+                        try {
+                            imv = new ImageView(encodeFileToBase64());
+                        } catch (IOException ex) {
+                            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        imv.setFitHeight(30);
+                        imv.setFitWidth(30);
+                    
+                            btn.setGraphic(imv);
+                       
+                          
+                        
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        colBtn.setCellFactory(cellFactory);
+
+        tvewNotificacion.getColumns().add(colBtn);
+
     }
 
     @FXML
@@ -239,7 +302,7 @@ public class MantenimientoNotificacionesController implements Initializable {
             notificacionDTO = (NotificacionDTO) tvewNotificacion.getSelectionModel().getSelectedItem();
         }
     }
-    
+
     private void ValidacionPermisos() {
 
         if ("Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))
@@ -247,9 +310,9 @@ public class MantenimientoNotificacionesController implements Initializable {
 
             btnCrear.setDisable(true);
             btnModificar.setDisable(true);
-            
-        }else if("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))){
-             
+
+        } else if ("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+
             btnCrear.setDisable(true);
             btnModificar.setDisable(true);
             btnInactivar.setDisable(true);
