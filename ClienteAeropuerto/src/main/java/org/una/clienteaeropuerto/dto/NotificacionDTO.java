@@ -100,4 +100,8 @@ public class NotificacionDTO {
         this.usuarios = usuarios;
     }
 
+    @Override
+    public String toString() {
+        return "NotificacionDTO{" + "id=" + id + ", fecha_envio=" + fecha_envio + ", fecha_entrega=" + fecha_entrega + ", mensaje=" + mensaje + ", emisor=" + emisor + ", receptor=" + receptor + ", estado=" + estado + ", usuarios=" + usuarios + '}';
+    }
 }

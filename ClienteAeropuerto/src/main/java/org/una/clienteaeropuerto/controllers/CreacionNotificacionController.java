@@ -26,6 +26,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -70,6 +72,10 @@ public class CreacionNotificacionController implements Initializable {
 
     NotificacionDTO notificacionDTO = new NotificacionDTO();
 
+    NotificacionDTO notificacionDTO2 = new NotificacionDTO();
+
+    UsuarioDTO usuariosDTO = new UsuarioDTO();
+
     NotificacionService notificacionservice = new NotificacionService();
 
     ImagenService imagenservice = new ImagenService();
@@ -77,9 +83,14 @@ public class CreacionNotificacionController implements Initializable {
     List<ImagenesDTO> listimagenes;
 
     static int residuo = 0;
+
     String str;
 
     private List<ImagenesDTO> imageneslist = new ArrayList<ImagenesDTO>();
+
+    List<NotificacionDTO> notificacionList = new ArrayList<>();
+
+    private boolean bandera = false;
 
     /**
      * Initializes the controller class.
@@ -87,6 +98,7 @@ public class CreacionNotificacionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        dpFechaEntrega.setDisable(true);
         this.listimagenes = new ArrayList<>();
         CargarListaImagenes();
         funcionAppContext();
@@ -94,30 +106,41 @@ public class CreacionNotificacionController implements Initializable {
     }
 
     @FXML
-    private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
-        UsuarioDTO usuariodto = new UsuarioDTO();
+    private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException, InstantiationException, IllegalAccessException {
 
+        GuardarNotificacion();
+        if (bandera == true) {
+            GuardarImagen64();
+            bandera = false;
+        }
+        MensajeCrear();
+    }
+
+    private void GuardarNotificacion() throws InterruptedException, ExecutionException, IOException {
+        
+        usuariosDTO.setId(AuthenticationSingleton.getInstance().getUsuario().getId());
         notificacionDTO.setEstado(true);
         notificacionDTO.setMensaje(txtMensaje.getText());
         notificacionDTO.setReceptor(txtReceptor.getText());
         notificacionDTO.setEmisor(AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto());
-//        notificacionDTO.setUsuarios((AuthenticationSingleton.getInstance().getUsuario().getId()));
+        notificacionDTO.setUsuarios(usuariosDTO);
         notificacionservice.add(notificacionDTO);
-        PostImage64();
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
-        Scene creacionDocs = new Scene(root);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
-
+    }
+    
+     private void MensajeCrear() {
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El usuario fue creado con éxito.");
+        alert.show();
     }
 
     @FXML
     private void OnActionBtnAgregarImagen(ActionEvent event) throws InterruptedException, ExecutionException, IOException, Exception {
 
+        bandera = true;
         File file = this.GetFile();
-        str = this.encodeFileToBase64(file);
+        str = this.codificarArchivoBase64(file);
     }
 
     public File GetFile() {
@@ -131,11 +154,10 @@ public class CreacionNotificacionController implements Initializable {
             Image image = new Image("file:" + selectedFile.getAbsolutePath());
             imgNotificacion.setImage(image);
         }
-        System.out.println(fileChooser);
         return selectedFile;
     }
 
-    public String encodeFileToBase64(File file) {
+    public String codificarArchivoBase64(File file) {
         try {
             byte[] fileContent = Files.readAllBytes(file.toPath());
             String enconde = new String(Base64.getEncoder().encodeToString(fileContent));
@@ -146,7 +168,7 @@ public class CreacionNotificacionController implements Initializable {
         }
     }
 
-    private void PostImage64() throws InterruptedException, ExecutionException, IOException {
+    private void GuardarImagen64() throws InterruptedException, ExecutionException, IOException {
 
         int diferencia = 0;
         int totalcadena = str.length();
@@ -171,6 +193,8 @@ public class CreacionNotificacionController implements Initializable {
                 imagen.setImagen_Adjunta(str.substring(0, totalcadena));
                 imagen.setParte(cantidadRecorrido - i);
                 imagen.setTotalPartes(cantidadRecorrido);
+                asignarIdNotificacion();
+                imagen.setNotificaciones(notificacionDTO2);
                 this.imagenservice.add(imagen);
             }
             if (totalcadena > 10000) {
@@ -179,6 +203,8 @@ public class CreacionNotificacionController implements Initializable {
                 imagen.setImagen_Adjunta(str.substring(limite, limite2));
                 imagen.setTotalPartes(cantidadRecorrido);
                 imagen.setParte(cantidadRecorrido - i);
+                asignarIdNotificacion();
+                imagen.setNotificaciones(notificacionDTO2);
                 this.imagenservice.add(imagen);
                 limite2 = limite;
                 limite = limite - 10000;
@@ -197,7 +223,7 @@ public class CreacionNotificacionController implements Initializable {
             notificacionDTO.getId();
 
             try {
-                imgNotificacion.setImage(encodeFileToBase64(Integer.valueOf(String.valueOf(notificacionDTO.getId()))));
+                imgNotificacion.setImage(DecodificarStringImagen(Integer.valueOf(String.valueOf(notificacionDTO.getId()))));
             } catch (IOException ex) {
                 Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -212,7 +238,6 @@ public class CreacionNotificacionController implements Initializable {
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public String UnirPartesImagen(int id) {
@@ -223,15 +248,13 @@ public class CreacionNotificacionController implements Initializable {
             if (id == imageneslist.get(i).getNotificaciones().getId()) {
                 parte = imageneslist.get(i).getImagen_Adjunta();
                 partesUnidas = parte + partesUnidas;
-
             }
-
         }
         cant = partesUnidas.length();
         return partesUnidas;
     }
 
-    public Image encodeFileToBase64(int id) throws IOException {
+    public Image DecodificarStringImagen(int id) throws IOException {
 
         String cadena = String.valueOf(UnirPartesImagen(id));
 
@@ -240,7 +263,6 @@ public class CreacionNotificacionController implements Initializable {
         ByteArrayInputStream bos = new ByteArrayInputStream(bytes);
         BufferedImage bi = ImageIO.read(bos);
         Image im = SwingFXUtils.toFXImage(bi, null);
-        //       imagensirva.setImage(im);
         return im;
     }
 
@@ -252,6 +274,41 @@ public class CreacionNotificacionController implements Initializable {
         } else {
             dpFechaEntrega.setDisable(true);
         }
+    }
 
+    private void asignarIdNotificacion() {
+
+        try {
+            notificacionList = notificacionservice.getInstance().getAll();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (int i = 0; i < notificacionList.size(); i++) {
+            if (i == notificacionList.size() - 1) {
+                notificacionDTO2.setEmisor(notificacionList.get(i).getEmisor());
+                notificacionDTO2.setEstado(notificacionList.get(i).isEstado());
+                notificacionDTO2.setFecha_entrega(notificacionList.get(i).getFecha_entrega());
+                notificacionDTO2.setFecha_envio(notificacionList.get(i).getFecha_entrega());
+                notificacionDTO2.setId(notificacionList.get(i).getId());
+                notificacionDTO2.setMensaje(notificacionList.get(i).getMensaje());
+                notificacionDTO2.setReceptor(notificacionList.get(i).getReceptor());
+                notificacionDTO2.setUsuarios(notificacionList.get(i).getUsuarios());
+            }
+        }
+    }
+
+    @FXML
+    private void OnActionBtnAtras(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
+        Scene creacionDocs = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(creacionDocs);
+        window.show();
     }
 }

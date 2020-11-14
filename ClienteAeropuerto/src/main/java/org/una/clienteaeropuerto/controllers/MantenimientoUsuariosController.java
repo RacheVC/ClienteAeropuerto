@@ -87,7 +87,7 @@ public class MantenimientoUsuariosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        ValidacionPermisos();
+ //       ValidacionPermisos();
         cargarInformacionUsuarios();
     }
 

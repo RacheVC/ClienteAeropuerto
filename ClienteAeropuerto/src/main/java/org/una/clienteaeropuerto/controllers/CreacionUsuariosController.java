@@ -53,15 +53,15 @@ public class CreacionUsuariosController implements Initializable {
     private ComboBox<RolesDTO> cbxRoles;
     @FXML
     private TextField txtJefe_id;
-    
+
     RolesDTO rolesDTO = new RolesDTO();
-    
+
     UsuarioDTO usuarioDTO = new UsuarioDTO();
-    
+
     UsuarioService usuarioService = new UsuarioService();
 
     java.util.Date date2 = new java.util.Date();
- 
+
     RolesService rolesService = new RolesService();
 
     List<RolesDTO> rolesList = new ArrayList<>();
@@ -81,24 +81,14 @@ public class CreacionUsuariosController implements Initializable {
 
         if (!AppContext.getInstance().get("ed").equals("edit")) {
             try {
-                usuarioDTO.setNombreCompleto(txtNombre.getText());
-                usuarioDTO.setCedula(txtCedula.getText());
-                usuarioDTO.setCorreo(txtCorreo.getText());
-                usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
-                usuarioDTO.setRoles(rolesDTO);
-                usuarioService.add(usuarioDTO);
+                CrearUsuario();
                 this.MensajeCrear();
             } catch (Exception e) {
                 this.CrearFalloMensaje();
             }
         } else {
             try {
-                usuarioDTO = (UsuarioDTO) AppContext.getInstance().get("usuarioDTO");
-                usuarioDTO.setNombreCompleto(txtNombre.getText());
-                usuarioDTO.setCedula(txtCedula.getText());
-                usuarioDTO.setCorreo(txtCorreo.getText());
-                usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
-                usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
+                modificarUsuario();
                 this.MensajeEditar();
             } catch (Exception e) {
                 this.EditarFalloMensaje();
@@ -108,12 +98,32 @@ public class CreacionUsuariosController implements Initializable {
 
     }
 
+    private void CrearUsuario() throws InterruptedException, ExecutionException, IOException {
+
+        usuarioDTO.setNombreCompleto(txtNombre.getText());
+        usuarioDTO.setCedula(txtCedula.getText());
+        usuarioDTO.setCorreo(txtCorreo.getText());
+        usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
+        usuarioDTO.setRoles(rolesDTO);
+        usuarioService.add(usuarioDTO);
+    }
+
+    private void modificarUsuario() throws InterruptedException, ExecutionException, IOException {
+        
+        usuarioDTO = (UsuarioDTO) AppContext.getInstance().get("usuarioDTO");
+        usuarioDTO.setNombreCompleto(txtNombre.getText());
+        usuarioDTO.setCedula(txtCedula.getText());
+        usuarioDTO.setCorreo(txtCorreo.getText());
+        usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
+        usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
+    }
+
     private void MensajeCrear() {
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El usuario fue creado con éxito.");
         alert.show();
-
     }
 
     private void CrearFalloMensaje() {

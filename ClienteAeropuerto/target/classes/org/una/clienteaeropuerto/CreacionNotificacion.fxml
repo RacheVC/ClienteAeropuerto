@@ -60,7 +60,12 @@
          <children>
             <Button mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets left="125.0" top="440.0" />
+                  <Insets left="120.0" top="440.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#OnActionBtnAtras" styleClass="jfx-buttonStandard2" text="Atrás">
+               <VBox.margin>
+                  <Insets left="190.0" top="-28.0" />
                </VBox.margin>
             </Button>
          </children>

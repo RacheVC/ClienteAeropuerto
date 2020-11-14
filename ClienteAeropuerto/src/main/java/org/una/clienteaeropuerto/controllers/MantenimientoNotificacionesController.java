@@ -5,12 +5,9 @@
  */
 package org.una.clienteaeropuerto.controllers;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -18,10 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,21 +23,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import javax.imageio.ImageIO;
-import org.apache.poi.ss.usermodel.Color;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
@@ -51,7 +38,6 @@ import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
-import org.una.clienteaeropuerto.utils.Imagen;
 
 /**
  * FXML Controller class
@@ -94,7 +80,6 @@ public class MantenimientoNotificacionesController implements Initializable {
     NotificacionDTO notificacionDTO = new NotificacionDTO();
 
     NotificacionService notificacionService = new NotificacionService();
-    private Image image;
 
     String str;
     @FXML
@@ -108,14 +93,6 @@ public class MantenimientoNotificacionesController implements Initializable {
 
 //        ValidacionPermisos();
         CargarInformacionNotificaciones();
-        CargarListaImagenes();
-        UnirPartesImagen(1);
-        addButtonToTable();
-        try {
-            CargarTableViewImagenes();
-        } catch (IOException ex) {
-            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public void CargarInformacionNotificaciones() {
@@ -125,64 +102,7 @@ public class MantenimientoNotificacionesController implements Initializable {
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         actualizarTableView();
-    }
-    
-    public void CargarTableViewImagenes() throws IOException{
-//       ImageView imview = null;
-////        Imagen imagenclase = null;
-////        imview = new ImageView(encodeFileToBase64());
-////       imagenclase.setImageView(imview);
-////        
-////       
-////        TableColumn<Imagen, ImageView> firstColumn = new TableColumn<Imagen, ImageView>("Images");
-////        firstColumn.setCellValueFactory(new PropertyValueFactory<Imagen, ImageView>("image"));
-////        firstColumn.setPrefWidth(60);
-////
-////        /* add column to the tableview and set its items */
-////        tvwImage.getColumns().add(firstColumn);
-////        tvwImage.setItems(imgList);
-////
-////        /* add TableView to the layout */
-////        layout.setCenter(tvwImage);
-////        return layout;
-////////////////////////////////////////////////////////////////////
-//        Image img;
-//        img = encodeFileToBase64();
-//        imagendeprueba.setImage(img);
-//        imagendeprueba.setFitHeight(50);
-//        imagendeprueba.setFitWidth(50);
-////        
-////        BorderPane layout = new BorderPane();
-//
-//        /* layout -> center */
-//        
-//
-//        
-//            /* initialize two CustomImage objects and add them to the observable list */
-//        ObservableList<Imagen> imgList = FXCollections.observableArrayList();
-//        Imagen imagen = new Imagen(new ImageView(img));
-//        imgList.addAll(imagen);
-//       
-//
-//        /* initialize and specify table column */
-//        
-//        clEmisor.setCellValueFactory(new PropertyValueFactory<>("imageView"));
-//        clImage.setPrefWidth(60);
-//       
-////      firstColumn.setPrefWidth(60);
-//
-//        /* add column to the tableview and set its items */
-//        tvwImage.getColumns().add(clImage);
-//        tvwImage.setItems(imgList);
-////
-////        /* add TableView to the layout */
-//
-//
-////       
-////        image = new Image(encodeFileToBase64());
-       
     }
 
     private void actualizarTableView() {
@@ -285,84 +205,9 @@ public class MantenimientoNotificacionesController implements Initializable {
                 partesUnidas = parte + partesUnidas;
 
             }
-
         }
         cant = partesUnidas.length();
         return partesUnidas;
-    }
-
-    public Image encodeFileToBase64() throws IOException {
-     
-        String cadena = String.valueOf(UnirPartesImagen(1));
-
-        byte[] bytes = Base64.getDecoder().decode(cadena);
-
-        ByteArrayInputStream bos = new ByteArrayInputStream(bytes);
-        BufferedImage bi = ImageIO.read(bos);
-        Image im = SwingFXUtils.toFXImage(bi, null);
-        //       imagensirva.setImage(im);
-        return im;
-    }
-
-    private void addButtonToTable() {
-      
-        TableColumn<NotificacionDTO, Void> colBtn = new TableColumn("Imagenes");
-
-        Callback<TableColumn<NotificacionDTO, Void>, TableCell<NotificacionDTO, Void>> cellFactory = new Callback<TableColumn<NotificacionDTO, Void>, TableCell<NotificacionDTO, Void>>() {
-            @Override
-            public TableCell<NotificacionDTO, Void> call(final TableColumn<NotificacionDTO, Void> param) {
-                final TableCell<NotificacionDTO, Void> cell = new TableCell<NotificacionDTO, Void>() {
-
-                    private final Button btn = new Button();
-
-                    {
-                        btn.setOnAction((ActionEvent event) -> {
-                            NotificacionDTO data = getTableView().getItems().get(getIndex());
-                            System.out.println("selectedData: " + data);
-                        });
-//                        btn.backgroundProperty(Color.blue);
-                        btn.setPrefWidth(30);
-                        btn.setPrefHeight(30);
-                        ImageView imv = null;
-                       
-                        try {
-                            imv = new ImageView(encodeFileToBase64());
-                        } catch (IOException ex) {
-                            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                        imv.setFitHeight(30);
-                        imv.setFitWidth(30);
-                    
-                            btn.setGraphic(imv);
-                       
-                          
-                        
-                    }
-
-                    @Override
-                    public void updateItem(Void item, boolean empty) {
-                        System.out.println(".updateItem()");
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                          
-                        } else {
-                            
-                            setGraphic(btn);
-                            
-                           
-                        }
-                    }
-                };
-                return cell;
-            }
-        };
-
-        colBtn.setCellFactory(cellFactory);
-
-        tvewNotificacion.getColumns().add(colBtn);
-
     }
 
     @FXML
