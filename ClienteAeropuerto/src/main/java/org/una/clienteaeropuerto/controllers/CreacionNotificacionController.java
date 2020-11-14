@@ -91,6 +91,9 @@ public class CreacionNotificacionController implements Initializable {
     List<NotificacionDTO> notificacionList = new ArrayList<>();
 
     private boolean bandera = false;
+    private boolean bandera2 = false;
+
+    java.util.Date date = new java.util.Date();
 
     /**
      * Initializes the controller class.
@@ -117,7 +120,12 @@ public class CreacionNotificacionController implements Initializable {
     }
 
     private void GuardarNotificacion() throws InterruptedException, ExecutionException, IOException {
-        
+
+        if (bandera2 == true) {
+            date = java.sql.Date.valueOf(dpFechaEntrega.getValue());
+            notificacionDTO.setFecha_entrega(date);
+            bandera2 = false;
+        }
         usuariosDTO.setId(AuthenticationSingleton.getInstance().getUsuario().getId());
         notificacionDTO.setEstado(true);
         notificacionDTO.setMensaje(txtMensaje.getText());
@@ -126,9 +134,9 @@ public class CreacionNotificacionController implements Initializable {
         notificacionDTO.setUsuarios(usuariosDTO);
         notificacionservice.add(notificacionDTO);
     }
-    
-     private void MensajeCrear() {
-        
+
+    private void MensajeCrear() {
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El usuario fue creado con éxito.");
@@ -271,8 +279,10 @@ public class CreacionNotificacionController implements Initializable {
 
         if (cbProgramarFechaEntrega.isSelected()) {
             dpFechaEntrega.setDisable(false);
+            bandera2 = true;
         } else {
             dpFechaEntrega.setDisable(true);
+            bandera2 = false;
         }
     }
 
@@ -290,14 +300,7 @@ public class CreacionNotificacionController implements Initializable {
 
         for (int i = 0; i < notificacionList.size(); i++) {
             if (i == notificacionList.size() - 1) {
-                notificacionDTO2.setEmisor(notificacionList.get(i).getEmisor());
-                notificacionDTO2.setEstado(notificacionList.get(i).isEstado());
-                notificacionDTO2.setFecha_entrega(notificacionList.get(i).getFecha_entrega());
-                notificacionDTO2.setFecha_envio(notificacionList.get(i).getFecha_entrega());
                 notificacionDTO2.setId(notificacionList.get(i).getId());
-                notificacionDTO2.setMensaje(notificacionList.get(i).getMensaje());
-                notificacionDTO2.setReceptor(notificacionList.get(i).getReceptor());
-                notificacionDTO2.setUsuarios(notificacionList.get(i).getUsuarios());
             }
         }
     }
