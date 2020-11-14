@@ -7,12 +7,13 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="923.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.MantenimientoNotificacionesController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="884.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.MantenimientoNotificacionesController">
    <top>
       <HBox prefHeight="143.0" prefWidth="824.0" styleClass="anchorPadre" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -57,26 +58,10 @@
                   </Button>
                </children>
             </HBox>
+            <ImageView fx:id="imagendeprueba" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </HBox>
    </top>
-   <center>
-      <TableView fx:id="tvewNotificacion" onMouseClicked="#MouseClickedTvewNotificacion" prefHeight="257.0" prefWidth="586.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="clId" prefWidth="75.0" text="Id" />
-          <TableColumn fx:id="clFechaEnvio" prefWidth="90.0" text="Fecha Envio" />
-            <TableColumn fx:id="clFechaLectura" prefWidth="107.0" text="Fecha Lectura" />
-            <TableColumn fx:id="clMensaje" prefWidth="99.0" text="Mensaje" />
-            <TableColumn fx:id="clEmisor" prefWidth="76.0" text="Emisor" />
-            <TableColumn fx:id="clEstado" prefWidth="69.0" text="Estado" />
-            <TableColumn fx:id="clReceptor" prefWidth="126.0" text="Receptor" />
-        </columns>
-         <styleClass>
-            <String fx:value="VBoxTarjeta" />
-            <String fx:value="vboxMenu" />
-         </styleClass>
-      </TableView>
-   </center>
    <right>
       <VBox prefHeight="204.0" prefWidth="146.0" styleClass="anchorPadre">
          <children>
@@ -97,4 +82,21 @@
       <String fx:value="anchorPadre2" />
       <String fx:value="anchorLogin" />
    </styleClass>
+   <center>
+      <TableView fx:id="tvewNotificacion" onMouseClicked="#MouseClickedTvewNotificacion" prefHeight="307.0" prefWidth="831.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="clId" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="clFechaEnvio" prefWidth="90.0" text="Fecha Envio" />
+            <TableColumn fx:id="clFechaLectura" prefWidth="107.0" text="Fecha Lectura" />
+            <TableColumn fx:id="clMensaje" prefWidth="99.0" text="Mensaje" />
+            <TableColumn fx:id="clEmisor" prefWidth="76.0" text="Emisor" />
+            <TableColumn fx:id="clEstado" prefWidth="69.0" text="Estado" />
+            <TableColumn fx:id="clReceptor" prefWidth="124.79998779296875" text="Receptor" />
+        </columns>
+         <styleClass>
+            <String fx:value="VBoxTarjeta" />
+            <String fx:value="vboxMenu" />
+         </styleClass>
+      </TableView>
+   </center>
 </BorderPane>

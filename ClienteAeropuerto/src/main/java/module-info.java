@@ -12,9 +12,11 @@ module org.una.clienteaeropuerto {
 
     opens org.una.clienteaeropuerto.dto;
     opens org.una.clienteaeropuerto to javafx.fxml;
+    opens org.una.clienteaeropuerto.utils to javafx.fxml;
     opens org.una.clienteaeropuerto.controllers to javafx.fxml;
     exports org.una.clienteaeropuerto;
     exports org.una.clienteaeropuerto.controllers;
     exports org.una.clienteaeropuerto.dto;
+    exports org.una.clienteaeropuerto.utils;
 
 }

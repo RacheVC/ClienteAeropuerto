@@ -18,7 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,6 +39,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javax.imageio.ImageIO;
@@ -48,6 +51,7 @@ import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
+import org.una.clienteaeropuerto.utils.Imagen;
 
 /**
  * FXML Controller class
@@ -90,8 +94,11 @@ public class MantenimientoNotificacionesController implements Initializable {
     NotificacionDTO notificacionDTO = new NotificacionDTO();
 
     NotificacionService notificacionService = new NotificacionService();
+    private Image image ;
 
     String str;
+    @FXML
+    private ImageView imagendeprueba;
 
     /**
      * Initializes the controller class.
@@ -104,6 +111,11 @@ public class MantenimientoNotificacionesController implements Initializable {
         CargarListaImagenes();
         UnirPartesImagen(1);
         addButtonToTable();
+        try {
+            CargarTableViewImagenes();
+        } catch (IOException ex) {
+            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void CargarInformacionNotificaciones() {
@@ -115,6 +127,62 @@ public class MantenimientoNotificacionesController implements Initializable {
         }
 
         actualizarTableView();
+    }
+    
+    public void CargarTableViewImagenes() throws IOException{
+//       ImageView imview = null;
+////        Imagen imagenclase = null;
+////        imview = new ImageView(encodeFileToBase64());
+////       imagenclase.setImageView(imview);
+////        
+////       
+////        TableColumn<Imagen, ImageView> firstColumn = new TableColumn<Imagen, ImageView>("Images");
+////        firstColumn.setCellValueFactory(new PropertyValueFactory<Imagen, ImageView>("image"));
+////        firstColumn.setPrefWidth(60);
+////
+////        /* add column to the tableview and set its items */
+////        tvwImage.getColumns().add(firstColumn);
+////        tvwImage.setItems(imgList);
+////
+////        /* add TableView to the layout */
+////        layout.setCenter(tvwImage);
+////        return layout;
+////////////////////////////////////////////////////////////////////
+//        Image img;
+//        img = encodeFileToBase64();
+//        imagendeprueba.setImage(img);
+//        imagendeprueba.setFitHeight(50);
+//        imagendeprueba.setFitWidth(50);
+////        
+////        BorderPane layout = new BorderPane();
+//
+//        /* layout -> center */
+//        
+//
+//        
+//            /* initialize two CustomImage objects and add them to the observable list */
+//        ObservableList<Imagen> imgList = FXCollections.observableArrayList();
+//        Imagen imagen = new Imagen(new ImageView(img));
+//        imgList.addAll(imagen);
+//       
+//
+//        /* initialize and specify table column */
+//        
+//        clEmisor.setCellValueFactory(new PropertyValueFactory<>("imageView"));
+//        clImage.setPrefWidth(60);
+//       
+////      firstColumn.setPrefWidth(60);
+//
+//        /* add column to the tableview and set its items */
+//        tvwImage.getColumns().add(clImage);
+//        tvwImage.setItems(imgList);
+////
+////        /* add TableView to the layout */
+//
+//
+////       
+////        image = new Image(encodeFileToBase64());
+       
     }
 
     private void actualizarTableView() {
@@ -237,6 +305,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     }
 
     private void addButtonToTable() {
+      
         TableColumn<NotificacionDTO, Void> colBtn = new TableColumn("Imagenes");
 
         Callback<TableColumn<NotificacionDTO, Void>, TableCell<NotificacionDTO, Void>> cellFactory = new Callback<TableColumn<NotificacionDTO, Void>, TableCell<NotificacionDTO, Void>>() {
@@ -255,6 +324,7 @@ public class MantenimientoNotificacionesController implements Initializable {
                         btn.setPrefWidth(30);
                         btn.setPrefHeight(30);
                         ImageView imv = null;
+                       
                         try {
                             imv = new ImageView(encodeFileToBase64());
                         } catch (IOException ex) {
@@ -272,11 +342,16 @@ public class MantenimientoNotificacionesController implements Initializable {
 
                     @Override
                     public void updateItem(Void item, boolean empty) {
+                        System.out.println(".updateItem()");
                         super.updateItem(item, empty);
                         if (empty) {
                             setGraphic(null);
+                          
                         } else {
+                            
                             setGraphic(btn);
+                            
+                           
                         }
                     }
                 };

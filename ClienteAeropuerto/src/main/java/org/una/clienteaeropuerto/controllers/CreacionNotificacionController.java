@@ -192,6 +192,8 @@ public class CreacionNotificacionController implements Initializable {
         }
     }
 
+    
+    
 //    public void CargarListaImagenes() {
 //        
 //        try {
