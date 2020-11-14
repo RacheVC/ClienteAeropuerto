@@ -54,23 +54,23 @@ public class CrearHorarioController implements Initializable {
     private ComboBox<String> cbHoraSalida;
     @FXML
     private ComboBox<String> cbMinutoSalida;
-    
+
     DatePicker datepicker;
-    
+
     HorarioService horarioService = new HorarioService();
-    
+
     HorarioDTO horarioDTO = new HorarioDTO();
 
     java.util.Date date = new java.util.Date();
-    
+
     java.util.Date date2 = new java.util.Date();
 
     Areas_trabajoDTO areas_trabajoDTO = new Areas_trabajoDTO();
-    
+
     AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
-    
+
     List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
-    
+
     /**
      * Initializes the controller class.
      */
@@ -86,17 +86,7 @@ public class CrearHorarioController implements Initializable {
 
         if (!AppContext.getInstance().get("ed").equals("edit")) {
             try {
-                date.setHours(Integer.valueOf(cbHoraEntrada.getValue()));
-                date.setMinutes(Integer.valueOf(cbMinutoEntrada.getValue()));
-                date2.setHours(Integer.valueOf(cbHoraSalida.getValue()));
-                date2.setMinutes(Integer.valueOf(cbMinutoSalida.getValue()));
-                horarioDTO.setDiaEntrada(cbDiaEntrada.getValue());
-                horarioDTO.setDiaSalida(cbDiaSalida.getValue());
-                horarioDTO.setEstado(true);
-                horarioDTO.setAreas_trabajo(areas_trabajoDTO);
-                horarioDTO.setHora_entrada(date);
-                horarioDTO.setHora_salida(date2);
-                horarioService.add(horarioDTO);
+                crearHorario();
                 this.CreateMessage();
             } catch (Exception e) {
                 this.FailCreateMessage();
@@ -104,18 +94,36 @@ public class CrearHorarioController implements Initializable {
 
         } else {
             try {
-                horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
-                horarioDTO.setDiaEntrada(cbDiaEntrada.getValue());
-                horarioDTO.setDiaSalida(cbDiaSalida.getValue());
-                horarioDTO.setEstado(true);
-                horarioService.modify(horarioDTO.getId(), horarioDTO);
+                modificarUsuario();
                 this.EditMessage();
             } catch (Exception e) {
                 this.FailEditMessage();
             }
-
         }
+    }
 
+    private void crearHorario() throws InterruptedException, ExecutionException, IOException {
+
+        date.setHours(Integer.valueOf(cbHoraEntrada.getValue()));
+        date.setMinutes(Integer.valueOf(cbMinutoEntrada.getValue()));
+        date2.setHours(Integer.valueOf(cbHoraSalida.getValue()));
+        date2.setMinutes(Integer.valueOf(cbMinutoSalida.getValue()));
+        horarioDTO.setDiaEntrada(cbDiaEntrada.getValue());
+        horarioDTO.setDiaSalida(cbDiaSalida.getValue());
+        horarioDTO.setEstado(true);
+        horarioDTO.setAreas_trabajo(areas_trabajoDTO);
+        horarioDTO.setHora_entrada(date);
+        horarioDTO.setHora_salida(date2);
+        horarioService.add(horarioDTO);
+    }
+
+    private void modificarUsuario() throws InterruptedException, ExecutionException, IOException {
+
+        horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
+        horarioDTO.setDiaEntrada(cbDiaEntrada.getValue());
+        horarioDTO.setDiaSalida(cbDiaSalida.getValue());
+        horarioDTO.setEstado(true);
+        horarioService.modify(horarioDTO.getId(), horarioDTO);
     }
 
     private void CreateMessage() {
@@ -193,6 +201,7 @@ public class CrearHorarioController implements Initializable {
     }
 
     private void RellenarCamposTable(HorarioDTO horarioDTO1) {
+       
         cbDiaEntrada.setValue(horarioDTO1.getDiaEntrada());
         cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
         cbDiaSalida.setValue(horarioDTO1.getDiaSalida());
@@ -204,6 +213,7 @@ public class CrearHorarioController implements Initializable {
     }
 
     public void LLenarComboboxHoras() {
+       
         for (int i = 1; i < 25; i++) {
             if (i < 10) {
                 cbHoraEntrada.getItems().addAll("0" + String.valueOf(i));
@@ -226,21 +236,4 @@ public class CrearHorarioController implements Initializable {
 
         }
     }
-
-    @FXML
-    private void actioncbHoraEntrada(ActionEvent event) {
-    }
-
-    @FXML
-    private void actioncbMinutoEntrada(ActionEvent event) {
-    }
-
-    @FXML
-    private void actioncbHoraSalida(ActionEvent event) {
-    }
-
-    @FXML
-    private void actioncbMinutoSalida(ActionEvent event) {
-    }
-
 }

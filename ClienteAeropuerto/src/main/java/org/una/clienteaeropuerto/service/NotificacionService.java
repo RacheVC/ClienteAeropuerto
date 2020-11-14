@@ -8,7 +8,6 @@ package org.una.clienteaeropuerto.service;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import org.una.clienteaeropuerto.dto.HorarioDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.utils.ConnectionUtils;
 

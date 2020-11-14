@@ -86,28 +86,38 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
 
         if (!AppContext.getInstance().get("ed").equals("edit")) {
             if (cbMarcaEntrada.isSelected()) {
-                marcaHorarioDTO.setAreas_trabajo(areas_trabajoDTO);
-                marcaHorarioDTO.setEstado(true);
-                date2.setHours(00);
-                date2.setMinutes(Integer.valueOf(00));
-                marcaHorarioDTO.setMarca_salida(date2);
-                marcasHorarioService.add(marcaHorarioDTO);
+                CrearMarcaEntrada();
                 this.CrearMensaje();
             } else {
                 this.FalloCrearMensaje();
             }
         } else {
-            if(cbMarcaSalida.isSelected()) {
-                marcaHorarioDTO = (MarcaHorarioDTO) AppContext.getInstance().get("marcaHorarioDTO");
-                marcaHorarioDTO.setAreas_trabajo(areas_trabajoDTO);
-                marcaHorarioDTO.setEstado(true);
-                marcaHorarioDTO.setMarca_salida(date);
-                marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
+            if (cbMarcaSalida.isSelected()) {
+                CrearMarcaSalida();
                 this.EditarMensaje();
-            }else{
+            } else {
                 this.FalloEditarMensaje();
             }
         }
+    }
+
+    private void CrearMarcaEntrada() throws InterruptedException, ExecutionException, IOException {
+
+        marcaHorarioDTO.setAreas_trabajo(areas_trabajoDTO);
+        marcaHorarioDTO.setEstado(true);
+        date2.setHours(00);
+        date2.setMinutes(Integer.valueOf(00));
+        marcaHorarioDTO.setMarca_salida(date2);
+        marcasHorarioService.add(marcaHorarioDTO);
+    }
+
+    private void CrearMarcaSalida() throws InterruptedException, ExecutionException, IOException {
+        
+        marcaHorarioDTO = (MarcaHorarioDTO) AppContext.getInstance().get("marcaHorarioDTO");
+        marcaHorarioDTO.setAreas_trabajo(areas_trabajoDTO);
+        marcaHorarioDTO.setEstado(true);
+        marcaHorarioDTO.setMarca_salida(date);
+        marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
     }
 
     private void CrearMensaje() {
