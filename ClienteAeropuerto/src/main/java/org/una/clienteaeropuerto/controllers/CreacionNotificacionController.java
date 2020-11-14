@@ -183,12 +183,6 @@ public class CreacionNotificacionController implements Initializable {
             txtReceptor.setText(notificacionDTO.getReceptor());
             notificacionDTO.setEstado(true);
             notificacionDTO.getId();
-
-//            try {
-//                imgNotificacion.setImage(encodeFileToBase64());
-//            } catch (IOException ex) {
-//                Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
         }
     }
 

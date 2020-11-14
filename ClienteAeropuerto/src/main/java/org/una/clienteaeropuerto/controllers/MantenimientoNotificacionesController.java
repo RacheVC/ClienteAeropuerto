@@ -94,7 +94,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     NotificacionDTO notificacionDTO = new NotificacionDTO();
 
     NotificacionService notificacionService = new NotificacionService();
-    private Image image ;
+    private Image image;
 
     String str;
     @FXML
