@@ -16,21 +16,21 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
 import org.una.clienteaeropuerto.dto.Usuarios_AreasDTO;
 import org.una.clienteaeropuerto.service.AreasTrabajoService;
 import org.una.clienteaeropuerto.service.MarcasHorarioService;
+import org.una.clienteaeropuerto.service.UsuariosAreasService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
@@ -53,18 +53,17 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
 
     MarcaHorarioDTO marcaHorarioDTO = new MarcaHorarioDTO();
     MarcasHorarioService marcasHorarioService = new MarcasHorarioService();
-    @FXML
-    private ComboBox<Areas_trabajoDTO> cbxAreaTrabajo;
 
     Areas_trabajoDTO areas_trabajoDTO = new Areas_trabajoDTO();
-    Usuarios_AreasDTO usuarios_areasDTO = new Usuarios_AreasDTO();
-    AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
-    List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
+    Usuarios_AreasDTO usuarios_AreasDTO = new Usuarios_AreasDTO();
+    UsuariosAreasService usuariosAreasService = new UsuariosAreasService();
+    private List<Usuarios_AreasDTO> usuariosAreasList = new ArrayList<Usuarios_AreasDTO>();
 
     java.util.Date date = new java.util.Date();
     java.util.Date date2 = new java.util.Date();
 
     CambiarVentana cambiarVentana = new CambiarVentana();
+
     /**
      * Initializes the controller class.
      */
@@ -73,8 +72,6 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
 
         h1 = new Thread(this);
         h1.start();
-
-        llenarCbAreaTrabajo();
 
         funcionAppContext();
     }
@@ -101,18 +98,20 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
 
     private void CrearMarcaEntrada() throws InterruptedException, ExecutionException, IOException {
 
-        marcaHorarioDTO.setUsuariosAreas(usuarios_areasDTO);
+        CompararID();
+        marcaHorarioDTO.setUsuariosAreas(usuarios_AreasDTO);
         marcaHorarioDTO.setEstado(true);
-        date2.setHours(00);
-        date2.setMinutes(Integer.valueOf(00));
-        marcaHorarioDTO.setMarca_salida(date2);
+//        date2.setHours(00);
+//        date2.setMinutes(Integer.valueOf(00));
+//        marcaHorarioDTO.setMarca_salida(date2);
         marcasHorarioService.add(marcaHorarioDTO);
     }
 
     private void CrearMarcaSalida() throws InterruptedException, ExecutionException, IOException {
-        
+
+        CompararID();
         marcaHorarioDTO = (MarcaHorarioDTO) AppContext.getInstance().get("marcaHorarioDTO");
-        marcaHorarioDTO.setUsuariosAreas(usuarios_areasDTO);
+        marcaHorarioDTO.setUsuariosAreas(usuarios_AreasDTO);
         marcaHorarioDTO.setEstado(true);
         marcaHorarioDTO.setMarca_salida(date);
         marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
@@ -170,16 +169,6 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
         }
     }
 
-    private void llenarCbAreaTrabajo() {
-        try {
-            areasTrabajoList = (List<Areas_trabajoDTO>) areasTrabajoService.getAll();
-        } catch (InterruptedException | ExecutionException | IOException ex) {
-            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        cbxAreaTrabajo.setItems(FXCollections.observableArrayList(areasTrabajoList));
-    }
-
     private void funcionAppContext() {
         if (AppContext.getInstance().get("ed").equals("edit")) {
             MarcaHorarioDTO marcaHorarioDTO = new MarcaHorarioDTO();
@@ -189,22 +178,36 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
         } else {
             if (AppContext.getInstance().get("ed").equals("insertar")) {
                 cbMarcaSalida.setDisable(true);
-                cbxAreaTrabajo.setDisable(true);
             }
 
         }
     }
 
     @FXML
-    private void actionCbxAreaTrabajo(ActionEvent event) {
-        if (cbxAreaTrabajo.getSelectionModel().getSelectedItem() != null) {
-            areas_trabajoDTO = (Areas_trabajoDTO) cbxAreaTrabajo.getSelectionModel().getSelectedItem();
-        }
+    private void actionBtnAtras(ActionEvent event) throws IOException {
+
+        cambiarVentana.cambioVentana("ControlMarcasHorario", event);
     }
 
-    @FXML
-    private void actionBtnAtras(ActionEvent event) throws IOException {
+    private void CompararID() {
         
-        cambiarVentana.cambioVentana("ControlMarcasHorario", event);
+        try {
+            usuariosAreasList = UsuariosAreasService.getInstance().getAll();
+            System.out.println("aaaaaaa " + usuariosAreasList.toString());
+        } catch (InterruptedException ex) {
+            Logger.getLogger(CreacionMarcaHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ExecutionException ex) {
+            Logger.getLogger(CreacionMarcaHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CreacionMarcaHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (int i = 0; i < usuariosAreasList.size(); i++) {
+            if(usuariosAreasList.get(i).getUsuarios().getId() ==  AuthenticationSingleton.getInstance().getUsuario().getId()){
+                usuarios_AreasDTO.setId(usuariosAreasList.get(i).getId());
+                usuarios_AreasDTO.setAreas_trabajo(usuariosAreasList.get(i).getAreas_trabajo());
+                usuarios_AreasDTO.setUsuarios(usuariosAreasList.get(i).getUsuarios());
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package org.una.clienteaeropuerto.dto;
+
 import java.util.Date;
 
 /**
@@ -73,7 +74,5 @@ public class MarcaHorarioDTO {
     public String toString() {
         return "MarcaHorarioDTO{" + "id=" + id + ", marca_entrada=" + marca_entrada + ", marca_salida=" + marca_salida + ", estado=" + estado + ", usuariosAreas=" + usuariosAreas + '}';
     }
-
-   
 
 }

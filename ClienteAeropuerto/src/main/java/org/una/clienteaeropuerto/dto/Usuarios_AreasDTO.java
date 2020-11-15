@@ -46,6 +46,10 @@ public class Usuarios_AreasDTO {
     public void setUsuarios(UsuarioDTO usuarios) {
         this.usuarios = usuarios;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Usuarios_AreasDTO{" + "id=" + id + ", areas_trabajo=" + areas_trabajo + ", usuarios=" + usuarios + '}';
+    }
     
 }

@@ -4,6 +4,7 @@ org\una\clienteaeropuerto\utils\ConnectionUtils$2.class
 org\una\clienteaeropuerto\utils\CambiarVentana.class
 org\una\clienteaeropuerto\dto\Monedas.class
 org\una\clienteaeropuerto\service\ImagenService.class
+org\una\clienteaeropuerto\utils\ConnectionUtils$15.class
 org\una\clienteaeropuerto\dto\NotificacionDTO.class
 org\una\clienteaeropuerto\dto\MarcaHorarioDTO.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$12.class
@@ -24,9 +25,11 @@ org\una\clienteaeropuerto\service\HorarioService.class
 org\una\clienteaeropuerto\dto\UsuarioDTO.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$13.class
 org\una\clienteaeropuerto\dto\AuthenticationResponse.class
+org\una\clienteaeropuerto\service\UsuariosAreasService$UsuariosAreasServiceHolder.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$5.class
 org\una\clienteaeropuerto\dto\RolesDTO.class
 org\una\clienteaeropuerto\service\DivisaService$DivisaServiceHolder.class
+org\una\clienteaeropuerto\service\UsuariosAreasService.class
 org\una\clienteaeropuerto\service\HorarioService$HorarioServiceHolder.class
 org\una\clienteaeropuerto\service\NotificacionService$NotificacionServiceHolder.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$9.class

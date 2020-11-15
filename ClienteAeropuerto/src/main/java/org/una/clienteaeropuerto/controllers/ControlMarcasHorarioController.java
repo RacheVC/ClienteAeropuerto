@@ -48,18 +48,19 @@ public class ControlMarcasHorarioController implements Initializable {
     private TableColumn<MarcaHorarioDTO, String> tcAreaTrabajo;
     @FXML
     private TableColumn<MarcaHorarioDTO, String> tcEstado;
+    @FXML
+    private Button btnInsertarHoraEntrada;
+    @FXML
+    private Button btnInsertarHoraSalida;
 
     private List<MarcaHorarioDTO> marcasList = new ArrayList<MarcaHorarioDTO>();
     private List<MarcaHorarioDTO> marcasList2 = new ArrayList<MarcaHorarioDTO>();
 
     MarcaHorarioDTO marcaHorarioDTO = new MarcaHorarioDTO();
     MarcasHorarioService marcasHorarioService = new MarcasHorarioService();
-    @FXML
-    private Button btnInsertarHoraEntrada;
-    @FXML
-    private Button btnInsertarHoraSalida;
 
     CambiarVentana cambiarVentana = new CambiarVentana();
+
     /**
      * Initializes the controller class.
      */
@@ -80,7 +81,7 @@ public class ControlMarcasHorarioController implements Initializable {
         if (marcaHorarioDTO.isEstado() == true) {
             marcaHorarioDTO.setEstado(false);
             marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
-            
+
             cambiarVentana.cambioVentana("ControlMarcasHorario", event);
         }
     }
@@ -108,7 +109,7 @@ public class ControlMarcasHorarioController implements Initializable {
     }
 
     private void cargarInformacionMarcasHorario() {
-        
+
         try {
             marcasList = MarcasHorarioService.getInstance().getAll();
         } catch (InterruptedException ex) {
@@ -137,7 +138,15 @@ public class ControlMarcasHorarioController implements Initializable {
                     return new ReadOnlyStringWrapper(estadoString);
                 });
                 tcMarcaEntrada.setCellValueFactory((param) -> new SimpleObjectProperty<>(param.getValue().getMarca_entrada().getHours() + ":" + (param.getValue().getMarca_entrada().getMinutes())));
-                tcMarcaSalida.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getMarca_salida().getHours() + ":" + (param.getValue().getMarca_salida().getMinutes())));
+                tcMarcaSalida.setCellValueFactory(pe -> {
+                    String horaSalida;
+                    if (pe.getValue().getMarca_salida() == null) {
+                        horaSalida = "Sin definir";
+                    } else {
+                        horaSalida = pe.getValue().getMarca_salida().getHours() + ":" + pe.getValue().getMarca_salida().getMinutes();
+                    }
+                    return new ReadOnlyStringWrapper(horaSalida);
+                });
                 tcAreaTrabajo.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getUsuariosAreas().getAreas_trabajo().getNombre()));
                 tvMarcasHorario.getItems().clear();
                 tvMarcasHorario.setItems(FXCollections.observableArrayList(marcasList2));
