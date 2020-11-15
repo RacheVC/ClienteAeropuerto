@@ -21,11 +21,7 @@ import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
@@ -36,10 +32,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 import javax.imageio.ImageIO;
-import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
@@ -47,6 +41,7 @@ import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -94,6 +89,8 @@ public class CreacionNotificacionController implements Initializable {
     private boolean bandera2 = false;
 
     java.util.Date date = new java.util.Date();
+
+    CambiarVentana cambiarVentana = new CambiarVentana();
 
     /**
      * Initializes the controller class.
@@ -308,10 +305,6 @@ public class CreacionNotificacionController implements Initializable {
     @FXML
     private void OnActionBtnAtras(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("MantenimientoNotificaciones", event);
     }
 }

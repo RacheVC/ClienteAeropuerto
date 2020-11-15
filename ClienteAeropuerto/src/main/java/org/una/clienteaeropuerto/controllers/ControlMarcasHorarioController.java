@@ -18,21 +18,16 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
 import org.una.clienteaeropuerto.service.MarcasHorarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -64,6 +59,7 @@ public class ControlMarcasHorarioController implements Initializable {
     @FXML
     private Button btnInsertarHoraSalida;
 
+    CambiarVentana cambiarVentana = new CambiarVentana();
     /**
      * Initializes the controller class.
      */
@@ -84,12 +80,8 @@ public class ControlMarcasHorarioController implements Initializable {
         if (marcaHorarioDTO.isEstado() == true) {
             marcaHorarioDTO.setEstado(false);
             marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
-
-            Parent root = FXMLLoader.load(App.class.getResource("ControlMarcasHorario.fxml"));
-            Scene creacionDocs = new Scene(root);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(creacionDocs);
-            window.show();
+            
+            cambiarVentana.cambioVentana("ControlMarcasHorario", event);
         }
     }
 
@@ -99,21 +91,13 @@ public class ControlMarcasHorarioController implements Initializable {
         AppContext.getInstance().set("marcaHorarioDTO", marcaHorarioDTO);
         AppContext.getInstance().set("ed", "insertar");
 
-        Parent root = FXMLLoader.load(App.class.getResource("CreacionMarcaHorario.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("CreacionMarcaHorario", event);
     }
 
     @FXML
     private void accionSalir(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("Dashboard", event);
     }
 
     @FXML
@@ -167,11 +151,7 @@ public class ControlMarcasHorarioController implements Initializable {
         AppContext.getInstance().set("marcaHorarioDTO", marcaHorarioDTO);
         AppContext.getInstance().set("ed", "edit");
 
-        Parent root = FXMLLoader.load(App.class.getResource("CreacionMarcaHorario.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("CreacionMarcaHorario", event);
     }
 
 }

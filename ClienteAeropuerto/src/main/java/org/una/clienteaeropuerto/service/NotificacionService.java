@@ -19,6 +19,7 @@ public class NotificacionService {
 
     private final String urlFindAll = "http://localhost:8098/notificaciones";
     private final String urlCreateModify = "http://localhost:8098/notificaciones/";
+    private final String urlFindByEmisor = "http://localhost:8098/notificaciones/emisor/";
 
     public List<NotificacionDTO> getAll() throws InterruptedException, ExecutionException, IOException {
         return ConnectionUtils.ListFromConnection(urlFindAll, NotificacionDTO.class);
@@ -40,4 +41,10 @@ public class NotificacionService {
 
         private static final NotificacionService INSTANCE = new NotificacionService();
     }
+    
+     public List<NotificacionDTO> finByEmisor(String emisor) throws IOException {
+
+        return ConnectionUtils.ConnectionToObjectByEmisor(urlFindByEmisor, emisor);
+    }
+    
 }

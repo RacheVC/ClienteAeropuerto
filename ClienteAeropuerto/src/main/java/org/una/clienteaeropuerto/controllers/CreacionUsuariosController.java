@@ -33,6 +33,7 @@ import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.RolesService;
 import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -65,6 +66,8 @@ public class CreacionUsuariosController implements Initializable {
     RolesService rolesService = new RolesService();
 
     List<RolesDTO> rolesList = new ArrayList<>();
+
+    CambiarVentana cambiarVentana = new CambiarVentana();
 
     /**
      * Initializes the controller class.
@@ -109,7 +112,7 @@ public class CreacionUsuariosController implements Initializable {
     }
 
     private void modificarUsuario() throws InterruptedException, ExecutionException, IOException {
-        
+
         usuarioDTO = (UsuarioDTO) AppContext.getInstance().get("usuarioDTO");
         usuarioDTO.setNombreCompleto(txtNombre.getText());
         usuarioDTO.setCedula(txtCedula.getText());
@@ -158,11 +161,8 @@ public class CreacionUsuariosController implements Initializable {
 
     @FXML
     private void OnActionBtnAtras(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoUsuarios.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        
+        cambiarVentana.cambioVentana("MantenimientoUsuarios", event);
     }
 
     private void llenarCbRoles() {

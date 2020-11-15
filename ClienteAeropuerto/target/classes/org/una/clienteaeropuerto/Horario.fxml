@@ -26,6 +26,11 @@
                         <Insets left="40.0" top="15.0" />
                      </VBox.margin>
                   </Label>
+                  <Button mnemonicParsing="false" onAction="#actionBtnMostrarTodos" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Mostrar todos">
+                     <VBox.margin>
+                        <Insets bottom="-50.0" left="240.0" />
+                     </VBox.margin>
+                  </Button>
                   <ComboBox fx:id="cbxFiltroDiaEntrada" onAction="#actioncbxFiltroDiaEntrada" prefHeight="25.0" prefWidth="171.0" promptText="Filtro por día de entrada">
                      <VBox.margin>
                         <Insets left="50.0" top="40.0" />

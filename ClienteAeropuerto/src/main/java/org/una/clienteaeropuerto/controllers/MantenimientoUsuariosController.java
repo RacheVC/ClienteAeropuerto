@@ -19,24 +19,20 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -79,7 +75,8 @@ public class MantenimientoUsuariosController implements Initializable {
     UsuarioDTO usuarioDTO = new UsuarioDTO();
 
     UsuarioService usuarioService = new UsuarioService();
-    
+
+    CambiarVentana cambiarVentana = new CambiarVentana();
 
     /**
      * Initializes the controller class.
@@ -87,46 +84,37 @@ public class MantenimientoUsuariosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
- //       ValidacionPermisos();
+        //       ValidacionPermisos();
         cargarInformacionUsuarios();
     }
 
     @FXML
     private void actionBtnCrear(ActionEvent event) throws IOException {
+
         AppContext.getInstance().set("usuarioDTO", usuarioDTO);
         AppContext.getInstance().set("ed", "insertar");
 
-        Parent root = FXMLLoader.load(App.class.getResource("CreacionUsuarios.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("CreacionUsuarios", event);
     }
 
     @FXML
     private void actionBtnModificar(ActionEvent event) throws IOException {
+
         AppContext.getInstance().set("usuarioDTO", usuarioDTO);
         AppContext.getInstance().set("ed", "edit");
 
-        Parent root = FXMLLoader.load(App.class.getResource("CreacionUsuarios.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("CreacionUsuarios", event);
     }
 
     @FXML
     private void actionBtnInactivar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
+
         if (usuarioDTO.isEstado() == true) {
             usuarioDTO.setEstado(false);
             encontrarFechaRegistro(usuarioDTO.getId());
             usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
 
-            Parent root = FXMLLoader.load(App.class.getResource("MantenimientoUsuarios.fxml"));
-            Scene creacionDocs = new Scene(root);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(creacionDocs);
-            window.show();
+            cambiarVentana.cambioVentana("MantenimientoUsuarios", event);
         }
     }
 
@@ -143,11 +131,8 @@ public class MantenimientoUsuariosController implements Initializable {
 
     @FXML
     private void actionBtnSalir(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+
+        cambiarVentana.cambioVentana("Dashboard", event);
     }
 
     @FXML
@@ -220,12 +205,21 @@ public class MantenimientoUsuariosController implements Initializable {
 
             btnCrear.setDisable(true);
             btnModificar.setDisable(true);
-            
-        }else if("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))){
-             
+
+        } else if ("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+
             btnCrear.setDisable(true);
             btnModificar.setDisable(true);
             btnInactivar.setDisable(true);
         }
+    }
+
+    @FXML
+    private void KeyTypedtxtBusqueda(KeyEvent event) {
+
+        if (txtBusqueda.getText().isEmpty()) {
+            actualizarTableView();
+        }
+
     }
 }

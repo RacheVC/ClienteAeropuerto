@@ -56,6 +56,28 @@ public class ConnectionUtils {
             return gson.fromJson(response.toString(), listtype);
         }
     }
+    
+    public static <T> List<T> ConnectionToObjectByEmisor(String urlstring, String emisor) throws MalformedURLException, IOException {
+        Gson gson = new Gson();
+        Type listtype = new TypeToken<ArrayList<NotificacionDTO>>() {
+        }.getType();
+
+        urlstring = urlstring + emisor;
+        URL url = new URL(urlstring);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Authorization", "bearer " + AuthenticationSingleton.getInstance().getJwt());
+
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            return gson.fromJson(response.toString(), listtype);
+        }
+    }
 
     public static <T> List<T> ConnectionToObjectByNombre(String urlstring, String nombre) throws MalformedURLException, IOException {
         Gson gson = new Gson();

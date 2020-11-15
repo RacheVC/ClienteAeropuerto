@@ -33,6 +33,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -65,6 +66,8 @@ public class DivisaController implements Initializable {
     @FXML
     private TextField txtColonCostarricense;
 
+    CambiarVentana cambiarVentana = new CambiarVentana();
+
     /**
      * Initializes the controller class.
      */
@@ -72,16 +75,16 @@ public class DivisaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         llenarComboBoxTipoDivisa();
-                
+
         txtMonto.addEventHandler(KeyEvent.KEY_TYPED, event -> SoloNumerosEnteros(event));
-        
+
         CargarDatos();
 
         txtMonto.setFocusTraversable(false);
 
     }
-    
-    private void llenarComboBoxTipoDivisa(){
+
+    private void llenarComboBoxTipoDivisa() {
         cmbTipoDivisa.setValue("Eurodolar");
         cmbTipoDivisa.getItems().addAll("Dólar Americano", "Libra Esterlina", "Yen Japones", "Eurodolar", "Dólar Canadiense", "Franco Suizo", "Dólar neozelandes", "Dólar Australiano", "Colón Costarricense");
     }
@@ -206,11 +209,7 @@ public class DivisaController implements Initializable {
     @FXML
     private void ActionBtnLogin(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(App.class.getResource("Login.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("Login", event);
     }
 
     @FXML

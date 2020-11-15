@@ -18,23 +18,18 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.HorarioDTO;
 import org.una.clienteaeropuerto.service.HorarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -75,7 +70,8 @@ public class HorarioController implements Initializable {
     HorarioDTO horarioDTO = new HorarioDTO();
 
     HorarioService horarioService = new HorarioService();
-    
+
+    CambiarVentana cambiarVentana = new CambiarVentana();
 
     /**
      * Initializes the controller class.
@@ -86,57 +82,44 @@ public class HorarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        ValidacionPermisos();
+//        ValidacionPermisos();
         CargarInformacionHorario();
 
     }
 
     @FXML
     private void accionCrearHorario(ActionEvent event) throws IOException {
+        
         AppContext.getInstance().set("horarioDTO", horarioDTO);
         AppContext.getInstance().set("ed", "insertar");
 
-        Parent root = FXMLLoader.load(App.class.getResource("CrearHorario.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("CrearHorario", event);
     }
 
     @FXML
     private void accionModificarHorario(ActionEvent event) throws IOException {
+        
         AppContext.getInstance().set("horarioDTO", horarioDTO);
         AppContext.getInstance().set("ed", "edit");
 
-        Parent root = FXMLLoader.load(App.class.getResource("CrearHorario.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("CrearHorario", event);
 
     }
 
     @FXML
     private void accionInactivarHorario(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
+
         if (horarioDTO.isEstado() == true) {
             horarioDTO.setEstado(false);
             horarioService.modify(horarioDTO.getId(), horarioDTO);
-
-            Parent root = FXMLLoader.load(App.class.getResource("HorarioController.fxml"));
-            Scene creacionDocs = new Scene(root);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(creacionDocs);
-            window.show();
+            cambiarVentana.cambioVentana("Horario", event);
         }
     }
 
     @FXML
     private void accionSalirHorario(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+
+        cambiarVentana.cambioVentana("Dashboard", event);
     }
 
     @FXML
@@ -209,18 +192,24 @@ public class HorarioController implements Initializable {
 
     private void ValidacionPermisos() {
 
-         if ("Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))
+        if ("Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))
                 || "Gerente".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
 
             btnCrear.setDisable(true);
             btnModificar.setDisable(true);
-            
-        }else if("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))){
-             
+
+        } else if ("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+
             btnCrear.setDisable(true);
             btnModificar.setDisable(true);
             btnInactivar.setDisable(true);
         }
+    }
+
+    @FXML
+    private void actionBtnMostrarTodos(ActionEvent event) throws IOException {
+
+        cambiarVentana.cambioVentana("Horario", event);
     }
 
 }

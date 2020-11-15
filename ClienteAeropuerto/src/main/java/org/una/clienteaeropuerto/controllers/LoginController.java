@@ -26,6 +26,7 @@ import org.una.clienteaeropuerto.dto.AuthenticationRequest;
 import org.una.clienteaeropuerto.dto.AuthenticationResponse;
 import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -41,6 +42,8 @@ public class LoginController implements Initializable {
 
     private boolean band = true;
 
+    CambiarVentana cambiarVentana = new CambiarVentana();
+    
     /**
      * Initializes the controller class.
      */
@@ -89,10 +92,6 @@ public class LoginController implements Initializable {
     @FXML
     private void ActionBtnTipoCambio(ActionEvent event) throws IOException {
         
-        Parent root = FXMLLoader.load(App.class.getResource("Divisa.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("Divisa", event);
     }
 }

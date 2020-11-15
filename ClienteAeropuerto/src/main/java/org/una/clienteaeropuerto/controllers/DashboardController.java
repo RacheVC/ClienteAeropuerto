@@ -10,17 +10,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -45,10 +40,12 @@ public class DashboardController implements Initializable {
     private Button btnReporteHorasLaboradas;
     @FXML
     private Button btnCerrarSesion;
-
-    UsuarioDTO usuarioDTO = new UsuarioDTO();
     @FXML
     private Label lbNombreUsuario;
+
+    UsuarioDTO usuarioDTO = new UsuarioDTO();
+
+    CambiarVentana cambiarVentana = new CambiarVentana();
 
     /**
      * Initializes the controller class.
@@ -63,41 +60,25 @@ public class DashboardController implements Initializable {
     @FXML
     private void actionControlEmpleados(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoUsuarios.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("MantenimientoUsuarios", event);
     }
 
     @FXML
     private void onActionControlHorarios(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(App.class.getResource("Horario.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("Horario", event);
     }
 
     @FXML
     private void actionControlNotificaciones(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("MantenimientoNotificaciones", event);
     }
 
     @FXML
     private void actionControlMarcas(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(App.class.getResource("ControlMarcasHorario.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("ControlMarcasHorario", event);
     }
 
     @FXML
@@ -115,11 +96,7 @@ public class DashboardController implements Initializable {
     @FXML
     private void actionCerrarSesion(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(App.class.getResource("Login.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("Login", event);
     }
 
     private void ValidacionPermisos() {
@@ -134,9 +111,9 @@ public class DashboardController implements Initializable {
             btnControlNotificaciones.setDisable(true);
         }
     }
-    
-    private void capturarNombreUsuario(){
-        
+
+    private void capturarNombreUsuario() {
+
         AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto();
         lbNombreUsuario.setText(AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto());
     }

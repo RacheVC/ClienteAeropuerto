@@ -23,12 +23,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
@@ -38,6 +40,7 @@ import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -70,6 +73,8 @@ public class MantenimientoNotificacionesController implements Initializable {
     private Button btnModificar;
     @FXML
     private Button btnInactivar;
+    @FXML
+    private ImageView imagendeprueba;
 
     private List<NotificacionDTO> notificacionlist = new ArrayList<NotificacionDTO>();
 
@@ -82,8 +87,8 @@ public class MantenimientoNotificacionesController implements Initializable {
     NotificacionService notificacionService = new NotificacionService();
 
     String str;
-    @FXML
-    private ImageView imagendeprueba;
+
+    CambiarVentana cambiarVentana = new CambiarVentana();
 
     /**
      * Initializes the controller class.
@@ -103,6 +108,7 @@ public class MantenimientoNotificacionesController implements Initializable {
             Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
         actualizarTableView();
+
     }
 
     private void actualizarTableView() {
@@ -133,6 +139,20 @@ public class MantenimientoNotificacionesController implements Initializable {
 
     @FXML
     private void accionBuscarNotificacion(ActionEvent event) {
+
+        try {
+            NotificacionService notificacionService = new NotificacionService();
+            List<NotificacionDTO> notificacionList = new ArrayList<>();
+            notificacionList = (List<NotificacionDTO>) notificacionService.finByEmisor(txtBusqueda.getText());
+            tvewNotificacion.getItems().clear();
+            tvewNotificacion.setItems(FXCollections.observableArrayList(notificacionList));
+        } catch (Exception e) {
+            System.out.println(e);
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("Error");
+            info.setContentText("Los datos no se han podido filtrar");
+            info.showAndWait();
+        }
     }
 
     @FXML
@@ -141,11 +161,7 @@ public class MantenimientoNotificacionesController implements Initializable {
         AppContext.getInstance().set("notificacionDTO", notificacionDTO);
         AppContext.getInstance().set("ed", "insertar");
 
-        Parent root = FXMLLoader.load(App.class.getResource("CreacionNotificacion.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("CreacionNotificacion", event);
     }
 
     @FXML
@@ -154,11 +170,7 @@ public class MantenimientoNotificacionesController implements Initializable {
         AppContext.getInstance().set("notificacionDTO", notificacionDTO);
         AppContext.getInstance().set("ed", "edit");
 
-        Parent root = FXMLLoader.load(App.class.getResource("CreacionNotificacion.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        cambiarVentana.cambioVentana("CreacionNotificacion", event);
     }
 
     @FXML
@@ -168,11 +180,7 @@ public class MantenimientoNotificacionesController implements Initializable {
             notificacionDTO.setEstado(false);
             notificacionService.modify(notificacionDTO.getId(), notificacionDTO);
 
-            Parent root = FXMLLoader.load(App.class.getResource("MantenimientoNotificaciones.fxml"));
-            Scene creacionDocs = new Scene(root);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(creacionDocs);
-            window.show();
+            cambiarVentana.cambioVentana("MantenimientoNotificaciones", event);
         }
     }
 
@@ -239,4 +247,11 @@ public class MantenimientoNotificacionesController implements Initializable {
         }
     }
 
+    @FXML
+    private void KeyTypedTxtBuscar(KeyEvent event) {
+
+        if (txtBusqueda.getText().isEmpty()) {
+            actualizarTableView();
+        }
+    }
 }

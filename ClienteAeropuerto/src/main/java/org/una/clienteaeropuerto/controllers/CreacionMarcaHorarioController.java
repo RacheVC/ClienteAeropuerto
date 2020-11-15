@@ -19,23 +19,18 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
 import org.una.clienteaeropuerto.service.AreasTrabajoService;
 import org.una.clienteaeropuerto.service.MarcasHorarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -67,6 +62,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     java.util.Date date = new java.util.Date();
     java.util.Date date2 = new java.util.Date();
 
+    CambiarVentana cambiarVentana = new CambiarVentana();
     /**
      * Initializes the controller class.
      */
@@ -206,10 +202,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
 
     @FXML
     private void actionBtnAtras(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(App.class.getResource("ControlMarcasHorario.fxml"));
-        Scene creacionDocs = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(creacionDocs);
-        window.show();
+        
+        cambiarVentana.cambioVentana("ControlMarcasHorario", event);
     }
 }
