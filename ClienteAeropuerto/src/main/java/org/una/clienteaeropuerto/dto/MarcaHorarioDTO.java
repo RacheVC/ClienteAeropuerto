@@ -16,17 +16,17 @@ public class MarcaHorarioDTO {
     private Date marca_entrada;
     private Date marca_salida;
     private boolean estado;
-    private Areas_trabajoDTO areas_trabajo;
+    private Usuarios_AreasDTO usuariosAreas;
 
     public MarcaHorarioDTO() {
     }
 
-    public MarcaHorarioDTO(Long id, Date marca_entrada, Date marca_salida, boolean estado, Areas_trabajoDTO areas_trabajo) {
+    public MarcaHorarioDTO(Long id, Date marca_entrada, Date marca_salida, boolean estado, Usuarios_AreasDTO usuariosAreas) {
         this.id = id;
         this.marca_entrada = marca_entrada;
         this.marca_salida = marca_salida;
         this.estado = estado;
-        this.areas_trabajo = areas_trabajo;
+        this.usuariosAreas = usuariosAreas;
     }
 
     public Long getId() {
@@ -61,17 +61,19 @@ public class MarcaHorarioDTO {
         this.estado = estado;
     }
 
-    public Areas_trabajoDTO getAreas_trabajo() {
-        return areas_trabajo;
+    public Usuarios_AreasDTO getUsuariosAreas() {
+        return usuariosAreas;
     }
 
-    public void setAreas_trabajo(Areas_trabajoDTO areas_trabajo) {
-        this.areas_trabajo = areas_trabajo;
+    public void setUsuariosAreas(Usuarios_AreasDTO usuariosAreas) {
+        this.usuariosAreas = usuariosAreas;
     }
 
     @Override
     public String toString() {
-        return "MarcaHorarioDTO{" + "id=" + id + ", marca_entrada=" + marca_entrada + ", marca_salida=" + marca_salida + ", estado=" + estado + ", Areas_trabajo=" + areas_trabajo + '}';
+        return "MarcaHorarioDTO{" + "id=" + id + ", marca_entrada=" + marca_entrada + ", marca_salida=" + marca_salida + ", estado=" + estado + ", usuariosAreas=" + usuariosAreas + '}';
     }
+
+   
 
 }

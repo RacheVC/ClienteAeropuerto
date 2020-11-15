@@ -27,6 +27,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
+import org.una.clienteaeropuerto.dto.Usuarios_AreasDTO;
 import org.una.clienteaeropuerto.service.AreasTrabajoService;
 import org.una.clienteaeropuerto.service.MarcasHorarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
@@ -56,6 +57,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     private ComboBox<Areas_trabajoDTO> cbxAreaTrabajo;
 
     Areas_trabajoDTO areas_trabajoDTO = new Areas_trabajoDTO();
+    Usuarios_AreasDTO usuarios_areasDTO = new Usuarios_AreasDTO();
     AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
     List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
 
@@ -99,7 +101,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
 
     private void CrearMarcaEntrada() throws InterruptedException, ExecutionException, IOException {
 
-        marcaHorarioDTO.setAreas_trabajo(areas_trabajoDTO);
+        marcaHorarioDTO.setUsuariosAreas(usuarios_areasDTO);
         marcaHorarioDTO.setEstado(true);
         date2.setHours(00);
         date2.setMinutes(Integer.valueOf(00));
@@ -110,7 +112,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     private void CrearMarcaSalida() throws InterruptedException, ExecutionException, IOException {
         
         marcaHorarioDTO = (MarcaHorarioDTO) AppContext.getInstance().get("marcaHorarioDTO");
-        marcaHorarioDTO.setAreas_trabajo(areas_trabajoDTO);
+        marcaHorarioDTO.setUsuariosAreas(usuarios_areasDTO);
         marcaHorarioDTO.setEstado(true);
         marcaHorarioDTO.setMarca_salida(date);
         marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
