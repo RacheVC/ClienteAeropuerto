@@ -26,12 +26,12 @@
                         <Insets left="40.0" top="15.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="txtBusqueda" alignment="CENTER" onKeyTyped="#KeyTypedtxtBusqueda" prefHeight="25.0" prefWidth="313.0" promptText="Busqueda por cédula" styleClass="VBoxTarjeta2" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
+                  <TextField fx:id="txtBusqueda" alignment="CENTER" focusTraversable="false" onKeyTyped="#KeyTypedtxtBusqueda" prefHeight="25.0" prefWidth="313.0" promptText="Busqueda por cédula" styleClass="VBoxTarjeta2" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets left="30.0" right="100.0" top="30.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" onAction="#actionBtnBuscar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-buttonStandard2" text="Buscar">
+                  <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#actionBtnBuscar" prefHeight="25.0" prefWidth="78.0" styleClass="jfx-buttonStandard2" text="Buscar">
                      <VBox.margin>
                         <Insets left="270.0" top="-25.0" />
                      </VBox.margin>

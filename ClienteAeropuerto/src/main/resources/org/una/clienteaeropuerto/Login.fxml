@@ -32,7 +32,7 @@
       </Button>
       <VBox alignment="CENTER" layoutX="610.0" layoutY="62.0" prefHeight="388.0" prefWidth="732.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="62.0">
          <children>
-            <AnchorPane maxWidth="375.0" prefHeight="324.0" prefWidth="375.0" stylesheets="@Styles.css">
+            <AnchorPane focusTraversable="true" maxWidth="375.0" prefHeight="324.0" prefWidth="375.0" stylesheets="@Styles.css">
                <children>
                   <Label alignment="CENTER" layoutX="134.0" layoutY="14.0" prefHeight="46.0" prefWidth="108.0" text="Login" textFill="#f5f2f2">
                      <font>

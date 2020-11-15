@@ -67,6 +67,8 @@ public class MantenimientoUsuariosController implements Initializable {
     private Button btnModificar;
     @FXML
     private Button btnInactivar;
+    @FXML
+    private Button btnBuscar;
 
     private List<UsuarioDTO> usuariosList = new ArrayList<UsuarioDTO>();
 
@@ -77,6 +79,7 @@ public class MantenimientoUsuariosController implements Initializable {
     UsuarioService usuarioService = new UsuarioService();
 
     CambiarVentana cambiarVentana = new CambiarVentana();
+    
 
     /**
      * Initializes the controller class.
@@ -84,8 +87,9 @@ public class MantenimientoUsuariosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        //       ValidacionPermisos();
+//        ValidacionPermisos();
         cargarInformacionUsuarios();
+        txtBusqueda.setFocusTraversable(false);
     }
 
     @FXML

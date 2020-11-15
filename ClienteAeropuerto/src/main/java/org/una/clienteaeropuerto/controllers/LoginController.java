@@ -43,7 +43,7 @@ public class LoginController implements Initializable {
     private boolean band = true;
 
     CambiarVentana cambiarVentana = new CambiarVentana();
-    
+
     /**
      * Initializes the controller class.
      */
@@ -65,12 +65,7 @@ public class LoginController implements Initializable {
         }
         if (band == true) {
             this.MensajeAutorizado();
-
-            Parent root = FXMLLoader.load(App.class.getResource("Dashboard.fxml"));
-            Scene creacionDocs = new Scene(root);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(creacionDocs);
-            window.show();
+            cambiarVentana.cambioVentana("Dashboard", event);
         }
 
     }
@@ -91,7 +86,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private void ActionBtnTipoCambio(ActionEvent event) throws IOException {
-        
+
         cambiarVentana.cambioVentana("Divisa", event);
     }
 }

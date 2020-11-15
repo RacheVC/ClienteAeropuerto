@@ -98,6 +98,7 @@ public class MantenimientoNotificacionesController implements Initializable {
 
 //        ValidacionPermisos();
         CargarInformacionNotificaciones();
+        txtBusqueda.setFocusTraversable(false);
     }
 
     public void CargarInformacionNotificaciones() {
