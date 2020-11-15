@@ -12,7 +12,19 @@
     -fx-background-color:  #447604;
     -fx-text-fill: WHITE;
     -fx-background-radius: 10 10 10 10;
-    -fx-opacity: 2;
+    -fx-alignment: CENTER;
+    -fx-border-style: solid;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
+
+}
+
+.jfx-buttonStandard3 {
+    -fx-background-color:  #447604;
+    -fx-text-fill: WHITE;
+    -fx-background-radius: 10 10 10 10;
+    -fx-opacity: 0.2;
     -fx-alignment: CENTER;
     -fx-border-style: solid;
     -fx-border-color: white;

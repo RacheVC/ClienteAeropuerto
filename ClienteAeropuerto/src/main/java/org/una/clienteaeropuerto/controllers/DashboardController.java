@@ -54,7 +54,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         capturarNombreUsuario();
-//        ValidacionPermisos();
+        ValidacionPermisos();
     }
 
     @FXML
@@ -114,7 +114,6 @@ public class DashboardController implements Initializable {
 
     private void capturarNombreUsuario() {
 
-        AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto();
         lbNombreUsuario.setText(AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto());
     }
 }
