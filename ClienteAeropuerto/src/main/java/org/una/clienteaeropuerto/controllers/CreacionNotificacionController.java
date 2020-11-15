@@ -287,11 +287,7 @@ public class CreacionNotificacionController implements Initializable {
 
         try {
             notificacionList = notificacionservice.getInstance().getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
         }
 

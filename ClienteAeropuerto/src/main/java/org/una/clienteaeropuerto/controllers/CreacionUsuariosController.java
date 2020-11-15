@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -16,22 +17,20 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import org.una.clienteaeropuerto.App;
+import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
 import org.una.clienteaeropuerto.dto.RolesDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
+import org.una.clienteaeropuerto.dto.Usuarios_AreasDTO;
+import org.una.clienteaeropuerto.service.AreasTrabajoService;
 import org.una.clienteaeropuerto.service.RolesService;
 import org.una.clienteaeropuerto.service.UsuarioService;
+import org.una.clienteaeropuerto.service.UsuariosAreasService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
 
@@ -54,10 +53,18 @@ public class CreacionUsuariosController implements Initializable {
     private ComboBox<RolesDTO> cbxRoles;
     @FXML
     private TextField txtJefe_id;
+    @FXML
+    private ComboBox<Areas_trabajoDTO> cmbAreaTrabajo;
 
     RolesDTO rolesDTO = new RolesDTO();
 
+    Usuarios_AreasDTO usuarios_AreasDTO = new Usuarios_AreasDTO();
+
+    Areas_trabajoDTO areas_trabajoDTO = new Areas_trabajoDTO();
+
     UsuarioDTO usuarioDTO = new UsuarioDTO();
+
+    UsuarioDTO usuarioDTO2 = new UsuarioDTO();
 
     UsuarioService usuarioService = new UsuarioService();
 
@@ -69,6 +76,16 @@ public class CreacionUsuariosController implements Initializable {
 
     CambiarVentana cambiarVentana = new CambiarVentana();
 
+    UsuariosAreasService usuariosAreasService = new UsuariosAreasService();
+
+    AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
+
+    List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
+
+    List<Usuarios_AreasDTO> usuarioareasList = new ArrayList<>();
+
+    List<UsuarioDTO> usuarioList = new ArrayList<>();
+
     /**
      * Initializes the controller class.
      */
@@ -76,6 +93,7 @@ public class CreacionUsuariosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         llenarCbRoles();
+        llenarCbAreasTrabajo();
         funcionAppContext();
     }
 
@@ -109,6 +127,11 @@ public class CreacionUsuariosController implements Initializable {
         usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
         usuarioDTO.setRoles(rolesDTO);
         usuarioService.add(usuarioDTO);
+
+        usuarios_AreasDTO.setAreas_trabajo(areas_trabajoDTO);
+        asignarIdUsuarioTrabajo();
+        usuarios_AreasDTO.setUsuarios(usuarioDTO2);
+        usuariosAreasService.add(usuarios_AreasDTO);
     }
 
     private void modificarUsuario() throws InterruptedException, ExecutionException, IOException {
@@ -119,6 +142,7 @@ public class CreacionUsuariosController implements Initializable {
         usuarioDTO.setCorreo(txtCorreo.getText());
         usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
         usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
+
     }
 
     private void MensajeCrear() {
@@ -161,7 +185,7 @@ public class CreacionUsuariosController implements Initializable {
 
     @FXML
     private void OnActionBtnAtras(ActionEvent event) throws IOException {
-        
+
         cambiarVentana.cambioVentana("MantenimientoUsuarios", event);
     }
 
@@ -184,7 +208,64 @@ public class CreacionUsuariosController implements Initializable {
             txtCorreo.setText(usuarioDTO.getCorreo());
             txtNombre.setText(usuarioDTO.getNombreCompleto());
             cbxRoles.setValue(usuarioDTO.getRoles());
+            BuscarIdUsuarioEnUsuarioAreas(usuarioDTO.getId());
+
+            cmbAreaTrabajo.setValue(BuscarIdUsuarioEnUsuarioAreas(usuarioDTO.getId()));
             usuarioDTO.getFecha_registro();
+        }
+    }
+
+    private void llenarCbAreasTrabajo() {
+
+        try {
+            areasTrabajoList = (List<Areas_trabajoDTO>) areasTrabajoService.getAll();
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        cmbAreaTrabajo.setItems(FXCollections.observableArrayList(areasTrabajoList));
+    }
+
+    @FXML
+    private void actionAreaTrabajo(ActionEvent event) {
+
+        if (cmbAreaTrabajo.getSelectionModel().getSelectedItem() != null) {
+            areas_trabajoDTO = (Areas_trabajoDTO) cmbAreaTrabajo.getSelectionModel().getSelectedItem();
+        }
+
+    }
+
+    private Areas_trabajoDTO BuscarIdUsuarioEnUsuarioAreas(Long id) {
+
+        Areas_trabajoDTO idEncontrada = null;
+
+        try {
+            usuarioareasList = UsuariosAreasService.getInstance().getAll();
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (int i = 0; i < usuarioareasList.size(); i++) {
+            if (Objects.equals(id, usuarioareasList.get(i).getUsuarios().getId())) {
+                idEncontrada = usuarioareasList.get(i).getAreas_trabajo();
+            }
+        }
+        return idEncontrada;
+
+    }
+
+    private void asignarIdUsuarioTrabajo() {
+
+        try {
+            usuarioList = UsuarioService.getInstance().getAll();
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        for (int i = 0; i < usuarioList.size(); i++) {
+            if (i == usuarioList.size() - 1) {
+                usuarioDTO2.setId(usuarioList.get(i).getId());
+            }
         }
     }
 

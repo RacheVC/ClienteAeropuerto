@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
@@ -49,10 +50,10 @@ public class ControlMarcasHorarioController implements Initializable {
     @FXML
     private TableColumn<MarcaHorarioDTO, String> tcEstado;
     @FXML
-    private Button btnInsertarHoraEntrada;
+    private TableColumn<MarcaHorarioDTO, String> tcUsuario;
     @FXML
-    private Button btnInsertarHoraSalida;
-
+    private TextField txtBusqueda;
+    
     private List<MarcaHorarioDTO> marcasList = new ArrayList<MarcaHorarioDTO>();
     private List<MarcaHorarioDTO> marcasList2 = new ArrayList<MarcaHorarioDTO>();
 
@@ -147,6 +148,7 @@ public class ControlMarcasHorarioController implements Initializable {
                     }
                     return new ReadOnlyStringWrapper(horaSalida);
                 });
+                tcUsuario.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getUsuariosAreas().getUsuarios().getNombreCompleto()));
                 tcAreaTrabajo.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getUsuariosAreas().getAreas_trabajo().getNombre()));
                 tvMarcasHorario.getItems().clear();
                 tvMarcasHorario.setItems(FXCollections.observableArrayList(marcasList2));

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="633.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.ControlMarcasHorarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="788.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.una.clienteaeropuerto.controllers.ControlMarcasHorarioController">
    <top>
       <HBox prefHeight="143.0" prefWidth="824.0" styleClass="anchorPadre" stylesheets="@styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -53,10 +53,11 @@
       <TableView fx:id="tvMarcasHorario" onMouseClicked="#MouseTvMarcas" prefHeight="257.0" prefWidth="514.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="tcId" prefWidth="53.0" text="Id" />
-          <TableColumn fx:id="tcMarcaEntrada" prefWidth="139.0" text="Marca de entrada" />
-            <TableColumn fx:id="tcMarcaSalida" prefWidth="111.0" text="Marca de salida" />
-            <TableColumn fx:id="tcAreaTrabajo" prefWidth="126.0" text="Área de trabajo" />
-            <TableColumn fx:id="tcEstado" prefWidth="82.0" text="Estado" />
+            <TableColumn fx:id="tcUsuario" prefWidth="143.20004272460938" text="Usuario" />
+            <TableColumn fx:id="tcAreaTrabajo" prefWidth="139.20001220703125" text="Área de trabajo" />
+          <TableColumn fx:id="tcMarcaEntrada" prefWidth="121.5999755859375" text="Marca de entrada" />
+            <TableColumn fx:id="tcMarcaSalida" prefWidth="111.99996948242188" text="Marca de salida" />
+            <TableColumn fx:id="tcEstado" prefWidth="94.39999999999998" text="Estado" />
         </columns>
          <styleClass>
             <String fx:value="VBoxTarjeta" />

@@ -18,9 +18,14 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
 public class UsuariosAreasService {
     
     private final String urlFindAll = "http://localhost:8098/usuarios_areas";
+    private final String urlCreate = "http://localhost:8098/usuarios_areas/";
     
     public List<Usuarios_AreasDTO> getAll() throws InterruptedException, ExecutionException, IOException {
         return ConnectionUtils.ListFromConnectionUsuariosAreas(urlFindAll, Usuarios_AreasDTO.class);
+    }
+    
+     public void add(Usuarios_AreasDTO object) throws InterruptedException, ExecutionException, IOException {
+        ConnectionUtils.ObjectToConnection(urlCreate, object);
     }
     
     public static UsuariosAreasService getInstance() {
