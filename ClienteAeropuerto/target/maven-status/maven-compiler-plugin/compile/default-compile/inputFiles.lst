@@ -15,6 +15,7 @@ C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\sr
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\CambiarVentana.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\CreacionNotificacionController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\CrearHorarioController.java
+C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\ConeccionReporteService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\NotificacionService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\UsuarioService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\App.java
@@ -23,6 +24,7 @@ C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\sr
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Usuarios_AreasDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\ConnectionUtils.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\NotificacionDTO.java
+C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\ReporteDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\LoginController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\ImagenService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\module-info.java

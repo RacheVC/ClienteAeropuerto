@@ -26,6 +26,7 @@ import org.una.clienteaeropuerto.dto.HorarioDTO;
 import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
+import org.una.clienteaeropuerto.dto.ReporteDTO;
 import org.una.clienteaeropuerto.dto.RolesDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.dto.Usuarios_AreasDTO;
@@ -98,7 +99,29 @@ public class ConnectionUtils {
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());
             }
+            System.out.println(response);
             return gson.fromJson(response.toString(), listtype);
+        }
+    }
+    
+     public static <T> String ConnectionToObjectByReporte(String urlstring, String nombre) throws MalformedURLException, IOException {
+       
+      
+
+        urlstring = urlstring + nombre;
+        URL url = new URL(urlstring);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Authorization", "bearer " + AuthenticationSingleton.getInstance().getJwt());
+
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            return response.toString();
         }
     }
 
