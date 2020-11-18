@@ -5,9 +5,12 @@
  */
 package org.una.clienteaeropuerto.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,6 +20,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import org.una.clienteaeropuerto.dto.ReporteDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.ConeccionReporteService;
@@ -98,12 +103,30 @@ public class DashboardController implements Initializable {
     private void actionReporteNotificaciones(ActionEvent event) {
         
         try {
-            reporte =  ConeccionReporteService.getInstance().finByNombre("report1");
+            
+            try {
+                reporte =  ConeccionReporteService.getInstance().finByNombre("report1");
+            } catch (IOException ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            System.err.println(reporte);
+            
+            byte[] repor = Base64.getDecoder().decode(reporte);
+            ByteArrayInputStream bta = null;
+            ObjectInputStream ois = null;
+            bta = new ByteArrayInputStream(repor);
+            ois = new ObjectInputStream(bta);
+            JasperPrint jp = (JasperPrint) ois.readObject();
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setTitle("Reporte de gastos de mantenimiento");
+            jv.setVisible(true);
+            jv.show();
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        System.err.println(reporte);
     }
 
     @FXML

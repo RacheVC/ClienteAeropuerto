@@ -113,7 +113,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     }
 
     private void actualizarTableView() {
-
+        notificacionlist2 = new ArrayList<>();
         for (int i = 0; i < notificacionlist.size(); i++) {
             if (notificacionlist.get(i).isEstado() == true) {
                 notificacionlist2.add(notificacionlist.get(i));
@@ -252,7 +252,9 @@ public class MantenimientoNotificacionesController implements Initializable {
     private void KeyTypedTxtBuscar(KeyEvent event) {
 
         if (txtBusqueda.getText().isEmpty()) {
+           
             actualizarTableView();
+            
         }
     }
 }

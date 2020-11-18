@@ -9,6 +9,7 @@ module org.una.clienteaeropuerto {
     requires poi;
     requires java.desktop;
     requires javafx.swing;
+    requires jasperreports;
 
     opens org.una.clienteaeropuerto.dto;
     opens org.una.clienteaeropuerto to javafx.fxml;
