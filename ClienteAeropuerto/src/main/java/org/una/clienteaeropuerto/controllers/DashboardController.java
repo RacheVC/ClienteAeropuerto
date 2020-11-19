@@ -105,7 +105,7 @@ public class DashboardController implements Initializable {
         try {
             
             try {
-                reporte =  ConeccionReporteService.getInstance().finByNombre("report1");
+                reporte =  ConeccionReporteService.getInstance().finByNombre("ReporteNotificaciones");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -122,9 +122,7 @@ public class DashboardController implements Initializable {
             jv.setTitle("Reporte de gastos de mantenimiento");
             jv.setVisible(true);
             jv.show();
-        } catch (IOException ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
