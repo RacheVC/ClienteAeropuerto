@@ -25,13 +25,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
 import org.una.clienteaeropuerto.dto.RolesDTO;
+import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.dto.Usuarios_AreasDTO;
 import org.una.clienteaeropuerto.service.AreasTrabajoService;
 import org.una.clienteaeropuerto.service.RolesService;
+import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.service.UsuariosAreasService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
@@ -69,6 +72,8 @@ public class CreacionUsuariosController implements Initializable {
     UsuarioService usuarioService = new UsuarioService();
 
     java.util.Date date2 = new java.util.Date();
+    
+    java.util.Date date3 = new java.util.Date();
 
     RolesService rolesService = new RolesService();
 
@@ -79,12 +84,15 @@ public class CreacionUsuariosController implements Initializable {
     UsuariosAreasService usuariosAreasService = new UsuariosAreasService();
 
     AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
+    TransaccionService transaccionService = new TransaccionService();
 
     List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
 
     List<Usuarios_AreasDTO> usuarioareasList = new ArrayList<>();
 
     List<UsuarioDTO> usuarioList = new ArrayList<>();
+
+    TransaccionDTO transaccionDTO = new TransaccionDTO();
 
     /**
      * Initializes the controller class.
@@ -132,6 +140,7 @@ public class CreacionUsuariosController implements Initializable {
         asignarIdUsuarioTrabajo();
         usuarios_AreasDTO.setUsuarios(usuarioDTO2);
         usuariosAreasService.add(usuarios_AreasDTO);
+        AgregarTransaccion("Se creó el usuario: ");
     }
 
     private void modificarUsuario() throws InterruptedException, ExecutionException, IOException {
@@ -142,7 +151,7 @@ public class CreacionUsuariosController implements Initializable {
         usuarioDTO.setCorreo(txtCorreo.getText());
         usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
         usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
-
+        AgregarTransaccion("Se modificó el usuario: ");
     }
 
     private void MensajeCrear() {
@@ -268,5 +277,20 @@ public class CreacionUsuariosController implements Initializable {
             }
         }
     }
+
+    private void AgregarTransaccion(String nombreTransaccion) {
+        try {
+            transaccionDTO.setNombre(nombreTransaccion + txtNombre.getText());
+            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario()); 
+            transaccionDTO.setFecha_registro(date3);
+            transaccionDTO.setEstado(true);
+            
+            transaccionService.add(transaccionDTO);
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
 
 }
