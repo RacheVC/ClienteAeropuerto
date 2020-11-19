@@ -2,6 +2,7 @@ org\una\clienteaeropuerto\controllers\MantenimientoUsuariosController.class
 org\una\clienteaeropuerto\service\RolesService.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$2.class
 org\una\clienteaeropuerto\utils\CambiarVentana.class
+org\una\clienteaeropuerto\controllers\TransaccionesController.class
 org\una\clienteaeropuerto\dto\Monedas.class
 org\una\clienteaeropuerto\service\ImagenService.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$15.class
@@ -62,6 +63,7 @@ org\una\clienteaeropuerto\dto\Areas_trabajoDTO.class
 org\una\clienteaeropuerto\dto\HorarioDTO.class
 org\una\clienteaeropuerto\dto\ImagenesDTO.class
 org\una\clienteaeropuerto\service\TransaccionService.class
+org\una\clienteaeropuerto\utils\ConnectionUtils$16.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$8.class
 org\una\clienteaeropuerto\controllers\CreacionUsuariosController.class
 org\una\clienteaeropuerto\service\TransaccionService$TransaccionServiceHolder.class

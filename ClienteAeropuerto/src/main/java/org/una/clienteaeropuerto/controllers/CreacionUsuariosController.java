@@ -84,6 +84,7 @@ public class CreacionUsuariosController implements Initializable {
     UsuariosAreasService usuariosAreasService = new UsuariosAreasService();
 
     AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
+    
     TransaccionService transaccionService = new TransaccionService();
 
     List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
@@ -291,6 +292,8 @@ public class CreacionUsuariosController implements Initializable {
         }
         
     }
+    
+    
     
 
 }

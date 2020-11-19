@@ -36,8 +36,10 @@ import javafx.stage.Stage;
 import org.una.clienteaeropuerto.App;
 import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
+import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
+import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
@@ -89,6 +91,10 @@ public class MantenimientoNotificacionesController implements Initializable {
     String str;
 
     CambiarVentana cambiarVentana = new CambiarVentana();
+
+    TransaccionDTO transaccionDTO = new TransaccionDTO();
+    TransaccionService transaccionService = new TransaccionService();
+    java.util.Date date3 = new java.util.Date();
 
     /**
      * Initializes the controller class.
@@ -180,7 +186,7 @@ public class MantenimientoNotificacionesController implements Initializable {
         if (notificacionDTO.isEstado() == true) {
             notificacionDTO.setEstado(false);
             notificacionService.modify(notificacionDTO.getId(), notificacionDTO);
-
+            AgregarTransaccion();
             cambiarVentana.cambioVentana("MantenimientoNotificaciones", event);
         }
     }
@@ -252,9 +258,22 @@ public class MantenimientoNotificacionesController implements Initializable {
     private void KeyTypedTxtBuscar(KeyEvent event) {
 
         if (txtBusqueda.getText().isEmpty()) {
-           
+
             actualizarTableView();
-            
+
+        }
+    }
+
+    private void AgregarTransaccion() {
+
+        try {
+            transaccionDTO.setNombre("Se ha inactivado inoformación de notificaciones");
+            transaccionDTO.setFecha_registro(date3);
+            transaccionDTO.setEstado(true);
+
+            transaccionService.add(transaccionDTO);
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(MantenimientoNotificacionesController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

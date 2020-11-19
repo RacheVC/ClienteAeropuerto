@@ -22,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
-import org.una.clienteaeropuerto.dto.ReporteDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.ConeccionReporteService;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
@@ -57,10 +56,11 @@ public class DashboardController implements Initializable {
     UsuarioDTO usuarioDTO = new UsuarioDTO();
 
     CambiarVentana cambiarVentana = new CambiarVentana();
-    
+
     private List<String> reporteList = new ArrayList<String>();
     String reporte;
     ConeccionReporteService coneccionReporteService;
+
     /**
      * Initializes the controller class.
      */
@@ -101,17 +101,17 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void actionReporteNotificaciones(ActionEvent event) {
-        
+
         try {
-            
+
             try {
-                reporte =  ConeccionReporteService.getInstance().finByNombre("ReporteNotificaciones");
+                reporte = ConeccionReporteService.getInstance().finByNombre("ReporteNotificaciones");
             } catch (IOException ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             System.err.println(reporte);
-            
+
             byte[] repor = Base64.getDecoder().decode(reporte);
             ByteArrayInputStream bta = null;
             ObjectInputStream ois = null;
@@ -153,5 +153,10 @@ public class DashboardController implements Initializable {
     private void capturarNombreUsuario() {
 
         lbNombreUsuario.setText(AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto());
+    }
+
+    @FXML
+    private void actionBtnHistorialTransacciones(ActionEvent event) throws IOException, IOException {
+        cambiarVentana.cambioVentana("Transacciones", event);
     }
 }

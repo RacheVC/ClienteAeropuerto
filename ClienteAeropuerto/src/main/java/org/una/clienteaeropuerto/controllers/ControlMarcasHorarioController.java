@@ -26,8 +26,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
+import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.service.MarcasHorarioService;
+import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
@@ -53,7 +56,7 @@ public class ControlMarcasHorarioController implements Initializable {
     private TableColumn<MarcaHorarioDTO, String> tcUsuario;
     @FXML
     private TextField txtBusqueda;
-    
+
     private List<MarcaHorarioDTO> marcasList = new ArrayList<MarcaHorarioDTO>();
     private List<MarcaHorarioDTO> marcasList2 = new ArrayList<MarcaHorarioDTO>();
 
@@ -61,6 +64,12 @@ public class ControlMarcasHorarioController implements Initializable {
     MarcasHorarioService marcasHorarioService = new MarcasHorarioService();
 
     CambiarVentana cambiarVentana = new CambiarVentana();
+
+    TransaccionDTO transaccionDTO = new TransaccionDTO();
+
+    TransaccionService transaccionService = new TransaccionService();
+
+    java.util.Date date3 = new java.util.Date();
 
     /**
      * Initializes the controller class.
@@ -82,7 +91,7 @@ public class ControlMarcasHorarioController implements Initializable {
         if (marcaHorarioDTO.isEstado() == true) {
             marcaHorarioDTO.setEstado(false);
             marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
-
+            AgregarTransaccion();
             cambiarVentana.cambioVentana("ControlMarcasHorario", event);
         }
     }
@@ -163,6 +172,22 @@ public class ControlMarcasHorarioController implements Initializable {
         AppContext.getInstance().set("ed", "edit");
 
         cambiarVentana.cambioVentana("CreacionMarcaHorario", event);
+    }
+    
+    private void AgregarTransaccion() {
+
+        try {
+            transaccionDTO.setNombre("Se inactivó información de marcas de horario");
+            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario()); 
+            transaccionDTO.setFecha_registro(date3);
+            transaccionDTO.setEstado(true);
+            
+            transaccionService.add(transaccionDTO);
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(ControlMarcasHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
     }
 
 }

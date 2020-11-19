@@ -33,6 +33,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.una.clienteaeropuerto.dto.TransaccionDTO;
+import org.una.clienteaeropuerto.service.TransaccionService;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
@@ -67,6 +70,10 @@ public class DivisaController implements Initializable {
     private TextField txtColonCostarricense;
 
     CambiarVentana cambiarVentana = new CambiarVentana();
+
+    TransaccionDTO transaccionDTO = new TransaccionDTO();
+    TransaccionService transaccionService = new TransaccionService();
+    java.util.Date date3 = new java.util.Date();
 
     /**
      * Initializes the controller class.
@@ -244,7 +251,7 @@ public class DivisaController implements Initializable {
                     cell.setCellValue((Integer) field);
                 }
             }
-
+            AgregarTransaccion();
         }
 
         try ( FileOutputStream outputStream = new FileOutputStream("ReporteDivisas.xlsx")) {
@@ -255,10 +262,25 @@ public class DivisaController implements Initializable {
     }
 
     public void MensajeConfirmacionReporte() {
+       
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El reporte se ha realizado de manera correcta.");
         alert.show();
+    }
+
+    private void AgregarTransaccion() {
+
+        try {
+            transaccionDTO.setNombre("Se ha generado un reporte de divisas");
+            transaccionDTO.setFecha_registro(date3);
+            transaccionDTO.setEstado(true);
+
+            transaccionService.add(transaccionDTO);
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(DivisaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

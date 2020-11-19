@@ -25,9 +25,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
+import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.dto.Usuarios_AreasDTO;
-import org.una.clienteaeropuerto.service.AreasTrabajoService;
 import org.una.clienteaeropuerto.service.MarcasHorarioService;
+import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.service.UsuariosAreasService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
@@ -63,6 +64,10 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     java.util.Date date2 = new java.util.Date();
 
     CambiarVentana cambiarVentana = new CambiarVentana();
+
+    TransaccionDTO transaccionDTO = new TransaccionDTO();
+    TransaccionService transaccionService = new TransaccionService();
+    java.util.Date date3 = new java.util.Date();
 
     /**
      * Initializes the controller class.
@@ -105,6 +110,8 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
 //        date2.setMinutes(Integer.valueOf(00));
 //        marcaHorarioDTO.setMarca_salida(date2);
         marcasHorarioService.add(marcaHorarioDTO);
+        
+        AgregarTransaccion("Se creó una marca de entrada");
     }
 
     private void CrearMarcaSalida() throws InterruptedException, ExecutionException, IOException {
@@ -115,6 +122,8 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
         marcaHorarioDTO.setEstado(true);
         marcaHorarioDTO.setMarca_salida(date);
         marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
+        
+        AgregarTransaccion("Se creó una marca de salida");
     }
 
     private void CrearMensaje() {
@@ -190,7 +199,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     }
 
     private void CompararID() {
-        
+
         try {
             usuariosAreasList = UsuariosAreasService.getInstance().getAll();
             System.out.println("aaaaaaa " + usuariosAreasList.toString());
@@ -203,11 +212,26 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
         }
 
         for (int i = 0; i < usuariosAreasList.size(); i++) {
-            if(usuariosAreasList.get(i).getUsuarios().getId() ==  AuthenticationSingleton.getInstance().getUsuario().getId()){
+            if (usuariosAreasList.get(i).getUsuarios().getId() == AuthenticationSingleton.getInstance().getUsuario().getId()) {
                 usuarios_AreasDTO.setId(usuariosAreasList.get(i).getId());
                 usuarios_AreasDTO.setAreas_trabajo(usuariosAreasList.get(i).getAreas_trabajo());
                 usuarios_AreasDTO.setUsuarios(usuariosAreasList.get(i).getUsuarios());
             }
         }
+    }
+
+    private void AgregarTransaccion(String string) {
+        
+        try {
+            transaccionDTO.setNombre(string);
+            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario());
+            transaccionDTO.setFecha_registro(date3);
+            transaccionDTO.setEstado(true);
+
+            transaccionService.add(transaccionDTO);
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(CreacionMarcaHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

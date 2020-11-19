@@ -36,9 +36,11 @@ import javafx.stage.Window;
 import javax.imageio.ImageIO;
 import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
+import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.ImagenService;
 import org.una.clienteaeropuerto.service.NotificacionService;
+import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
@@ -91,6 +93,10 @@ public class CreacionNotificacionController implements Initializable {
     java.util.Date date = new java.util.Date();
 
     CambiarVentana cambiarVentana = new CambiarVentana();
+    
+    TransaccionDTO transaccionDTO = new TransaccionDTO();
+    TransaccionService transaccionService = new TransaccionService();
+    java.util.Date date3 = new java.util.Date();
 
     /**
      * Initializes the controller class.
@@ -130,6 +136,8 @@ public class CreacionNotificacionController implements Initializable {
         notificacionDTO.setEmisor(AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto());
         notificacionDTO.setUsuarios(usuariosDTO);
         notificacionservice.add(notificacionDTO);
+        
+        AgregarTransaccion("Se ha creado una notificación");
     }
 
     private void MensajeCrear() {
@@ -302,5 +310,20 @@ public class CreacionNotificacionController implements Initializable {
     private void OnActionBtnAtras(ActionEvent event) throws IOException {
 
         cambiarVentana.cambioVentana("MantenimientoNotificaciones", event);
+    }
+    
+     private void AgregarTransaccion(String string) {
+        
+        try {
+            transaccionDTO.setNombre(string);
+            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario());
+            transaccionDTO.setFecha_registro(date3);
+            transaccionDTO.setEstado(true);
+
+            transaccionService.add(transaccionDTO);
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

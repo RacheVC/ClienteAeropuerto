@@ -26,7 +26,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import org.una.clienteaeropuerto.dto.HorarioDTO;
+import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.service.HorarioService;
+import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
@@ -73,6 +75,10 @@ public class HorarioController implements Initializable {
 
     CambiarVentana cambiarVentana = new CambiarVentana();
 
+    TransaccionDTO transaccionDTO = new TransaccionDTO();
+    TransaccionService transaccionService = new TransaccionService();
+    java.util.Date date3 = new java.util.Date();
+
     /**
      * Initializes the controller class.
      *
@@ -89,7 +95,7 @@ public class HorarioController implements Initializable {
 
     @FXML
     private void accionCrearHorario(ActionEvent event) throws IOException {
-        
+
         AppContext.getInstance().set("horarioDTO", horarioDTO);
         AppContext.getInstance().set("ed", "insertar");
 
@@ -98,7 +104,7 @@ public class HorarioController implements Initializable {
 
     @FXML
     private void accionModificarHorario(ActionEvent event) throws IOException {
-        
+
         AppContext.getInstance().set("horarioDTO", horarioDTO);
         AppContext.getInstance().set("ed", "edit");
 
@@ -112,6 +118,7 @@ public class HorarioController implements Initializable {
         if (horarioDTO.isEstado() == true) {
             horarioDTO.setEstado(false);
             horarioService.modify(horarioDTO.getId(), horarioDTO);
+            AgregarTransaccion();
             cambiarVentana.cambioVentana("Horario", event);
         }
     }
@@ -210,6 +217,20 @@ public class HorarioController implements Initializable {
     private void actionBtnMostrarTodos(ActionEvent event) throws IOException {
 
         cambiarVentana.cambioVentana("Horario", event);
+    }
+
+    private void AgregarTransaccion() {
+
+        try {
+            transaccionDTO.setNombre("Se ha inactivado un horario");
+            transaccionDTO.setFecha_registro(date3);
+            transaccionDTO.setEstado(true);
+
+            transaccionService.add(transaccionDTO);
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

@@ -23,9 +23,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import org.una.clienteaeropuerto.dto.Areas_trabajoDTO;
 import org.una.clienteaeropuerto.dto.HorarioDTO;
+import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.service.AreasTrabajoService;
 import org.una.clienteaeropuerto.service.HorarioService;
+import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
@@ -65,8 +68,12 @@ public class CrearHorarioController implements Initializable {
     AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
 
     List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
-    
+
     CambiarVentana cambiarVentana = new CambiarVentana();
+
+    TransaccionDTO transaccionDTO = new TransaccionDTO();
+    TransaccionService transaccionService = new TransaccionService();
+    java.util.Date date3 = new java.util.Date();
 
     /**
      * Initializes the controller class.
@@ -112,6 +119,8 @@ public class CrearHorarioController implements Initializable {
         horarioDTO.setHora_entrada(date);
         horarioDTO.setHora_salida(date2);
         horarioService.add(horarioDTO);
+        
+        AgregarTransaccion("Se ha creado un horario");
     }
 
     private void modificarUsuario() throws InterruptedException, ExecutionException, IOException {
@@ -121,6 +130,8 @@ public class CrearHorarioController implements Initializable {
         horarioDTO.setDiaSalida(cbDiaSalida.getValue());
         horarioDTO.setEstado(true);
         horarioService.modify(horarioDTO.getId(), horarioDTO);
+        
+        AgregarTransaccion("Se ha modificado un horario");
     }
 
     private void CreateMessage() {
@@ -156,7 +167,7 @@ public class CrearHorarioController implements Initializable {
 
     @FXML
     private void OnActionBtnAtras(ActionEvent event) throws IOException {
-        
+
         cambiarVentana.cambioVentana("Horario", event);
     }
 
@@ -195,7 +206,7 @@ public class CrearHorarioController implements Initializable {
     }
 
     private void RellenarCamposTable(HorarioDTO horarioDTO1) {
-       
+
         cbDiaEntrada.setValue(horarioDTO1.getDiaEntrada());
         cbDiaEntrada.getItems().addAll("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo");
         cbDiaSalida.setValue(horarioDTO1.getDiaSalida());
@@ -207,7 +218,7 @@ public class CrearHorarioController implements Initializable {
     }
 
     public void LLenarComboboxHoras() {
-       
+
         for (int i = 1; i < 25; i++) {
             if (i < 10) {
                 cbHoraEntrada.getItems().addAll("0" + String.valueOf(i));
@@ -229,5 +240,20 @@ public class CrearHorarioController implements Initializable {
             }
 
         }
+    }
+
+    private void AgregarTransaccion(String string) {
+
+        try {
+            transaccionDTO.setNombre(string);
+            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario());
+            transaccionDTO.setFecha_registro(date3);
+            transaccionDTO.setEstado(true);
+            
+            transaccionService.add(transaccionDTO);
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

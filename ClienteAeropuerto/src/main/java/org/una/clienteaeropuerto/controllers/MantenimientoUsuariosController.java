@@ -28,7 +28,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
+import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
@@ -79,7 +81,12 @@ public class MantenimientoUsuariosController implements Initializable {
     UsuarioService usuarioService = new UsuarioService();
 
     CambiarVentana cambiarVentana = new CambiarVentana();
-    
+
+    TransaccionDTO transaccionDTO = new TransaccionDTO();
+
+    TransaccionService transaccionService = new TransaccionService();
+
+    java.util.Date date3 = new java.util.Date();
 
     /**
      * Initializes the controller class.
@@ -117,7 +124,7 @@ public class MantenimientoUsuariosController implements Initializable {
             usuarioDTO.setEstado(false);
             encontrarFechaRegistro(usuarioDTO.getId());
             usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
-
+            AgregarTransaccion();
             cambiarVentana.cambioVentana("MantenimientoUsuarios", event);
         }
     }
@@ -225,5 +232,18 @@ public class MantenimientoUsuariosController implements Initializable {
             actualizarTableView();
         }
 
+    }
+
+    private void AgregarTransaccion() {
+        try {
+            transaccionDTO.setNombre("Se inactivó información de usuarios");
+            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario());
+            transaccionDTO.setFecha_registro(date3);
+            transaccionDTO.setEstado(true);
+
+            transaccionService.add(transaccionDTO);
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
