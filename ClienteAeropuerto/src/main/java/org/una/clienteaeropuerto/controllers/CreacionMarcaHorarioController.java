@@ -33,6 +33,7 @@ import org.una.clienteaeropuerto.service.UsuariosAreasService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.VigenciaToken;
 
 /**
  * FXML Controller class
@@ -68,6 +69,8 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     TransaccionDTO transaccionDTO = new TransaccionDTO();
     TransaccionService transaccionService = new TransaccionService();
     java.util.Date date3 = new java.util.Date();
+
+    VigenciaToken vigenciaToken = new VigenciaToken();
 
     /**
      * Initializes the controller class.
@@ -110,7 +113,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
 //        date2.setMinutes(Integer.valueOf(00));
 //        marcaHorarioDTO.setMarca_salida(date2);
         marcasHorarioService.add(marcaHorarioDTO);
-        
+
         AgregarTransaccion("Se creó una marca de entrada");
     }
 
@@ -122,7 +125,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
         marcaHorarioDTO.setEstado(true);
         marcaHorarioDTO.setMarca_salida(date);
         marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
-        
+
         AgregarTransaccion("Se creó una marca de salida");
     }
 
@@ -195,7 +198,12 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     @FXML
     private void actionBtnAtras(ActionEvent event) throws IOException {
 
-        cambiarVentana.cambioVentana("ControlMarcasHorario", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            cambiarVentana.cambioVentana("ControlMarcasHorario", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     private void CompararID() {
@@ -221,7 +229,7 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
     }
 
     private void AgregarTransaccion(String string) {
-        
+
         try {
             transaccionDTO.setNombre(string);
             transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario());
@@ -232,6 +240,12 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(CreacionMarcaHorarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+    }
+    
+     private void MensajeTokenVencido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Su sesión ha caducado.");
+        alert.show();
     }
 }

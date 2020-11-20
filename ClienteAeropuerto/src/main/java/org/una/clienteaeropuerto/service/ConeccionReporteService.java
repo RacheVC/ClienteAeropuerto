@@ -16,15 +16,13 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
 public class ConeccionReporteService {
     
       private final String urlFindByReporte = "http://localhost:8098/reportes/";
-      
-
        
          public String finByNombre(String nombre) throws IOException {
 
         return ConnectionUtils.ConnectionToObjectByReporte(urlFindByReporte, nombre);
     }
          
-          public static ConeccionReporteService getInstance() {
+    public static ConeccionReporteService getInstance() {
         return ConeccionReporteHolder.INSTANCE;
     }
             private static class ConeccionReporteHolder {

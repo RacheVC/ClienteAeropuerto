@@ -19,7 +19,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,6 +34,7 @@ import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.VigenciaToken;
 
 /**
  * FXML Controller class
@@ -79,6 +82,8 @@ public class HorarioController implements Initializable {
     TransaccionService transaccionService = new TransaccionService();
     java.util.Date date3 = new java.util.Date();
 
+    VigenciaToken vigenciaToken = new VigenciaToken();
+
     /**
      * Initializes the controller class.
      *
@@ -96,37 +101,57 @@ public class HorarioController implements Initializable {
     @FXML
     private void accionCrearHorario(ActionEvent event) throws IOException {
 
-        AppContext.getInstance().set("horarioDTO", horarioDTO);
-        AppContext.getInstance().set("ed", "insertar");
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            AppContext.getInstance().set("horarioDTO", horarioDTO);
+            AppContext.getInstance().set("ed", "insertar");
+            cambiarVentana.cambioVentana("CrearHorario", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
 
-        cambiarVentana.cambioVentana("CrearHorario", event);
     }
 
     @FXML
     private void accionModificarHorario(ActionEvent event) throws IOException {
 
-        AppContext.getInstance().set("horarioDTO", horarioDTO);
-        AppContext.getInstance().set("ed", "edit");
-
-        cambiarVentana.cambioVentana("CrearHorario", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            AppContext.getInstance().set("horarioDTO", horarioDTO);
+            AppContext.getInstance().set("ed", "edit");
+            cambiarVentana.cambioVentana("CrearHorario", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
 
     }
 
     @FXML
     private void accionInactivarHorario(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
 
-        if (horarioDTO.isEstado() == true) {
-            horarioDTO.setEstado(false);
-            horarioService.modify(horarioDTO.getId(), horarioDTO);
-            AgregarTransaccion();
-            cambiarVentana.cambioVentana("Horario", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            if (horarioDTO.isEstado() == true) {
+                horarioDTO.setEstado(false);
+                horarioService.modify(horarioDTO.getId(), horarioDTO);
+                AgregarTransaccion();
+                cambiarVentana.cambioVentana("Horario", event);
+            }
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
         }
+
     }
 
     @FXML
     private void accionSalirHorario(ActionEvent event) throws IOException {
 
-        cambiarVentana.cambioVentana("Dashboard", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            cambiarVentana.cambioVentana("Dashboard", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     @FXML
@@ -176,7 +201,8 @@ public class HorarioController implements Initializable {
     @FXML
     private void actioncbxFiltroDiaEntrada(ActionEvent event) throws IOException {
 
-        if (cbxFiltroDiaEntrada.getSelectionModel().getSelectedItem() != null) {
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            if (cbxFiltroDiaEntrada.getSelectionModel().getSelectedItem() != null) {
             HorarioDTO horarioDTO = new HorarioDTO();
             horarioDTO = (HorarioDTO) cbxFiltroDiaEntrada.getSelectionModel().getSelectedItem();
             HorarioService horarioService = new HorarioService();
@@ -186,6 +212,11 @@ public class HorarioController implements Initializable {
             tvewHorarios.getItems().clear();
             tvewHorarios.setItems(FXCollections.observableArrayList(horarioList));
         }
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
+        
     }
 
     private void llenarCbxDiaEntrada() throws InterruptedException, ExecutionException, IOException {
@@ -216,7 +247,12 @@ public class HorarioController implements Initializable {
     @FXML
     private void actionBtnMostrarTodos(ActionEvent event) throws IOException {
 
-        cambiarVentana.cambioVentana("Horario", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            cambiarVentana.cambioVentana("Horario", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     private void AgregarTransaccion() {
@@ -230,7 +266,13 @@ public class HorarioController implements Initializable {
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(HorarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    private void MensajeTokenVencido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Su sesión ha caducado.");
+        alert.show();
     }
 
 }

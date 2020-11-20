@@ -1,3 +1,4 @@
+D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\VigenciaToken.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\AppContext.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\module-info.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\TransaccionService.java
@@ -13,7 +14,6 @@ D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAe
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\UsuariosAreasService.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\AuthenticationRequest.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\AuthenticationSingleton.java
-D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\CronometroSingleton.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\ParametrosService.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\CambiarVentana.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\MantenimientoNotificacionesController.java
@@ -24,6 +24,7 @@ D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAe
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\MarcasHorarioService.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\UsuarioDTO.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\LoginController.java
+D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\VigenciaTokenSingleton.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\CreacionUsuariosController.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\DivisaController.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\MarcaHorarioDTO.java
@@ -47,3 +48,4 @@ D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAe
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\Imagen.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\AuthenticationResponse.java
 D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\CreacionMarcaHorarioController.java
+D:\Users\Luis\Desktop\UNA\Progra 3\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\Cronometro.java

@@ -57,8 +57,10 @@ public class ParametroDTO {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
-    
-   
+
+    @Override
+    public String toString() {
+        return "ParametroDTO{" + "id=" + id + ", vigenciaEnMinutos=" + vigenciaEnMinutos + ", nombre=" + nombre + ", estado=" + estado + '}';
+    }
     
 }

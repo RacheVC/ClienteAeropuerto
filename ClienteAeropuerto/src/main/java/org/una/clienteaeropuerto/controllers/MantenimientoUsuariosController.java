@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,6 +36,7 @@ import org.una.clienteaeropuerto.service.UsuarioService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.VigenciaToken;
 
 /**
  * FXML Controller class
@@ -88,6 +90,8 @@ public class MantenimientoUsuariosController implements Initializable {
 
     java.util.Date date3 = new java.util.Date();
 
+    VigenciaToken vigenciaToken = new VigenciaToken();
+
     /**
      * Initializes the controller class.
      */
@@ -102,31 +106,47 @@ public class MantenimientoUsuariosController implements Initializable {
     @FXML
     private void actionBtnCrear(ActionEvent event) throws IOException {
 
-        AppContext.getInstance().set("usuarioDTO", usuarioDTO);
-        AppContext.getInstance().set("ed", "insertar");
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            AppContext.getInstance().set("usuarioDTO", usuarioDTO);
+            AppContext.getInstance().set("ed", "insertar");
+            cambiarVentana.cambioVentana("CreacionUsuarios", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
 
-        cambiarVentana.cambioVentana("CreacionUsuarios", event);
     }
 
     @FXML
     private void actionBtnModificar(ActionEvent event) throws IOException {
 
-        AppContext.getInstance().set("usuarioDTO", usuarioDTO);
-        AppContext.getInstance().set("ed", "edit");
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            AppContext.getInstance().set("usuarioDTO", usuarioDTO);
+            AppContext.getInstance().set("ed", "edit");
+            cambiarVentana.cambioVentana("CreacionUsuarios", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
 
-        cambiarVentana.cambioVentana("CreacionUsuarios", event);
     }
 
     @FXML
     private void actionBtnInactivar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
 
-        if (usuarioDTO.isEstado() == true) {
-            usuarioDTO.setEstado(false);
-            encontrarFechaRegistro(usuarioDTO.getId());
-            usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
-            AgregarTransaccion();
-            cambiarVentana.cambioVentana("MantenimientoUsuarios", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            if (usuarioDTO.isEstado() == true) {
+                usuarioDTO.setEstado(false);
+                encontrarFechaRegistro(usuarioDTO.getId());
+                usuarioService.modify(usuarioDTO.getId(), usuarioDTO);
+                AgregarTransaccion();
+                cambiarVentana.cambioVentana("MantenimientoUsuarios", event);
+            }
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
         }
+
     }
 
     private void encontrarFechaRegistro(Long id) {
@@ -143,7 +163,12 @@ public class MantenimientoUsuariosController implements Initializable {
     @FXML
     private void actionBtnSalir(ActionEvent event) throws IOException {
 
-        cambiarVentana.cambioVentana("Dashboard", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            cambiarVentana.cambioVentana("Dashboard", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     @FXML
@@ -194,18 +219,23 @@ public class MantenimientoUsuariosController implements Initializable {
     @FXML
     private void actionBtnBuscar(ActionEvent event) throws IOException {
 
-        try {
-            UsuarioService usuarioService = new UsuarioService();
-            List<UsuarioDTO> UsuarioList = new ArrayList<>();
-            UsuarioList = (List<UsuarioDTO>) usuarioService.finByCedula(txtBusqueda.getText());
-            tvUsuarios.getItems().clear();
-            tvUsuarios.setItems(FXCollections.observableArrayList(UsuarioList));
-        } catch (Exception e) {
-            System.out.println(e);
-            Alert info = new Alert(Alert.AlertType.INFORMATION);
-            info.setTitle("Error");
-            info.setContentText("Los datos no se han podido filtrar");
-            info.showAndWait();
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            try {
+                UsuarioService usuarioService = new UsuarioService();
+                List<UsuarioDTO> UsuarioList = new ArrayList<>();
+                UsuarioList = (List<UsuarioDTO>) usuarioService.finByCedula(txtBusqueda.getText());
+                tvUsuarios.getItems().clear();
+                tvUsuarios.setItems(FXCollections.observableArrayList(UsuarioList));
+            } catch (Exception e) {
+                System.out.println(e);
+                Alert info = new Alert(Alert.AlertType.INFORMATION);
+                info.setTitle("Error");
+                info.setContentText("Los datos no se han podido filtrar");
+                info.showAndWait();
+            }
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
         }
     }
 
@@ -245,5 +275,12 @@ public class MantenimientoUsuariosController implements Initializable {
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void MensajeTokenVencido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Su sesión ha caducado.");
+        alert.show();
     }
 }

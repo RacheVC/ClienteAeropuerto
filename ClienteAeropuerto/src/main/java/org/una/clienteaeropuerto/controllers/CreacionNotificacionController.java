@@ -44,6 +44,7 @@ import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.VigenciaToken;
 
 /**
  * FXML Controller class
@@ -93,10 +94,12 @@ public class CreacionNotificacionController implements Initializable {
     java.util.Date date = new java.util.Date();
 
     CambiarVentana cambiarVentana = new CambiarVentana();
-    
+
     TransaccionDTO transaccionDTO = new TransaccionDTO();
     TransaccionService transaccionService = new TransaccionService();
     java.util.Date date3 = new java.util.Date();
+
+    VigenciaToken vigenciaToken = new VigenciaToken();
 
     /**
      * Initializes the controller class.
@@ -108,18 +111,22 @@ public class CreacionNotificacionController implements Initializable {
         this.listimagenes = new ArrayList<>();
         CargarListaImagenes();
         funcionAppContext();
-
     }
 
     @FXML
     private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException, InstantiationException, IllegalAccessException {
 
-        GuardarNotificacion();
-        if (bandera == true) {
-            GuardarImagen64();
-            bandera = false;
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            GuardarNotificacion();
+            if (bandera == true) {
+                GuardarImagen64();
+                bandera = false;
+            }
+            MensajeCrear();
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
         }
-        MensajeCrear();
     }
 
     private void GuardarNotificacion() throws InterruptedException, ExecutionException, IOException {
@@ -136,7 +143,7 @@ public class CreacionNotificacionController implements Initializable {
         notificacionDTO.setEmisor(AuthenticationSingleton.getInstance().getUsuario().getNombreCompleto());
         notificacionDTO.setUsuarios(usuariosDTO);
         notificacionservice.add(notificacionDTO);
-        
+
         AgregarTransaccion("Se ha creado una notificación");
     }
 
@@ -151,9 +158,14 @@ public class CreacionNotificacionController implements Initializable {
     @FXML
     private void OnActionBtnAgregarImagen(ActionEvent event) throws InterruptedException, ExecutionException, IOException, Exception {
 
-        bandera = true;
-        File file = this.GetFile();
-        str = this.codificarArchivoBase64(file);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            bandera = true;
+            File file = this.GetFile();
+            str = this.codificarArchivoBase64(file);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     public File GetFile() {
@@ -182,7 +194,7 @@ public class CreacionNotificacionController implements Initializable {
     }
 
     private void GuardarImagen64() throws InterruptedException, ExecutionException, IOException {
-
+        
         int diferencia = 0;
         int totalcadena = str.length();
         int cantidadRecorrido = 0;
@@ -311,9 +323,9 @@ public class CreacionNotificacionController implements Initializable {
 
         cambiarVentana.cambioVentana("MantenimientoNotificaciones", event);
     }
-    
-     private void AgregarTransaccion(String string) {
-        
+
+    private void AgregarTransaccion(String string) {
+
         try {
             transaccionDTO.setNombre(string);
             transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario());
@@ -324,6 +336,12 @@ public class CreacionNotificacionController implements Initializable {
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+    }
+
+    private void MensajeTokenVencido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Su sesión ha caducado.");
+        alert.show();
     }
 }

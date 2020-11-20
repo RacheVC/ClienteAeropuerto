@@ -19,7 +19,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.VigenciaToken;
 
 /**
  * FXML Controller class
@@ -55,33 +58,41 @@ public class TransaccionesController implements Initializable {
     private List<TransaccionDTO> transaccionList2 = new ArrayList<TransaccionDTO>();
 
     TransaccionService transaccionService = new TransaccionService();
-    
+
     CambiarVentana cambiarVentana = new CambiarVentana();
-    
+
     TransaccionDTO transaccionDTO = new TransaccionDTO();
+
+    VigenciaToken vigenciaToken = new VigenciaToken();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         cargarInformacionUsuarios();
     }
 
     @FXML
     private void actionBtnInactivar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
-        
-        if (transaccionDTO.isEstado() == true) {
-            transaccionDTO.setEstado(false);
-            transaccionService.modify(transaccionDTO.getId(), transaccionDTO);
-            cambiarVentana.cambioVentana("Transacciones", event);
+
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            if (transaccionDTO.isEstado() == true) {
+                transaccionDTO.setEstado(false);
+                transaccionService.modify(transaccionDTO.getId(), transaccionDTO);
+                cambiarVentana.cambioVentana("Transacciones", event);
+            }
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
         }
+
     }
 
     @FXML
     private void MouseTvUsuarios(MouseEvent event) {
-        
+
         if (tvTransacciones.getSelectionModel().getSelectedItem() != null) {
             transaccionDTO = (TransaccionDTO) tvTransacciones.getSelectionModel().getSelectedItem();
         }
@@ -90,7 +101,13 @@ public class TransaccionesController implements Initializable {
     @FXML
     private void actionBtnSalir(ActionEvent event) throws IOException, IOException {
         
-        cambiarVentana.cambioVentana("Dashboard", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            cambiarVentana.cambioVentana("Dashboard", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
+
     }
 
     private void cargarInformacionUsuarios() {
@@ -128,6 +145,13 @@ public class TransaccionesController implements Initializable {
                 tvTransacciones.setItems(FXCollections.observableArrayList(transaccionList2));
             }
         }
+    }
+
+    private void MensajeTokenVencido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Su sesión ha caducado.");
+        alert.show();
     }
 
 }

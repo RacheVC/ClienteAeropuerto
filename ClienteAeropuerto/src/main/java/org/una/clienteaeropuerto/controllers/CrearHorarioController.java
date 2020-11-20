@@ -30,6 +30,7 @@ import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.VigenciaToken;
 
 /**
  * FXML Controller class
@@ -75,6 +76,8 @@ public class CrearHorarioController implements Initializable {
     TransaccionService transaccionService = new TransaccionService();
     java.util.Date date3 = new java.util.Date();
 
+    VigenciaToken vigenciaToken = new VigenciaToken();
+
     /**
      * Initializes the controller class.
      */
@@ -88,21 +91,25 @@ public class CrearHorarioController implements Initializable {
     @FXML
     private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
 
-        if (!AppContext.getInstance().get("ed").equals("edit")) {
-            try {
-                crearHorario();
-                this.CreateMessage();
-            } catch (Exception e) {
-                this.FailCreateMessage();
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            if (!AppContext.getInstance().get("ed").equals("edit")) {
+                try {
+                    crearHorario();
+                    this.CreateMessage();
+                } catch (Exception e) {
+                    this.FailCreateMessage();
+                }
+            } else {
+                try {
+                    modificarUsuario();
+                    this.EditMessage();
+                } catch (Exception e) {
+                    this.FailEditMessage();
+                }
             }
-
         } else {
-            try {
-                modificarUsuario();
-                this.EditMessage();
-            } catch (Exception e) {
-                this.FailEditMessage();
-            }
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
         }
     }
 
@@ -119,7 +126,7 @@ public class CrearHorarioController implements Initializable {
         horarioDTO.setHora_entrada(date);
         horarioDTO.setHora_salida(date2);
         horarioService.add(horarioDTO);
-        
+
         AgregarTransaccion("Se ha creado un horario");
     }
 
@@ -130,7 +137,7 @@ public class CrearHorarioController implements Initializable {
         horarioDTO.setDiaSalida(cbDiaSalida.getValue());
         horarioDTO.setEstado(true);
         horarioService.modify(horarioDTO.getId(), horarioDTO);
-        
+
         AgregarTransaccion("Se ha modificado un horario");
     }
 
@@ -168,7 +175,12 @@ public class CrearHorarioController implements Initializable {
     @FXML
     private void OnActionBtnAtras(ActionEvent event) throws IOException {
 
-        cambiarVentana.cambioVentana("Horario", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            cambiarVentana.cambioVentana("Horario", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     @FXML
@@ -249,11 +261,17 @@ public class CrearHorarioController implements Initializable {
             transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario());
             transaccionDTO.setFecha_registro(date3);
             transaccionDTO.setEstado(true);
-            
+
             transaccionService.add(transaccionDTO);
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(CrearHorarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    private void MensajeTokenVencido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Su sesión ha caducado.");
+        alert.show();
     }
 }

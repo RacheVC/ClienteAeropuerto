@@ -13,14 +13,15 @@ org\una\clienteaeropuerto\controllers\ControlParametrosController.class
 org\una\clienteaeropuerto\controllers\CreacionNotificacionController.class
 org\una\clienteaeropuerto\utils\Imagen.class
 org\una\clienteaeropuerto\service\DivisaService.class
+org\una\clienteaeropuerto\utils\Cronometro.class
 org\una\clienteaeropuerto\service\UsuarioService.class
 org\una\clienteaeropuerto\utils\AuthenticationSingleton.class
 org\una\clienteaeropuerto\controllers\ControlMarcasHorarioController.class
 org\una\clienteaeropuerto\service\MarcasHorarioService$MarcasHorarioServiceHolder.class
+org\una\clienteaeropuerto\utils\VigenciaTokenSingleton.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$4.class
 module-info.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$14.class
-org\una\clienteaeropuerto\utils\CronometroSingleton.class
 org\una\clienteaeropuerto\utils\AppContext.class
 org\una\clienteaeropuerto\dto\ParametroDTO.class
 org\una\clienteaeropuerto\utils\ConnectionUtils.class
@@ -45,6 +46,7 @@ org\una\clienteaeropuerto\service\UsuarioService$UsuarioServiceHolder.class
 org\una\clienteaeropuerto\controllers\CreacionMarcaHorarioController.class
 org\una\clienteaeropuerto\service\RolesService$RolesServiceHolder.class
 org\una\clienteaeropuerto\controllers\CrearHorarioController.class
+org\una\clienteaeropuerto\utils\VigenciaToken.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$1.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$6.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$11.class
@@ -66,7 +68,6 @@ org\una\clienteaeropuerto\controllers\DashboardController.class
 org\una\clienteaeropuerto\App.class
 org\una\clienteaeropuerto\dto\Areas_trabajoDTO.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$17.class
-org\una\clienteaeropuerto\controllers\DashboardController$1.class
 org\una\clienteaeropuerto\dto\HorarioDTO.class
 org\una\clienteaeropuerto\dto\ImagenesDTO.class
 org\una\clienteaeropuerto\service\TransaccionService.class

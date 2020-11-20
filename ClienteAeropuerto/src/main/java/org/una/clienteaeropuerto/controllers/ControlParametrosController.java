@@ -19,7 +19,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import org.una.clienteaeropuerto.dto.ParametroDTO;
 import org.una.clienteaeropuerto.service.ParametrosService;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.VigenciaToken;
 
 /**
  * FXML Controller class
@@ -61,6 +64,8 @@ public class ControlParametrosController implements Initializable {
     ParametrosService parametrosService = new ParametrosService();
 
     CambiarVentana cambiarVentana = new CambiarVentana();
+
+    VigenciaToken vigenciaToken = new VigenciaToken();
 
     /**
      * Initializes the controller class.
@@ -120,11 +125,17 @@ public class ControlParametrosController implements Initializable {
     @FXML
     private void actionBtnInactivar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
         
-        if (parametrosDTO.isEstado() == true) {
-            parametrosDTO.setEstado(false);
-            parametrosService.modify(parametrosDTO.getId(), parametrosDTO);
-            cambiarVentana.cambioVentana("ControlParametros", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            if (parametrosDTO.isEstado() == true) {
+                parametrosDTO.setEstado(false);
+                parametrosService.modify(parametrosDTO.getId(), parametrosDTO);
+                cambiarVentana.cambioVentana("ControlParametros", event);
+            }
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
         }
+
     }
 
     @FXML
@@ -136,8 +147,20 @@ public class ControlParametrosController implements Initializable {
 
     @FXML
     private void actionBtnSalir(ActionEvent event) throws IOException, IOException {
-      
-        cambiarVentana.cambioVentana("Dashboard", event);
+
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            cambiarVentana.cambioVentana("Dashboard", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
+    }
+
+    private void MensajeTokenVencido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Su sesión ha caducado.");
+        alert.show();
     }
 
 }

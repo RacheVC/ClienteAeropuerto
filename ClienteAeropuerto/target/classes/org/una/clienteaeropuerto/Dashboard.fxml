@@ -228,11 +228,6 @@
                   <Font name="Forte" size="47.0" />
                </font>
             </Label>
-            <Label fx:id="lblTiempo" prefHeight="30.0" prefWidth="116.0" text="Label" textFill="#f8f6f6">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="143.0" fitWidth="326.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@iconos/LogoAero.png" />

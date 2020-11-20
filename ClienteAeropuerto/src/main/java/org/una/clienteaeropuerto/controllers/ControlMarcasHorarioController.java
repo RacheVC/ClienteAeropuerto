@@ -19,7 +19,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -32,6 +34,7 @@ import org.una.clienteaeropuerto.service.TransaccionService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.VigenciaToken;
 
 /**
  * FXML Controller class
@@ -71,6 +74,8 @@ public class ControlMarcasHorarioController implements Initializable {
 
     java.util.Date date3 = new java.util.Date();
 
+    VigenciaToken vigenciaToken = new VigenciaToken();
+
     /**
      * Initializes the controller class.
      */
@@ -88,27 +93,42 @@ public class ControlMarcasHorarioController implements Initializable {
     @FXML
     private void accionInactivar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
 
-        if (marcaHorarioDTO.isEstado() == true) {
-            marcaHorarioDTO.setEstado(false);
-            marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
-            AgregarTransaccion();
-            cambiarVentana.cambioVentana("ControlMarcasHorario", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            if (marcaHorarioDTO.isEstado() == true) {
+                marcaHorarioDTO.setEstado(false);
+                marcasHorarioService.modify(marcaHorarioDTO.getId(), marcaHorarioDTO);
+                AgregarTransaccion();
+                cambiarVentana.cambioVentana("ControlMarcasHorario", event);
+            }
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
         }
+
     }
 
     @FXML
     private void actionBtnInsertarHoraEntrada(ActionEvent event) throws IOException {
 
-        AppContext.getInstance().set("marcaHorarioDTO", marcaHorarioDTO);
-        AppContext.getInstance().set("ed", "insertar");
-
-        cambiarVentana.cambioVentana("CreacionMarcaHorario", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            AppContext.getInstance().set("marcaHorarioDTO", marcaHorarioDTO);
+            AppContext.getInstance().set("ed", "insertar");
+            cambiarVentana.cambioVentana("CreacionMarcaHorario", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     @FXML
     private void accionSalir(ActionEvent event) throws IOException {
 
-        cambiarVentana.cambioVentana("Dashboard", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            cambiarVentana.cambioVentana("Dashboard", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     @FXML
@@ -168,26 +188,35 @@ public class ControlMarcasHorarioController implements Initializable {
     @FXML
     private void actionBtnInsertarHoraSalida(ActionEvent event) throws IOException {
 
-        AppContext.getInstance().set("marcaHorarioDTO", marcaHorarioDTO);
-        AppContext.getInstance().set("ed", "edit");
-
-        cambiarVentana.cambioVentana("CreacionMarcaHorario", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            AppContext.getInstance().set("marcaHorarioDTO", marcaHorarioDTO);
+            AppContext.getInstance().set("ed", "edit");
+            cambiarVentana.cambioVentana("CreacionMarcaHorario", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
-    
+
     private void AgregarTransaccion() {
 
         try {
             transaccionDTO.setNombre("Se inactivó información de marcas de horario");
-            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario()); 
+            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario());
             transaccionDTO.setFecha_registro(date3);
             transaccionDTO.setEstado(true);
-            
+
             transaccionService.add(transaccionDTO);
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(ControlMarcasHorarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
+    }
+
+    private void MensajeTokenVencido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Su sesión ha caducado.");
+        alert.show();
     }
 
 }

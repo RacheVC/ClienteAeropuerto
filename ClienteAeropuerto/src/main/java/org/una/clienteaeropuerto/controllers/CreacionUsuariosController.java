@@ -36,6 +36,7 @@ import org.una.clienteaeropuerto.service.UsuariosAreasService;
 import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.VigenciaToken;
 
 /**
  * FXML Controller class
@@ -72,7 +73,7 @@ public class CreacionUsuariosController implements Initializable {
     UsuarioService usuarioService = new UsuarioService();
 
     java.util.Date date2 = new java.util.Date();
-    
+
     java.util.Date date3 = new java.util.Date();
 
     RolesService rolesService = new RolesService();
@@ -84,7 +85,7 @@ public class CreacionUsuariosController implements Initializable {
     UsuariosAreasService usuariosAreasService = new UsuariosAreasService();
 
     AreasTrabajoService areasTrabajoService = new AreasTrabajoService();
-    
+
     TransaccionService transaccionService = new TransaccionService();
 
     List<Areas_trabajoDTO> areasTrabajoList = new ArrayList<>();
@@ -94,6 +95,8 @@ public class CreacionUsuariosController implements Initializable {
     List<UsuarioDTO> usuarioList = new ArrayList<>();
 
     TransaccionDTO transaccionDTO = new TransaccionDTO();
+
+    VigenciaToken vigenciaToken = new VigenciaToken();
 
     /**
      * Initializes the controller class.
@@ -109,21 +112,25 @@ public class CreacionUsuariosController implements Initializable {
     @FXML
     private void OnActionBtnGuardar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
 
-        if (!AppContext.getInstance().get("ed").equals("edit")) {
-            try {
-                CrearUsuario();
-                this.MensajeCrear();
-            } catch (Exception e) {
-                this.CrearFalloMensaje();
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            if (!AppContext.getInstance().get("ed").equals("edit")) {
+                try {
+                    CrearUsuario();
+                    this.MensajeCrear();
+                } catch (Exception e) {
+                    this.CrearFalloMensaje();
+                }
+            } else {
+                try {
+                    modificarUsuario();
+                    this.MensajeEditar();
+                } catch (Exception e) {
+                    this.EditarFalloMensaje();
+                }
             }
         } else {
-            try {
-                modificarUsuario();
-                this.MensajeEditar();
-            } catch (Exception e) {
-                this.EditarFalloMensaje();
-            }
-
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
         }
 
     }
@@ -196,7 +203,12 @@ public class CreacionUsuariosController implements Initializable {
     @FXML
     private void OnActionBtnAtras(ActionEvent event) throws IOException {
 
-        cambiarVentana.cambioVentana("MantenimientoUsuarios", event);
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            cambiarVentana.cambioVentana("MantenimientoUsuarios", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     private void llenarCbRoles() {
@@ -282,18 +294,21 @@ public class CreacionUsuariosController implements Initializable {
     private void AgregarTransaccion(String nombreTransaccion) {
         try {
             transaccionDTO.setNombre(nombreTransaccion + txtNombre.getText());
-            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario()); 
+            transaccionDTO.setUsuarios(AuthenticationSingleton.getInstance().getUsuario());
             transaccionDTO.setFecha_registro(date3);
             transaccionDTO.setEstado(true);
-            
+
             transaccionService.add(transaccionDTO);
         } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
-    
-    
-    
+
+    private void MensajeTokenVencido() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("Su sesión ha caducado.");
+        alert.show();
+    }
 
 }

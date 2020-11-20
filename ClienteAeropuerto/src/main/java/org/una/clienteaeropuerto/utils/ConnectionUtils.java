@@ -363,7 +363,7 @@ public class ConnectionUtils {
         }
     }
 
-        public static <T> List<ParametroDTO> ListFromConnectionParametros(String urlstring, Class<T> type) throws MalformedURLException, IOException {
+    public static <T> List<ParametroDTO> ListFromConnectionParametros(String urlstring, Class<T> type) throws MalformedURLException, IOException {
         Gson gson = new Gson();
         Type listtype = new TypeToken<ArrayList<ParametroDTO>>() {
         }.getType();
@@ -380,9 +380,9 @@ public class ConnectionUtils {
                 response.append(responseLine.trim());
             }
             return gson.fromJson(response.toString(), listtype);
-
         }
     }
+
     public static <T> List<T> ConnectionToObjectByField(String urlstring, String Nombre) throws MalformedURLException, IOException {
         Gson gson = new Gson();
         Type listtype = new TypeToken<ArrayList<T>>() {
