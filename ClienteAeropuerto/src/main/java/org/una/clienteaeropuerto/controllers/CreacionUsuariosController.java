@@ -69,6 +69,8 @@ public class CreacionUsuariosController implements Initializable {
     UsuarioDTO usuarioDTO = new UsuarioDTO();
 
     UsuarioDTO usuarioDTO2 = new UsuarioDTO();
+    
+    UsuarioDTO usuarioDTO3 = new UsuarioDTO();
 
     UsuarioService usuarioService = new UsuarioService();
 
@@ -94,9 +96,14 @@ public class CreacionUsuariosController implements Initializable {
 
     List<UsuarioDTO> usuarioList = new ArrayList<>();
 
+    List<UsuarioDTO> usuarioList2 = new ArrayList<>();
+    List<UsuarioDTO> usuarioList3 = new ArrayList<>();
+
     TransaccionDTO transaccionDTO = new TransaccionDTO();
 
     VigenciaToken vigenciaToken = new VigenciaToken();
+    @FXML
+    private ComboBox<UsuarioDTO> cbxGefe;
 
     /**
      * Initializes the controller class.
@@ -106,6 +113,7 @@ public class CreacionUsuariosController implements Initializable {
 
         llenarCbRoles();
         llenarCbAreasTrabajo();
+        llenarCbGefe();
         funcionAppContext();
     }
 
@@ -142,6 +150,7 @@ public class CreacionUsuariosController implements Initializable {
         usuarioDTO.setCorreo(txtCorreo.getText());
         usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
         usuarioDTO.setRoles(rolesDTO);
+       // usuarioDTO.setEmpleado(usuarioDTO3);
         usuarioService.add(usuarioDTO);
 
         usuarios_AreasDTO.setAreas_trabajo(areas_trabajoDTO);
@@ -221,6 +230,24 @@ public class CreacionUsuariosController implements Initializable {
         cbxRoles.setItems(FXCollections.observableArrayList(rolesList));
     }
 
+    private void llenarCbGefe() {
+
+        try {
+            usuarioList2 = (List<UsuarioDTO>) usuarioService.getAll();
+
+        } catch (InterruptedException | ExecutionException | IOException ex) {
+            Logger.getLogger(CreacionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < usuarioList2.size(); i++) {
+            if (usuarioList2.get(i).isEstado() == true) {
+                   usuarioList3.add(usuarioList2.get(i));
+            }
+
+        }
+        cbxGefe.setItems(FXCollections.observableArrayList(usuarioList3));
+
+    }
+
     private void funcionAppContext() {
         if (AppContext.getInstance().get("ed").equals("edit")) {
             UsuarioDTO usuarioDTO = new UsuarioDTO();
@@ -230,6 +257,7 @@ public class CreacionUsuariosController implements Initializable {
             txtCorreo.setText(usuarioDTO.getCorreo());
             txtNombre.setText(usuarioDTO.getNombreCompleto());
             cbxRoles.setValue(usuarioDTO.getRoles());
+            cbxGefe.setValue(usuarioDTO.getEmpleado());
             BuscarIdUsuarioEnUsuarioAreas(usuarioDTO.getId());
 
             cmbAreaTrabajo.setValue(BuscarIdUsuarioEnUsuarioAreas(usuarioDTO.getId()));
@@ -306,9 +334,17 @@ public class CreacionUsuariosController implements Initializable {
 
     private void MensajeTokenVencido() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
-        alert.setTitle("Mensaje");
+//        alert.setTitle("Mensaje");
         alert.setHeaderText("Su sesión ha caducado.");
         alert.show();
+    }
+
+    @FXML
+    private void ActionCbxGefes(ActionEvent event) {
+        
+        if (cbxGefe.getSelectionModel().getSelectedItem() != null) {
+            usuarioDTO3.setEmpleado(cbxGefe.getSelectionModel().getSelectedItem()) ;
+        }
     }
 
 }

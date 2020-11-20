@@ -19,34 +19,23 @@ public class UsuarioDTO {
     private String contrasenaEncriptada;
     private boolean estado; 
     private Date fecha_registro; 
-    private Long empleadoId; 
+    private UsuarioDTO empleado; 
     private RolesDTO roles;
-    
-   
-    public UsuarioDTO(Long id, String nombreCompleto, String cedula, String correo, boolean estado, Date fecha_registro, Long empleadoId, RolesDTO roles, String contrasenaEncriptada) {
+
+    public UsuarioDTO() {
+    }
+
+    public UsuarioDTO(Long id, String nombreCompleto, String cedula, String correo, String contrasenaEncriptada, boolean estado, Date fecha_registro, UsuarioDTO empleado, RolesDTO roles) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.cedula = cedula;
         this.correo = correo;
+        this.contrasenaEncriptada = contrasenaEncriptada;
         this.estado = estado;
         this.fecha_registro = fecha_registro;
-        this.empleadoId = empleadoId;
+        this.empleado = empleado;
         this.roles = roles;
-        this.contrasenaEncriptada = contrasenaEncriptada;
     }
-
-    public String getContrasenaEncriptada() {
-        return contrasenaEncriptada;
-    }
-
-    public void setContrasenaEncriptada(String contrasenaEncriptada) {
-        this.contrasenaEncriptada = contrasenaEncriptada;
-    }
-
-    public UsuarioDTO() {
-   }
-
- 
 
     public Long getId() {
         return id;
@@ -80,6 +69,14 @@ public class UsuarioDTO {
         this.correo = correo;
     }
 
+    public String getContrasenaEncriptada() {
+        return contrasenaEncriptada;
+    }
+
+    public void setContrasenaEncriptada(String contrasenaEncriptada) {
+        this.contrasenaEncriptada = contrasenaEncriptada;
+    }
+
     public boolean isEstado() {
         return estado;
     }
@@ -96,12 +93,12 @@ public class UsuarioDTO {
         this.fecha_registro = fecha_registro;
     }
 
-    public Long getEmpleadoId() {
-        return empleadoId;
+    public UsuarioDTO getEmpleado() {
+        return empleado;
     }
 
-    public void setEmpleadoId(Long empleadoId) {
-        this.empleadoId = empleadoId;
+    public void setEmpleado(UsuarioDTO empleado) {
+        this.empleado = empleado;
     }
 
     public RolesDTO getRoles() {
@@ -112,9 +109,13 @@ public class UsuarioDTO {
         this.roles = roles;
     }
 
+    
+    
     @Override
     public String toString() {
-        return "UsuarioDTO{" + "fecha_registro=" + fecha_registro + '}';
+        return nombreCompleto ;
     }
+
+  
     
 }

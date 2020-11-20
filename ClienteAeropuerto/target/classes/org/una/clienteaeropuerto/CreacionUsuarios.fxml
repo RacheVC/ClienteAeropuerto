@@ -72,6 +72,11 @@
                   <Insets left="50.0" right="20.0" top="50.0" />
                </VBox.margin>
             </ComboBox>
+            <ComboBox fx:id="cbxGefe" onAction="#ActionCbxGefes" prefWidth="150.0" promptText="Gefe">
+               <VBox.margin>
+                  <Insets left="50.0" right="20.0" top="50.0" />
+               </VBox.margin>
+            </ComboBox>
             <ComboBox fx:id="cmbAreaTrabajo" onAction="#actionAreaTrabajo" prefWidth="150.0" promptText="Área de trabajo">
                <VBox.margin>
                   <Insets left="50.0" right="20.0" top="50.0" />

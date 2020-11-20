@@ -209,7 +209,7 @@ public class MantenimientoUsuariosController implements Initializable {
                 tcCorreo.setCellValueFactory(new PropertyValueFactory<>("correo"));
                 tcRolId.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getRoles()));
                 tcFechaRegistro.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_registro()));
-                tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleadoId"));
+                tcEmpleadoId.setCellValueFactory(new PropertyValueFactory<>("empleado"));
                 tvUsuarios.getItems().clear();
                 tvUsuarios.setItems(FXCollections.observableArrayList(usuariosList2));
             }
