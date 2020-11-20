@@ -26,6 +26,7 @@ import org.una.clienteaeropuerto.dto.HorarioDTO;
 import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
+import org.una.clienteaeropuerto.dto.ParametroDTO;
 import org.una.clienteaeropuerto.dto.ReporteDTO;
 import org.una.clienteaeropuerto.dto.RolesDTO;
 import org.una.clienteaeropuerto.dto.TransaccionDTO;
@@ -362,6 +363,26 @@ public class ConnectionUtils {
         }
     }
 
+        public static <T> List<ParametroDTO> ListFromConnectionParametros(String urlstring, Class<T> type) throws MalformedURLException, IOException {
+        Gson gson = new Gson();
+        Type listtype = new TypeToken<ArrayList<ParametroDTO>>() {
+        }.getType();
+        URL url = new URL(urlstring);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Authorization", "bearer " + AuthenticationSingleton.getInstance().getJwt());
+
+        try ( BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            return gson.fromJson(response.toString(), listtype);
+
+        }
+    }
     public static <T> List<T> ConnectionToObjectByField(String urlstring, String Nombre) throws MalformedURLException, IOException {
         Gson gson = new Gson();
         Type listtype = new TypeToken<ArrayList<T>>() {

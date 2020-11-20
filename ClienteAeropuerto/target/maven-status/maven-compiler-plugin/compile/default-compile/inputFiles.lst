@@ -2,8 +2,10 @@ C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\sr
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\ControlMarcasHorarioController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\DivisaDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\AreasTrabajoService.java
+C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\ParametrosService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Monedas.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\DivisaService.java
+C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\controllers\ControlParametrosController.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\utils\Imagen.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\UsuariosAreasService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\HorarioService.java
@@ -20,6 +22,7 @@ C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\sr
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\UsuarioService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\App.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\AuthenticationResponse.java
+C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\ParametroDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\service\TransaccionService.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Areas_trabajoDTO.java
 C:\Users\Andres\Desktop\ClienteAeropuerto\ClienteAeropuerto\ClienteAeropuerto\src\main\java\org\una\clienteaeropuerto\dto\Usuarios_AreasDTO.java
