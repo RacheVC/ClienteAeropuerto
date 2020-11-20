@@ -50,6 +50,8 @@ public class LoginController implements Initializable {
     List<ParametroDTO> parametrosList = new ArrayList<>();
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,11 +62,7 @@ public class LoginController implements Initializable {
         
         try {
             parametrosList = ParametrosService.getInstance().getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         

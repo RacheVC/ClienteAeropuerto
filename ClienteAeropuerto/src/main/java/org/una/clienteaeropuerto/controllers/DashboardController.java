@@ -75,7 +75,7 @@ public class DashboardController implements Initializable {
         ValidacionPermisos();
     }
 
-    private void Mensaje() {
+    private void MensajeFinalizacionSesion() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El tiempo de su sesión ha finalizado.");

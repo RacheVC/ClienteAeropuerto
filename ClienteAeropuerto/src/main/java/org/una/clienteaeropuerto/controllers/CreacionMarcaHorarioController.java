@@ -109,9 +109,6 @@ public class CreacionMarcaHorarioController implements Initializable, Runnable {
         CompararID();
         marcaHorarioDTO.setUsuariosAreas(usuarios_AreasDTO);
         marcaHorarioDTO.setEstado(true);
-//        date2.setHours(00);
-//        date2.setMinutes(Integer.valueOf(00));
-//        marcaHorarioDTO.setMarca_salida(date2);
         marcasHorarioService.add(marcaHorarioDTO);
 
         AgregarTransaccion("Se creó una marca de entrada");

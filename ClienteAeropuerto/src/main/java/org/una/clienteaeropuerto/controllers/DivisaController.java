@@ -184,12 +184,12 @@ public class DivisaController implements Initializable {
             CargarDivisasAutomaticamente();
 
         } else {
-            this.Clear();
+            this.Limpiar();
         }
 
     }
 
-    private void Clear() {
+    private void Limpiar() {
         txtColonCostarricense.clear();
         txtDolarAmericano.clear();
         txtDolarAustraliano.clear();
