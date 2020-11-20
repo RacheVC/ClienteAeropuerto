@@ -5,6 +5,7 @@
  */
 package org.una.clienteaeropuerto.controllers;
 
+import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,11 +16,17 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.util.Duration;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;
@@ -61,14 +68,74 @@ public class DashboardController implements Initializable {
     String reporte;
     ConeccionReporteService coneccionReporteService;
 
+    Timeline cronoW;
+    private int mili1;
+    private int minuto1;
+    private int segundo1;
+    private int h, m, s, cs;
+    @FXML
+    private Label lblTiempo;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        cronoW();
+        cronoW.play();
         capturarNombreUsuario();
 //        ValidacionPermisos();
+    }
+
+    private ActionListener acciones = new ActionListener() {
+
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+
+            ++cs;
+            if (cs == 100) {
+                cs = 0;
+                ++s;
+            }
+            if (s == 60) {
+                s = 0;
+                ++m;
+            }
+            if (m == 60) {
+                m = 0;
+                ++h;
+            }
+        }
+    };
+
+    private void cronoW() {
+        cronoW = new Timeline(new KeyFrame(Duration.ZERO, (ActionEvent z) -> {
+            lblTiempo.setText(String.valueOf(minuto1 + " : " + segundo1));
+            mili1++;
+            if (mili1 == 1000) {
+                if (minuto1 == 5) {
+                    cronoW.pause();
+                    Mensaje();
+                } else {
+                    segundo1++;
+                    mili1 = 0;
+                    if (segundo1 == 60) {
+                        segundo1 = 0;
+                        minuto1++;
+                    }
+                }
+            }
+        }), new KeyFrame(Duration.millis(1)));
+        cronoW.setCycleCount(Animation.INDEFINITE);
+    }
+
+    private void Mensaje() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        alert.setTitle("Mensaje");
+        alert.setHeaderText("El tiempo de su sesión ha finalizado.");
+        alert.show();
+
     }
 
     @FXML
@@ -96,7 +163,9 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void actionControlParametros(ActionEvent event) {
+    private void actionControlParametros(ActionEvent event) throws IOException {
+
+        cambiarVentana.cambioVentana("ControlParametros", event);
     }
 
     @FXML

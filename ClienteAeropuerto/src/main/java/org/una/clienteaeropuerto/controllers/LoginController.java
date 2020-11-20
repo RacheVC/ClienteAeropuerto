@@ -67,7 +67,6 @@ public class LoginController implements Initializable {
             this.MensajeAutorizado();
             cambiarVentana.cambioVentana("Dashboard", event);
         }
-
     }
 
     private void MensajeNoAutorizado() {

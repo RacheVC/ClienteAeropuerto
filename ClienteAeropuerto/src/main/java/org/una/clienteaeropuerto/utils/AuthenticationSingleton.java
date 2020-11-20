@@ -12,15 +12,15 @@ import org.una.clienteaeropuerto.dto.AuthenticationResponse;
  * @author Andres
  */
 public class AuthenticationSingleton {
-    
-      private static  AuthenticationResponse SINGLETON = new AuthenticationResponse();
-   
-    public static AuthenticationResponse getInstance(){
+
+    private static AuthenticationResponse SINGLETON = new AuthenticationResponse();
+
+    public static AuthenticationResponse getInstance() {
         return SINGLETON;
     }
-    
-     public static void  setInstance(AuthenticationResponse singleton){
+
+    public static void setInstance(AuthenticationResponse singleton) {
         SINGLETON = singleton;
     }
-   
+
 }

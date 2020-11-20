@@ -13,6 +13,9 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import org.una.clienteaeropuerto.dto.ParametroDTO;
 import org.una.clienteaeropuerto.service.ParametrosService;
+import org.una.clienteaeropuerto.utils.CambiarVentana;
 
 /**
  * FXML Controller class
@@ -45,32 +49,30 @@ public class ControlParametrosController implements Initializable {
     private TableColumn<ParametroDTO, String> tcNombre;
     @FXML
     private TableColumn<ParametroDTO, String> tcTiempoVigencia;
-    
-     private List<ParametroDTO> parametroslist = new ArrayList<ParametroDTO>();
-     
-      private List<ParametroDTO> parametroslist2 = new ArrayList<ParametroDTO>();
+    @FXML
+    private TableColumn<ParametroDTO, String> tcEstado;
+
+    private List<ParametroDTO> parametroslist = new ArrayList<ParametroDTO>();
+
+    private List<ParametroDTO> parametroslist2 = new ArrayList<ParametroDTO>();
 
     ParametroDTO parametrosDTO = new ParametroDTO();
 
     ParametrosService parametrosService = new ParametrosService();
-    @FXML
-    private TableColumn<ParametroDTO, String> tcEstado;
-    
-    
+
+    CambiarVentana cambiarVentana = new CambiarVentana();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    } 
-    
-     public void CargarInformacionParametros() {
 
-     
-      
-    
+        CargarInformacionParametros();
+    }
+
+    public void CargarInformacionParametros() {
+
         try {
             parametroslist = ParametrosService.getInstance().getAll();
         } catch (InterruptedException ex) {
@@ -80,41 +82,32 @@ public class ControlParametrosController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ControlParametrosController.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-            
-           
-   
-        
-        
 
+        actualizarTableView();
     }
 
     private void actualizarTableView() {
         parametroslist2 = new ArrayList<>();
         for (int i = 0; i < parametroslist.size(); i++) {
-            if (parametroslist.get(i).i == true) {
+            if (parametroslist.get(i).isEstado() == true) {
                 parametroslist2.add(parametroslist.get(i));
-                clId.setCellValueFactory(new PropertyValueFactory<>("id"));
+                tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
                 tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
                 tcEstado.setCellValueFactory(per -> {
                     String estadoString;
-                    if (per.getValue().isEstado) {
+                    if (per.getValue().isEstado()) {
                         estadoString = "Activo";
                     } else {
                         estadoString = "Inactivo";
                     }
                     return new ReadOnlyStringWrapper(estadoString);
                 });
-                clFechaEnvio.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_envio()));
-                clFechaLectura.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getFecha_entrega()));
-                clMensaje.setCellValueFactory(new PropertyValueFactory<>("mensaje"));
-                clReceptor.setCellValueFactory(new PropertyValueFactory<>("receptor"));
-                tvewNotificacion.getItems().clear();
-                tvewNotificacion.setItems(FXCollections.observableArrayList(parametroslist2));
+                tcTiempoVigencia.setCellValueFactory((param) -> new SimpleObjectProperty(param.getValue().getVigenciaEnMinutos() + " minutos"));
+                tvParametros.getItems().clear();
+                tvParametros.setItems(FXCollections.observableArrayList(parametroslist2));
             }
         }
     }
-
 
     @FXML
     private void actionBtnCrear(ActionEvent event) {
@@ -125,15 +118,26 @@ public class ControlParametrosController implements Initializable {
     }
 
     @FXML
-    private void actionBtnInactivar(ActionEvent event) {
+    private void actionBtnInactivar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
+        
+        if (parametrosDTO.isEstado() == true) {
+            parametrosDTO.setEstado(false);
+            parametrosService.modify(parametrosDTO.getId(), parametrosDTO);
+            cambiarVentana.cambioVentana("ControlParametros", event);
+        }
     }
 
     @FXML
     private void MouseTvUsuarios(MouseEvent event) {
+        if (tvParametros.getSelectionModel().getSelectedItem() != null) {
+            parametrosDTO = (ParametroDTO) tvParametros.getSelectionModel().getSelectedItem();
+        }
     }
 
     @FXML
-    private void actionBtnSalir(ActionEvent event) {
+    private void actionBtnSalir(ActionEvent event) throws IOException, IOException {
+      
+        cambiarVentana.cambioVentana("Dashboard", event);
     }
-    
+
 }
