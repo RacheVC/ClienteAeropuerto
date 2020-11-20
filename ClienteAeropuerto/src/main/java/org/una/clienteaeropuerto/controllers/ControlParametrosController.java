@@ -71,6 +71,8 @@ public class ControlParametrosController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -83,11 +85,7 @@ public class ControlParametrosController implements Initializable {
 
         try {
             parametroslist = ParametrosService.getInstance().getAll();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ControlParametrosController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(ControlParametrosController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (InterruptedException | ExecutionException | IOException ex) {
             Logger.getLogger(ControlParametrosController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
