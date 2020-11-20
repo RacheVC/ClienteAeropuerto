@@ -12,14 +12,15 @@ import java.util.Date;
  * @author Andres
  */
 public class UsuarioDTO {
-    private Long id; 
-    private String nombreCompleto;   
+
+    private Long id;
+    private String nombreCompleto;
     private String cedula;
     private String correo;
     private String contrasenaEncriptada;
-    private boolean estado; 
-    private Date fecha_registro; 
-    private UsuarioDTO empleado; 
+    private boolean estado;
+    private Date fecha_registro;
+    private UsuarioDTO empleado;
     private RolesDTO roles;
 
     public UsuarioDTO() {
@@ -109,13 +110,9 @@ public class UsuarioDTO {
         this.roles = roles;
     }
 
-    
-    
     @Override
     public String toString() {
-        return nombreCompleto ;
+        return nombreCompleto;
     }
 
-  
-    
 }

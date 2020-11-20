@@ -29,11 +29,6 @@
             </VBox>
             <HBox prefHeight="143.0" prefWidth="304.0">
                <children>
-                  <Button fx:id="btnCrear" mnemonicParsing="false" onAction="#actionBtnCrear" prefHeight="30.0" prefWidth="86.0" styleClass="jfx-buttonStandard2" text="Crear">
-                     <HBox.margin>
-                        <Insets left="10.0" right="20.0" top="50.0" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#actionBtnModificar" prefHeight="25.0" prefWidth="94.0" styleClass="jfx-buttonStandard2" text="Modificar">
                      <HBox.margin>
                         <Insets left="10.0" right="20.0" top="50.0" />

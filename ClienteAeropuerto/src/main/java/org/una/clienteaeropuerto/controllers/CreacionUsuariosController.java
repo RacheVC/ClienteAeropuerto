@@ -150,7 +150,7 @@ public class CreacionUsuariosController implements Initializable {
         usuarioDTO.setCorreo(txtCorreo.getText());
         usuarioDTO.setContrasenaEncriptada(txtContrasena.getText());
         usuarioDTO.setRoles(rolesDTO);
-       // usuarioDTO.setEmpleado(usuarioDTO3);
+        usuarioDTO.setEmpleado(usuarioDTO3);
         usuarioService.add(usuarioDTO);
 
         usuarios_AreasDTO.setAreas_trabajo(areas_trabajoDTO);
@@ -334,7 +334,7 @@ public class CreacionUsuariosController implements Initializable {
 
     private void MensajeTokenVencido() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "", ButtonType.OK);
-//        alert.setTitle("Mensaje");
+        alert.setTitle("Mensaje");
         alert.setHeaderText("Su sesión ha caducado.");
         alert.show();
     }
@@ -343,7 +343,7 @@ public class CreacionUsuariosController implements Initializable {
     private void ActionCbxGefes(ActionEvent event) {
         
         if (cbxGefe.getSelectionModel().getSelectedItem() != null) {
-            usuarioDTO3.setEmpleado(cbxGefe.getSelectionModel().getSelectedItem()) ;
+            usuarioDTO3 = (UsuarioDTO) cbxGefe.getSelectionModel().getSelectedItem();
         }
     }
 
