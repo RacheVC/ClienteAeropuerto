@@ -17,7 +17,7 @@ import org.una.clienteaeropuerto.utils.ConnectionUtils;
  */
 public class ParametrosService {
     
-    private final String urlCreateModify = "http://localhost:8098/parametros";
+    private final String urlCreateModify = "http://localhost:8098/parametros/";
     private final String urlFindAll = "http://localhost:8098/parametros";;
     
     

@@ -28,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import org.una.clienteaeropuerto.dto.ParametroDTO;
 import org.una.clienteaeropuerto.service.ParametrosService;
+import org.una.clienteaeropuerto.utils.AppContext;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
 import org.una.clienteaeropuerto.utils.VigenciaToken;
 
@@ -119,7 +120,16 @@ public class ControlParametrosController implements Initializable {
     }
 
     @FXML
-    private void actionBtnModificar(ActionEvent event) {
+    private void actionBtnModificar(ActionEvent event) throws IOException {
+        
+        if (vigenciaToken.validarVigenciaToken() == true) {
+            AppContext.getInstance().set("parametrosDTO", parametrosDTO);
+            AppContext.getInstance().set("ed", "edit");
+            cambiarVentana.cambioVentana("CreacionParametro", event);
+        } else {
+            MensajeTokenVencido();
+            cambiarVentana.cambioVentana("Login", event);
+        }
     }
 
     @FXML

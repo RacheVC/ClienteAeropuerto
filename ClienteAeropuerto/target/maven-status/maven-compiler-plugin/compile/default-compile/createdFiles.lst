@@ -66,6 +66,7 @@ org\una\clienteaeropuerto\controllers\HorarioController.class
 org\una\clienteaeropuerto\service\ParametrosService.class
 org\una\clienteaeropuerto\controllers\DashboardController.class
 org\una\clienteaeropuerto\App.class
+org\una\clienteaeropuerto\controllers\CreacionParametroController.class
 org\una\clienteaeropuerto\dto\Areas_trabajoDTO.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$17.class
 org\una\clienteaeropuerto\dto\HorarioDTO.class
