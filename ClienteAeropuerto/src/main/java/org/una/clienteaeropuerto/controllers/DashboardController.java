@@ -33,6 +33,7 @@ import org.una.clienteaeropuerto.dto.UsuarioDTO;
 import org.una.clienteaeropuerto.service.ConeccionReporteService;
 import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
+import org.una.clienteaeropuerto.utils.CronometroSingleton;
 
 /**
  * FXML Controller class
@@ -75,20 +76,24 @@ public class DashboardController implements Initializable {
     private int h, m, s, cs;
     @FXML
     private Label lblTiempo;
+    
+    DashboardController dashboardController = new DashboardController();
+     DashboardController dashboardController2 = new DashboardController();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         cronoW();
         cronoW.play();
+        CronometroSingleton.setInstance(dashboardController);
         capturarNombreUsuario();
 //        ValidacionPermisos();
     }
 
-    private ActionListener acciones = new ActionListener() {
+    public ActionListener acciones = new ActionListener() {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -109,7 +114,7 @@ public class DashboardController implements Initializable {
         }
     };
 
-    private void cronoW() {
+    public void cronoW() {
         cronoW = new Timeline(new KeyFrame(Duration.ZERO, (ActionEvent z) -> {
             lblTiempo.setText(String.valueOf(minuto1 + " : " + segundo1));
             mili1++;

@@ -20,6 +20,7 @@ org\una\clienteaeropuerto\service\MarcasHorarioService$MarcasHorarioServiceHolde
 org\una\clienteaeropuerto\utils\ConnectionUtils$4.class
 module-info.class
 org\una\clienteaeropuerto\utils\ConnectionUtils$14.class
+org\una\clienteaeropuerto\utils\CronometroSingleton.class
 org\una\clienteaeropuerto\utils\AppContext.class
 org\una\clienteaeropuerto\dto\ParametroDTO.class
 org\una\clienteaeropuerto\utils\ConnectionUtils.class
