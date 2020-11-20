@@ -69,7 +69,7 @@ public class CreacionUsuariosController implements Initializable {
     UsuarioDTO usuarioDTO = new UsuarioDTO();
 
     UsuarioDTO usuarioDTO2 = new UsuarioDTO();
-    
+
     UsuarioDTO usuarioDTO3 = new UsuarioDTO();
 
     UsuarioService usuarioService = new UsuarioService();
@@ -240,7 +240,7 @@ public class CreacionUsuariosController implements Initializable {
         }
         for (int i = 0; i < usuarioList2.size(); i++) {
             if (usuarioList2.get(i).isEstado() == true) {
-                   usuarioList3.add(usuarioList2.get(i));
+                usuarioList3.add(usuarioList2.get(i));
             }
 
         }
@@ -249,6 +249,7 @@ public class CreacionUsuariosController implements Initializable {
     }
 
     private void funcionAppContext() {
+        
         if (AppContext.getInstance().get("ed").equals("edit")) {
             UsuarioDTO usuarioDTO = new UsuarioDTO();
             usuarioDTO = (UsuarioDTO) AppContext.getInstance().get("usuarioDTO");
@@ -256,10 +257,14 @@ public class CreacionUsuariosController implements Initializable {
             txtContrasena.setText(usuarioDTO.getContrasenaEncriptada());
             txtCorreo.setText(usuarioDTO.getCorreo());
             txtNombre.setText(usuarioDTO.getNombreCompleto());
-            cbxRoles.setValue(usuarioDTO.getRoles());
+
+            if ("Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+                cbxRoles.setValue(usuarioDTO.getRoles());
+            } else {
+                cbxRoles.setDisable(true);
+            }
             cbxGefe.setValue(usuarioDTO.getEmpleado());
             BuscarIdUsuarioEnUsuarioAreas(usuarioDTO.getId());
-
             cmbAreaTrabajo.setValue(BuscarIdUsuarioEnUsuarioAreas(usuarioDTO.getId()));
             usuarioDTO.getFecha_registro();
         }
@@ -341,7 +346,7 @@ public class CreacionUsuariosController implements Initializable {
 
     @FXML
     private void ActionCbxGefes(ActionEvent event) {
-        
+
         if (cbxGefe.getSelectionModel().getSelectedItem() != null) {
             usuarioDTO3 = (UsuarioDTO) cbxGefe.getSelectionModel().getSelectedItem();
         }

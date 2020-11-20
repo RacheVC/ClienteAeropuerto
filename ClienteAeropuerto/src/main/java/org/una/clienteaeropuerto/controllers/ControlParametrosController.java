@@ -29,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import org.una.clienteaeropuerto.dto.ParametroDTO;
 import org.una.clienteaeropuerto.service.ParametrosService;
 import org.una.clienteaeropuerto.utils.AppContext;
+import org.una.clienteaeropuerto.utils.AuthenticationSingleton;
 import org.una.clienteaeropuerto.utils.CambiarVentana;
 import org.una.clienteaeropuerto.utils.VigenciaToken;
 
@@ -74,6 +75,7 @@ public class ControlParametrosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        ValidacionPermisos();
         CargarInformacionParametros();
     }
 
@@ -121,7 +123,7 @@ public class ControlParametrosController implements Initializable {
 
     @FXML
     private void actionBtnModificar(ActionEvent event) throws IOException {
-        
+
         if (vigenciaToken.validarVigenciaToken() == true) {
             AppContext.getInstance().set("parametrosDTO", parametrosDTO);
             AppContext.getInstance().set("ed", "edit");
@@ -134,7 +136,7 @@ public class ControlParametrosController implements Initializable {
 
     @FXML
     private void actionBtnInactivar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
-        
+
         if (vigenciaToken.validarVigenciaToken() == true) {
             if (parametrosDTO.isEstado() == true) {
                 parametrosDTO.setEstado(false);
@@ -171,6 +173,13 @@ public class ControlParametrosController implements Initializable {
         alert.setTitle("Mensaje");
         alert.setHeaderText("Su sesión ha caducado.");
         alert.show();
+    }
+
+    private void ValidacionPermisos() {
+
+        if (!"Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+            btnModificar.setDisable(true);
+        }
     }
 
 }

@@ -50,8 +50,6 @@ public class DashboardController implements Initializable {
     @FXML
     private Button btnReporteNotificaciones;
     @FXML
-    private Button btnReporteHorasLaboradas;
-    @FXML
     private Button btnCerrarSesion;
     @FXML
     private Label lbNombreUsuario;
@@ -64,6 +62,8 @@ public class DashboardController implements Initializable {
     ConeccionReporteService coneccionReporteService;
 
     VigenciaToken vigenciaToken = new VigenciaToken();
+    @FXML
+    private Button btnTransacciones;
 
     /**
      * Initializes the controller class.
@@ -72,7 +72,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         capturarNombreUsuario();
-//        ValidacionPermisos();
+        ValidacionPermisos();
     }
 
     private void Mensaje() {
@@ -169,10 +169,6 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    private void actionReporteHorasLaboradas(ActionEvent event) {
-    }
-
-    @FXML
     private void actionCerrarSesion(ActionEvent event) throws IOException {
 
         cambiarVentana.cambioVentana("Login", event);
@@ -181,13 +177,17 @@ public class DashboardController implements Initializable {
     private void ValidacionPermisos() {
 
         if ("Administrador".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+            btnTransacciones.setDisable(true);
             btnControlNotificaciones.setDisable(true);
         } else if ("Gestor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+            btnTransacciones.setDisable(true);
             btnControlParametros.setDisable(true);
             btnControlNotificaciones.setDisable(true);
         } else if ("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
             btnControlParametros.setDisable(true);
             btnControlNotificaciones.setDisable(true);
+        } else if ("Gerente".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
+            btnTransacciones.setDisable(true);
         }
     }
 

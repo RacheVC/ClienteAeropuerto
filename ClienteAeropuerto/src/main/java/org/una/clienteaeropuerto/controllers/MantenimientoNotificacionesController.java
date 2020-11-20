@@ -100,7 +100,7 @@ public class MantenimientoNotificacionesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-//        ValidacionPermisos();
+        ValidacionPermisos();
         CargarInformacionNotificaciones();
         txtBusqueda.setFocusTraversable(false);
     }

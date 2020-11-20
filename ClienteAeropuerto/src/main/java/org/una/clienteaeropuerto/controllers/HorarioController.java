@@ -93,7 +93,7 @@ public class HorarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-//        ValidacionPermisos();
+        ValidacionPermisos();
         CargarInformacionHorario();
 
     }

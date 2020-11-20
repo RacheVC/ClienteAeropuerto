@@ -27,7 +27,6 @@ import org.una.clienteaeropuerto.dto.ImagenesDTO;
 import org.una.clienteaeropuerto.dto.MarcaHorarioDTO;
 import org.una.clienteaeropuerto.dto.NotificacionDTO;
 import org.una.clienteaeropuerto.dto.ParametroDTO;
-import org.una.clienteaeropuerto.dto.ReporteDTO;
 import org.una.clienteaeropuerto.dto.RolesDTO;
 import org.una.clienteaeropuerto.dto.TransaccionDTO;
 import org.una.clienteaeropuerto.dto.UsuarioDTO;

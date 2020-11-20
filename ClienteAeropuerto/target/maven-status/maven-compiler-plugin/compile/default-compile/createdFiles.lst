@@ -13,7 +13,6 @@ org\una\clienteaeropuerto\controllers\ControlParametrosController.class
 org\una\clienteaeropuerto\controllers\CreacionNotificacionController.class
 org\una\clienteaeropuerto\utils\Imagen.class
 org\una\clienteaeropuerto\service\DivisaService.class
-org\una\clienteaeropuerto\utils\Cronometro.class
 org\una\clienteaeropuerto\service\UsuarioService.class
 org\una\clienteaeropuerto\utils\AuthenticationSingleton.class
 org\una\clienteaeropuerto\controllers\ControlMarcasHorarioController.class

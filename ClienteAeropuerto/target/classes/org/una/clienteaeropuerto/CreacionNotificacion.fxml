@@ -58,7 +58,7 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <VBox layoutX="456.0" prefHeight="474.0" prefWidth="269.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#OnActionBtnGuardar" styleClass="jfx-buttonStandard2" text="Guardar" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="120.0" top="440.0" />
                </VBox.margin>
@@ -80,7 +80,7 @@
                   <Insets bottom="-150.0" left="300.0" />
                </VBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#OnActionBtnAgregarImagen" prefHeight="31.0" prefWidth="0.0" styleClass="jfx-buttonStandard" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnAgregarImagen" mnemonicParsing="false" onAction="#OnActionBtnAgregarImagen" prefHeight="31.0" prefWidth="0.0" styleClass="jfx-buttonStandard" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets left="450.0" top="120.0" />
                </VBox.margin>

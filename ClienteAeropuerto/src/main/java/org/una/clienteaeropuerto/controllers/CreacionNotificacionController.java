@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -100,6 +101,10 @@ public class CreacionNotificacionController implements Initializable {
     java.util.Date date3 = new java.util.Date();
 
     VigenciaToken vigenciaToken = new VigenciaToken();
+    @FXML
+    private Button btnGuardar;
+    @FXML
+    private Button btnAgregarImagen;
 
     /**
      * Initializes the controller class.
@@ -186,7 +191,6 @@ public class CreacionNotificacionController implements Initializable {
         try {
             byte[] fileContent = Files.readAllBytes(file.toPath());
             String enconde = new String(Base64.getEncoder().encodeToString(fileContent));
-            System.err.println("++++++++++++++++++++++" + enconde);
             return enconde;
         } catch (IOException e) {
             throw new IllegalStateException("could not read file " + file, e);
@@ -194,7 +198,7 @@ public class CreacionNotificacionController implements Initializable {
     }
 
     private void GuardarImagen64() throws InterruptedException, ExecutionException, IOException {
-        
+
         int diferencia = 0;
         int totalcadena = str.length();
         int cantidadRecorrido = 0;
@@ -246,13 +250,14 @@ public class CreacionNotificacionController implements Initializable {
             txtReceptor.setText(notificacionDTO.getReceptor());
             notificacionDTO.setEstado(true);
             notificacionDTO.getId();
-
             try {
                 imgNotificacion.setImage(DecodificarStringImagen(Integer.valueOf(String.valueOf(notificacionDTO.getId()))));
             } catch (IOException ex) {
                 Logger.getLogger(CreacionNotificacionController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+            btnAgregarImagen.setDisable(true);
+            btnGuardar.setDisable(true);
         }
     }
 
