@@ -80,12 +80,14 @@ public class CrearHorarioController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         llenarCbAreaTrabajo();
-        funcionAppContext();
+        FuncionAppContext();
     }
 
     @FXML
@@ -95,16 +97,16 @@ public class CrearHorarioController implements Initializable {
             if (!AppContext.getInstance().get("ed").equals("edit")) {
                 try {
                     crearHorario();
-                    this.CreateMessage();
-                } catch (Exception e) {
-                    this.FailCreateMessage();
+                    this.MensajeCreado();
+                } catch (IOException | InterruptedException | ExecutionException e) {
+                    this.MensajeCreadoFallido();
                 }
             } else {
                 try {
                     modificarUsuario();
-                    this.EditMessage();
-                } catch (Exception e) {
-                    this.FailEditMessage();
+                    this.MensajeEditado();
+                } catch (IOException | InterruptedException | ExecutionException e) {
+                    this.MensajeEditadoFallido();
                 }
             }
         } else {
@@ -141,7 +143,7 @@ public class CrearHorarioController implements Initializable {
         AgregarTransaccion("Se ha modificado un horario");
     }
 
-    private void CreateMessage() {
+    private void MensajeCreado() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El horario fue creado con éxito.");
@@ -149,14 +151,14 @@ public class CrearHorarioController implements Initializable {
 
     }
 
-    private void FailCreateMessage() {
+    private void MensajeCreadoFallido() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Error");
         alert.setHeaderText("El horario no se ha podido crear.");
         alert.show();
     }
 
-    private void EditMessage() {
+    private void MensajeEditado () {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El horario fue modificado con éxito.");
@@ -164,7 +166,7 @@ public class CrearHorarioController implements Initializable {
 
     }
 
-    private void FailEditMessage() {
+    private void MensajeEditadoFallido () {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         alert.setTitle("Mensaje");
         alert.setHeaderText("El horario no se ha podido modificar.");
@@ -200,7 +202,7 @@ public class CrearHorarioController implements Initializable {
         cbAreaTrabajo.setItems(FXCollections.observableArrayList(areasTrabajoList));
     }
 
-    private void funcionAppContext() {
+    private void FuncionAppContext() {
         if (AppContext.getInstance().get("ed").equals("edit")) {
             HorarioDTO horarioDTO = new HorarioDTO();
             horarioDTO = (HorarioDTO) AppContext.getInstance().get("horarioDTO");
