@@ -57,8 +57,6 @@ public class ControlMarcasHorarioController implements Initializable {
     private TableColumn<MarcaHorarioDTO, String> tcEstado;
     @FXML
     private TableColumn<MarcaHorarioDTO, String> tcUsuario;
-    @FXML
-    private TextField txtBusqueda;
 
     private List<MarcaHorarioDTO> marcasList = new ArrayList<MarcaHorarioDTO>();
     private List<MarcaHorarioDTO> marcasList2 = new ArrayList<MarcaHorarioDTO>();
@@ -85,10 +83,6 @@ public class ControlMarcasHorarioController implements Initializable {
         cargarInformacionMarcasHorario();
     }
 
-    @FXML
-    private void accionBuscar(ActionEvent event) {
-
-    }
 
     @FXML
     private void accionInactivar(ActionEvent event) throws InterruptedException, ExecutionException, IOException {
