@@ -182,7 +182,7 @@ public class DashboardController implements Initializable {
         } else if ("Gestor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
             btnTransacciones.setDisable(true);
             btnControlParametros.setDisable(true);
-            btnControlNotificaciones.setDisable(true);
+           
         } else if ("Auditor".equals(String.valueOf(AuthenticationSingleton.getInstance().getUsuario().getRoles()))) {
             btnControlParametros.setDisable(true);
             btnControlNotificaciones.setDisable(true);
