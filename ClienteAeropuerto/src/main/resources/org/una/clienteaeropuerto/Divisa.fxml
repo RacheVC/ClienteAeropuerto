@@ -38,15 +38,15 @@
                      </HBox.margin>
                   </ComboBox>
                   <Button mnemonicParsing="false" onAction="#ActionBtnLogin" prefHeight="34.0" prefWidth="88.0" styleClass="jfx-buttonStandard2" stylesheets="@styles.css" text="Login">
-                     <HBox.margin>
-                        <Insets left="28.0" right="3.0" top="-30.0" />
-                     </HBox.margin>
                      <effect>
                         <InnerShadow />
                      </effect>
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="28.0" right="3.0" top="-160.0" />
+                     </HBox.margin>
                   </Button>
                </children>
             </HBox>
